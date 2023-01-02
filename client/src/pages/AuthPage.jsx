@@ -47,6 +47,7 @@ export default function AuthPage() {
               type="password"
               name="password"
               required
+              minLength={8}
               className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
@@ -57,6 +58,7 @@ export default function AuthPage() {
                 type="password"
                 name="confirmPassword"
                 required
+                minLength={8}
                 className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
               />
             </label>
