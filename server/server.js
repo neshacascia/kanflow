@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 const logger = require('morgan');
 const connectDB = require('./config/database');
+const homeRoutes = require('./routes/Home');
 
 require('dotenv').config({ path: './config/.env' });
 
@@ -37,9 +38,7 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
-});
+app.use('/', homeRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`The server is running on port ${process.env.PORT}.`);
