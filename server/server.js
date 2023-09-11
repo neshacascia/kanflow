@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 const logger = require('morgan');
 const connectDB = require('./config/database');
-const homeRoutes = require('./routes/Home');
+const homeRoutes = require('./routes/home');
 
 require('dotenv').config({ path: './config/.env' });
 
