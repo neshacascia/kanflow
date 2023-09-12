@@ -1,8 +1,19 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
 export default function AuthPage() {
-  const { authValue } = useContext(Context);
+  const { authValue, setAuthValue } = useContext(Context);
+
+  function changeAuthValue() {
+    setAuthValue(prevValue => {
+      if (prevValue === 'Signup') {
+        setAuthValue('Login');
+      } else {
+        setAuthValue('Signup');
+      }
+    });
+  }
 
   return (
     <section>
@@ -38,9 +49,12 @@ export default function AuthPage() {
           {authValue === 'Signup'
             ? 'Already have an account? '
             : "Don't have an account? "}
-          <a href={authValue === 'Signup' ? '/signup' : '/login'}>
+          <Link
+            to={authValue === 'Signup' ? '/login' : '/signup'}
+            onClick={changeAuthValue}
+          >
             {authValue === 'Signup' ? 'Login' : 'Signup'} Now
-          </a>
+          </Link>
         </p>
       </div>
     </section>
