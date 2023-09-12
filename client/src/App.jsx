@@ -3,6 +3,7 @@ import Root from './components/Root';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import BoardPage from './pages/BoardPage';
+import LogoutPage from './pages/LogoutPage';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <AuthPage /> },
       { path: 'signup', element: <AuthPage /> },
       { path: 'board', element: <BoardPage /> },
+      { path: 'logout', element: <LogoutPage /> },
     ],
   },
 ]);
