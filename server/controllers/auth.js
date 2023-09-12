@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect('/boards');
+    return res.redirect('/board');
   }
   res.redirect('/login');
 };
@@ -37,7 +37,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/boards');
+      res.redirect(req.session.returnTo || '/board');
     });
   })(req, res, next);
 };
@@ -66,7 +66,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/boards');
+    return res.redirect('/board');
   }
   res.redirect('/signup');
 };
@@ -117,7 +117,7 @@ exports.postSignup = async (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.redirect('/boards');
+      res.redirect('/board');
     });
   } catch (err) {
     return next(err);
