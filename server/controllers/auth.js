@@ -123,3 +123,11 @@ exports.postSignup = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.getUser = (req, res) => {
+  if (req.user) {
+    return res.json({ user: req.user });
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};
