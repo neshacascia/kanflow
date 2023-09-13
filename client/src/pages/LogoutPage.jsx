@@ -12,6 +12,7 @@ export default function LogoutPage() {
       try {
         await axios.get('/logout', { withCredentials: true });
         setIsLoggedIn(false);
+        localStorage.removeItem('user');
         navigate('/');
       } catch (err) {
         console.error(err);
