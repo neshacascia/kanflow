@@ -5,7 +5,7 @@ import { Context } from '../context/Context';
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, setAuthValue } = useContext(Context);
+  const { setIsLoggedIn, setAuthValue } = useContext(Context);
   const user = localStorage.getItem('user');
 
   if (user) {
