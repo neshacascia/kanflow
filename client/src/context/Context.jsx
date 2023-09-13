@@ -4,11 +4,13 @@ import axios from 'axios';
 const Context = createContext();
 
 function ContextProvider(props) {
-  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authValue, setAuthValue] = useState(null);
 
   return (
-    <Context.Provider value={{ user, setUser, authValue, setAuthValue }}>
+    <Context.Provider
+      value={{ isLoggedIn, setIsLoggedIn, authValue, setAuthValue }}
+    >
       {props.children}
     </Context.Provider>
   );
