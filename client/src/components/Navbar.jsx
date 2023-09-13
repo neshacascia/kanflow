@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
 export default function Navbar() {
-  const { user, setAuthValue } = useContext(Context);
+  const { isLoggedIn, setAuthValue } = useContext(Context);
 
   return (
     <nav>
-      {!user && (
+      {!isLoggedIn ? (
         <div>
           <Link to="/login" onClick={() => setAuthValue('Login')}>
             Login
@@ -16,9 +16,9 @@ export default function Navbar() {
             Signup
           </Link>{' '}
         </div>
+      ) : (
+        <Link to="/logout">Logout</Link>
       )}
-
-      {user && <Link to="/logout">Logout</Link>}
     </nav>
   );
 }
