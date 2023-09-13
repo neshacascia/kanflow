@@ -68,7 +68,6 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect('/board');
   }
-  res.redirect('/signup');
 };
 
 exports.postSignup = async (req, res, next) => {
