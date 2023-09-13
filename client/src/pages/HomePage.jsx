@@ -1,6 +1,5 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import { Context } from '../context/Context';
 
 export default function HomePage() {
