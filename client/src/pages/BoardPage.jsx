@@ -13,6 +13,7 @@ export default function BoardPage() {
 
         if (user) {
           setIsLoggedIn(true);
+          localStorage.setItem('user', true);
         }
       } catch (err) {
         console.error(err);
