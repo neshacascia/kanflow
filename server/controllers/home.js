@@ -1,7 +1,9 @@
-const path = require('path');
-
 module.exports = {
-  getIndex: (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  getIndex: async (req, res) => {
+    try {
+      res.status(200).json({ message: "getIndex at '/' was successful! " });
+    } catch (err) {
+      console.log(err);
+    }
   },
 };
