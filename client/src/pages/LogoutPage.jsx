@@ -4,14 +4,14 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 
 export default function LogoutPage() {
-  const { setUser } = useContext(Context);
+  const { setIsLoggedIn } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function logout() {
       try {
         await axios.get('/logout', { withCredentials: true });
-        setUser(null);
+        setIsLoggedIn(false);
         navigate('/');
       } catch (err) {
         console.error(err);
