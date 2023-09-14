@@ -1,9 +1,11 @@
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Context } from '../context/Context';
+import MenuModal from '../components/MenuModal';
 
 export default function BoardPage() {
-  const { setIsLoggedIn } = useContext(Context);
+  const { setIsLoggedIn, displayMenuModal, setDisplayMenuModal } =
+    useContext(Context);
 
   useEffect(() => {
     async function checkAuthentication() {
@@ -23,5 +25,12 @@ export default function BoardPage() {
     checkAuthentication();
   }, []);
 
-  return <h1>Platform Launch Board</h1>;
+  return (
+    <main>
+      <h1>Platform Launch Board</h1>
+      {displayMenuModal && (
+        <MenuModal setDisplayMenuModal={setDisplayMenuModal} />
+      )}
+    </main>
+  );
 }
