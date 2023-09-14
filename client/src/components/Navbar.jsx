@@ -1,9 +1,20 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
-export default function Navbar() {
-  const { isLoggedIn } = useContext(Context);
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-  return <nav>{isLoggedIn && <Link to="/logout">Logout</Link>}</nav>;
+export default function Navbar() {
+  const { isLoggedIn, setDisplayMenuModal } = useContext(Context);
+
+  return (
+    <nav>
+      {isLoggedIn && (
+        <FontAwesomeIcon
+          icon={faEllipsisVertical}
+          onClick={() => setDisplayMenuModal(true)}
+        />
+      )}
+    </nav>
+  );
 }
