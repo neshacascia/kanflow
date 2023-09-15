@@ -6,6 +6,7 @@ function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authValue, setAuthValue] = useState(null);
   const [displayMenuModal, setDisplayMenuModal] = useState(false);
+  const [boardDetails, setBoardDetails] = useState(null);
 
   return (
     <Context.Provider
@@ -16,6 +17,8 @@ function ContextProvider(props) {
         setAuthValue,
         displayMenuModal,
         setDisplayMenuModal,
+        boardDetails,
+        setBoardDetails,
       }}
     >
       {props.children}
