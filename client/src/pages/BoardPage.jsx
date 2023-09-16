@@ -1,52 +1,36 @@
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Context } from '../context/Context';
-import MenuModal from '../components/MenuModal';
-import BoardDetailsModal from '../components/BoardDetailsModal';
+import Board from '../components/Board';
 
 export default function BoardPage() {
-  const {
-    setIsLoggedIn,
-    displayMenuModal,
-    setDisplayMenuModal,
-    boardDetails,
-    setBoardDetails,
-  } = useContext(Context);
+  const { setIsLoggedIn, setBoards } = useContext(Context);
 
   useEffect(() => {
-    async function checkAuthentication() {
+    async function getBoards() {
       try {
-        const res = await axios.get('/user', { withCredentials: true });
-        const { user } = res.data;
+        const res = await axios.get('/board/getBoards', {
+          withCredentials: true,
+        });
+
+        const { user, boards } = res.data;
 
         if (user) {
           setIsLoggedIn(true);
           localStorage.setItem('user', true);
+          setBoards(boards);
         }
       } catch (err) {
         console.error(err);
       }
     }
 
-    checkAuthentication();
+    getBoards();
   }, []);
 
   return (
     <main>
-      <h1>Platform Launch Board</h1>
-      {displayMenuModal && (
-        <MenuModal
-          setDisplayMenuModal={setDisplayMenuModal}
-          setBoardDetails={setBoardDetails}
-        />
-      )}
-      {boardDetails && (
-        <BoardDetailsModal
-          boardDetails={boardDetails}
-          setBoardDetails={setBoardDetails}
-          setDisplayMenuModal={setDisplayMenuModal}
-        />
-      )}
+      <Board />
     </main>
   );
 }
