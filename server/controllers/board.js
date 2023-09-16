@@ -5,6 +5,16 @@ module.exports = {
   getIndex: (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
   },
+  getBoards: async (req, res) => {
+    console.log(req.user);
+
+    try {
+      const boards = await Board.find({ userId: req.user.id });
+      res.status(200).json({ boards: boards, user: req.user.id });
+    } catch (err) {
+      console.error(err);
+    }
+  },
   createBoard: async (req, res) => {
     try {
       await Board.create({
