@@ -35,6 +35,10 @@ export default function BoardDetailsModal() {
     );
   }
 
+  function deleteColumnName(id) {
+    setBoardColumns(boardColumns.filter(column => column.id !== id));
+  }
+
   return (
     <div>
       <FontAwesomeIcon icon={faXmark} onClick={() => setBoardDetails(null)} />
@@ -49,15 +53,21 @@ export default function BoardDetailsModal() {
         <label>
           Board Columns
           {boardColumns.map(column => (
-            <input
-              key={column.id}
-              type="text"
-              name="columnName"
-              value={column.columnName}
-              onChange={e =>
-                updateColumnName(column.id, 'columnName', e.target.value)
-              }
-            />
+            <div>
+              <input
+                key={column.id}
+                type="text"
+                name="columnName"
+                value={column.columnName}
+                onChange={e =>
+                  updateColumnName(column.id, 'columnName', e.target.value)
+                }
+              />
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => deleteColumnName(column.id)}
+              />
+            </div>
           ))}
         </label>
 
