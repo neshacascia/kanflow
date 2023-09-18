@@ -1,27 +1,36 @@
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Context } from '../context/Context';
+import Board from '../components/Board';
 
 export default function BoardPage() {
-  const { setIsLoggedIn } = useContext(Context);
+  const { setIsLoggedIn, setBoards } = useContext(Context);
 
   useEffect(() => {
-    async function checkAuthentication() {
+    async function getBoards() {
       try {
-        const res = await axios.get('/user', { withCredentials: true });
-        const { user } = res.data;
+        const res = await axios.get('/board/getBoards', {
+          withCredentials: true,
+        });
+
+        const { user, boards } = res.data;
 
         if (user) {
           setIsLoggedIn(true);
           localStorage.setItem('user', true);
+          setBoards(boards);
         }
       } catch (err) {
         console.error(err);
       }
     }
 
-    checkAuthentication();
+    getBoards();
   }, []);
 
-  return <h1>Platform Launch Board</h1>;
+  return (
+    <main>
+      <Board />
+    </main>
+  );
 }
