@@ -1,4 +1,4 @@
-export default function TaskModal({ boardId }) {
+export default function TaskModal({ id, columns }) {
   function addNewTask(e) {
     e.preventDefault();
 
@@ -28,6 +28,13 @@ export default function TaskModal({ boardId }) {
             placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
           ></textarea>
         </label>
+
+        <select>
+          Status{' '}
+          {columns.map(status => (
+            <option value={status}>{status}</option>
+          ))}
+        </select>
         <button type="submit">Create Task</button>
       </form>
     </div>
