@@ -1,4 +1,11 @@
+import { useState } from 'react';
+
 export default function TaskModal({ id, columns }) {
+  const [subtasks, setSubtasks] = useState([
+    { id: 1, placeholder: 'e.g. Make coffee', subtask: '' },
+    { id: 2, placeholder: 'e.g. Drink coffee & smile', subtask: '' },
+  ]);
+
   function addNewTask(e) {
     e.preventDefault();
 
@@ -27,6 +34,13 @@ export default function TaskModal({ id, columns }) {
             name="desc"
             placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
           ></textarea>
+        </label>
+
+        <label>
+          Subtasks{' '}
+          {subtasks.map(item => (
+            <input key={item.id} placeholder={item.placeholder} />
+          ))}
         </label>
 
         <select>
