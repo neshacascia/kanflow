@@ -6,6 +6,13 @@ export default function TaskModal({ id, columns }) {
     { id: 2, placeholder: 'e.g. Drink coffee & smile', subtask: '' },
   ]);
 
+  function addNewSubtask() {
+    setSubtasks(prevState => [
+      ...prevState,
+      { id: subtasks.length + 1, subtask: '' },
+    ]);
+  }
+
   function addNewTask(e) {
     e.preventDefault();
 
@@ -42,6 +49,10 @@ export default function TaskModal({ id, columns }) {
             <input key={item.id} placeholder={item.placeholder} />
           ))}
         </label>
+
+        <button type="button" onClick={addNewSubtask}>
+          + Add New Subtask
+        </button>
 
         <select>
           Status{' '}
