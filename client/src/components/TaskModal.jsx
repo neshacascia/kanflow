@@ -9,15 +9,15 @@ export default function TaskModal({ id, columns }) {
   ]);
 
   function addNewSubtask() {
-    setSubtasks(prevState => [
-      ...prevState,
-      { id: subtasks.length + 1, subtask: '' },
-    ]);
+    const maxId = Math.max(...subtasks.map(subtask => subtask.id));
+
+    setSubtasks(prevState => [...prevState, { id: maxId + 1, subtask: '' }]);
   }
 
   function deleteSubtask(id) {
     setSubtasks(prevState => prevState.filter(subtask => subtask.id !== id));
   }
+  console.log(subtasks);
 
   function addNewTask(e) {
     e.preventDefault();
