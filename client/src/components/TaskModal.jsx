@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function TaskModal({ id, columns }) {
   const [subtasks, setSubtasks] = useState([
@@ -11,6 +13,10 @@ export default function TaskModal({ id, columns }) {
       ...prevState,
       { id: subtasks.length + 1, subtask: '' },
     ]);
+  }
+
+  function deleteSubtask(id) {
+    setSubtasks(prevState => prevState.filter(subtask => subtask.id !== id));
   }
 
   function addNewTask(e) {
@@ -46,7 +52,13 @@ export default function TaskModal({ id, columns }) {
         <label>
           Subtasks{' '}
           {subtasks.map(item => (
-            <input key={item.id} placeholder={item.placeholder} />
+            <div>
+              <input key={item.id} placeholder={item.placeholder} />
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => deleteSubtask(item.id)}
+              />
+            </div>
           ))}
         </label>
 
