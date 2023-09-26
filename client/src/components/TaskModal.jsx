@@ -17,7 +17,6 @@ export default function TaskModal({ id, columns }) {
   function deleteSubtask(id) {
     setSubtasks(prevState => prevState.filter(subtask => subtask.id !== id));
   }
-  console.log(subtasks);
 
   function addNewTask(e) {
     e.preventDefault();
@@ -26,6 +25,8 @@ export default function TaskModal({ id, columns }) {
 
     const title = formData.get('title');
     const description = formData.get('desc');
+    const subtasks = Array.from(formData.getAll('subtask'));
+    const status = formData.get('status');
   }
 
   return (
@@ -53,7 +54,11 @@ export default function TaskModal({ id, columns }) {
           Subtasks{' '}
           {subtasks.map(item => (
             <div>
-              <input key={item.id} placeholder={item.placeholder} />
+              <input
+                key={item.id}
+                placeholder={item.placeholder}
+                name="subtask"
+              />
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => deleteSubtask(item.id)}
@@ -66,7 +71,7 @@ export default function TaskModal({ id, columns }) {
           + Add New Subtask
         </button>
 
-        <select>
+        <select name="status">
           Status{' '}
           {columns.map(status => (
             <option value={status}>{status}</option>
