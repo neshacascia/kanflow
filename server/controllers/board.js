@@ -16,6 +16,15 @@ module.exports = {
       console.error(err);
     }
   },
+  getBoard: async (req, res) => {
+    try {
+      const board = await Board.find({ _id: req.params.id });
+      const tasks = await Task.find({ boardId: req.params.id });
+      res.status(200).json({ board, tasks });
+    } catch (err) {
+      console.error(err);
+    }
+  },
   createBoard: async (req, res) => {
     try {
       await Board.create({
