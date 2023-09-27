@@ -9,7 +9,7 @@ module.exports = {
     console.log(req.user);
 
     try {
-      const boards = await Board.find({ userId: req.user.id });
+      const boards = await Board.find({ userId: req.user.id }).lean();
       res.status(200).json({ boards: boards, user: req.user.id });
     } catch (err) {
       console.error(err);
