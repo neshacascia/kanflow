@@ -1,16 +1,37 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { Context } from '../context/Context';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
 import TaskModal from './TaskModal';
 
 export default function Board() {
-  const { boards, displayMenuModal, boardDetails, displayTaskModal } =
+  const { displayMenuModal, boardDetails, displayTaskModal } =
     useContext(Context);
   const { id } = useParams();
 
-  const board = boards?.find(board => board._id === id);
+  const [board, setBoard] = useState();
+  const [tasks, setTasks] = useState();
+
+  useEffect(() => {
+    if (id) {
+      async function getBoardData() {
+        try {
+          const res = await axios.get(`/board/${id}`, {
+            withCredentials: true,
+          });
+
+          const { board, tasks } = res.data;
+          setBoard(board[0]);
+          setTasks(tasks);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      getBoardData();
+    }
+  }, [id]);
 
   return (
     <main>
