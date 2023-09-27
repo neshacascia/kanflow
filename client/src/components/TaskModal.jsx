@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function TaskModal({ id, columns }) {
+export default function TaskModal({ id, columns, setDisplayTaskModal }) {
+  const navigate = useNavigate();
+
   const [subtasks, setSubtasks] = useState([
     { id: 1, placeholder: 'e.g. Make coffee', subtask: '' },
     { id: 2, placeholder: 'e.g. Drink coffee & smile', subtask: '' },
@@ -18,7 +22,7 @@ export default function TaskModal({ id, columns }) {
     setSubtasks(prevState => prevState.filter(subtask => subtask.id !== id));
   }
 
-  function addNewTask(e) {
+  async function addNewTask(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -27,6 +31,27 @@ export default function TaskModal({ id, columns }) {
     const description = formData.get('desc');
     const subtasks = Array.from(formData.getAll('subtask'));
     const status = formData.get('status');
+
+    const taskData = {
+      id,
+      title,
+      description,
+      subtasks,
+      status,
+    };
+
+    try {
+      const res = await axios.post('/board/addTask', {
+        taskData,
+      });
+      console.log(res);
+      if (res.status === 200) {
+        setDisplayTaskModal(false);
+        navigate(0);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
