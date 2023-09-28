@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
+import Column from './Column';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
 import TaskModal from './TaskModal';
@@ -45,7 +46,7 @@ export default function Board() {
 
           <section>
             {board.columns.map(column => (
-              <span>{column}()</span>
+              <Column name={column} tasks={tasks} />
             ))}
           </section>
         </>
