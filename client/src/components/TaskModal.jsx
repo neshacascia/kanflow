@@ -56,6 +56,10 @@ export default function TaskModal({ id, columns, setDisplayTaskModal }) {
 
   return (
     <div>
+      <FontAwesomeIcon
+        icon={faXmark}
+        onClick={() => setDisplayTaskModal(false)}
+      />
       <h2>Add New Task</h2>
       <form onSubmit={addNewTask}>
         <label>

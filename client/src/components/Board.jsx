@@ -7,8 +7,12 @@ import BoardDetailsModal from './BoardDetailsModal';
 import TaskModal from './TaskModal';
 
 export default function Board() {
-  const { displayMenuModal, boardDetails, displayTaskModal } =
-    useContext(Context);
+  const {
+    displayMenuModal,
+    boardDetails,
+    displayTaskModal,
+    setDisplayTaskModal,
+  } = useContext(Context);
   const { id } = useParams();
 
   const [board, setBoard] = useState();
@@ -49,7 +53,13 @@ export default function Board() {
 
       {displayMenuModal && <MenuModal />}
       {boardDetails && <BoardDetailsModal />}
-      {displayTaskModal && <TaskModal id={board._id} columns={board.columns} />}
+      {displayTaskModal && (
+        <TaskModal
+          id={board._id}
+          columns={board.columns}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
     </main>
   );
 }
