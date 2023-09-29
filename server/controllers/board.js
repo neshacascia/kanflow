@@ -27,13 +27,13 @@ module.exports = {
   },
   createBoard: async (req, res) => {
     try {
-      await Board.create({
+      const newBoard = await Board.create({
         name: req.body.boardName,
         columns: req.body.columnName,
         userId: req.user.id,
       });
       console.log('Board has been added');
-      res.redirect('/board');
+      res.redirect(`/board/${newBoard._id}`);
     } catch (err) {
       console.error(err);
     }
