@@ -26,6 +26,21 @@ export default function TaskModal({ id, columns, setDisplayTaskModal }) {
     ]);
   }
 
+  function updateSubtask(id, key, value) {
+    setSubtasks(
+      subtasks.map(subtask => {
+        if (subtask.id === id) {
+          return {
+            ...subtask,
+            [key]: value,
+          };
+        } else {
+          return subtask;
+        }
+      })
+    );
+  }
+
   function deleteSubtask(id) {
     setSubtasks(prevState => prevState.filter(subtask => subtask.id !== id));
   }
@@ -94,6 +109,9 @@ export default function TaskModal({ id, columns, setDisplayTaskModal }) {
                 key={item.id}
                 placeholder={item.placeholder}
                 name="subtask"
+                onChange={e =>
+                  updateSubtask(item.id, 'subtask', e.target.value)
+                }
               />
               <FontAwesomeIcon
                 icon={faXmark}
