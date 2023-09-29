@@ -8,14 +8,22 @@ export default function TaskModal({ id, columns, setDisplayTaskModal }) {
   const navigate = useNavigate();
 
   const [subtasks, setSubtasks] = useState([
-    { id: 1, placeholder: 'e.g. Make coffee', subtask: '' },
-    { id: 2, placeholder: 'e.g. Drink coffee & smile', subtask: '' },
+    { id: 0, placeholder: 'e.g. Make coffee', subtask: '', completed: false },
+    {
+      id: 1,
+      placeholder: 'e.g. Drink coffee & smile',
+      subtask: '',
+      completed: false,
+    },
   ]);
 
   function addNewSubtask() {
     const maxId = Math.max(...subtasks.map(subtask => subtask.id));
 
-    setSubtasks(prevState => [...prevState, { id: maxId + 1, subtask: '' }]);
+    setSubtasks(prevState => [
+      ...prevState,
+      { id: maxId + 1, subtask: '', completed: false },
+    ]);
   }
 
   function deleteSubtask(id) {
@@ -29,7 +37,6 @@ export default function TaskModal({ id, columns, setDisplayTaskModal }) {
 
     const title = formData.get('title');
     const description = formData.get('desc');
-    const subtasks = Array.from(formData.getAll('subtask'));
     const status = formData.get('status');
 
     const taskData = {
