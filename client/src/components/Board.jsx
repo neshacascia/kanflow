@@ -6,6 +6,8 @@ import Column from './Column';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
 import TaskModal from './TaskModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
   const {
@@ -45,9 +47,18 @@ export default function Board() {
           <h1>{board.name}</h1>
 
           <section>
-            {board.columns.map(column => (
-              <Column name={column} tasks={tasks} />
-            ))}
+            {board.columns.length > 0 ? (
+              board.columns.map(column => (
+                <Column name={column} tasks={tasks} />
+              ))
+            ) : (
+              <div>
+                <p>This board is empty. Create a new column to get started.</p>
+                <button>
+                  <FontAwesomeIcon icon={faPlus} /> Add New Column
+                </button>
+              </div>
+            )}
           </section>
         </>
       )}
