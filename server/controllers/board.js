@@ -53,4 +53,16 @@ module.exports = {
       console.error(err);
     }
   },
+  updateStatus: async (req, res) => {
+    try {
+      await Task.updateOne(
+        { _id: req.body.taskId },
+        { $set: { status: req.body.status } }
+      );
+      console.log("Task's status has been updated");
+      res.status(200).json("Task's status has been updated");
+    } catch (err) {
+      console.error(err);
+    }
+  },
 };
