@@ -5,7 +5,7 @@ import { Context } from '../context/Context';
 import Column from './Column';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
-import TaskModal from './TaskModal';
+import AddTaskModal from './AddTaskModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -66,7 +66,7 @@ export default function Board() {
       {displayMenuModal && <MenuModal />}
       {boardDetails && <BoardDetailsModal />}
       {displayTaskModal && (
-        <TaskModal
+        <AddTaskModal
           id={board._id}
           columns={board.columns}
           setDisplayTaskModal={setDisplayTaskModal}

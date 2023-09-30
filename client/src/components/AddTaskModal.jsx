@@ -4,7 +4,7 @@ import axios from 'axios';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function TaskModal({ id, columns, setDisplayTaskModal }) {
+export default function AddTaskModal({ id, columns, setDisplayTaskModal }) {
   const navigate = useNavigate();
 
   const [subtasks, setSubtasks] = useState([
