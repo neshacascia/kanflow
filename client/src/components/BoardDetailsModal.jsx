@@ -12,8 +12,10 @@ export default function BoardDetailsModal() {
   ]);
 
   function addNewColumn() {
+    const maxId = Math.max(...boardColumns.map(column => column.id));
+
     const newColumn = {
-      id: boardColumns.length,
+      id: maxId + 1,
       columnName: '',
     };
 

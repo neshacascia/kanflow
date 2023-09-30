@@ -8,6 +8,7 @@ function ContextProvider(props) {
   const [authValue, setAuthValue] = useState(null);
   const [displayMenuModal, setDisplayMenuModal] = useState(false);
   const [boardDetails, setBoardDetails] = useState(null);
+  const [displayTaskModal, setDisplayTaskModal] = useState(false);
   const [boards, setBoards] = useState([]);
 
   return (
@@ -21,6 +22,8 @@ function ContextProvider(props) {
         setDisplayMenuModal,
         boardDetails,
         setBoardDetails,
+        displayTaskModal,
+        setDisplayTaskModal,
         boards,
         setBoards,
       }}
