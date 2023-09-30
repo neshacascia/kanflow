@@ -8,6 +8,7 @@ import BoardDetailsModal from './BoardDetailsModal';
 import AddTaskModal from './AddTaskModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import ViewTaskModal from './ViewTaskModal';
 
 export default function Board() {
   const {
@@ -20,6 +21,8 @@ export default function Board() {
 
   const [board, setBoard] = useState();
   const [tasks, setTasks] = useState();
+  const [viewTask, setViewTask] = useState();
+  const [selectedStatus, setSelectedStatus] = useState();
 
   useEffect(() => {
     if (id) {
@@ -49,7 +52,12 @@ export default function Board() {
           <section>
             {board.columns.length > 0 ? (
               board.columns.map(column => (
-                <Column name={column} tasks={tasks} />
+                <Column
+                  name={column}
+                  tasks={tasks}
+                  setViewTask={setViewTask}
+                  setSelectedStatus={setSelectedStatus}
+                />
               ))
             ) : (
               <div>
@@ -70,6 +78,13 @@ export default function Board() {
           id={board._id}
           columns={board.columns}
           setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
+      {viewTask && (
+        <ViewTaskModal
+          task={viewTask}
+          columns={board.columns}
+          selectedStatus={selectedStatus}
         />
       )}
     </main>
