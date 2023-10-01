@@ -7,6 +7,19 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
     task => task.completed === true
   ).length;
 
+  async function setCompletionStatus(id, completed) {
+    try {
+      const res = await axios.put('/board/setCompletionStatus', {
+        taskId: task._id,
+        subtaskId: id,
+        completed: completed,
+      });
+      console.log(res);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   async function updateCurrentStatus(newStatus) {
     try {
       const res = await axios.put('/board/updateStatus', {
@@ -32,7 +45,14 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
       <ul>
         {task.subtasks.map(subtask => (
           <li>
-            <input type="checkbox" /> {subtask.subtask}
+            <input
+              type="checkbox"
+              id={subtask.id}
+              onChange={() =>
+                setCompletionStatus(subtask.id, subtask.completed)
+              }
+            />{' '}
+            {subtask.subtask}
           </li>
         ))}
       </ul>
