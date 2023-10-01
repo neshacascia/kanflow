@@ -9,5 +9,6 @@ router.get('/:id', boardController.getBoard);
 router.post('/createBoard', boardController.createBoard);
 router.post('/addTask', boardController.addTask);
 router.put('/updateStatus', boardController.updateStatus);
+router.put('/setCompletionStatus', boardController.setCompletionStatus);
 
 module.exports = router;

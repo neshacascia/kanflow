@@ -65,4 +65,29 @@ module.exports = {
       console.error(err);
     }
   },
+  setCompletionStatus: async (req, res) => {
+    try {
+      if (req.body.completed) {
+        await Task.updateOne(
+          { _id: req.body.taskId, 'subtasks.id': req.body.subtaskId },
+          { $set: { 'subtasks.$.completed': false } }
+        );
+        console.log('Subtask has been marked incompleted');
+        res
+          .status(200)
+          .json("Subtask's completion status has been marked incompleted");
+      } else {
+        await Task.updateOne(
+          { _id: req.body.taskId, 'subtasks.id': req.body.subtaskId },
+          { $set: { 'subtasks.$.completed': true } }
+        );
+        console.log('Subtask has been marked completed');
+        res
+          .status(200)
+          .json("Subtask's completion status has been marked completed");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
 };
