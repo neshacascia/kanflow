@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useState } from 'react';
 
 export default function ViewTaskModal({ task, columns, selectedStatus }) {
+  const [subtasks, setSubtasks] = useState(task.subtasks);
+
   const navigate = useNavigate();
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
@@ -9,6 +12,15 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
 
   async function setCompletionStatus(id, completed) {
     try {
+      const updatedSubtasks = subtasks.map(subtask => {
+        if (subtask.id === id) {
+          return { ...subtask, completed: !completed };
+        }
+        return subtask;
+      });
+
+      setSubtasks(updatedSubtasks);
+
       const res = await axios.put('/board/setCompletionStatus', {
         taskId: task._id,
         subtaskId: id,
@@ -43,7 +55,7 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
       </span>
 
       <ul>
-        {task.subtasks.map(subtask => (
+        {subtasks.map(subtask => (
           <li>
             <input
               type="checkbox"
@@ -51,6 +63,7 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
               onChange={() =>
                 setCompletionStatus(subtask.id, subtask.completed)
               }
+              checked={subtask.completed}
             />{' '}
             {subtask.subtask}
           </li>
