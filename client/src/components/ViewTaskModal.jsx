@@ -1,9 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+
 export default function ViewTaskModal({ task, columns, selectedStatus }) {
   const [subtasks, setSubtasks] = useState(task.subtasks);
+  const [taskModal, setTaskModal] = useState(false);
 
   const navigate = useNavigate();
   const completedSubtasks = task.subtasks.filter(
@@ -47,6 +51,7 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
 
   return (
     <div>
+      <FontAwesomeIcon icon={faEllipsisVertical} />
       <h2>{task.title}</h2>
       <p>{task.description}</p>
 
