@@ -1,13 +1,14 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
+import { Context } from '../context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 export default function ViewTaskModal({ task, columns, selectedStatus }) {
+  const { setDisplayTaskModal } = useContext(Context);
   const [subtasks, setSubtasks] = useState(task.subtasks);
-  const [taskModal, setTaskModal] = useState(false);
+  const [settingsModal, setSettingsModal] = useState(false);
 
   const navigate = useNavigate();
   const completedSubtasks = task.subtasks.filter(
@@ -51,7 +52,10 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
 
   return (
     <div>
-      <FontAwesomeIcon icon={faEllipsisVertical} />
+      <FontAwesomeIcon
+        icon={faEllipsisVertical}
+        onClick={() => setSettingsModal(true)}
+      />
       <h2>{task.title}</h2>
       <p>{task.description}</p>
 
@@ -89,6 +93,11 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
           })}
         </select>
       </label>
+      {settingsModal && (
+        <div>
+          <button onClick={() => setDisplayTaskModal('edit')}>Edit</button>
+        </div>
+      )}
     </div>
   );
 }
