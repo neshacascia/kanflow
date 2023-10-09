@@ -21,7 +21,7 @@ export default function Navbar() {
     setDisplayMenuModal(false);
     setBoardDetails(null);
 
-    setDisplayTaskModal(true);
+    setDisplayTaskModal('add');
   }
 
   return (
