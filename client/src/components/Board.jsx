@@ -6,9 +6,11 @@ import Column from './Column';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
 import AddTaskModal from './AddTaskModal';
+import ViewTaskModal from './ViewTaskModal';
+import EditTaskModal from './EditTaskModal';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import ViewTaskModal from './ViewTaskModal';
 
 export default function Board() {
   const {
@@ -73,9 +75,17 @@ export default function Board() {
 
       {displayMenuModal && <MenuModal />}
       {boardDetails && <BoardDetailsModal />}
-      {displayTaskModal && (
+      {displayTaskModal === 'add' && (
         <AddTaskModal
           id={board._id}
+          columns={board.columns}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
+      {displayTaskModal === 'edit' && (
+        <EditTaskModal
+          id={board._id}
+          selectedTask={viewTask}
           columns={board.columns}
           setDisplayTaskModal={setDisplayTaskModal}
         />
