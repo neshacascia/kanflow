@@ -30,9 +30,8 @@ export default function EditTaskModal({
   }
 
   function updateSubtask(id, key, value) {
-    setSubtasks(
-      task.subtasks.map(subtask => {
-        console.log(subtask.id, id);
+    setSubtasks(prevState =>
+      prevState.map(subtask => {
         if (subtask.id === id) {
           return {
             ...subtask,
