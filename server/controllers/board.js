@@ -53,6 +53,26 @@ module.exports = {
       console.error(err);
     }
   },
+  editTask: async (req, res) => {
+    console.log(req.body.taskData);
+    try {
+      await Task.updateOne(
+        { _id: req.body.taskData.taskId },
+        {
+          $set: {
+            title: req.body.taskData.title,
+            description: req.body.taskData.description,
+            subtasks: req.body.taskData.subtasks,
+            status: req.body.taskData.status,
+          },
+        }
+      );
+      console.log('Task has been updated');
+      res.status(200).json('Task has been updated');
+    } catch (err) {
+      console.error(err);
+    }
+  },
   updateStatus: async (req, res) => {
     try {
       await Task.updateOne(
