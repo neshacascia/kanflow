@@ -95,7 +95,7 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
       </label>
       {settingsModal && (
         <div>
-          <button onClick={() => setDisplayTaskModal('edit')}>Edit</button>
+          <button onClick={() => setDisplayTaskModal('edit')}>Edit Task</button>
         </div>
       )}
     </div>
