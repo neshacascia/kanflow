@@ -110,4 +110,13 @@ module.exports = {
       console.error(err);
     }
   },
+  delete: async (req, res) => {
+    try {
+      await Task.deleteOne({ _id: req.body.taskId });
+      console.log('Task has been deleted');
+      res.status(200).json('Task has been deleted');
+    } catch (err) {
+      console.error(err);
+    }
+  },
 };

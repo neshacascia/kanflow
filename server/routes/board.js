@@ -11,5 +11,6 @@ router.post('/addTask', boardController.addTask);
 router.put('/editTask', boardController.editTask);
 router.put('/updateStatus', boardController.updateStatus);
 router.put('/setCompletionStatus', boardController.setCompletionStatus);
+router.delete('/delete', boardController.delete);
 
 module.exports = router;
