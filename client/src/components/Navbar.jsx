@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '../context/Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +11,8 @@ export default function Navbar() {
     setBoardDetails,
     setDisplayTaskModal,
   } = useContext(Context);
+
+  const [displaySettings, setDisplaySettings] = useState(false);
 
   function displayMenu() {
     setBoardDetails(null);
@@ -28,9 +30,21 @@ export default function Navbar() {
     <nav>
       {isLoggedIn && (
         <span>
+          <h2 onClick={displayMenu}>Boards</h2>
           <FontAwesomeIcon icon={faPlus} onClick={displayTask} />
-          <FontAwesomeIcon icon={faEllipsisVertical} onClick={displayMenu} />
+          <FontAwesomeIcon
+            icon={faEllipsisVertical}
+            onClick={() => setDisplaySettings(true)}
+          />
         </span>
+      )}
+
+      {displaySettings && (
+        <div>
+          <button onClick={() => setDisplayTaskModal('deleteBoard')}>
+            Delete Board
+          </button>
+        </div>
       )}
     </nav>
   );

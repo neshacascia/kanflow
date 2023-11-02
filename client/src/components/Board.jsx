@@ -98,6 +98,13 @@ export default function Board() {
           setDisplayTaskModal={setDisplayTaskModal}
         />
       )}
+      {displayTaskModal === 'deleteBoard' && (
+        <DeleteModal
+          board={board}
+          displayTaskModal={displayTaskModal}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
       {viewTask && (
         <ViewTaskModal
           task={viewTask}
