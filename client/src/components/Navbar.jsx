@@ -28,8 +28,9 @@ export default function Navbar() {
     <nav>
       {isLoggedIn && (
         <span>
+          <h2 onClick={displayMenu}>Boards</h2>
           <FontAwesomeIcon icon={faPlus} onClick={displayTask} />
-          <FontAwesomeIcon icon={faEllipsisVertical} onClick={displayMenu} />
+          <FontAwesomeIcon icon={faEllipsisVertical} />
         </span>
       )}
     </nav>
