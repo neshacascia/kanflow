@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export default function DeleteModal({
+  board,
   selectedTask,
   displayTaskModal,
   setDisplayTaskModal,
@@ -19,10 +20,22 @@ export default function DeleteModal({
 
   return (
     <div>
-      <h2>Delete this task?</h2>
+      <h2>
+        Delete this {`${displayTaskModal === 'deleteTask' ? 'task' : 'board'}`}?
+      </h2>
       <p>
-        Are you sure you want to delete the {`'${selectedTask.title}'`} task and
-        its subtasks? This action cannot be reversed.
+        Are you sure you want to delete the
+        {`${
+          displayTaskModal === 'deleteTask'
+            ? ` '${selectedTask.title}' task and its subtasks`
+            : ` '${board.name}' board`
+        }`}
+        ?{' '}
+        {`This action ${
+          displayTaskModal === 'deleteBoard'
+            ? 'will remove all columns and tasks and '
+            : ' '
+        }cannot be reversed.`}
       </p>
       <button onClick={() => deleteTask()}>Delete</button>
       <button onClick={() => setDisplayTaskModal(false)}>Cancel</button>
