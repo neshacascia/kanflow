@@ -6,11 +6,14 @@ export default function DeleteModal({
   displayTaskModal,
   setDisplayTaskModal,
 }) {
-  async function deleteTask() {
-    const taskId = selectedTask._id;
+  async function deleteData() {
+    const data =
+      displayTaskModal === 'deleteTask' ? selectedTask._id : board._id;
 
     try {
-      const res = await axios.delete('/board/delete', { data: { taskId } });
+      const res = await axios.delete('/board/delete', {
+        data: { displayTaskModal, data },
+      });
       console.log(res);
       setDisplayTaskModal(false);
     } catch (err) {
@@ -37,7 +40,7 @@ export default function DeleteModal({
             : ' '
         }cannot be reversed.`}
       </p>
-      <button onClick={() => deleteTask()}>Delete</button>
+      <button onClick={() => deleteData()}>Delete</button>
       <button onClick={() => setDisplayTaskModal(false)}>Cancel</button>
     </div>
   );
