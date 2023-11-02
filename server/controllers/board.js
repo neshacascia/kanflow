@@ -111,10 +111,17 @@ module.exports = {
     }
   },
   delete: async (req, res) => {
+    console.log(req.body);
     try {
-      await Task.deleteOne({ _id: req.body.taskId });
-      console.log('Task has been deleted');
-      res.status(200).json('Task has been deleted');
+      if (req.body.displayTaskModal === 'deleteTask') {
+        await Task.deleteOne({ _id: req.body.data });
+        console.log('Task has been deleted');
+        res.status(200).json('Task has been deleted');
+      } else {
+        await Board.deleteOne({ _id: req.body.data });
+        console.log('Board has been deleted');
+        res.status(200).json('Board has been deleted');
+      }
     } catch (err) {
       console.error(err);
     }
