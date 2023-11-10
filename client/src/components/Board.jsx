@@ -75,7 +75,7 @@ export default function Board() {
       )}
 
       {displayMenuModal && <MenuModal />}
-      {boardDetails && <BoardDetailsModal />}
+      {boardDetails && <BoardDetailsModal board={board} />}
       {displayTaskModal === 'add' && (
         <AddTaskModal
           id={board._id}
