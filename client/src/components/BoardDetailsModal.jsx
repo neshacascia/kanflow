@@ -3,13 +3,15 @@ import { Context } from '../context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function BoardDetailsModal() {
+export default function BoardDetailsModal({ board }) {
   const { boardDetails, setBoardDetails } = useContext(Context);
 
   const [boardColumns, setBoardColumns] = useState([
     { id: 0, columnName: 'Todo' },
     { id: 1, columnName: 'Doing' },
   ]);
+
+  const [existingBoard, setExistingBoard] = useState(board);
 
   function addNewColumn() {
     const maxId = Math.max(...boardColumns.map(column => column.id));
@@ -38,7 +40,16 @@ export default function BoardDetailsModal() {
   }
 
   function deleteColumnName(id) {
-    setBoardColumns(boardColumns.filter(column => column.id !== id));
+    if (boardDetails === 'new') {
+      setBoardColumns(boardColumns.filter(column => column.id !== id));
+    } else {
+      setExistingBoard(prevState => {
+        return {
+          ...prevState,
+          columns: prevState.columns.filter((column, ind) => id !== ind),
+        };
+      });
+    }
   }
 
   return (
@@ -49,28 +60,51 @@ export default function BoardDetailsModal() {
       <form action="/board/createBoard" method="POST">
         <label>
           Board Name{' '}
-          <input type="text" name="boardName" placeholder="e.g. Web Design" />
+          <input
+            type="text"
+            name="boardName"
+            placeholder="e.g. Web Design"
+            value={boardDetails === 'editBoard' ? board.name : ''}
+          />
         </label>
 
         <label>
           Board Columns
-          {boardColumns.map(column => (
-            <div>
-              <input
-                key={column.id}
-                type="text"
-                name="columnName"
-                value={column.columnName}
-                onChange={e =>
-                  updateColumnName(column.id, 'columnName', e.target.value)
-                }
-              />
-              <FontAwesomeIcon
-                icon={faXmark}
-                onClick={() => deleteColumnName(column.id)}
-              />
-            </div>
-          ))}
+          {boardDetails === 'new'
+            ? boardColumns.map(column => (
+                <div>
+                  <input
+                    key={column.id}
+                    type="text"
+                    name="columnName"
+                    value={column.columnName}
+                    onChange={e =>
+                      updateColumnName(column.id, 'columnName', e.target.value)
+                    }
+                  />
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    onClick={() => deleteColumnName(column.id)}
+                  />
+                </div>
+              ))
+            : existingBoard.columns.map((column, ind) => (
+                <div>
+                  <input
+                    key={ind}
+                    type="text"
+                    name="columnName"
+                    value={column}
+                    onChange={e =>
+                      updateColumnName(ind, 'columnName', e.target.value)
+                    }
+                  />
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    onClick={() => deleteColumnName(ind)}
+                  />
+                </div>
+              ))}
         </label>
 
         <button type="button" onClick={addNewColumn}>
