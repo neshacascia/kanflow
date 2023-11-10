@@ -112,6 +112,7 @@ export default function Board() {
           selectedStatus={selectedStatus}
         />
       )}
+      {displayMenuModal === 'editBoard' && <BoardDetailsModal board={board} />}
     </main>
   );
 }
