@@ -41,10 +41,10 @@ export default function Navbar() {
 
       {displaySettings && (
         <div>
-          <button onClick={() => setDisplayTaskModal('editBoard')}>
+          <button onClick={() => setDisplayMenuModal('editBoard')}>
             Edit Board
           </button>
-          <button onClick={() => setDisplayMenuModal('deleteBoard')}>
+          <button onClick={() => setDisplayTaskModal('deleteBoard')}>
             Delete Board
           </button>
         </div>
