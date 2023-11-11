@@ -27,17 +27,11 @@ export default function BoardDetailsModal({ board }) {
       setBoardColumns([...boardColumns, newColumn]);
     } else {
       setExistingBoardColumns(prevState => {
-        return {
-          ...prevState,
-          columns: prevState.columns.map((column, ind) => ({
-            id: ind + 1,
-            columnName: '',
-          })),
-        };
+        return [...prevState, ''];
       });
     }
   }
-  console.log(existingBoardColumns);
+
   function updateColumnName(id, key, value) {
     setBoardColumns(
       boardColumns.map(column => {
