@@ -12,7 +12,7 @@ export default function BoardDetailsModal({ board }) {
   ]);
 
   const [existingBoardColumns, setExistingBoardColumns] = useState(
-    board.columns
+    board?.columns
   );
 
   function addNewColumn() {
