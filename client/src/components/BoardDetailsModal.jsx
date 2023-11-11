@@ -33,18 +33,30 @@ export default function BoardDetailsModal({ board }) {
   }
 
   function updateColumnName(id, key, value) {
-    setBoardColumns(
-      boardColumns.map(column => {
-        if (column.id === id) {
-          return {
-            ...column,
-            [key]: value,
-          };
-        } else {
-          return column;
-        }
-      })
-    );
+    if (boardDetails === 'new') {
+      setBoardColumns(
+        boardColumns.map(column => {
+          if (column.id === id) {
+            return {
+              ...column,
+              [key]: value,
+            };
+          } else {
+            return column;
+          }
+        })
+      );
+    } else {
+      setExistingBoardColumns(prevState => {
+        return prevState.map((column, ind) => {
+          if (ind === id) {
+            return value;
+          } else {
+            return column;
+          }
+        });
+      });
+    }
   }
 
   function deleteColumnName(id) {
