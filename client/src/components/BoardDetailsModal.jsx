@@ -81,7 +81,7 @@ export default function BoardDetailsModal({ board }) {
             type="text"
             name="boardName"
             placeholder="e.g. Web Design"
-            value={boardDetails === 'editBoard' ? board.name : ''}
+            value={boardDetails === 'editBoard' ? board.name : null}
           />
         </label>
 
