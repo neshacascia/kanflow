@@ -11,7 +11,9 @@ export default function BoardDetailsModal({ board }) {
     { id: 1, columnName: 'Doing' },
   ]);
 
-  const [existingBoard, setExistingBoard] = useState(board);
+  const [existingBoardColumns, setExistingBoardColumns] = useState(
+    board.columns
+  );
 
   function addNewColumn() {
     const maxId = Math.max(...boardColumns.map(column => column.id));
@@ -21,9 +23,21 @@ export default function BoardDetailsModal({ board }) {
       columnName: '',
     };
 
-    setBoardColumns([...boardColumns, newColumn]);
+    if (boardDetails === 'new') {
+      setBoardColumns([...boardColumns, newColumn]);
+    } else {
+      setExistingBoardColumns(prevState => {
+        return {
+          ...prevState,
+          columns: prevState.columns.map((column, ind) => ({
+            id: ind + 1,
+            columnName: '',
+          })),
+        };
+      });
+    }
   }
-
+  console.log(existingBoardColumns);
   function updateColumnName(id, key, value) {
     setBoardColumns(
       boardColumns.map(column => {
@@ -43,12 +57,9 @@ export default function BoardDetailsModal({ board }) {
     if (boardDetails === 'new') {
       setBoardColumns(boardColumns.filter(column => column.id !== id));
     } else {
-      setExistingBoard(prevState => {
-        return {
-          ...prevState,
-          columns: prevState.columns.filter((column, ind) => id !== ind),
-        };
-      });
+      setExistingBoardColumns(prevState =>
+        prevState.filter((column, ind) => id !== ind)
+      );
     }
   }
 
@@ -88,7 +99,7 @@ export default function BoardDetailsModal({ board }) {
                   />
                 </div>
               ))
-            : existingBoard.columns.map((column, ind) => (
+            : existingBoardColumns.map((column, ind) => (
                 <div>
                   <input
                     key={ind}
