@@ -21,13 +21,7 @@ export default function BoardDetailsModal({ board }) {
       columnName: '',
     };
 
-    if (boardDetails === 'new') {
-      setBoardColumns([...boardColumns, newColumn]);
-    } else {
-      setExistingBoardColumns(prevState => {
-        return [...prevState, ''];
-      });
-    }
+    setBoardColumns([...boardColumns, newColumn]);
   }
 
   function updateColumnName(id, key, value) {
