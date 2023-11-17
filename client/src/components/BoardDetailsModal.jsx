@@ -61,41 +61,23 @@ export default function BoardDetailsModal({ board }) {
 
         <label>
           Board Columns
-          {boardDetails === 'new'
-            ? boardColumns.map(column => (
-                <div>
-                  <input
-                    key={column.id}
-                    type="text"
-                    name="columnName"
-                    value={column.columnName}
-                    onChange={e =>
-                      updateColumnName(column.id, 'columnName', e.target.value)
-                    }
-                  />
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                    onClick={() => deleteColumnName(column.id)}
-                  />
-                </div>
-              ))
-            : existingBoardColumns.map((column, ind) => (
-                <div>
-                  <input
-                    key={ind}
-                    type="text"
-                    name="columnName"
-                    value={column}
-                    onChange={e =>
-                      updateColumnName(ind, 'columnName', e.target.value)
-                    }
-                  />
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                    onClick={() => deleteColumnName(ind)}
-                  />
-                </div>
-              ))}
+          {boardColumns.map(column => (
+            <div>
+              <input
+                key={column.id}
+                type="text"
+                name="columnName"
+                value={column.columnName}
+                onChange={e =>
+                  updateColumnName(column.id, 'columnName', e.target.value)
+                }
+              />
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => deleteColumnName(column.id)}
+              />
+            </div>
+          ))}
         </label>
 
         <button type="button" onClick={addNewColumn}>
