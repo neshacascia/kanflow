@@ -40,13 +40,7 @@ export default function BoardDetailsModal({ board }) {
   }
 
   function deleteColumnName(id) {
-    if (boardDetails === 'new') {
-      setBoardColumns(boardColumns.filter(column => column.id !== id));
-    } else {
-      setExistingBoardColumns(prevState =>
-        prevState.filter((column, ind) => id !== ind)
-      );
-    }
+    setBoardColumns(prevState => prevState.filter(column => column.id !== id));
   }
 
   return (
