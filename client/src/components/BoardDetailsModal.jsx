@@ -16,14 +16,20 @@ export default function BoardDetailsModal({ board }) {
   );
 
   function addNewColumn() {
-    const maxId = Math.max(...boardColumns.map(column => column.id));
+    if (boardDetails === 'new') {
+      const maxId = Math.max(...boardColumns.map(column => column.id));
 
-    const newColumn = {
-      id: maxId + 1,
-      columnName: '',
-    };
+      const newColumn = {
+        id: maxId + 1,
+        columnName: '',
+      };
 
-    setBoardColumns([...boardColumns, newColumn]);
+      setBoardColumns([...boardColumns, newColumn]);
+    } else {
+      setBoardColumns(prevState => {
+        return [...prevState, ''];
+      });
+    }
   }
 
   function updateColumnName(id, key, value) {
@@ -70,6 +76,7 @@ export default function BoardDetailsModal({ board }) {
     }
   }
 
+  console.log(boardColumns);
   return (
     <div>
       <FontAwesomeIcon icon={faXmark} onClick={() => setBoardDetails(null)} />
@@ -94,7 +101,7 @@ export default function BoardDetailsModal({ board }) {
                 key={column.id}
                 type="text"
                 name="columnName"
-                value={column.columnName}
+                value={boardDetails === 'new' ? column.columnName : column}
                 onChange={e =>
                   updateColumnName(column.id, 'columnName', e.target.value)
                 }
