@@ -83,11 +83,10 @@ export default function BoardDetailsModal({ board }) {
         <button type="button" onClick={addNewColumn}>
           + Add New Column
         </button>
-        {boardDetails === 'new' ? (
-          <button type="submit">Create New Board</button>
-        ) : (
-          <button>Save Changes</button>
-        )}
+
+        <button type="submit">
+          {boardDetails === 'new' ? 'Create New Board' : 'Save Changes'}
+        </button>
       </form>
     </div>
   );
