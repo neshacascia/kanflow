@@ -8,6 +8,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 export default function BoardDetailsModal({ board }) {
   const { boardDetails, setBoardDetails } = useContext(Context);
 
+  const [boardName, setBoardName] = useState(board?.name || '');
+
   const [boardColumns, setBoardColumns] = useState(
     board?.columns || [
       { id: 0, columnName: 'Todo' },
@@ -30,6 +32,10 @@ export default function BoardDetailsModal({ board }) {
         return [...prevState, ''];
       });
     }
+  }
+
+  function updateBoardName(value) {
+    setBoardName(value);
   }
 
   function updateColumnName(id, key, value) {
@@ -109,7 +115,8 @@ export default function BoardDetailsModal({ board }) {
             type="text"
             name="boardName"
             placeholder="e.g. Web Design"
-            value={boardDetails === 'editBoard' ? board.name : null}
+            value={boardName}
+            onChange={e => updateBoardName(e.target.value)}
           />
         </label>
 
