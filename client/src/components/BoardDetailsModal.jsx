@@ -33,18 +33,30 @@ export default function BoardDetailsModal({ board }) {
   }
 
   function updateColumnName(id, key, value) {
-    setBoardColumns(prevState =>
-      prevState.map(column => {
-        if (column.id === id) {
-          return {
-            ...column,
-            [key]: value,
-          };
-        } else {
-          return column;
-        }
-      })
-    );
+    if (boardDetails === 'new') {
+      setBoardColumns(prevState =>
+        prevState.map(column => {
+          if (column.id === id) {
+            return {
+              ...column,
+              [key]: value,
+            };
+          } else {
+            return column;
+          }
+        })
+      );
+    } else {
+      setBoardColumns(prevState => {
+        return prevState.map((column, ind) => {
+          if (ind === id) {
+            return value;
+          } else {
+            return column;
+          }
+        });
+      });
+    }
   }
 
   function deleteColumnName(id) {
@@ -95,7 +107,7 @@ export default function BoardDetailsModal({ board }) {
 
         <label>
           Board Columns
-          {boardColumns.map(column => (
+          {boardColumns.map((column, ind) => (
             <div>
               <input
                 key={column.id}
@@ -103,7 +115,11 @@ export default function BoardDetailsModal({ board }) {
                 name="columnName"
                 value={boardDetails === 'new' ? column.columnName : column}
                 onChange={e =>
-                  updateColumnName(column.id, 'columnName', e.target.value)
+                  updateColumnName(
+                    column.id || ind,
+                    'columnName',
+                    e.target.value
+                  )
                 }
               />
               <FontAwesomeIcon
