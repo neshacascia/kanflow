@@ -60,7 +60,15 @@ export default function BoardDetailsModal({ board }) {
   }
 
   function deleteColumnName(id) {
-    setBoardColumns(prevState => prevState.filter(column => column.id !== id));
+    if (boardDetails === 'new') {
+      setBoardColumns(prevState =>
+        prevState.filter(column => column.id !== id)
+      );
+    } else {
+      setBoardColumns(prevState =>
+        prevState.filter((column, ind) => id !== ind)
+      );
+    }
   }
 
   async function handleSubmit(e) {
@@ -124,7 +132,7 @@ export default function BoardDetailsModal({ board }) {
               />
               <FontAwesomeIcon
                 icon={faXmark}
-                onClick={() => deleteColumnName(column.id)}
+                onClick={() => deleteColumnName(column.id || ind)}
               />
             </div>
           ))}
