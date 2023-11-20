@@ -27,9 +27,10 @@ module.exports = {
   },
   createBoard: async (req, res) => {
     try {
+      console.log(req.body);
       const newBoard = await Board.create({
-        name: req.body.boardName,
-        columns: req.body.columnName,
+        name: req.body.boardData.name,
+        columns: req.body.boardData.columns,
         userId: req.user.id,
       });
       console.log('Board has been added');
