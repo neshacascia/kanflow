@@ -1,5 +1,7 @@
 import { useState, useContext } from 'react';
 import { Context } from '../context/Context';
+import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -43,12 +45,37 @@ export default function BoardDetailsModal({ board }) {
     setBoardColumns(prevState => prevState.filter(column => column.id !== id));
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const name = formData.get('boardName');
+    const columns = formData.getAll('columnName');
+
+    const boardData = {
+      name,
+      columns,
+    };
+
+    try {
+      if (boardDetails === 'new') {
+        const res = axios.post('/board/createBoard', { boardData });
+        if (res.status === 200) {
+          setBoardDetails(null);
+          navigate(0);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div>
       <FontAwesomeIcon icon={faXmark} onClick={() => setBoardDetails(null)} />
       <h2>{boardDetails === 'new' ? 'Add New' : 'Edit'} Board</h2>
 
-      <form action="/board/createBoard" method="POST">
+      <form onSubmit={handleSubmit}>
         <label>
           Board Name{' '}
           <input
