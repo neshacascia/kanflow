@@ -96,6 +96,12 @@ export default function BoardDetailsModal({ board }) {
           setBoardDetails(null);
           navigate(0);
         }
+      } else {
+        const res = axios.put('/board/editBoard', { boardData });
+        if (res.status === 200) {
+          setBoardDetails(null);
+          navigate(0);
+        }
       }
     } catch (err) {
       console.error(err);
