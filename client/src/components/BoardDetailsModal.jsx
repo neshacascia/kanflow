@@ -7,14 +7,19 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetailsModal({ board }) {
   const { boardDetails, setBoardDetails } = useContext(Context);
+  console.log(boardDetails);
 
-  const [boardName, setBoardName] = useState(board?.name || '');
+  const [boardName, setBoardName] = useState(
+    boardDetails === 'editBoard' ? board?.name : ''
+  );
 
   const [boardColumns, setBoardColumns] = useState(
-    board?.columns || [
-      { id: 0, columnName: 'Todo' },
-      { id: 1, columnName: 'Doing' },
-    ]
+    boardDetails === 'editBoard'
+      ? board?.columns
+      : [
+          { id: 0, columnName: 'Todo' },
+          { id: 1, columnName: 'Doing' },
+        ]
   );
 
   function addNewColumn() {
