@@ -85,6 +85,7 @@ export default function BoardDetailsModal({ board }) {
     const columns = formData.getAll('columnName');
 
     const boardData = {
+      id: board?._id,
       name,
       columns,
     };
@@ -108,7 +109,6 @@ export default function BoardDetailsModal({ board }) {
     }
   }
 
-  console.log(boardColumns);
   return (
     <div>
       <FontAwesomeIcon icon={faXmark} onClick={() => setBoardDetails(null)} />
