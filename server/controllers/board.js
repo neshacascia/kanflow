@@ -39,6 +39,23 @@ module.exports = {
       console.error(err);
     }
   },
+  editBoard: async (req, res) => {
+    try {
+      await Board.updateOne(
+        { _id: req.body.boardData.id },
+        {
+          $set: {
+            name: req.body.boardData.name,
+            columns: req.body.boardData.columns,
+          },
+        }
+      );
+      console.log('Board has been updated');
+      res.status(200).json('Board has been updated');
+    } catch (err) {
+      console.error(err);
+    }
+  },
   addTask: async (req, res) => {
     try {
       await Task.create({
