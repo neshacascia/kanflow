@@ -27,13 +27,31 @@ module.exports = {
   },
   createBoard: async (req, res) => {
     try {
+      console.log(req.body);
       const newBoard = await Board.create({
-        name: req.body.boardName,
-        columns: req.body.columnName,
+        name: req.body.boardData.name,
+        columns: req.body.boardData.columns,
         userId: req.user.id,
       });
       console.log('Board has been added');
       res.redirect(`/board/${newBoard._id}`);
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  editBoard: async (req, res) => {
+    try {
+      await Board.updateOne(
+        { _id: req.body.boardData.id },
+        {
+          $set: {
+            name: req.body.boardData.name,
+            columns: req.body.boardData.columns,
+          },
+        }
+      );
+      console.log('Board has been updated');
+      res.status(200).json('Board has been updated');
     } catch (err) {
       console.error(err);
     }

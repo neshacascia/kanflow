@@ -1,44 +1,116 @@
 import { useState, useContext } from 'react';
 import { Context } from '../context/Context';
+import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function BoardDetailsModal() {
+export default function BoardDetailsModal({ board }) {
   const { boardDetails, setBoardDetails } = useContext(Context);
 
-  const [boardColumns, setBoardColumns] = useState([
-    { id: 0, columnName: 'Todo' },
-    { id: 1, columnName: 'Doing' },
-  ]);
+  const [boardName, setBoardName] = useState(
+    boardDetails === 'editBoard' ? board?.name : ''
+  );
+
+  const [boardColumns, setBoardColumns] = useState(
+    boardDetails === 'editBoard'
+      ? board?.columns
+      : [
+          { id: 0, columnName: 'Todo' },
+          { id: 1, columnName: 'Doing' },
+        ]
+  );
 
   function addNewColumn() {
-    const maxId = Math.max(...boardColumns.map(column => column.id));
+    if (boardDetails === 'new') {
+      const maxId = Math.max(...boardColumns.map(column => column.id));
 
-    const newColumn = {
-      id: maxId + 1,
-      columnName: '',
-    };
+      const newColumn = {
+        id: maxId + 1,
+        columnName: '',
+      };
 
-    setBoardColumns([...boardColumns, newColumn]);
+      setBoardColumns([...boardColumns, newColumn]);
+    } else {
+      setBoardColumns(prevState => {
+        return [...prevState, ''];
+      });
+    }
+  }
+
+  function updateBoardName(value) {
+    setBoardName(value);
   }
 
   function updateColumnName(id, key, value) {
-    setBoardColumns(
-      boardColumns.map(column => {
-        if (column.id === id) {
-          return {
-            ...column,
-            [key]: value,
-          };
-        } else {
-          return column;
-        }
-      })
-    );
+    if (boardDetails === 'new') {
+      setBoardColumns(prevState =>
+        prevState.map(column => {
+          if (column.id === id) {
+            return {
+              ...column,
+              [key]: value,
+            };
+          } else {
+            return column;
+          }
+        })
+      );
+    } else {
+      setBoardColumns(prevState => {
+        return prevState.map((column, ind) => {
+          if (ind === id) {
+            return value;
+          } else {
+            return column;
+          }
+        });
+      });
+    }
   }
 
   function deleteColumnName(id) {
-    setBoardColumns(boardColumns.filter(column => column.id !== id));
+    if (boardDetails === 'new') {
+      setBoardColumns(prevState =>
+        prevState.filter(column => column.id !== id)
+      );
+    } else {
+      setBoardColumns(prevState =>
+        prevState.filter((column, ind) => id !== ind)
+      );
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const name = formData.get('boardName');
+    const columns = formData.getAll('columnName');
+
+    const boardData = {
+      id: board?._id,
+      name,
+      columns,
+    };
+
+    try {
+      if (boardDetails === 'new') {
+        const res = axios.post('/board/createBoard', { boardData });
+        if (res.status === 200) {
+          setBoardDetails(null);
+          navigate(0);
+        }
+      } else {
+        const res = axios.put('/board/editBoard', { boardData });
+        if (res.status === 200) {
+          setBoardDetails(null);
+          navigate(0);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
@@ -46,28 +118,38 @@ export default function BoardDetailsModal() {
       <FontAwesomeIcon icon={faXmark} onClick={() => setBoardDetails(null)} />
       <h2>{boardDetails === 'new' ? 'Add New' : 'Edit'} Board</h2>
 
-      <form action="/board/createBoard" method="POST">
+      <form onSubmit={handleSubmit}>
         <label>
           Board Name{' '}
-          <input type="text" name="boardName" placeholder="e.g. Web Design" />
+          <input
+            type="text"
+            name="boardName"
+            placeholder="e.g. Web Design"
+            value={boardName}
+            onChange={e => updateBoardName(e.target.value)}
+          />
         </label>
 
         <label>
           Board Columns
-          {boardColumns.map(column => (
+          {boardColumns.map((column, ind) => (
             <div>
               <input
                 key={column.id}
                 type="text"
                 name="columnName"
-                value={column.columnName}
+                value={boardDetails === 'new' ? column.columnName : column}
                 onChange={e =>
-                  updateColumnName(column.id, 'columnName', e.target.value)
+                  updateColumnName(
+                    column.id || ind,
+                    'columnName',
+                    e.target.value
+                  )
                 }
               />
               <FontAwesomeIcon
                 icon={faXmark}
-                onClick={() => deleteColumnName(column.id)}
+                onClick={() => deleteColumnName(column.id || ind)}
               />
             </div>
           ))}
@@ -76,6 +158,7 @@ export default function BoardDetailsModal() {
         <button type="button" onClick={addNewColumn}>
           + Add New Column
         </button>
+
         <button type="submit">
           {boardDetails === 'new' ? 'Create New Board' : 'Save Changes'}
         </button>
