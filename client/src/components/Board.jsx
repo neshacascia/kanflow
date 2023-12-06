@@ -54,8 +54,9 @@ export default function Board() {
 
           <section>
             {board.columns.length > 0 ? (
-              board.columns.map(column => (
+              board.columns.map((column, ind) => (
                 <Column
+                  key={ind}
                   name={column}
                   tasks={tasks}
                   setViewTask={setViewTask}

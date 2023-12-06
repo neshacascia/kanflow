@@ -23,8 +23,8 @@ export default function MenuModal() {
   return (
     <div>
       <h3>All Boards ({boards.length})</h3>
-      {boards?.map(board => (
-        <Link to={`/board/${board._id}`} onClick={closeMenuModal}>
+      {boards?.map((board, ind) => (
+        <Link key={ind} to={`/board/${board._id}`} onClick={closeMenuModal}>
           {board.name}
         </Link>
       ))}
