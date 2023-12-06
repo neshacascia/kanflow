@@ -11,7 +11,7 @@ export default function DeleteModal({
       displayTaskModal === 'deleteTask' ? selectedTask._id : board._id;
 
     try {
-      const res = await axios.delete('/board/delete', {
+      const res = await axios.delete('/api/board/delete', {
         data: { displayTaskModal, data },
       });
       console.log(res);

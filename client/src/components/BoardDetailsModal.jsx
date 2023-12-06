@@ -96,13 +96,13 @@ export default function BoardDetailsModal({ board }) {
 
     try {
       if (boardDetails === 'new') {
-        const res = axios.post('/board/createBoard', { boardData });
+        const res = axios.post('/api/board/createBoard', { boardData });
         if (res.status === 200) {
           setBoardDetails(null);
           navigate(0);
         }
       } else {
-        const res = axios.put('/board/editBoard', { boardData });
+        const res = axios.put('/api/board/editBoard', { boardData });
         if (res.status === 200) {
           setBoardDetails(null);
           navigate(0);

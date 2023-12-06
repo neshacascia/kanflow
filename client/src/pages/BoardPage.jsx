@@ -9,7 +9,7 @@ export default function BoardPage() {
   useEffect(() => {
     async function getBoards() {
       try {
-        const res = await axios.get('/board/getBoards', {
+        const res = await axios.get('/api/board/getBoards', {
           withCredentials: true,
         });
 

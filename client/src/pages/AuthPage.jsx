@@ -31,11 +31,7 @@ export default function AuthPage() {
         <% }) %> <% } %> */}
 
         <form
-          action={
-            authValue === 'Signup'
-              ? 'http://localhost:8000/signup'
-              : 'http://localhost:8000/login'
-          }
+          action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
         >
           <input type="text" name="userName" placeholder="Username" />

@@ -26,7 +26,7 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
 
       setSubtasks(updatedSubtasks);
 
-      const res = await axios.put('/board/setCompletionStatus', {
+      const res = await axios.put('/api/board/setCompletionStatus', {
         taskId: task._id,
         subtaskId: id,
         completed: completed,

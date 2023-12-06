@@ -31,7 +31,7 @@ export default function Board() {
     if (id) {
       async function getBoardData() {
         try {
-          const res = await axios.get(`/board/${id}`, {
+          const res = await axios.get(`/api/board/${id}`, {
             withCredentials: true,
           });
 

@@ -67,7 +67,7 @@ export default function EditTaskModal({
     };
 
     try {
-      const res = await axios.put('/board/editTask', {
+      const res = await axios.put('/api/board/editTask', {
         taskData,
       });
       console.log(res);

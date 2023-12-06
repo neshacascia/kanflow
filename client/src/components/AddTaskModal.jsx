@@ -63,7 +63,7 @@ export default function AddTaskModal({ id, columns, setDisplayTaskModal }) {
     };
 
     try {
-      const res = await axios.post('/board/addTask', {
+      const res = await axios.post('/api/board/addTask', {
         taskData,
       });
       console.log(res);
