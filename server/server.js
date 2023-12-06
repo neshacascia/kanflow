@@ -39,8 +39,8 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use('/', homeRoutes);
-app.use('/board', boardRoutes);
+app.use('/api', homeRoutes);
+app.use('/api/board', boardRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`The server is running on port ${process.env.PORT}.`);
