@@ -138,9 +138,8 @@ export default function BoardDetailsModal({ board }) {
         <label>
           Board Columns
           {boardColumns.map((column, ind) => (
-            <div>
+            <div key={column.id}>
               <input
-                key={column.id}
                 type="text"
                 name="columnName"
                 value={boardDetails === 'new' ? column.columnName : column}
