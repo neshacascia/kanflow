@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
 
@@ -6,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetailsModal({ board }) {
+  const navigate = useNavigate();
   const { boardDetails, setBoardDetails } = useContext(Context);
 
   const [boardName, setBoardName] = useState(
@@ -96,16 +98,19 @@ export default function BoardDetailsModal({ board }) {
 
     try {
       if (boardDetails === 'new') {
-        const res = axios.post('/api/board/createBoard', { boardData });
+        const res = await axios.post('/api/board/createBoard', { boardData });
+        const { boardId } = res.data;
+
         if (res.status === 200) {
           setBoardDetails(null);
-          navigate(0);
+          navigate(`/board/${boardId}`);
         }
       } else {
-        const res = axios.put('/api/board/editBoard', { boardData });
+        const res = await axios.put('/api/board/editBoard', { boardData });
+
         if (res.status === 200) {
           setBoardDetails(null);
-          navigate(0);
+          window.location.reload();
         }
       }
     } catch (err) {
