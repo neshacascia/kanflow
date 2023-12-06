@@ -5,14 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const {
-    isLoggedIn,
-    setDisplayMenuModal,
-    setBoardDetails,
-    setDisplayTaskModal,
-  } = useContext(Context);
+  const { setDisplayMenuModal, setBoardDetails, setDisplayTaskModal } =
+    useContext(Context);
 
   const [displaySettings, setDisplaySettings] = useState(false);
+  const user = localStorage.getItem('user');
 
   function displayMenu() {
     setBoardDetails(null);
@@ -28,7 +25,7 @@ export default function Navbar() {
 
   return (
     <nav>
-      {isLoggedIn && (
+      {user && (
         <span>
           <h2 onClick={displayMenu}>Boards</h2>
           <FontAwesomeIcon icon={faPlus} onClick={displayTask} />
