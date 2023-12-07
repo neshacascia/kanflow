@@ -2,11 +2,20 @@ import { useContext, useState } from 'react';
 import { Context } from '../context/Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEllipsisVertical,
+  faPlus,
+  faAngleDown,
+  faAngleUp,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { setDisplayMenuModal, setBoardDetails, setDisplayTaskModal } =
-    useContext(Context);
+  const {
+    displayMenuModal,
+    setDisplayMenuModal,
+    setBoardDetails,
+    setDisplayTaskModal,
+  } = useContext(Context);
 
   const [displaySettings, setDisplaySettings] = useState(false);
   const user = localStorage.getItem('user');
@@ -24,10 +33,13 @@ export default function Navbar() {
   }
 
   return (
-    <nav>
+    <nav className="bg-darkGrey h-16 px-4">
       {user && (
-        <span>
-          <h2 onClick={displayMenu}>Boards</h2>
+        <span className="h-full flex items-center">
+          <h2 onClick={displayMenu} className="text-white text-lg">
+            Boards
+          </h2>
+
           <FontAwesomeIcon icon={faPlus} onClick={displayTask} />
           <FontAwesomeIcon
             icon={faEllipsisVertical}
