@@ -15,6 +15,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
   const {
+    board,
+    setBoard,
     displayMenuModal,
     boardDetails,
     displayTaskModal,
@@ -22,7 +24,6 @@ export default function Board() {
   } = useContext(Context);
   const { id } = useParams();
 
-  const [board, setBoard] = useState();
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
@@ -50,8 +51,6 @@ export default function Board() {
     <main>
       {board && (
         <>
-          <h1>{board.name}</h1>
-
           <section>
             {board.columns.length > 0 ? (
               board.columns.map((column, ind) => (

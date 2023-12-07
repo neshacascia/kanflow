@@ -13,6 +13,7 @@ import {
 
 export default function Navbar() {
   const {
+    board,
     displayMenuModal,
     setDisplayMenuModal,
     setBoardDetails,
@@ -46,7 +47,7 @@ export default function Navbar() {
             onClick={displayMenu}
             className="flex items-center gap-2 ml-4 mr-auto"
           >
-            <h2 className="text-white text-lg font-semibold">Boards</h2>
+            <h2 className="text-white text-lg font-semibold">{board?.name}</h2>
             {displayMenuModal === true ? (
               <FontAwesomeIcon icon={faAngleUp} className="text-mainPurple " />
             ) : (

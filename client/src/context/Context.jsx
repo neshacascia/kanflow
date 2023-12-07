@@ -10,6 +10,7 @@ function ContextProvider(props) {
   const [boardDetails, setBoardDetails] = useState(null);
   const [displayTaskModal, setDisplayTaskModal] = useState(false);
   const [boards, setBoards] = useState([]);
+  const [board, setBoard] = useState();
 
   return (
     <Context.Provider
@@ -26,6 +27,8 @@ function ContextProvider(props) {
         setDisplayTaskModal,
         boards,
         setBoards,
+        board,
+        setBoard,
       }}
     >
       {props.children}
