@@ -3,7 +3,11 @@ import axios from 'axios';
 import { useContext, useState } from 'react';
 import { Context } from '../context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEllipsisVertical,
+  faSquare,
+  faSquareCheck,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function ViewTask({ task, columns, selectedStatus }) {
   const { setDisplayTaskModal } = useContext(Context);
@@ -72,16 +76,31 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         {subtasks.map((subtask, ind) => (
           <li
             key={ind}
-            className="text-white bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-5"
+            className={`bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-5 ${
+              subtask.completed ? 'text-white/50 line-through' : 'text-white'
+            }`}
           >
-            <input
-              type="checkbox"
-              id={subtask.id}
-              onChange={() =>
-                setCompletionStatus(subtask.id, subtask.completed)
-              }
-              checked={subtask.completed}
-            />{' '}
+            {subtask.completed ? (
+              <FontAwesomeIcon
+                icon={faSquareCheck}
+                id={subtask.id}
+                onClick={() =>
+                  setCompletionStatus(subtask.id, subtask.completed)
+                }
+                checked={subtask.completed}
+                className="text-mainPurple w-4 h-4"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faSquare}
+                id={subtask.id}
+                onClick={() =>
+                  setCompletionStatus(subtask.id, subtask.completed)
+                }
+                checked={subtask.completed}
+                className="w-4 h-4"
+              />
+            )}
             {subtask.subtask}
           </li>
         ))}
