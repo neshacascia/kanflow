@@ -92,7 +92,7 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         <select
           name="status"
           onChange={e => updateCurrentStatus(e.target.value)}
-          className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-2 px-4 mt-2"
+          className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2"
         >
           <option value={selectedStatus}>{selectedStatus}</option>
           {columns.map((status, ind) => {
