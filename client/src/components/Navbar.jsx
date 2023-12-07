@@ -65,7 +65,7 @@ export default function Navbar() {
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             onClick={() => setDisplaySettings(true)}
-            className="text-mediumGray text-lg"
+            className="text-mediumGrey text-lg"
           />
         </span>
       )}
