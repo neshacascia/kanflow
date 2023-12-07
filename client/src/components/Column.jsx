@@ -11,8 +11,9 @@ export default function Column({
   return (
     <section>
       <h3>{`${name} (${columnTasks.length})`}</h3>
-      {columnTasks.map(task => (
+      {columnTasks.map((task, ind) => (
         <Task
+          key={ind}
           task={task}
           setViewTask={setViewTask}
           setSelectedStatus={setSelectedStatus}

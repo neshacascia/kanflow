@@ -64,8 +64,8 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
       </span>
 
       <ul>
-        {subtasks.map(subtask => (
-          <li>
+        {subtasks.map((subtask, ind) => (
+          <li key={ind}>
             <input
               type="checkbox"
               id={subtask.id}
@@ -86,9 +86,13 @@ export default function ViewTaskModal({ task, columns, selectedStatus }) {
           onChange={e => updateCurrentStatus(e.target.value)}
         >
           <option value={selectedStatus}>{selectedStatus}</option>
-          {columns.map(status => {
+          {columns.map((status, ind) => {
             if (status !== selectedStatus) {
-              return <option value={status}>{status}</option>;
+              return (
+                <option key={ind} value={status}>
+                  {status}
+                </option>
+              );
             }
           })}
         </select>
