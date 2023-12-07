@@ -72,7 +72,7 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         {subtasks.map((subtask, ind) => (
           <li
             key={ind}
-            className="text-white bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 px-3 py-5"
+            className="text-white bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-5"
           >
             <input
               type="checkbox"
@@ -87,12 +87,12 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         ))}
       </ul>
 
-      <label className="text-white text-xs font-semibold flex flex-col">
+      <label className="text-white text-xs font-semibold flex flex-col mb-2">
         Current Status
         <select
           name="status"
           onChange={e => updateCurrentStatus(e.target.value)}
-          className="bg-transparent text-white"
+          className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-2 px-4 mt-2"
         >
           <option value={selectedStatus}>{selectedStatus}</option>
           {columns.map((status, ind) => {
