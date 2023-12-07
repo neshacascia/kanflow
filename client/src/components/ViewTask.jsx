@@ -55,7 +55,7 @@ export default function ViewTask({ task, columns, selectedStatus }) {
   }
 
   return (
-    <div className="bg-darkGrey w-[343px] rounded-md p-6">
+    <div className="bg-darkGrey w-[343px] flex flex-col rounded-md p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-white text-lg font-semibold">{task.title}</h2>
         <FontAwesomeIcon
@@ -125,10 +125,19 @@ export default function ViewTask({ task, columns, selectedStatus }) {
           })}
         </select>
       </label>
+
       {settingsModal && (
-        <div>
-          <button onClick={() => setDisplayTaskModal('edit')}>Edit Task</button>
-          <button onClick={() => setDisplayTaskModal('deleteTask')}>
+        <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute right-5 rounded-lg shadow-settings p-4 mt-8">
+          <button
+            onClick={() => setDisplayTaskModal('edit')}
+            className="text-mediumGrey"
+          >
+            Edit Task
+          </button>
+          <button
+            onClick={() => setDisplayTaskModal('deleteTask')}
+            className="text-deleteRed"
+          >
             Delete Task
           </button>
         </div>
