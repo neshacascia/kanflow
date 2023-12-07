@@ -77,34 +77,38 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
   }
 
   return (
-    <div>
+    <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
       <FontAwesomeIcon
         icon={faXmark}
         onClick={() => setDisplayTaskModal(false)}
+        className="absolute right-0 mr-4"
       />
-      <h2>Add New Task</h2>
-      <form onSubmit={addNewTask}>
-        <label>
+      <h2 className="text-white text-lg font-semibold mb-6">Add New Task</h2>
+
+      <form onSubmit={addNewTask} className="flex flex-col gap-6">
+        <label className="text-white text-xs font-semibold flex flex-col gap-2">
           Title
           <input
             type="text"
             name="title"
             placeholder="e.g. Take coffee break"
+            className="bg-transparent text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
           />
         </label>
 
-        <label>
+        <label className="text-white text-xs font-semibold flex flex-col gap-2">
           Description
           <textarea
             name="desc"
             placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
+            className="bg-transparent text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
           ></textarea>
         </label>
 
-        <label>
+        <label className="text-white text-xs font-semibold flex flex-col gap-2">
           Subtasks{' '}
           {subtasks.map(item => (
-            <div>
+            <div className="w-full flex items-center gap-4">
               <input
                 key={item.id}
                 placeholder={item.placeholder}
@@ -112,10 +116,12 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
                 onChange={e =>
                   updateSubtask(item.id, 'subtask', e.target.value)
                 }
+                className="bg-transparent text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
               />
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => deleteSubtask(item.id)}
+                className="text-mediumGrey w-5 h-5"
               />
             </div>
           ))}
@@ -125,12 +131,17 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
           + Add New Subtask
         </button>
 
-        <select name="status">
+        <label className="text-white text-xs font-semibold flex flex-col gap-2">
           Status{' '}
-          {columns.map(status => (
-            <option value={status}>{status}</option>
-          ))}
-        </select>
+          <select
+            name="status"
+            className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+          >
+            {columns.map(status => (
+              <option value={status}>{status}</option>
+            ))}
+          </select>
+        </label>
         <button type="submit">Create Task</button>
       </form>
     </div>
