@@ -48,30 +48,31 @@ export default function Board() {
   }, [id]);
 
   return (
-    <main>
+    <main className="bg-veryDarkGrey w-screen h-screen flex flex-col justify-center px-4">
       {board && (
-        <>
-          <section>
-            {board.columns.length > 0 ? (
-              board.columns.map((column, ind) => (
-                <Column
-                  key={ind}
-                  name={column}
-                  tasks={tasks}
-                  setViewTask={setViewTask}
-                  setSelectedStatus={setSelectedStatus}
-                />
-              ))
-            ) : (
-              <div>
-                <p>This board is empty. Create a new column to get started.</p>
-                <button>
-                  <FontAwesomeIcon icon={faPlus} /> Add New Column
-                </button>
-              </div>
-            )}
-          </section>
-        </>
+        <section>
+          {board.columns.length > 0 ? (
+            board.columns.map((column, ind) => (
+              <Column
+                key={ind}
+                name={column}
+                tasks={tasks}
+                setViewTask={setViewTask}
+                setSelectedStatus={setSelectedStatus}
+              />
+            ))
+          ) : (
+            <div className="flex flex-col justify-center items-center gap-6">
+              <p className="text-mediumGrey text-lg font-semibold text-center">
+                This board is empty. Create a new column to get started.
+              </p>
+              <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4">
+                <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
+                <p>Add New Column</p>
+              </button>
+            </div>
+          )}
+        </section>
       )}
 
       {displayMenuModal && <MenuModal />}
