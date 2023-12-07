@@ -36,7 +36,7 @@ export default function Navbar() {
     <nav className="bg-darkGrey h-16 px-4">
       {user && (
         <span className="h-full flex items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mr-auto">
             <h2 onClick={displayMenu} className="text-white text-lg">
               Boards
             </h2>
@@ -46,10 +46,17 @@ export default function Navbar() {
               <FontAwesomeIcon icon={faAngleDown} className="text-mainPurple" />
             )}
           </div>
-          <FontAwesomeIcon icon={faPlus} onClick={displayTask} />
+          <div className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4">
+            <FontAwesomeIcon
+              icon={faPlus}
+              onClick={displayTask}
+              className="text-white"
+            />
+          </div>
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             onClick={() => setDisplaySettings(true)}
+            className="text-mediumGray text-lg"
           />
         </span>
       )}
