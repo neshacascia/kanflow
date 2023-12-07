@@ -22,7 +22,6 @@ export default function Navbar() {
 
   const [displaySettings, setDisplaySettings] = useState(false);
   const user = localStorage.getItem('user');
-  console.log(board?.columns.length === 0);
 
   function displayMenu() {
     setBoardDetails(null);
