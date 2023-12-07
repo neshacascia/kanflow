@@ -51,21 +51,29 @@ export default function ViewTask({ task, columns, selectedStatus }) {
   }
 
   return (
-    <div>
-      <FontAwesomeIcon
-        icon={faEllipsisVertical}
-        onClick={() => setSettingsModal(true)}
-      />
-      <h2>{task.title}</h2>
-      <p>{task.description}</p>
+    <div className="bg-darkGrey w-[343px] rounded-md p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-white text-lg font-semibold">{task.title}</h2>
+        <FontAwesomeIcon
+          icon={faEllipsisVertical}
+          onClick={() => setSettingsModal(true)}
+          className="text-mediumGrey text-xl"
+        />
+      </div>
+      <p className="text-mediumGrey text-[13px] leading-6 mb-6">
+        {task.description}
+      </p>
 
-      <span>
+      <span className="text-white text-xs font-semibold">
         Subtasks ({`${completedSubtasks} of ${task.subtasks.length}`})
       </span>
 
-      <ul>
+      <ul className="flex flex-col gap-2 my-4">
         {subtasks.map((subtask, ind) => (
-          <li key={ind}>
+          <li
+            key={ind}
+            className="text-white bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 px-3 py-5"
+          >
             <input
               type="checkbox"
               id={subtask.id}
@@ -79,11 +87,12 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         ))}
       </ul>
 
-      <label>
+      <label className="text-white text-xs font-semibold flex flex-col">
         Current Status
         <select
           name="status"
           onChange={e => updateCurrentStatus(e.target.value)}
+          className="bg-transparent text-white"
         >
           <option value={selectedStatus}>{selectedStatus}</option>
           {columns.map((status, ind) => {
