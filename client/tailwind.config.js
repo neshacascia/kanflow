@@ -8,6 +8,9 @@ export default {
         mainPurple: '#635FC7',
         mediumGray: '#828FA3',
       },
+      fontFamily: {
+        body: ['Plus Jakarta Sans'],
+      },
     },
   },
   plugins: [],
