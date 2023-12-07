@@ -48,9 +48,9 @@ export default function Board() {
   }, [id]);
 
   return (
-    <main className="bg-veryDarkGrey w-screen h-screen flex flex-col justify-center px-4">
+    <main className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6">
       {board && (
-        <section>
+        <section className="flex gap-6">
           {board.columns.length > 0 ? (
             board.columns.map((column, ind) => (
               <Column

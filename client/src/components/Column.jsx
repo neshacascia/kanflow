@@ -10,7 +10,7 @@ export default function Column({
 
   return (
     <section>
-      <h3>{`${name} (${columnTasks.length})`}</h3>
+      <h3 className="text-mediumGrey text-xs font-medium uppercase tracking-widest mb-6">{`${name} (${columnTasks.length})`}</h3>
       {columnTasks.map((task, ind) => (
         <Task
           key={ind}
