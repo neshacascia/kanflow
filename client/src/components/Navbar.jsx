@@ -22,6 +22,7 @@ export default function Navbar() {
 
   const [displaySettings, setDisplaySettings] = useState(false);
   const user = localStorage.getItem('user');
+  console.log(board?.columns.length === 0);
 
   function displayMenu() {
     setBoardDetails(null);
@@ -54,13 +55,13 @@ export default function Navbar() {
               <FontAwesomeIcon icon={faAngleDown} className="text-mainPurple" />
             )}
           </div>
-          <div className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4">
-            <FontAwesomeIcon
-              icon={faPlus}
-              onClick={displayTask}
-              className="text-white"
-            />
-          </div>
+          <button
+            onClick={displayTask}
+            disabled={board?.columns.length === 0}
+            className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25"
+          >
+            <FontAwesomeIcon icon={faPlus} className="text-white" />
+          </button>
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             onClick={() => setDisplaySettings(true)}
