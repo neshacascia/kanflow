@@ -39,7 +39,7 @@ export default function ViewTask({ task, columns, selectedStatus }) {
 
   async function updateCurrentStatus(newStatus) {
     try {
-      const res = await axios.put('/board/updateStatus', {
+      const res = await axios.put('/api/board/updateStatus', {
         taskId: task._id,
         status: newStatus,
       });
