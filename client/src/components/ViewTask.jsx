@@ -55,7 +55,10 @@ export default function ViewTask({ task, columns, selectedStatus }) {
   }
 
   return (
-    <div className="bg-darkGrey w-[343px] flex flex-col rounded-md p-6">
+    <div
+      className="bg-darkGrey w-[343px] flex flex-col rounded-md p-6"
+      onClick={() => (settingsModal ? setSettingsModal(false) : null)}
+    >
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-white text-lg font-semibold">{task.title}</h2>
         <FontAwesomeIcon
