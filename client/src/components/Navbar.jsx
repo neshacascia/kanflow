@@ -36,10 +36,16 @@ export default function Navbar() {
     <nav className="bg-darkGrey h-16 px-4">
       {user && (
         <span className="h-full flex items-center">
-          <h2 onClick={displayMenu} className="text-white text-lg">
-            Boards
-          </h2>
-
+          <div className="flex items-center gap-2">
+            <h2 onClick={displayMenu} className="text-white text-lg">
+              Boards
+            </h2>
+            {displayMenuModal === true ? (
+              <FontAwesomeIcon icon={faAngleUp} className="text-mainPurple " />
+            ) : (
+              <FontAwesomeIcon icon={faAngleDown} className="text-mainPurple" />
+            )}
+          </div>
           <FontAwesomeIcon icon={faPlus} onClick={displayTask} />
           <FontAwesomeIcon
             icon={faEllipsisVertical}
