@@ -24,7 +24,10 @@ export default function Navbar() {
 
   function displayMenu() {
     setBoardDetails(null);
-    setDisplayMenuModal(true);
+
+    displayMenuModal === true
+      ? setDisplayMenuModal(false)
+      : setDisplayMenuModal(true);
   }
 
   function displayTask() {
@@ -39,10 +42,11 @@ export default function Navbar() {
       {user && (
         <span className="h-full flex items-center">
           <img src={logo} />
-          <div className="flex items-center gap-2 ml-4 mr-auto">
-            <h2 onClick={displayMenu} className="text-white text-lg">
-              Boards
-            </h2>
+          <div
+            onClick={displayMenu}
+            className="flex items-center gap-2 ml-4 mr-auto"
+          >
+            <h2 className="text-white text-lg">Boards</h2>
             {displayMenuModal === true ? (
               <FontAwesomeIcon icon={faAngleUp} className="text-mainPurple " />
             ) : (
