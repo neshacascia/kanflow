@@ -5,7 +5,7 @@ import { Context } from '../context/Context';
 import Column from './Column';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
-import AddTaskModal from './AddTaskModal';
+import AddTask from './AddTask';
 import ViewTask from './ViewTask';
 import EditTaskModal from './EditTaskModal';
 import DeleteModal from './DeleteModal';
@@ -78,7 +78,7 @@ export default function Board() {
         {displayMenuModal && <MenuModal />}
         {boardDetails && <BoardDetailsModal board={board} />}
         {displayTaskModal === 'add' && (
-          <AddTaskModal
+          <AddTask
             id={board._id}
             columns={board.columns}
             setDisplayTaskModal={setDisplayTaskModal}
