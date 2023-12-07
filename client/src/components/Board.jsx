@@ -6,7 +6,7 @@ import Column from './Column';
 import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
 import AddTaskModal from './AddTaskModal';
-import ViewTaskModal from './ViewTaskModal';
+import ViewTask from './ViewTask';
 import EditTaskModal from './EditTaskModal';
 import DeleteModal from './DeleteModal';
 
@@ -107,7 +107,7 @@ export default function Board() {
         />
       )}
       {viewTask && (
-        <ViewTaskModal
+        <ViewTask
           task={viewTask}
           columns={board.columns}
           selectedStatus={selectedStatus}

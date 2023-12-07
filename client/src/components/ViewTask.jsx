@@ -5,7 +5,7 @@ import { Context } from '../context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-export default function ViewTaskModal({ task, columns, selectedStatus }) {
+export default function ViewTask({ task, columns, selectedStatus }) {
   const { setDisplayTaskModal } = useContext(Context);
   const [subtasks, setSubtasks] = useState(task.subtasks);
   const [settingsModal, setSettingsModal] = useState(false);
