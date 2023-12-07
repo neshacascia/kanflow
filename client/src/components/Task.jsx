@@ -9,9 +9,14 @@ export default function Task({ task, setViewTask, setSelectedStatus }) {
   }
 
   return (
-    <div onClick={() => handleTaskClick(task.status)}>
-      <p>{task.title}</p>
-      <span>{`${completedSubtasks} of ${task.subtasks.length} subtasks`}</span>
+    <div
+      onClick={() => handleTaskClick(task.status)}
+      className="bg-darkGrey w-[280px] flex flex-col gap-2 rounded-lg shadow-task py-6 px-4"
+    >
+      <p className="text-white text-sm font-medium tracking-[0.015em]">
+        {task.title}
+      </p>
+      <span className="text-mediumGrey text-xs font-medium">{`${completedSubtasks} of ${task.subtasks.length} subtasks`}</span>
     </div>
   );
 }
