@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import { Context } from '../context/Context';
 
+import logo from '../assets/logo.svg';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisVertical,
@@ -36,7 +38,8 @@ export default function Navbar() {
     <nav className="bg-darkGrey h-16 px-4">
       {user && (
         <span className="h-full flex items-center">
-          <div className="flex items-center gap-2 mr-auto">
+          <img src={logo} />
+          <div className="flex items-center gap-2 ml-4 mr-auto">
             <h2 onClick={displayMenu} className="text-white text-lg">
               Boards
             </h2>
