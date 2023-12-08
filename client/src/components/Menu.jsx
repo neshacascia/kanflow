@@ -5,7 +5,7 @@ import { Context } from '../context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function MenuModal() {
+export default function Menu() {
   const { setBoardDetails, setDisplayMenuModal, boards } = useContext(Context);
 
   function displayBoard(type) {

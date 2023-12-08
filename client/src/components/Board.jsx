@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
 import Column from './Column';
-import MenuModal from './MenuModal';
+import Menu from './Menu';
 import BoardDetails from './BoardDetails';
 import AddTask from './AddTask';
 import ViewTask from './ViewTask';
@@ -75,7 +75,7 @@ export default function Board() {
         </section>
       )}
       <section className="flex flex-col items-center">
-        {displayMenuModal && <MenuModal />}
+        {displayMenuModal && <Menu />}
         {boardDetails && <BoardDetails board={board} />}
         {displayTaskModal === 'add' && (
           <AddTask
