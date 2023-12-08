@@ -81,7 +81,7 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
       <FontAwesomeIcon
         icon={faXmark}
         onClick={() => setDisplayTaskModal(false)}
-        className="absolute right-0 mr-4 cursor-pointer"
+        className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
       />
       <h2 className="text-white text-lg font-semibold mb-6">Add New Task</h2>
 
