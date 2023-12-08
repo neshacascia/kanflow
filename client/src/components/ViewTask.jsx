@@ -79,7 +79,7 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         {subtasks.map((subtask, ind) => (
           <li
             key={ind}
-            className={`bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-5 ${
+            className={`bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 ${
               subtask.completed ? 'text-white/50 line-through' : 'text-white'
             }`}
           >
