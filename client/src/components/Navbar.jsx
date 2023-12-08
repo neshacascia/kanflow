@@ -89,7 +89,7 @@ export default function Navbar() {
       </span>
 
       {displaySettings && (
-        <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[160px] flex flex-col items-start gap-4 absolute right-5 rounded-lg shadow-glow p-4 -mt-2">
+        <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[170px] flex flex-col items-start gap-4 absolute right-4 rounded-lg shadow-glow p-4 -mt-2">
           <button
             onClick={() => setBoardDetails('editBoard')}
             className="text-mediumGrey"
