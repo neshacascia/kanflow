@@ -22,11 +22,11 @@ export default function Delete({
   }
 
   return (
-    <div>
-      <h2>
+    <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
+      <h2 className="text-deleteRed text-lg font-semibold mb-6">
         Delete this {`${displayTaskModal === 'deleteTask' ? 'task' : 'board'}`}?
       </h2>
-      <p>
+      <p className="text-mediumGrey text-[13px] leading-6 mb-6">
         Are you sure you want to delete the
         {`${
           displayTaskModal === 'deleteTask'
@@ -40,8 +40,21 @@ export default function Delete({
             : ' '
         }cannot be reversed.`}
       </p>
-      <button onClick={() => deleteData()}>Delete</button>
-      <button onClick={() => setDisplayTaskModal(false)}>Cancel</button>
+
+      <div className="flex flex-col gap-4">
+        <button
+          onClick={() => deleteData()}
+          className="text-white bg-deleteRed text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+        >
+          Delete
+        </button>
+        <button
+          onClick={() => setDisplayTaskModal(false)}
+          className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
