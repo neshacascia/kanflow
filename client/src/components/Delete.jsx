@@ -16,6 +16,7 @@ export default function Delete({
       });
       console.log(res);
       setDisplayTaskModal(false);
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
