@@ -5,7 +5,7 @@ import axios from 'axios';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function EditTaskModal({
+export default function EditTask({
   id,
   selectedTask,
   columns,

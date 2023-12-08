@@ -7,7 +7,7 @@ import MenuModal from './MenuModal';
 import BoardDetailsModal from './BoardDetailsModal';
 import AddTask from './AddTask';
 import ViewTask from './ViewTask';
-import EditTaskModal from './EditTaskModal';
+import EditTask from './EditTask';
 import DeleteModal from './DeleteModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -85,7 +85,7 @@ export default function Board() {
           />
         )}
         {displayTaskModal === 'edit' && (
-          <EditTaskModal
+          <EditTask
             id={board._id}
             selectedTask={viewTask}
             columns={board.columns}
