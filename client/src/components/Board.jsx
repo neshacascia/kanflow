@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 import Column from './Column';
 import MenuModal from './MenuModal';
-import BoardDetailsModal from './BoardDetailsModal';
+import BoardDetails from './BoardDetails';
 import AddTask from './AddTask';
 import ViewTask from './ViewTask';
 import EditTask from './EditTask';
@@ -76,7 +76,7 @@ export default function Board() {
       )}
       <section className="flex flex-col items-center">
         {displayMenuModal && <MenuModal />}
-        {boardDetails && <BoardDetailsModal board={board} />}
+        {boardDetails && <BoardDetails board={board} />}
         {displayTaskModal === 'add' && (
           <AddTask
             id={board._id}
