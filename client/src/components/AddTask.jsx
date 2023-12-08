@@ -92,7 +92,7 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
             type="text"
             name="title"
             placeholder="e.g. Take coffee break"
-            className="bg-transparent text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+            className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
           />
         </label>
 
@@ -101,7 +101,7 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
           <textarea
             name="desc"
             placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
-            className="bg-transparent text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
+            className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
           ></textarea>
         </label>
 
@@ -116,7 +116,7 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
                 onChange={e =>
                   updateSubtask(item.id, 'subtask', e.target.value)
                 }
-                className="bg-transparent text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
               />
               <FontAwesomeIcon
                 icon={faXmark}
