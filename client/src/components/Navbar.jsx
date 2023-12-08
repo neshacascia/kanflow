@@ -51,7 +51,7 @@ export default function Navbar() {
           <div className="w-full flex items-center gap-2">
             <div
               onClick={displayMenu}
-              className="flex items-center gap-2 ml-4 mr-auto"
+              className="flex items-center gap-2 ml-4 mr-auto cursor-pointer"
             >
               <h2 className="text-white text-lg font-semibold">
                 {board?.name}
@@ -77,8 +77,12 @@ export default function Navbar() {
             </button>
             <FontAwesomeIcon
               icon={faEllipsisVertical}
-              onClick={() => setDisplaySettings(true)}
-              className="text-mediumGrey text-lg"
+              onClick={() =>
+                displaySettings
+                  ? setDisplaySettings(false)
+                  : setDisplaySettings(true)
+              }
+              className="text-mediumGrey text-lg cursor-pointer"
             />
           </div>
         )}
