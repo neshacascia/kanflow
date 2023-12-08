@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function BoardDetailsModal({ board }) {
+export default function BoardDetails({ board }) {
   const navigate = useNavigate();
   const { boardDetails, setBoardDetails } = useContext(Context);
 
@@ -119,12 +119,18 @@ export default function BoardDetailsModal({ board }) {
   }
 
   return (
-    <div>
-      <FontAwesomeIcon icon={faXmark} onClick={() => setBoardDetails(null)} />
-      <h2>{boardDetails === 'new' ? 'Add New' : 'Edit'} Board</h2>
+    <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
+      <FontAwesomeIcon
+        icon={faXmark}
+        onClick={() => setBoardDetails(null)}
+        className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
+      />
+      <h2 className="text-white text-lg font-semibold mb-6">
+        {boardDetails === 'new' ? 'Add New' : 'Edit'} Board
+      </h2>
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <label className="text-white text-xs font-semibold flex flex-col gap-2">
           Board Name{' '}
           <input
             type="text"
@@ -132,13 +138,14 @@ export default function BoardDetailsModal({ board }) {
             placeholder="e.g. Web Design"
             value={boardName}
             onChange={e => updateBoardName(e.target.value)}
+            className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
           />
         </label>
 
-        <label>
+        <label className="text-white text-xs font-semibold flex flex-col gap-2">
           Board Columns
           {boardColumns.map((column, ind) => (
-            <div key={column.id}>
+            <div key={column.id} className="w-full flex items-center gap-4">
               <input
                 type="text"
                 name="columnName"
@@ -150,20 +157,29 @@ export default function BoardDetailsModal({ board }) {
                     e.target.value
                   )
                 }
+                className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
               />
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => deleteColumnName(column.id || ind)}
+                className="text-mediumGrey w-5 h-5 cursor-pointer"
               />
             </div>
           ))}
         </label>
 
-        <button type="button" onClick={addNewColumn}>
+        <button
+          type="button"
+          onClick={addNewColumn}
+          className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+        >
           + Add New Column
         </button>
 
-        <button type="submit">
+        <button
+          type="submit"
+          className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+        >
           {boardDetails === 'new' ? 'Create New Board' : 'Save Changes'}
         </button>
       </form>
