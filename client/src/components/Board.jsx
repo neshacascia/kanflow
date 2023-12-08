@@ -8,7 +8,7 @@ import BoardDetails from './BoardDetails';
 import AddTask from './AddTask';
 import ViewTask from './ViewTask';
 import EditTask from './EditTask';
-import DeleteModal from './DeleteModal';
+import Delete from './Delete';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -93,14 +93,14 @@ export default function Board() {
           />
         )}
         {displayTaskModal === 'deleteTask' && (
-          <DeleteModal
+          <Delete
             selectedTask={viewTask}
             displayTaskModal={displayTaskModal}
             setDisplayTaskModal={setDisplayTaskModal}
           />
         )}
         {displayTaskModal === 'deleteBoard' && (
-          <DeleteModal
+          <Delete
             board={board}
             displayTaskModal={displayTaskModal}
             setDisplayTaskModal={setDisplayTaskModal}

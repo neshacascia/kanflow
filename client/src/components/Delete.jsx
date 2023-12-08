@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function DeleteModal({
+export default function Delete({
   board,
   selectedTask,
   displayTaskModal,
