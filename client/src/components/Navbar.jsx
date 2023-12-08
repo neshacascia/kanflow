@@ -40,34 +40,49 @@ export default function Navbar() {
 
   return (
     <nav className="bg-darkGrey h-16 px-4">
-      {user && (
-        <span className="h-full flex items-center">
-          <img src={logo} />
-          <div
-            onClick={displayMenu}
-            className="flex items-center gap-2 ml-4 mr-auto"
-          >
-            <h2 className="text-white text-lg font-semibold">{board?.name}</h2>
-            {displayMenuModal === true ? (
-              <FontAwesomeIcon icon={faAngleUp} className="text-mainPurple " />
-            ) : (
-              <FontAwesomeIcon icon={faAngleDown} className="text-mainPurple" />
-            )}
+      <span className="h-full flex items-center">
+        <img src={logo} />
+        {!user && (
+          <p className="text-white text-lg font-semibold tracking-wide ml-4">
+            kanflow
+          </p>
+        )}
+        {user && (
+          <div className="w-full flex items-center gap-2">
+            <div
+              onClick={displayMenu}
+              className="flex items-center gap-2 ml-4 mr-auto"
+            >
+              <h2 className="text-white text-lg font-semibold">
+                {board?.name}
+              </h2>
+              {displayMenuModal === true ? (
+                <FontAwesomeIcon
+                  icon={faAngleUp}
+                  className="text-mainPurple "
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faAngleDown}
+                  className="text-mainPurple"
+                />
+              )}
+            </div>
+            <button
+              onClick={displayTask}
+              disabled={board?.columns.length === 0}
+              className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25"
+            >
+              <FontAwesomeIcon icon={faPlus} className="text-white" />
+            </button>
+            <FontAwesomeIcon
+              icon={faEllipsisVertical}
+              onClick={() => setDisplaySettings(true)}
+              className="text-mediumGrey text-lg"
+            />
           </div>
-          <button
-            onClick={displayTask}
-            disabled={board?.columns.length === 0}
-            className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25"
-          >
-            <FontAwesomeIcon icon={faPlus} className="text-white" />
-          </button>
-          <FontAwesomeIcon
-            icon={faEllipsisVertical}
-            onClick={() => setDisplaySettings(true)}
-            className="text-mediumGrey text-lg"
-          />
-        </span>
-      )}
+        )}
+      </span>
 
       {displaySettings && (
         <div>
