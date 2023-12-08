@@ -130,7 +130,7 @@ export default function ViewTask({ task, columns, selectedStatus }) {
       </label>
 
       {settingsModal && (
-        <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute right-5 rounded-lg shadow-settings p-4 mt-8">
+        <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute right-5 rounded-lg shadow-glow p-4 mt-8">
           <button
             onClick={() => setDisplayTaskModal('edit')}
             className="text-mediumGrey"
