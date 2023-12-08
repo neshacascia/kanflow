@@ -14,9 +14,8 @@ export default {
       fontFamily: {
         body: ['Plus Jakarta Sans'],
       },
-      boxShadow: {
-        task: '0px 4px 6px 0px rgba(54, 78, 126, 0.10)',
-        settings: '0px 5px 5px 0px rgba(54, 78, 126, 0.15)',
+      borderRadius: {
+        menuLink: '0px 100px 100px 0px;',
       },
     },
   },
