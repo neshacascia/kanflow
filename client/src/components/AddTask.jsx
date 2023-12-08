@@ -127,7 +127,11 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
           ))}
         </label>
 
-        <button type="button" onClick={addNewSubtask}>
+        <button
+          type="button"
+          onClick={addNewSubtask}
+          className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+        >
           + Add New Subtask
         </button>
 
@@ -142,7 +146,12 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
             ))}
           </select>
         </label>
-        <button type="submit">Create Task</button>
+        <button
+          type="submit"
+          className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+        >
+          Create Task
+        </button>
       </form>
     </div>
   );
