@@ -74,46 +74,45 @@ export default function Board() {
           )}
         </section>
       )}
-      <section className="flex flex-col items-center">
-        {displayMenuModal && <Menu />}
-        {boardDetails && <BoardDetails board={board} />}
-        {displayTaskModal === 'add' && (
-          <AddTask
-            id={board._id}
-            columns={board.columns}
-            setDisplayTaskModal={setDisplayTaskModal}
-          />
-        )}
-        {displayTaskModal === 'edit' && (
-          <EditTask
-            id={board._id}
-            selectedTask={viewTask}
-            columns={board.columns}
-            setDisplayTaskModal={setDisplayTaskModal}
-          />
-        )}
-        {displayTaskModal === 'deleteTask' && (
-          <Delete
-            selectedTask={viewTask}
-            displayTaskModal={displayTaskModal}
-            setDisplayTaskModal={setDisplayTaskModal}
-          />
-        )}
-        {displayTaskModal === 'deleteBoard' && (
-          <Delete
-            board={board}
-            displayTaskModal={displayTaskModal}
-            setDisplayTaskModal={setDisplayTaskModal}
-          />
-        )}
-        {viewTask && (
-          <ViewTask
-            task={viewTask}
-            columns={board.columns}
-            selectedStatus={selectedStatus}
-          />
-        )}
-      </section>
+
+      {displayMenuModal && <Menu />}
+      {boardDetails && <BoardDetails board={board} />}
+      {displayTaskModal === 'add' && (
+        <AddTask
+          id={board._id}
+          columns={board.columns}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
+      {displayTaskModal === 'edit' && (
+        <EditTask
+          id={board._id}
+          selectedTask={viewTask}
+          columns={board.columns}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
+      {displayTaskModal === 'deleteTask' && (
+        <Delete
+          selectedTask={viewTask}
+          displayTaskModal={displayTaskModal}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
+      {displayTaskModal === 'deleteBoard' && (
+        <Delete
+          board={board}
+          displayTaskModal={displayTaskModal}
+          setDisplayTaskModal={setDisplayTaskModal}
+        />
+      )}
+      {viewTask && (
+        <ViewTask
+          task={viewTask}
+          columns={board.columns}
+          selectedStatus={selectedStatus}
+        />
+      )}
     </main>
   );
 }

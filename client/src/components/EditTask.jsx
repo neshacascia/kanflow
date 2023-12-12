@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Modal from './Modal';
 
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -81,87 +82,89 @@ export default function EditTask({
   }
 
   return (
-    <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
-      <FontAwesomeIcon
-        icon={faXmark}
-        onClick={() => setDisplayTaskModal(false)}
-        className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
-      />
-      <h2 className="text-white text-lg font-semibold mb-6">Edit Task</h2>
+    <Modal>
+      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
+        <FontAwesomeIcon
+          icon={faXmark}
+          onClick={() => setDisplayTaskModal(false)}
+          className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
+        />
+        <h2 className="text-white text-lg font-semibold mb-6">Edit Task</h2>
 
-      <form onSubmit={editTask} className="flex flex-col gap-6">
-        <label className="text-white text-xs font-semibold flex flex-col gap-2">
-          Title
-          <input
-            type="text"
-            name="title"
-            placeholder="e.g. Take coffee break"
-            value={task.title}
-            onChange={e => handleInputChange('title', e.target.value)}
-            className="bg-transparent text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
-          />
-        </label>
+        <form onSubmit={editTask} className="flex flex-col gap-6">
+          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+            Title
+            <input
+              type="text"
+              name="title"
+              placeholder="e.g. Take coffee break"
+              value={task.title}
+              onChange={e => handleInputChange('title', e.target.value)}
+              className="bg-transparent text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+            />
+          </label>
 
-        <label className="text-white text-xs font-semibold flex flex-col gap-2">
-          Description
-          <textarea
-            name="desc"
-            placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
-            value={task.description}
-            onChange={e => handleInputChange('description', e.target.value)}
-            className="bg-transparent text-white text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
-          ></textarea>
-        </label>
+          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+            Description
+            <textarea
+              name="desc"
+              placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
+              value={task.description}
+              onChange={e => handleInputChange('description', e.target.value)}
+              className="bg-transparent text-white text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
+            ></textarea>
+          </label>
 
-        <label className="text-white text-xs font-semibold flex flex-col gap-2">
-          Subtasks{' '}
-          {subtasks.map(item => (
-            <div className="w-full flex items-center gap-4">
-              <input
-                key={item.id}
-                placeholder={item.placeholder}
-                name="subtask"
-                value={item?.subtask}
-                onChange={e =>
-                  updateSubtask(item.id, 'subtask', e.target.value)
-                }
-                className="bg-transparent text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
-              />
-              <FontAwesomeIcon
-                icon={faXmark}
-                onClick={() => deleteSubtask(item.id)}
-                className="text-mediumGrey w-5 h-5 cursor-pointer"
-              />
-            </div>
-          ))}
-        </label>
-
-        <button
-          type="button"
-          onClick={addNewSubtask}
-          className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
-        >
-          + Add New Subtask
-        </button>
-
-        <label className="text-white text-xs font-semibold flex flex-col gap-2">
-          Status{' '}
-          <select
-            name="status"
-            className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
-          >
-            {columns.map(status => (
-              <option value={status}>{status}</option>
+          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+            Subtasks{' '}
+            {subtasks.map(item => (
+              <div className="w-full flex items-center gap-4">
+                <input
+                  key={item.id}
+                  placeholder={item.placeholder}
+                  name="subtask"
+                  value={item?.subtask}
+                  onChange={e =>
+                    updateSubtask(item.id, 'subtask', e.target.value)
+                  }
+                  className="bg-transparent text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                />
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  onClick={() => deleteSubtask(item.id)}
+                  className="text-mediumGrey w-5 h-5 cursor-pointer"
+                />
+              </div>
             ))}
-          </select>
-        </label>
-        <button
-          type="submit"
-          className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
-        >
-          Update Task
-        </button>
-      </form>
-    </div>
+          </label>
+
+          <button
+            type="button"
+            onClick={addNewSubtask}
+            className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+          >
+            + Add New Subtask
+          </button>
+
+          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+            Status{' '}
+            <select
+              name="status"
+              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+            >
+              {columns.map(status => (
+                <option value={status}>{status}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="submit"
+            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+          >
+            Update Task
+          </button>
+        </form>
+      </div>
+    </Modal>
   );
 }
