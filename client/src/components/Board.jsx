@@ -50,7 +50,7 @@ export default function Board() {
   return (
     <main className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6">
       {board && (
-        <section className="flex gap-6">
+        <section className="h-full flex gap-6">
           {board.columns.length > 0 ? (
             board.columns.map((column, ind) => (
               <Column
@@ -62,7 +62,7 @@ export default function Board() {
               />
             ))
           ) : (
-            <div className="flex flex-col justify-center items-center gap-6">
+            <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
               <p className="text-mediumGrey text-lg font-semibold text-center">
                 This board is empty. Create a new column to get started.
               </p>
