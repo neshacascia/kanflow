@@ -1,22 +1,15 @@
 import axios from 'axios';
 import Modal from './Modal';
 
-export default function Delete({
-  board,
-  selectedTask,
-  displayTaskModal,
-  setDisplayTaskModal,
-}) {
+export default function Delete({ board, selectedTask, modal, closeModal }) {
   async function deleteData() {
-    const data =
-      displayTaskModal === 'deleteTask' ? selectedTask._id : board._id;
+    const data = modal === 'deleteTask' ? selectedTask._id : board._id;
 
     try {
       const res = await axios.delete('/api/board/delete', {
-        data: { displayTaskModal, data },
+        data: { modal, data },
       });
       console.log(res);
-      setDisplayTaskModal(false);
       window.location.reload();
     } catch (err) {
       console.error(err);
@@ -27,19 +20,18 @@ export default function Delete({
     <Modal>
       <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
         <h2 className="text-deleteRed text-lg font-semibold mb-6">
-          Delete this{' '}
-          {`${displayTaskModal === 'deleteTask' ? 'task' : 'board'}`}?
+          Delete this {`${modal === 'deleteTask' ? 'task' : 'board'}`}?
         </h2>
         <p className="text-mediumGrey text-[13px] leading-6 mb-6">
           Are you sure you want to delete the
           {`${
-            displayTaskModal === 'deleteTask'
+            modal === 'deleteTask'
               ? ` '${selectedTask.title}' task and its subtasks`
               : ` '${board.name}' board`
           }`}
           ?{' '}
           {`This action ${
-            displayTaskModal === 'deleteBoard'
+            modal === 'deleteBoard'
               ? 'will remove all columns and tasks and '
               : ' '
           }cannot be reversed.`}
@@ -53,7 +45,7 @@ export default function Delete({
             Delete
           </button>
           <button
-            onClick={() => setDisplayTaskModal(false)}
+            onClick={closeModal}
             className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
           >
             Cancel

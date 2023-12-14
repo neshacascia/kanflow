@@ -104,19 +104,11 @@ export default function Board() {
           closeModal={closeModal}
         />
       )}
-      {displayTaskModal === 'deleteTask' && (
-        <Delete
-          selectedTask={viewTask}
-          displayTaskModal={displayTaskModal}
-          setDisplayTaskModal={setDisplayTaskModal}
-        />
+      {modal === 'deleteTask' && (
+        <Delete selectedTask={viewTask} modal={modal} closeModal={closeModal} />
       )}
-      {displayTaskModal === 'deleteBoard' && (
-        <Delete
-          board={board}
-          displayTaskModal={displayTaskModal}
-          setDisplayTaskModal={setDisplayTaskModal}
-        />
+      {modal === 'deleteBoard' && (
+        <Delete board={board} modal={modal} closeModal={closeModal} />
       )}
     </main>
   );

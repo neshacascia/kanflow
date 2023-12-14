@@ -26,6 +26,10 @@ function ContextProvider(props) {
       setModal('edit');
     } else if (modal === 'viewTask') {
       setModal('viewTask');
+    } else if (modal === 'deleteTask') {
+      setModal('deleteTask');
+    } else if (modal === 'deleteBoard') {
+      setModal('deleteBoard');
     }
   }
 
