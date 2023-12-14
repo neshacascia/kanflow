@@ -141,7 +141,7 @@ export default function AddTask({ id, columns, closeModal }) {
             Status{' '}
             <select
               name="status"
-              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4"
             >
               {columns.map((status, ind) => (
                 <option key={ind} value={status}>
