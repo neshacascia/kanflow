@@ -6,7 +6,7 @@ import Modal from './Modal';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function AddTask({ id, columns, setDisplayTaskModal }) {
+export default function AddTask({ id, columns, closeModal }) {
   const navigate = useNavigate();
 
   const [subtasks, setSubtasks] = useState([
@@ -70,7 +70,7 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
       });
       console.log(res);
       if (res.status === 200) {
-        setDisplayTaskModal(false);
+        closeModal();
         navigate(0);
       }
     } catch (err) {
@@ -83,7 +83,7 @@ export default function AddTask({ id, columns, setDisplayTaskModal }) {
       <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
         <FontAwesomeIcon
           icon={faXmark}
-          onClick={() => setDisplayTaskModal(false)}
+          onClick={closeModal}
           className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
         />
         <h2 className="text-white text-lg font-semibold mb-6">Add New Task</h2>

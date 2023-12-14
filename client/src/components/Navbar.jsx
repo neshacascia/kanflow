@@ -70,7 +70,7 @@ export default function Navbar() {
               )}
             </div>
             <button
-              onClick={displayTask}
+              onClick={() => openModal('add')}
               disabled={board?.columns.length === 0}
               className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25"
             >

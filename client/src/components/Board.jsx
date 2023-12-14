@@ -14,8 +14,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
-  const { board, setBoard, displayTaskModal, setDisplayTaskModal, modal } =
-    useContext(Context);
+  const {
+    board,
+    setBoard,
+    displayTaskModal,
+    setDisplayTaskModal,
+    modal,
+    closeModal,
+  } = useContext(Context);
   const { id } = useParams();
 
   const [tasks, setTasks] = useState();
@@ -72,11 +78,11 @@ export default function Board() {
       {modal === 'menu' && <Menu />}
       {modal === 'editBoard' && <BoardDetails board={board} />}
       {modal === 'new' && <BoardDetails board={board} />}
-      {displayTaskModal === 'add' && (
+      {modal === 'add' && (
         <AddTask
           id={board._id}
           columns={board.columns}
-          setDisplayTaskModal={setDisplayTaskModal}
+          closeModal={closeModal}
         />
       )}
       {displayTaskModal === 'edit' && (

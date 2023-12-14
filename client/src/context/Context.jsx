@@ -20,6 +20,8 @@ function ContextProvider(props) {
       setModal('editBoard');
     } else if (modal === 'new') {
       setModal('new');
+    } else if (modal === 'add') {
+      setModal('add');
     }
   }
 
