@@ -7,7 +7,6 @@ function ContextProvider(props) {
   const [authValue, setAuthValue] = useState(null);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
-
   const [modal, setModal] = useState(null);
 
   function openModal(modal) {

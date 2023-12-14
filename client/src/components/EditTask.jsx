@@ -113,9 +113,8 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
           <label className="text-white text-xs font-semibold flex flex-col gap-2">
             Subtasks{' '}
             {subtasks.map(item => (
-              <div className="w-full flex items-center gap-4">
+              <div key={item.id} className="w-full flex items-center gap-4">
                 <input
-                  key={item.id}
                   placeholder={item.placeholder}
                   name="subtask"
                   value={item?.subtask}
@@ -147,8 +146,10 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
               name="status"
               className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
             >
-              {columns.map(status => (
-                <option value={status}>{status}</option>
+              {columns.map((status, ind) => (
+                <option key={ind} value={status}>
+                  {status}
+                </option>
               ))}
             </select>
           </label>

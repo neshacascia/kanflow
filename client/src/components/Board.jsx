@@ -14,15 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
-  const {
-    board,
-    setBoard,
-    displayTaskModal,
-    setDisplayTaskModal,
-    modal,
-    openModal,
-    closeModal,
-  } = useContext(Context);
+  const { board, setBoard, modal, openModal, closeModal } = useContext(Context);
   const { id } = useParams();
 
   const [tasks, setTasks] = useState();

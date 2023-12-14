@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useContext, useState } from 'react';
-import { Context } from '../context/Context';
+import { useState } from 'react';
 import Modal from './Modal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
