@@ -11,8 +11,13 @@ import {
   faSquareCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function ViewTask({ task, columns, selectedStatus }) {
-  const { setDisplayTaskModal } = useContext(Context);
+export default function ViewTask({
+  task,
+  columns,
+  selectedStatus,
+  openModal,
+  closeModal,
+}) {
   const [subtasks, setSubtasks] = useState(task.subtasks);
   const [settingsModal, setSettingsModal] = useState(false);
 
@@ -20,6 +25,11 @@ export default function ViewTask({ task, columns, selectedStatus }) {
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
   ).length;
+
+  function updateModal(modalType) {
+    closeModal();
+    openModal(modalType);
+  }
 
   async function setCompletionStatus(id, completed) {
     try {
@@ -135,13 +145,13 @@ export default function ViewTask({ task, columns, selectedStatus }) {
         {settingsModal && (
           <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute right-5 rounded-lg shadow-glow p-4 mt-8">
             <button
-              onClick={() => setDisplayTaskModal('edit')}
+              onClick={() => updateModal('edit')}
               className="text-mediumGrey"
             >
               Edit Task
             </button>
             <button
-              onClick={() => setDisplayTaskModal('deleteTask')}
+              onClick={() => updateModal('deleteTask')}
               className="text-deleteRed"
             >
               Delete Task

@@ -1,4 +1,9 @@
-export default function Task({ task, setViewTask, setSelectedStatus }) {
+export default function Task({
+  task,
+  setViewTask,
+  setSelectedStatus,
+  openModal,
+}) {
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
   ).length;
@@ -6,6 +11,7 @@ export default function Task({ task, setViewTask, setSelectedStatus }) {
   function handleTaskClick(status) {
     setSelectedStatus(status);
     setViewTask(task);
+    openModal('viewTask');
   }
 
   return (

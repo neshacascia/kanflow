@@ -8,6 +8,7 @@ export default function Column({
   tasks,
   setViewTask,
   setSelectedStatus,
+  openModal,
 }) {
   const columnTasks = tasks.filter(task => task.status === name);
 
@@ -25,6 +26,7 @@ export default function Column({
             task={task}
             setViewTask={setViewTask}
             setSelectedStatus={setSelectedStatus}
+            openModal={openModal}
           />
         ))}
       </div>

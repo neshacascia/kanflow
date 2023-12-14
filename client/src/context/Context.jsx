@@ -24,6 +24,8 @@ function ContextProvider(props) {
       setModal('add');
     } else if (modal === 'edit') {
       setModal('edit');
+    } else if (modal === 'viewTask') {
+      setModal('viewTask');
     }
   }
 

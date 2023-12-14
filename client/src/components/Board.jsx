@@ -60,6 +60,7 @@ export default function Board() {
                 tasks={tasks}
                 setViewTask={setViewTask}
                 setSelectedStatus={setSelectedStatus}
+                openModal={openModal}
               />
             ))
           ) : (
@@ -86,6 +87,15 @@ export default function Board() {
           closeModal={closeModal}
         />
       )}
+      {modal === 'viewTask' && (
+        <ViewTask
+          task={viewTask}
+          columns={board.columns}
+          selectedStatus={selectedStatus}
+          openModal={openModal}
+          closeModal={closeModal}
+        />
+      )}
       {modal === 'edit' && (
         <EditTask
           id={board._id}
@@ -106,13 +116,6 @@ export default function Board() {
           board={board}
           displayTaskModal={displayTaskModal}
           setDisplayTaskModal={setDisplayTaskModal}
-        />
-      )}
-      {viewTask && (
-        <ViewTask
-          task={viewTask}
-          columns={board.columns}
-          selectedStatus={selectedStatus}
         />
       )}
     </main>
