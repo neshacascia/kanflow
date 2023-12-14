@@ -10,27 +10,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
-  const { setBoardDetails, setDisplayMenuModal, boards } = useContext(Context);
+  const { boards, openModal, closeModal } = useContext(Context);
   const location = useLocation();
-
-  function displayBoard(type) {
-    if (type === 'new') {
-      setBoardDetails('new');
-    }
-
-    closeMenuModal();
-  }
-
-  function closeMenuModal() {
-    setDisplayMenuModal(false);
-  }
 
   return (
     <Modal>
       <div className="bg-darkGrey w-[264px] relative rounded-lg shadow-glow py-4">
         <FontAwesomeIcon
           icon={faXmark}
-          onClick={() => setDisplayMenuModal(false)}
           className="text-mediumGrey w-4 h-4 absolute right-0 mr-4 cursor-pointer"
         />
         <h3 className="text-mediumGrey text-xs font-semibold tracking-[2.4px] uppercase px-6 mb-4">
@@ -42,7 +29,7 @@ export default function Menu() {
             <NavLink
               key={ind}
               to={`/board/${board._id}`}
-              onClick={closeMenuModal}
+              onClick={closeModal}
               className={({ isActive }) =>
                 `text-[15px] font-semibold flex items-center gap-3 py-3 pl-6 ${
                   isActive
@@ -74,7 +61,10 @@ export default function Menu() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3 py-3 px-6">
+        <div
+          onClick={() => openModal('new')}
+          className="flex items-center gap-3 py-3 px-6"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -89,10 +79,7 @@ export default function Menu() {
               fill="#635FC7"
             />
           </svg>
-          <button
-            onClick={() => displayBoard('new')}
-            className="text-mainPurple text-[15px] font-semibold"
-          >
+          <button className="text-mainPurple text-[15px] font-semibold">
             + Create New Board
           </button>
         </div>

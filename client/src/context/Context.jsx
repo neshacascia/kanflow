@@ -5,8 +5,6 @@ const Context = createContext();
 function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authValue, setAuthValue] = useState(null);
-  const [displayMenuModal, setDisplayMenuModal] = useState(false);
-  const [boardDetails, setBoardDetails] = useState(null);
   const [displayTaskModal, setDisplayTaskModal] = useState(false);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
@@ -20,12 +18,16 @@ function ContextProvider(props) {
       setModal('menu');
     } else if (modal === 'editBoard') {
       setModal('editBoard');
+    } else if (modal === 'new') {
+      setModal('new');
     }
   }
 
   function closeModal() {
     setModal(null);
   }
+
+  console.log(modal);
 
   return (
     <Context.Provider
@@ -34,10 +36,6 @@ function ContextProvider(props) {
         setIsLoggedIn,
         authValue,
         setAuthValue,
-        displayMenuModal,
-        setDisplayMenuModal,
-        boardDetails,
-        setBoardDetails,
         displayTaskModal,
         setDisplayTaskModal,
         boards,

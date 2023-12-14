@@ -21,7 +21,6 @@ export default function Board() {
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
-  console.log(modal);
 
   useEffect(() => {
     if (id) {
@@ -72,6 +71,7 @@ export default function Board() {
 
       {modal === 'menu' && <Menu />}
       {modal === 'editBoard' && <BoardDetails board={board} />}
+      {modal === 'new' && <BoardDetails board={board} />}
       {displayTaskModal === 'add' && (
         <AddTask
           id={board._id}

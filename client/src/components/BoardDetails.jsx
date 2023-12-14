@@ -9,7 +9,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetails({ board }) {
   const navigate = useNavigate();
-  const { modal } = useContext(Context);
+  const { modal, closeModal } = useContext(Context);
 
   const boardDetails = modal;
 
@@ -105,14 +105,14 @@ export default function BoardDetails({ board }) {
         const { boardId } = res.data;
 
         if (res.status === 200) {
-          setBoardDetails(null);
+          closeModal();
           navigate(`/board/${boardId}`);
         }
       } else {
         const res = await axios.put('/api/board/editBoard', { boardData });
 
         if (res.status === 200) {
-          setBoardDetails(null);
+          closeModal();
           window.location.reload();
         }
       }
@@ -126,7 +126,7 @@ export default function BoardDetails({ board }) {
       <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
         <FontAwesomeIcon
           icon={faXmark}
-          onClick={() => setBoardDetails(null)}
+          onClick={closeModal}
           className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
         />
         <h2 className="text-white text-lg font-semibold mb-6">
