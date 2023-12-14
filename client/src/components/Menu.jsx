@@ -18,6 +18,7 @@ export default function Menu() {
       <div className="bg-darkGrey w-[264px] relative rounded-lg shadow-glow py-4">
         <FontAwesomeIcon
           icon={faXmark}
+          onClick={closeModal}
           className="text-mediumGrey w-4 h-4 absolute right-0 mr-4 cursor-pointer"
         />
         <h3 className="text-mediumGrey text-xs font-semibold tracking-[2.4px] uppercase px-6 mb-4">
