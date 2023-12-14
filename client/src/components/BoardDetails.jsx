@@ -9,7 +9,9 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetails({ board }) {
   const navigate = useNavigate();
-  const { boardDetails, setBoardDetails } = useContext(Context);
+  const { modal } = useContext(Context);
+
+  const boardDetails = modal;
 
   const [boardName, setBoardName] = useState(
     boardDetails === 'editBoard' ? board?.name : ''

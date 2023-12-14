@@ -18,6 +18,7 @@ export default function Navbar() {
     setDisplayMenuModal,
     setBoardDetails,
     setDisplayTaskModal,
+    openModal,
   } = useContext(Context);
 
   const [displaySettings, setDisplaySettings] = useState(false);
@@ -50,7 +51,7 @@ export default function Navbar() {
         {user && (
           <div className="w-full flex items-center gap-2">
             <div
-              onClick={displayMenu}
+              onClick={() => openModal('menu')}
               className="flex items-center gap-2 ml-4 mr-auto cursor-pointer"
             >
               <h2 className="text-white text-lg font-semibold">
@@ -91,7 +92,7 @@ export default function Navbar() {
       {displaySettings && (
         <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[170px] flex flex-col items-start gap-4 absolute right-4 rounded-lg shadow-glow p-4 -mt-2">
           <button
-            onClick={() => setBoardDetails('editBoard')}
+            onClick={() => openModal('editBoard')}
             className="text-mediumGrey"
           >
             Edit Board
