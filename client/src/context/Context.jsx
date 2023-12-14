@@ -5,7 +5,6 @@ const Context = createContext();
 function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authValue, setAuthValue] = useState(null);
-  const [displayTaskModal, setDisplayTaskModal] = useState(false);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
 
@@ -37,8 +36,6 @@ function ContextProvider(props) {
     setModal(null);
   }
 
-  console.log(modal);
-
   return (
     <Context.Provider
       value={{
@@ -46,8 +43,6 @@ function ContextProvider(props) {
         setIsLoggedIn,
         authValue,
         setAuthValue,
-        displayTaskModal,
-        setDisplayTaskModal,
         boards,
         setBoards,
         board,
