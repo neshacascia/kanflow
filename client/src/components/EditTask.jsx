@@ -6,12 +6,7 @@ import Modal from './Modal';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function EditTask({
-  id,
-  selectedTask,
-  columns,
-  setDisplayTaskModal,
-}) {
+export default function EditTask({ id, selectedTask, columns, closeModal }) {
   const navigate = useNavigate();
 
   const [task, setTask] = useState(selectedTask);
@@ -73,7 +68,7 @@ export default function EditTask({
       });
       console.log(res);
       if (res.status === 200) {
-        setDisplayTaskModal(false);
+        closeModal();
         navigate(0);
       }
     } catch (err) {
@@ -86,7 +81,7 @@ export default function EditTask({
       <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
         <FontAwesomeIcon
           icon={faXmark}
-          onClick={() => setDisplayTaskModal(false)}
+          onClick={closeModal}
           className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
         />
         <h2 className="text-white text-lg font-semibold mb-6">Edit Task</h2>

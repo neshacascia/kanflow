@@ -22,6 +22,8 @@ function ContextProvider(props) {
       setModal('new');
     } else if (modal === 'add') {
       setModal('add');
+    } else if (modal === 'edit') {
+      setModal('edit');
     }
   }
 

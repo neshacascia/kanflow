@@ -20,6 +20,7 @@ export default function Board() {
     displayTaskModal,
     setDisplayTaskModal,
     modal,
+    openModal,
     closeModal,
   } = useContext(Context);
   const { id } = useParams();
@@ -85,12 +86,12 @@ export default function Board() {
           closeModal={closeModal}
         />
       )}
-      {displayTaskModal === 'edit' && (
+      {modal === 'edit' && (
         <EditTask
           id={board._id}
           selectedTask={viewTask}
           columns={board.columns}
-          setDisplayTaskModal={setDisplayTaskModal}
+          closeModal={closeModal}
         />
       )}
       {displayTaskModal === 'deleteTask' && (
