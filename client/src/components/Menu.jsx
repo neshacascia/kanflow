@@ -86,8 +86,11 @@ export default function Menu() {
         </div>
 
         <div className="text-mediumGrey flex items items-center justify-end gap-2 px-6 mt-4">
-          <FontAwesomeIcon icon={faArrowRightFromBracket} />
-          <Link to="/logout" className="text-[13px] font-semibold">
+          <Link
+            to="/logout"
+            className="text-[13px] font-semibold flex items-center gap-2"
+          >
+            <FontAwesomeIcon icon={faArrowRightFromBracket} />
             Logout
           </Link>
         </div>
