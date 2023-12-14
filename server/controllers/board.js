@@ -135,7 +135,7 @@ module.exports = {
   delete: async (req, res) => {
     console.log(req.body);
     try {
-      if (req.body.displayTaskModal === 'deleteTask') {
+      if (req.body.modal === 'deleteTask') {
         await Task.deleteOne({ _id: req.body.data });
         console.log('Task has been deleted');
         res.status(200).json('Task has been deleted');
