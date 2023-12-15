@@ -40,8 +40,6 @@ export default function Board() {
     }
   }, [id]);
 
-  console.log(modal);
-
   return (
     <main className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6">
       {board && (
