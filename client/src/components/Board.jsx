@@ -40,6 +40,8 @@ export default function Board() {
     }
   }, [id]);
 
+  console.log(modal);
+
   return (
     <main className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6">
       {board && (
@@ -62,7 +64,7 @@ export default function Board() {
               </p>
               <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4">
                 <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
-                <p>Add New Column</p>
+                <p onClick={() => openModal('editBoard')}>Add New Column</p>
               </button>
             </div>
           )}
