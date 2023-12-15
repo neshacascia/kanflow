@@ -47,6 +47,7 @@ export default function ViewTask({
         completed: completed,
       });
       console.log(res);
+      navigate(0);
     } catch (err) {
       console.error(err);
     }
