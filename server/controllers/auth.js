@@ -59,7 +59,7 @@ exports.logout = (req, res) => {
       }
 
       req.user = null;
-      res.redirect('/');
+      return res.status(200).json({ message: 'Logout successful' });
     });
   });
 };

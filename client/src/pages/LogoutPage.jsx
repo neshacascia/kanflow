@@ -10,9 +10,11 @@ export default function LogoutPage() {
   useEffect(() => {
     async function logout() {
       try {
-        await axios.get('/logout', { withCredentials: true });
+        await axios.get('/api/logout', { withCredentials: true });
+
         setIsLoggedIn(false);
         localStorage.removeItem('user');
+        console.log('User logged out successfully');
         navigate('/');
       } catch (err) {
         console.error(err);

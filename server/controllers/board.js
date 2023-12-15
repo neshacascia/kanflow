@@ -7,9 +7,13 @@ module.exports = {
     res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
   },
   getBoards: async (req, res) => {
-    console.log(req.user);
-
     try {
+      const userId = req.user && req.user.id;
+
+      if (!userId) {
+        console.log('User is not logged in');
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
       const boards = await Board.find({ userId: req.user.id }).lean();
       res.status(200).json({ boards: boards, user: req.user.id });
     } catch (err) {
@@ -34,7 +38,7 @@ module.exports = {
         userId: req.user.id,
       });
       console.log('Board has been added');
-      res.redirect(`/board/${newBoard._id}`);
+      res.status(200).json({ boardId: newBoard._id });
     } catch (err) {
       console.error(err);
     }
@@ -131,7 +135,7 @@ module.exports = {
   delete: async (req, res) => {
     console.log(req.body);
     try {
-      if (req.body.displayTaskModal === 'deleteTask') {
+      if (req.body.modal === 'deleteTask') {
         await Task.deleteOne({ _id: req.body.data });
         console.log('Task has been deleted');
         res.status(200).json('Task has been deleted');

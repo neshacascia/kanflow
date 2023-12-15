@@ -31,7 +31,7 @@ export default function AuthPage() {
         <% }) %> <% } %> */}
 
         <form
-          action={authValue === 'Signup' ? '/signup' : '/login'}
+          action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
         >
           <input type="text" name="userName" placeholder="Username" />
