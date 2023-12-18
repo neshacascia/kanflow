@@ -16,7 +16,9 @@ export default function Column({
     <section>
       <div className="flex gap-3">
         <FontAwesomeIcon icon={faCircle} className="w-[15px] h-[15px]" />
-        <h3 className="text-mediumGrey text-xs font-medium uppercase tracking-widest mb-6">{`${name} (${columnTasks?.length})`}</h3>
+        <h3 className="text-mediumGrey text-xs font-medium uppercase tracking-widest mb-6">{`${name} (${
+          columnTasks ? columnTasks.length : ''
+        })`}</h3>
       </div>
 
       <div className="flex flex-col gap-5">
