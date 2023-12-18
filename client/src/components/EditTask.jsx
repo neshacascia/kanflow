@@ -126,7 +126,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
                 <FontAwesomeIcon
                   icon={faXmark}
                   onClick={() => deleteSubtask(item.id)}
-                  className="text-mediumGrey w-5 h-5 cursor-pointer"
+                  className="text-mediumGrey w-5 h-5 cursor-pointer hover:text-deleteRed"
                 />
               </div>
             ))}
@@ -155,7 +155,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
           </label>
           <button
             type="submit"
-            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover"
           >
             Update Task
           </button>
