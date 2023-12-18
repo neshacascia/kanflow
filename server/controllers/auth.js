@@ -33,7 +33,6 @@ exports.postLogin = (req, res, next) => {
       return res.redirect('/login');
     }
     req.logIn(user, err => {
-      console.log(user);
       if (err) {
         return next(err);
       }
