@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
+import axios from 'axios';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -10,6 +11,18 @@ export default function HomePage() {
   if (user) {
     setIsLoggedIn(true);
     navigate('/board');
+  }
+
+  async function demoUserLogin() {
+    try {
+      const res = await axios.post('/api/login', {
+        email: import.meta.env.VITE_DEMO_USER_EMAIL,
+        password: import.meta.env.VITE_DEMO_USER_PASSWORD,
+      });
+      navigate('/board');
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
@@ -23,6 +36,7 @@ export default function HomePage() {
             <Link to="/signup" onClick={() => setAuthValue('Signup')}>
               Signup
             </Link>{' '}
+            <button onClick={demoUserLogin}>Demo</button>
           </nav>
           <h1>Unleash Your Productivity with kanflow</h1>
         </main>
