@@ -33,11 +33,16 @@ exports.postLogin = (req, res, next) => {
       return res.redirect('/login');
     }
     req.logIn(user, err => {
+      console.log(user);
       if (err) {
         return next(err);
       }
+      if (user.userName === 'demo_user') {
+        return res.redirect('/api/board');
+      }
+
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/api/board');
+      return res.redirect(req.session.returnTo || '/board');
     });
   })(req, res, next);
 };
