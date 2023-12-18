@@ -64,7 +64,7 @@ export default function Board() {
               <p className="text-mediumGrey text-lg font-semibold text-center">
                 This board is empty. Create a new column to get started.
               </p>
-              <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4">
+              <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
                 <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
                 <p onClick={() => openModal('editBoard')}>Add New Column</p>
               </button>
