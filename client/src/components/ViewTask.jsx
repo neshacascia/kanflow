@@ -77,7 +77,7 @@ export default function ViewTask({
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             onClick={() => setSettingsModal(true)}
-            className="text-mediumGrey text-xl cursor-pointer"
+            className="text-mediumGrey text-xl cursor-pointer pl-4"
           />
         </div>
         <p className="text-mediumGrey text-[13px] leading-6 mb-6">
