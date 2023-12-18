@@ -95,7 +95,7 @@ export default function AddTask({ id, columns, closeModal }) {
               type="text"
               name="title"
               placeholder="e.g. Take coffee break"
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
 
@@ -104,7 +104,7 @@ export default function AddTask({ id, columns, closeModal }) {
             <textarea
               name="desc"
               placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
+              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             ></textarea>
           </label>
 
@@ -118,7 +118,7 @@ export default function AddTask({ id, columns, closeModal }) {
                   onChange={e =>
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
-                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
@@ -141,7 +141,7 @@ export default function AddTask({ id, columns, closeModal }) {
             Status{' '}
             <select
               name="status"
-              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4"
+              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             >
               {columns.map((status, ind) => (
                 <option key={ind} value={status}>

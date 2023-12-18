@@ -142,7 +142,7 @@ export default function BoardDetails({ board }) {
               placeholder="e.g. Web Design"
               value={boardName}
               onChange={e => updateBoardName(e.target.value)}
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
 
@@ -161,7 +161,7 @@ export default function BoardDetails({ board }) {
                       e.target.value
                     )
                   }
-                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
                 />
                 <FontAwesomeIcon
                   icon={faXmark}

@@ -95,7 +95,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
               placeholder="e.g. Take coffee break"
               value={task.title}
               onChange={e => handleInputChange('title', e.target.value)}
-              className="bg-transparent text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              className="bg-transparent text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
 
@@ -106,7 +106,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
               placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
               value={task.description}
               onChange={e => handleInputChange('description', e.target.value)}
-              className="bg-transparent text-white text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
+              className="bg-transparent text-white text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             ></textarea>
           </label>
 
@@ -121,7 +121,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
                   onChange={e =>
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
-                  className="bg-transparent text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  className="bg-transparent text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
@@ -144,7 +144,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
             Status{' '}
             <select
               name="status"
-              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             >
               {columns.map((status, ind) => (
                 <option key={ind} value={status}>
