@@ -14,7 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
-  const { board, setBoard, modal, openModal, closeModal } = useContext(Context);
+  const { board, setBoard, modal, openModal, closeModal, setDisplaySettings } =
+    useContext(Context);
   const { id } = useParams();
 
   const [tasks, setTasks] = useState();
@@ -41,7 +42,10 @@ export default function Board() {
   }, [id]);
 
   return (
-    <main className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6">
+    <main
+      onClick={() => setDisplaySettings(false)}
+      className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6"
+    >
       {board && (
         <section className="h-full flex gap-6">
           {board.columns.length > 0 ? (
