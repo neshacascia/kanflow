@@ -44,10 +44,10 @@ export default function Board() {
   return (
     <main
       onClick={() => setDisplaySettings(false)}
-      className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6"
+      className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6 overflow-x-auto"
     >
       {board && (
-        <section className="h-full flex gap-6">
+        <section className="h-full flex gap-3">
           {board.columns.length > 0 ? (
             board.columns.map((column, ind) => (
               <Column
