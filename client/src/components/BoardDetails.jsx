@@ -182,7 +182,7 @@ export default function BoardDetails({ board }) {
 
           <button
             type="submit"
-            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover"
           >
             {boardDetails === 'new' ? 'Create New Board' : 'Save Changes'}
           </button>
