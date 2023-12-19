@@ -142,7 +142,11 @@ export default function AddTask({ id, columns, closeModal }) {
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
                   onBlur={() => subtasksInputBlurHandler(item.id)}
-                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 ${
+                    (item.isTouched === false) & (item.subtask.length === 0)
+                      ? 'border-borderGrey'
+                      : 'invalid:border-deleteRed'
+                  }`}
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
