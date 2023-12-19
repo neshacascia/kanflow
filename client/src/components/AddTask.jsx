@@ -26,6 +26,21 @@ export default function AddTask({ id, columns, closeModal }) {
     },
   ]);
 
+  function subtasksInputBlurHandler(id) {
+    setSubtasks(prevState =>
+      prevState.map(subtask => {
+        if (subtask.id === id) {
+          return {
+            ...subtask,
+            isTouched: true,
+          };
+        } else {
+          return subtask;
+        }
+      })
+    );
+  }
+
   function addNewSubtask() {
     const maxId = Math.max(...subtasks.map(subtask => subtask.id));
 
@@ -126,6 +141,7 @@ export default function AddTask({ id, columns, closeModal }) {
                   onChange={e =>
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
+                  onBlur={() => subtasksInputBlurHandler(item.id)}
                   className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
                 />
                 <FontAwesomeIcon
