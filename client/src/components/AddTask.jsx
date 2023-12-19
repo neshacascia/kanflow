@@ -31,7 +31,7 @@ export default function AddTask({ id, columns, closeModal }) {
 
     setSubtasks(prevState => [
       ...prevState,
-      { id: maxId + 1, subtask: '', completed: false },
+      { id: maxId + 1, subtask: '', completed: false, isTouched: false },
     ]);
   }
 
