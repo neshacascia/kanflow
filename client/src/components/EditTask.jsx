@@ -11,6 +11,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
 
   const [task, setTask] = useState(selectedTask);
   const [subtasks, setSubtasks] = useState(task.subtasks);
+  const [titleInputTouched, setTitleInputTouched] = useState(false);
 
   function handleInputChange(key, value) {
     setTask({ ...task, [key]: value });
@@ -109,8 +110,14 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
               name="title"
               placeholder="e.g. Take coffee break"
               value={task.title}
+              required
               onChange={e => handleInputChange('title', e.target.value)}
-              className="bg-transparent text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              onBlur={() => setTitleInputTouched(true)}
+              className={`bg-transparent text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 ${
+                titleInputTouched
+                  ? 'invalid:border-deleteRed'
+                  : 'border-borderGrey'
+              }`}
             />
           </label>
 
