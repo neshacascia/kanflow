@@ -21,10 +21,25 @@ export default function BoardDetails({ board }) {
     boardDetails === 'editBoard'
       ? board?.columns
       : [
-          { id: 0, columnName: 'Todo' },
-          { id: 1, columnName: 'Doing' },
+          { id: 0, columnName: 'Todo', isTouched: false },
+          { id: 1, columnName: 'Doing', isTouched: false },
         ]
   );
+
+  function columnInputBlurHandler(id) {
+    setBoardColumns(prevState =>
+      prevState.map(column => {
+        if (column.id === id) {
+          return {
+            ...column,
+            isTouched: true,
+          };
+        } else {
+          return column;
+        }
+      })
+    );
+  }
 
   function addNewColumn() {
     if (boardDetails === 'new') {
@@ -33,6 +48,7 @@ export default function BoardDetails({ board }) {
       const newColumn = {
         id: maxId + 1,
         columnName: '',
+        isTouched: false,
       };
 
       setBoardColumns([...boardColumns, newColumn]);
@@ -153,7 +169,8 @@ export default function BoardDetails({ board }) {
                 <input
                   type="text"
                   name="columnName"
-                  value={boardDetails === 'new' ? column.columnName : column}
+                  value={column.columnName}
+                  required
                   onChange={e =>
                     updateColumnName(
                       column.id || ind,
@@ -161,7 +178,13 @@ export default function BoardDetails({ board }) {
                       e.target.value
                     )
                   }
-                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  onBlur={() => columnInputBlurHandler(column.id)}
+                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 ${
+                    (column.isTouched === false) &
+                    (column.columnName.length === 0)
+                      ? 'border-borderGrey'
+                      : 'invalid:border-deleteRed'
+                  }`}
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
