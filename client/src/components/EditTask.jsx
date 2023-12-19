@@ -16,12 +16,27 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
     setTask({ ...task, [key]: value });
   }
 
+  function subtasksInputBlurHandler(id) {
+    setSubtasks(prevState =>
+      prevState.map(subtask => {
+        if (subtask.id === id) {
+          return {
+            ...subtask,
+            isTouched: true,
+          };
+        } else {
+          return subtask;
+        }
+      })
+    );
+  }
+
   function addNewSubtask() {
     const maxId = Math.max(...subtasks.map(subtask => subtask.id));
 
     setSubtasks(prevState => [
       ...prevState,
-      { id: maxId + 1, subtask: '', completed: false },
+      { id: maxId + 1, subtask: '', completed: false, isTouched: false },
     ]);
   }
 
@@ -118,10 +133,16 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
                   placeholder={item.placeholder}
                   name="subtask"
                   value={item?.subtask}
+                  required
                   onChange={e =>
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
-                  className="bg-transparent text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  onBlur={() => subtasksInputBlurHandler(item.id)}
+                  className={`bg-transparent text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 ${
+                    (item.isTouched === false) & (item.subtask.length === 0)
+                      ? 'border-borderGrey'
+                      : 'invalid:border-deleteRed'
+                  }`}
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
