@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function AddTask({ id, columns, closeModal }) {
   const navigate = useNavigate();
 
+  const [titleInputTouched, setTitleInputTouched] = useState(false);
+
   const [subtasks, setSubtasks] = useState([
     {
       id: 0,
@@ -117,7 +119,13 @@ export default function AddTask({ id, columns, closeModal }) {
               type="text"
               name="title"
               placeholder="e.g. Take coffee break"
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              required
+              onBlur={() => setTitleInputTouched(true)}
+              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 ${
+                titleInputTouched
+                  ? 'invalid:border-deleteRed'
+                  : 'border-borderGrey'
+              }`}
             />
           </label>
 
