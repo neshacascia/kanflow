@@ -10,12 +10,19 @@ export default function AddTask({ id, columns, closeModal }) {
   const navigate = useNavigate();
 
   const [subtasks, setSubtasks] = useState([
-    { id: 0, placeholder: 'e.g. Make coffee', subtask: '', completed: false },
+    {
+      id: 0,
+      placeholder: 'e.g. Make coffee',
+      subtask: '',
+      completed: false,
+      isTouched: false,
+    },
     {
       id: 1,
       placeholder: 'e.g. Drink coffee & smile',
       subtask: '',
       completed: false,
+      isTouched: false,
     },
   ]);
 
@@ -115,6 +122,7 @@ export default function AddTask({ id, columns, closeModal }) {
                 <input
                   placeholder={item.placeholder}
                   name="subtask"
+                  required
                   onChange={e =>
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
