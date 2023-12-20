@@ -17,6 +17,8 @@ export default function BoardDetails({ board }) {
     boardDetails === 'editBoard' ? board?.name : ''
   );
 
+  const [boardNameInputTouched, setBoardNameInputTouched] = useState(false);
+
   const [boardColumns, setBoardColumns] = useState(
     boardDetails === 'editBoard'
       ? board?.columns
@@ -131,8 +133,14 @@ export default function BoardDetails({ board }) {
               name="boardName"
               placeholder="e.g. Web Design"
               value={boardName}
+              required
               onChange={e => updateBoardName(e.target.value)}
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              onBlur={() => setBoardNameInputTouched(true)}
+              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 ${
+                boardNameInputTouched
+                  ? 'invalid:border-deleteRed'
+                  : 'border-borderGrey'
+              }`}
             />
           </label>
 
