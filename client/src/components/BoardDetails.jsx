@@ -42,7 +42,6 @@ export default function BoardDetails({ board }) {
   }
 
   function addNewColumn() {
-    // if (boardDetails === 'new') {
     const maxId = Math.max(...boardColumns.map(column => column.id));
 
     const newColumn = {
@@ -52,11 +51,6 @@ export default function BoardDetails({ board }) {
     };
 
     setBoardColumns([...boardColumns, newColumn]);
-    // } else {
-    //   setBoardColumns(prevState => {
-    //     return [...prevState, ''];
-    //   });
-    // }
   }
 
   function updateBoardName(value) {
@@ -64,7 +58,6 @@ export default function BoardDetails({ board }) {
   }
 
   function updateColumnName(id, key, value) {
-    // if (boardDetails === 'new') {
     setBoardColumns(prevState =>
       prevState.map(column => {
         if (column.id === id) {
@@ -77,27 +70,10 @@ export default function BoardDetails({ board }) {
         }
       })
     );
-    // } else {
-    //   setBoardColumns(prevState => {
-    //     return prevState.map((column, ind) => {
-    //       if (ind === id) {
-    //         return value;
-    //       } else {
-    //         return column;
-    //       }
-    //     });
-    //   });
-    // }
   }
-  console.log(boardColumns);
+
   function deleteColumnName(id) {
-    // if (boardDetails === 'new') {
     setBoardColumns(prevState => prevState.filter(column => column.id !== id));
-    // } else {
-    //   setBoardColumns(prevState =>
-    //     prevState.filter((column, ind) => id !== ind)
-    //   );
-    // }
   }
 
   async function handleSubmit(e) {
