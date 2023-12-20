@@ -11,7 +11,7 @@ import EditTask from './EditTask';
 import Delete from './Delete';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
   const { board, setBoard, modal, openModal, closeModal, setDisplaySettings } =
@@ -106,6 +106,13 @@ export default function Board() {
       {modal === 'deleteBoard' && (
         <Delete board={board} modal={modal} closeModal={closeModal} />
       )}
+
+      <button className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8">
+        <FontAwesomeIcon
+          icon={faEye}
+          className="text-white text-xs py-5 pr-2"
+        />
+      </button>
     </main>
   );
 }
