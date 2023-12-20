@@ -8,6 +8,7 @@ function ContextProvider(props) {
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
   const [modal, setModal] = useState(null);
+  const [displaySettings, setDisplaySettings] = useState(false);
 
   function openModal(modal) {
     setModal(null);
@@ -49,6 +50,8 @@ function ContextProvider(props) {
         modal,
         openModal,
         closeModal,
+        displaySettings,
+        setDisplaySettings,
       }}
     >
       {props.children}

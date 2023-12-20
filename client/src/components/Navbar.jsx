@@ -12,13 +12,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { board, modal, openModal } = useContext(Context);
+  const { board, modal, openModal, displaySettings, setDisplaySettings } =
+    useContext(Context);
 
-  const [displaySettings, setDisplaySettings] = useState(false);
   const user = localStorage.getItem('user');
 
   return (
-    <nav className="bg-darkGrey h-16 px-4">
+    <nav
+      onClick={() => (displaySettings ? setDisplaySettings(false) : null)}
+      className="bg-darkGrey h-16 px-4"
+    >
       <span className="h-full flex items-center">
         <img src={logo} />
         {!user && (

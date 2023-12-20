@@ -32,10 +32,10 @@ export default function Menu() {
               to={`/board/${board._id}`}
               onClick={closeModal}
               className={({ isActive }) =>
-                `text-[15px] font-semibold flex items-center gap-3 py-3 pl-6 ${
+                `text-[15px] font-semibold flex items-center gap-3 rounded-menuLink py-3 pl-6 ${
                   isActive
-                    ? 'text-white bg-mainPurple rounded-menuLink'
-                    : 'text-mediumGrey'
+                    ? 'text-white bg-mainPurple'
+                    : 'text-mediumGrey hover:bg-white hover:text-mainPurple'
                 }`
               }
             >

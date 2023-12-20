@@ -13,7 +13,7 @@ export default function Column({
   const columnTasks = tasks?.filter(task => task.status === name);
 
   return (
-    <section>
+    <section className="pr-4">
       <div className="flex gap-3">
         <FontAwesomeIcon icon={faCircle} className="w-[15px] h-[15px]" />
         <h3 className="text-mediumGrey text-xs font-medium uppercase tracking-widest mb-6">{`${name} (${

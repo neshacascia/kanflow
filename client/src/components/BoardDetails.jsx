@@ -136,7 +136,7 @@ export default function BoardDetails({ board }) {
               required
               onChange={e => updateBoardName(e.target.value)}
               onBlur={() => setBoardNameInputTouched(true)}
-              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 ${
+              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 boardNameInputTouched
                   ? 'invalid:border-deleteRed'
                   : 'border-borderGrey'
@@ -161,7 +161,7 @@ export default function BoardDetails({ board }) {
                     )
                   }
                   onBlur={() => columnInputBlurHandler(column.id)}
-                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 ${
+                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                     (column.isTouched === false) &
                     (column.columnName.length === 0)
                       ? 'border-borderGrey'
@@ -171,7 +171,7 @@ export default function BoardDetails({ board }) {
                 <FontAwesomeIcon
                   icon={faXmark}
                   onClick={() => deleteColumnName(column.id || ind)}
-                  className="text-mediumGrey w-5 h-5 cursor-pointer"
+                  className="text-mediumGrey w-5 h-5 cursor-pointer hover:text-deleteRed"
                 />
               </div>
             ))}
@@ -187,7 +187,7 @@ export default function BoardDetails({ board }) {
 
           <button
             type="submit"
-            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover"
           >
             {boardDetails === 'new' ? 'Create New Board' : 'Save Changes'}
           </button>

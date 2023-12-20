@@ -14,7 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
-  const { board, setBoard, modal, openModal, closeModal } = useContext(Context);
+  const { board, setBoard, modal, openModal, closeModal, setDisplaySettings } =
+    useContext(Context);
   const { id } = useParams();
 
   const [tasks, setTasks] = useState();
@@ -41,9 +42,12 @@ export default function Board() {
   }, [id]);
 
   return (
-    <main className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6">
+    <main
+      onClick={() => setDisplaySettings(false)}
+      className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-6 overflow-x-auto"
+    >
       {board && (
-        <section className="h-full flex gap-6">
+        <section className="h-full flex gap-3">
           {board.columns.length > 0 ? (
             board.columns.map((column, ind) => (
               <Column
@@ -60,7 +64,7 @@ export default function Board() {
               <p className="text-mediumGrey text-lg font-semibold text-center">
                 This board is empty. Create a new column to get started.
               </p>
-              <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4">
+              <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
                 <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
                 <p onClick={() => openModal('editBoard')}>Add New Column</p>
               </button>

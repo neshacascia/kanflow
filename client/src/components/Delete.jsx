@@ -40,7 +40,7 @@ export default function Delete({ board, selectedTask, modal, closeModal }) {
         <div className="flex flex-col gap-4">
           <button
             onClick={() => deleteData()}
-            className="text-white bg-deleteRed text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-white bg-deleteRed text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-redHover"
           >
             Delete
           </button>

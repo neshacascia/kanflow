@@ -104,7 +104,7 @@ export default function AddTask({ id, columns, closeModal }) {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
+      <div className="bg-darkGrey w-[343px] h-[90vh] relative flex flex-col rounded-md p-6 overflow-y-auto">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}
@@ -121,7 +121,7 @@ export default function AddTask({ id, columns, closeModal }) {
               placeholder="e.g. Take coffee break"
               required
               onBlur={() => setTitleInputTouched(true)}
-              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 ${
+              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 titleInputTouched
                   ? 'invalid:border-deleteRed'
                   : 'border-borderGrey'
@@ -134,7 +134,7 @@ export default function AddTask({ id, columns, closeModal }) {
             <textarea
               name="desc"
               placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4"
+              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             ></textarea>
           </label>
 
@@ -150,7 +150,7 @@ export default function AddTask({ id, columns, closeModal }) {
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
                   onBlur={() => subtasksInputBlurHandler(item.id)}
-                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 ${
+                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                     (item.isTouched === false) & (item.subtask.length === 0)
                       ? 'border-borderGrey'
                       : 'invalid:border-deleteRed'
@@ -159,7 +159,7 @@ export default function AddTask({ id, columns, closeModal }) {
                 <FontAwesomeIcon
                   icon={faXmark}
                   onClick={() => deleteSubtask(item.id)}
-                  className="text-mediumGrey w-5 h-5 cursor-pointer"
+                  className="text-mediumGrey w-5 h-5 cursor-pointer hover:text-deleteRed"
                 />
               </div>
             ))}
@@ -177,7 +177,7 @@ export default function AddTask({ id, columns, closeModal }) {
             Status{' '}
             <select
               name="status"
-              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4"
+              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple hover:cursor-pointer"
             >
               {columns.map((status, ind) => (
                 <option key={ind} value={status}>
@@ -188,7 +188,7 @@ export default function AddTask({ id, columns, closeModal }) {
           </label>
           <button
             type="submit"
-            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover"
           >
             Create Task
           </button>

@@ -69,7 +69,7 @@ export default function ViewTask({
   return (
     <Modal>
       <div
-        className="bg-darkGrey w-[343px] flex flex-col rounded-md p-6"
+        className="bg-darkGrey w-[343px] h-auto flex flex-col rounded-md p-6 overflow-y-auto"
         onClick={() => (settingsModal ? setSettingsModal(false) : null)}
       >
         <div className="flex justify-between items-center mb-6">
@@ -77,7 +77,7 @@ export default function ViewTask({
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             onClick={() => setSettingsModal(true)}
-            className="text-mediumGrey text-xl cursor-pointer"
+            className="text-mediumGrey text-xl cursor-pointer pl-4"
           />
         </div>
         <p className="text-mediumGrey text-[13px] leading-6 mb-6">
@@ -92,7 +92,7 @@ export default function ViewTask({
           {subtasks.map((subtask, ind) => (
             <li
               key={ind}
-              className={`bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 ${
+              className={`bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 hover:bg-mainPurple hover:bg-opacity-25 hover:cursor-pointer ${
                 subtask.completed ? 'text-white/50 line-through' : 'text-white'
               }`}
             >
@@ -127,7 +127,7 @@ export default function ViewTask({
           <select
             name="status"
             onChange={e => updateCurrentStatus(e.target.value)}
-            className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2"
+            className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2 hover:cursor-pointer "
           >
             <option value={selectedStatus}>{selectedStatus}</option>
             {columns.map((status, ind) => {

@@ -10,6 +10,8 @@ export default {
         veryDarkGrey: '#20212C',
         borderGrey: 'rgba(130, 143, 163, 0.25)',
         deleteRed: '#EA5555',
+        mainPurpleHover: '#A8A4FF',
+        redHover: '#FF9898',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
