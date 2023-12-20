@@ -166,7 +166,7 @@ export default function BoardDetails({ board }) {
                 <FontAwesomeIcon
                   icon={faXmark}
                   onClick={() => deleteColumnName(column.id || ind)}
-                  className="text-mediumGrey w-5 h-5 cursor-pointer"
+                  className="text-mediumGrey w-5 h-5 cursor-pointer hover:text-deleteRed"
                 />
               </div>
             ))}
