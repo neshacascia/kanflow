@@ -9,22 +9,46 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function AddTask({ id, columns, closeModal }) {
   const navigate = useNavigate();
 
+  const [titleInputTouched, setTitleInputTouched] = useState(false);
+
   const [subtasks, setSubtasks] = useState([
-    { id: 0, placeholder: 'e.g. Make coffee', subtask: '', completed: false },
+    {
+      id: 0,
+      placeholder: 'e.g. Make coffee',
+      subtask: '',
+      completed: false,
+      isTouched: false,
+    },
     {
       id: 1,
       placeholder: 'e.g. Drink coffee & smile',
       subtask: '',
       completed: false,
+      isTouched: false,
     },
   ]);
+
+  function subtasksInputBlurHandler(id) {
+    setSubtasks(prevState =>
+      prevState.map(subtask => {
+        if (subtask.id === id) {
+          return {
+            ...subtask,
+            isTouched: true,
+          };
+        } else {
+          return subtask;
+        }
+      })
+    );
+  }
 
   function addNewSubtask() {
     const maxId = Math.max(...subtasks.map(subtask => subtask.id));
 
     setSubtasks(prevState => [
       ...prevState,
-      { id: maxId + 1, subtask: '', completed: false },
+      { id: maxId + 1, subtask: '', completed: false, isTouched: false },
     ]);
   }
 
@@ -95,7 +119,13 @@ export default function AddTask({ id, columns, closeModal }) {
               type="text"
               name="title"
               placeholder="e.g. Take coffee break"
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              required
+              onBlur={() => setTitleInputTouched(true)}
+              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                titleInputTouched
+                  ? 'invalid:border-deleteRed'
+                  : 'border-borderGrey'
+              }`}
             />
           </label>
 
@@ -115,10 +145,16 @@ export default function AddTask({ id, columns, closeModal }) {
                 <input
                   placeholder={item.placeholder}
                   name="subtask"
+                  required
                   onChange={e =>
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
-                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+                  onBlur={() => subtasksInputBlurHandler(item.id)}
+                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                    (item.isTouched === false) & (item.subtask.length === 0)
+                      ? 'border-borderGrey'
+                      : 'invalid:border-deleteRed'
+                  }`}
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
