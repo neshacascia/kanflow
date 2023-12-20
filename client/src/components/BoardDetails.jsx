@@ -42,21 +42,21 @@ export default function BoardDetails({ board }) {
   }
 
   function addNewColumn() {
-    if (boardDetails === 'new') {
-      const maxId = Math.max(...boardColumns.map(column => column.id));
+    // if (boardDetails === 'new') {
+    const maxId = Math.max(...boardColumns.map(column => column.id));
 
-      const newColumn = {
-        id: maxId + 1,
-        columnName: '',
-        isTouched: false,
-      };
+    const newColumn = {
+      id: maxId + 1,
+      columnName: '',
+      isTouched: false,
+    };
 
-      setBoardColumns([...boardColumns, newColumn]);
-    } else {
-      setBoardColumns(prevState => {
-        return [...prevState, ''];
-      });
-    }
+    setBoardColumns([...boardColumns, newColumn]);
+    // } else {
+    //   setBoardColumns(prevState => {
+    //     return [...prevState, ''];
+    //   });
+    // }
   }
 
   function updateBoardName(value) {
@@ -64,42 +64,40 @@ export default function BoardDetails({ board }) {
   }
 
   function updateColumnName(id, key, value) {
-    if (boardDetails === 'new') {
-      setBoardColumns(prevState =>
-        prevState.map(column => {
-          if (column.id === id) {
-            return {
-              ...column,
-              [key]: value,
-            };
-          } else {
-            return column;
-          }
-        })
-      );
-    } else {
-      setBoardColumns(prevState => {
-        return prevState.map((column, ind) => {
-          if (ind === id) {
-            return value;
-          } else {
-            return column;
-          }
-        });
-      });
-    }
+    // if (boardDetails === 'new') {
+    setBoardColumns(prevState =>
+      prevState.map(column => {
+        if (column.id === id) {
+          return {
+            ...column,
+            [key]: value,
+          };
+        } else {
+          return column;
+        }
+      })
+    );
+    // } else {
+    //   setBoardColumns(prevState => {
+    //     return prevState.map((column, ind) => {
+    //       if (ind === id) {
+    //         return value;
+    //       } else {
+    //         return column;
+    //       }
+    //     });
+    //   });
+    // }
   }
-
+  console.log(boardColumns);
   function deleteColumnName(id) {
-    if (boardDetails === 'new') {
-      setBoardColumns(prevState =>
-        prevState.filter(column => column.id !== id)
-      );
-    } else {
-      setBoardColumns(prevState =>
-        prevState.filter((column, ind) => id !== ind)
-      );
-    }
+    // if (boardDetails === 'new') {
+    setBoardColumns(prevState => prevState.filter(column => column.id !== id));
+    // } else {
+    //   setBoardColumns(prevState =>
+    //     prevState.filter((column, ind) => id !== ind)
+    //   );
+    // }
   }
 
   async function handleSubmit(e) {
@@ -107,7 +105,7 @@ export default function BoardDetails({ board }) {
 
     const formData = new FormData(e.target);
     const name = formData.get('boardName');
-    const columns = formData.getAll('columnName');
+    const columns = boardColumns;
 
     const boardData = {
       id: board?._id,
