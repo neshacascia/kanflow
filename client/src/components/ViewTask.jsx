@@ -130,11 +130,11 @@ export default function ViewTask({
             className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2 hover:cursor-pointer "
           >
             <option value={selectedStatus}>{selectedStatus}</option>
-            {columns.map((status, ind) => {
-              if (status !== selectedStatus) {
+            {columns.map((column, ind) => {
+              if (column !== selectedStatus) {
                 return (
-                  <option key={ind} value={status}>
-                    {status}
+                  <option key={ind} value={column.columnName}>
+                    {column.columnName}
                   </option>
                 );
               }

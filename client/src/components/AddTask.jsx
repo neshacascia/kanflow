@@ -179,9 +179,9 @@ export default function AddTask({ id, columns, closeModal }) {
               name="status"
               className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple hover:cursor-pointer"
             >
-              {columns.map((status, ind) => (
-                <option key={ind} value={status}>
-                  {status}
+              {columns.map((column, ind) => (
+                <option key={ind} value={column.columnName}>
+                  {column.columnName}
                 </option>
               ))}
             </select>
