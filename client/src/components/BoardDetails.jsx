@@ -17,30 +17,42 @@ export default function BoardDetails({ board }) {
     boardDetails === 'editBoard' ? board?.name : ''
   );
 
+  const [boardNameInputTouched, setBoardNameInputTouched] = useState(false);
+
   const [boardColumns, setBoardColumns] = useState(
     boardDetails === 'editBoard'
       ? board?.columns
       : [
-          { id: 0, columnName: 'Todo' },
-          { id: 1, columnName: 'Doing' },
+          { id: 0, columnName: 'Todo', isTouched: false },
+          { id: 1, columnName: 'Doing', isTouched: false },
         ]
   );
 
+  function columnInputBlurHandler(id) {
+    setBoardColumns(prevState =>
+      prevState.map(column => {
+        if (column.id === id) {
+          return {
+            ...column,
+            isTouched: true,
+          };
+        } else {
+          return column;
+        }
+      })
+    );
+  }
+
   function addNewColumn() {
-    if (boardDetails === 'new') {
-      const maxId = Math.max(...boardColumns.map(column => column.id));
+    const maxId = Math.max(...boardColumns.map(column => column.id));
 
-      const newColumn = {
-        id: maxId + 1,
-        columnName: '',
-      };
+    const newColumn = {
+      id: maxId + 1,
+      columnName: '',
+      isTouched: false,
+    };
 
-      setBoardColumns([...boardColumns, newColumn]);
-    } else {
-      setBoardColumns(prevState => {
-        return [...prevState, ''];
-      });
-    }
+    setBoardColumns([...boardColumns, newColumn]);
   }
 
   function updateBoardName(value) {
@@ -48,42 +60,22 @@ export default function BoardDetails({ board }) {
   }
 
   function updateColumnName(id, key, value) {
-    if (boardDetails === 'new') {
-      setBoardColumns(prevState =>
-        prevState.map(column => {
-          if (column.id === id) {
-            return {
-              ...column,
-              [key]: value,
-            };
-          } else {
-            return column;
-          }
-        })
-      );
-    } else {
-      setBoardColumns(prevState => {
-        return prevState.map((column, ind) => {
-          if (ind === id) {
-            return value;
-          } else {
-            return column;
-          }
-        });
-      });
-    }
+    setBoardColumns(prevState =>
+      prevState.map(column => {
+        if (column.id === id) {
+          return {
+            ...column,
+            [key]: value,
+          };
+        } else {
+          return column;
+        }
+      })
+    );
   }
 
   function deleteColumnName(id) {
-    if (boardDetails === 'new') {
-      setBoardColumns(prevState =>
-        prevState.filter(column => column.id !== id)
-      );
-    } else {
-      setBoardColumns(prevState =>
-        prevState.filter((column, ind) => id !== ind)
-      );
-    }
+    setBoardColumns(prevState => prevState.filter(column => column.id !== id));
   }
 
   async function handleSubmit(e) {
@@ -91,7 +83,7 @@ export default function BoardDetails({ board }) {
 
     const formData = new FormData(e.target);
     const name = formData.get('boardName');
-    const columns = formData.getAll('columnName');
+    const columns = boardColumns;
 
     const boardData = {
       id: board?._id,
@@ -141,8 +133,14 @@ export default function BoardDetails({ board }) {
               name="boardName"
               placeholder="e.g. Web Design"
               value={boardName}
+              required
               onChange={e => updateBoardName(e.target.value)}
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4"
+              onBlur={() => setBoardNameInputTouched(true)}
+              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 ${
+                boardNameInputTouched
+                  ? 'invalid:border-deleteRed'
+                  : 'border-borderGrey'
+              }`}
             />
           </label>
 
@@ -153,7 +151,8 @@ export default function BoardDetails({ board }) {
                 <input
                   type="text"
                   name="columnName"
-                  value={boardDetails === 'new' ? column.columnName : column}
+                  value={column.columnName}
+                  required
                   onChange={e =>
                     updateColumnName(
                       column.id || ind,
@@ -161,7 +160,13 @@ export default function BoardDetails({ board }) {
                       e.target.value
                     )
                   }
-                  className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4"
+                  onBlur={() => columnInputBlurHandler(column.id)}
+                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 ${
+                    (column.isTouched === false) &
+                    (column.columnName.length === 0)
+                      ? 'border-borderGrey'
+                      : 'invalid:border-deleteRed'
+                  }`}
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
