@@ -26,7 +26,7 @@ export default function Navbar() {
   return (
     <nav
       onClick={() => (displaySettings ? setDisplaySettings(false) : null)}
-      className="bg-darkGrey w-screen h-16 absolute px-4"
+      className="bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesDark"
     >
       <span className="h-full flex items-center">
         <img src={logo} />
@@ -55,8 +55,8 @@ export default function Navbar() {
             </div>
 
             <h2
-              className={`text-white text-lg font-semibold mr-auto hidden md:block ${
-                displaySidebar ? 'ml-[90px]' : ''
+              className={`text-white text-lg font-semibold mr-auto hidden md:block md:text-[20px] ${
+                displaySidebar ? 'ml-[115px]' : ''
               }`}
             >
               {board?.name}
