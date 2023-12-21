@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
 import logo from '../assets/logo.svg';
