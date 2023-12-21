@@ -94,7 +94,7 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] h-[90vh] relative flex flex-col rounded-md p-6 overflow-y-auto">
+      <div className="bg-darkGrey w-[343px] h-[90vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}

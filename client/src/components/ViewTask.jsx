@@ -69,7 +69,7 @@ export default function ViewTask({
   return (
     <Modal>
       <div
-        className="bg-darkGrey w-[343px] h-auto flex flex-col rounded-md p-6 overflow-y-auto"
+        className="bg-darkGrey w-[343px] h-auto flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8"
         onClick={() => (settingsModal ? setSettingsModal(false) : null)}
       >
         <div className="flex justify-between items-center mb-6">

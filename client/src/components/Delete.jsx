@@ -18,7 +18,7 @@ export default function Delete({ board, selectedTask, modal, closeModal }) {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
+      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6 md:w-[480px] md:p-8">
         <h2 className="text-deleteRed text-lg font-semibold mb-6">
           Delete this {`${modal === 'deleteTask' ? 'task' : 'board'}`}?
         </h2>
