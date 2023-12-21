@@ -4,10 +4,13 @@ import { Context } from '../context/Context';
 
 import logo from '../assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowRightFromBracket,
+  faEyeSlash,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar() {
-  const { boards, openModal } = useContext(Context);
+  const { boards, openModal, setDisplaySidebar } = useContext(Context);
 
   return (
     <div className="bg-darkGrey min-w-[260px] h-screen left-0 pt-8 z-20 hidden md:block">
@@ -93,6 +96,14 @@ export default function Sidebar() {
           <FontAwesomeIcon icon={faArrowRightFromBracket} />
           Logout
         </Link>
+      </div>
+
+      <div
+        onClick={() => setDisplaySidebar(false)}
+        className="text-mediumGrey flex items-center gap-2 absolute bottom-0 px-6 pb-12 cursor-pointer"
+      >
+        <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
+        <p className="text-sm font-semibold">Hide Sidebar</p>
       </div>
     </div>
   );
