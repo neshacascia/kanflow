@@ -1,5 +1,9 @@
 import { useContext } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  MemoryRouter,
+} from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { Context } from './context/Context';
 import Root from './components/Root';
@@ -33,7 +37,12 @@ function App() {
     <>
       <RouterProvider router={router} />
       {displaySidebar &&
-        createPortal(<Sidebar />, document.getElementById('overlay-root'))}
+        createPortal(
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>,
+          document.getElementById('overlay-root')
+        )}
     </>
   );
 }
