@@ -13,7 +13,7 @@ export default function Sidebar() {
   const { boards, openModal, setDisplaySidebar } = useContext(Context);
 
   return (
-    <div className="bg-darkGrey min-w-[260px] h-screen relative left-0 pt-8 z-20 hidden md:block ">
+    <div className="bg-darkGrey min-w-[260px] h-screen relative left-0 pt-8 z-20 hidden md:block">
       <div className="flex px-6">
         <img src={logo} />
         <p className="text-white text-2xl font-semibold tracking-wide ml-4">
@@ -30,9 +30,6 @@ export default function Sidebar() {
           <NavLink
             key={ind}
             to={`/board/${board._id}`}
-            onClick={() => {
-              setDisplaySidebar(false);
-            }}
             className={({ isActive }) =>
               `text-[15px] font-semibold flex items-center gap-3 rounded-menuLink py-3 px-6 ${
                 isActive
