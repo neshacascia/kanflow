@@ -12,6 +12,7 @@ export default {
         deleteRed: '#EA5555',
         mainPurpleHover: '#A8A4FF',
         redHover: '#FF9898',
+        linesDark: '#3E3F4E',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],

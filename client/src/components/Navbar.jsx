@@ -12,8 +12,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { board, modal, openModal, displaySettings, setDisplaySettings } =
-    useContext(Context);
+  const {
+    board,
+    modal,
+    openModal,
+    displaySettings,
+    setDisplaySettings,
+    displaySidebar,
+  } = useContext(Context);
 
   const user = localStorage.getItem('user');
 
@@ -24,25 +30,22 @@ export default function Navbar() {
     >
       <span className="h-full flex items-center">
         <img src={logo} />
-        {!user && (
-          <p className="text-white text-lg font-semibold tracking-wide ml-4">
-            kanflow
-          </p>
-        )}
+        <p className="text-white text-2xl font-semibold tracking-wide px-4 hidden md:block">
+          kanflow
+        </p>
+        <div className="h-full border-r-[1px] border-linesDark mr-4 hidden md:block"></div>
+
         {user && (
           <div className="w-full flex items-center gap-2">
             <div
               onClick={() => openModal('menu')}
-              className="flex items-center gap-2 ml-4 mr-auto cursor-pointer"
+              className="flex items-center gap-2 ml-4 mr-auto cursor-pointer md:hidden"
             >
               <h2 className="text-white text-lg font-semibold">
                 {board?.name}
               </h2>
               {modal === 'menu' ? (
-                <FontAwesomeIcon
-                  icon={faAngleUp}
-                  className="text-mainPurple "
-                />
+                <FontAwesomeIcon icon={faAngleUp} className="text-mainPurple" />
               ) : (
                 <FontAwesomeIcon
                   icon={faAngleDown}
@@ -50,6 +53,15 @@ export default function Navbar() {
                 />
               )}
             </div>
+
+            <h2
+              className={`text-white text-lg font-semibold mr-auto hidden md:block ${
+                displaySidebar ? 'ml-[82px]' : ''
+              }`}
+            >
+              {board?.name}
+            </h2>
+
             <button
               onClick={() => openModal('add')}
               disabled={board?.columns.length === 0}
