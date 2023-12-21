@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  MemoryRouter,
+  BrowserRouter,
 } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { Context } from './context/Context';
@@ -38,9 +38,9 @@ function App() {
       <RouterProvider router={router} />
       {displaySidebar &&
         createPortal(
-          <MemoryRouter>
+          <BrowserRouter>
             <Sidebar />
-          </MemoryRouter>,
+          </BrowserRouter>,
           document.getElementById('overlay-root')
         )}
     </>
