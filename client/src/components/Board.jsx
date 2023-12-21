@@ -15,15 +15,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
-  const { board, setBoard, modal, openModal, closeModal, setDisplaySettings } =
-    useContext(Context);
+  const {
+    board,
+    setBoard,
+    modal,
+    openModal,
+    closeModal,
+    setDisplaySettings,
+    displaySidebar,
+    setDisplaySidebar,
+  } = useContext(Context);
   const { id } = useParams();
 
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
-
-  const [displaySidebar, setDisplaySidebar] = useState(false);
 
   useEffect(() => {
     if (id) {
