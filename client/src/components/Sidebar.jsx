@@ -13,7 +13,7 @@ export default function Sidebar() {
   const { boards, openModal, setDisplaySidebar } = useContext(Context);
 
   return (
-    <div className="bg-darkGrey min-w-[260px] h-screen left-0 pt-8 z-20 hidden md:block">
+    <div className="bg-darkGrey min-w-[260px] h-screen relative left-0 pt-8 z-20 hidden md:block ">
       <div className="flex px-6">
         <img src={logo} />
         <p className="text-white text-2xl font-semibold tracking-wide ml-4">
@@ -98,12 +98,14 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <div
-        onClick={() => setDisplaySidebar(false)}
-        className="text-mediumGrey flex items-center gap-2 absolute bottom-0 px-6 pb-12 cursor-pointer"
-      >
-        <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
-        <p className="text-sm font-semibold">Hide Sidebar</p>
+      <div className="w-full absolute bottom-0 pr-6">
+        <button
+          onClick={() => setDisplaySidebar(false)}
+          className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-white hover:text-mainPurple"
+        >
+          <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
+          <p className="text-sm font-semibold">Hide Sidebar</p>
+        </button>
       </div>
     </div>
   );
