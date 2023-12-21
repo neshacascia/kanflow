@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
@@ -9,25 +10,21 @@ import AddTask from './AddTask';
 import ViewTask from './ViewTask';
 import EditTask from './EditTask';
 import Delete from './Delete';
+import Sidebar from './Sidebar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
-  const {
-    board,
-    setBoard,
-    modal,
-    openModal,
-    closeModal,
-    setDisplaySettings,
-    setDisplaySidebar,
-  } = useContext(Context);
+  const { board, setBoard, modal, openModal, closeModal, setDisplaySettings } =
+    useContext(Context);
   const { id } = useParams();
 
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
+
+  const [displaySidebar, setDisplaySidebar] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -123,6 +120,9 @@ export default function Board() {
           className="text-white text-xs py-5 pr-2"
         />
       </button>
+
+      {displaySidebar &&
+        createPortal(<Sidebar />, document.getElementById('overlay-root'))}
     </main>
   );
 }
