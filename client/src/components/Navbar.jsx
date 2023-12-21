@@ -56,7 +56,7 @@ export default function Navbar() {
 
             <h2
               className={`text-white text-lg font-semibold mr-auto hidden md:block ${
-                displaySidebar ? 'ml-[82px]' : ''
+                displaySidebar ? 'ml-[90px]' : ''
               }`}
             >
               {board?.name}
