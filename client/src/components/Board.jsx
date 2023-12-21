@@ -124,7 +124,7 @@ export default function Board() {
 
         <button
           onClick={() => setDisplaySidebar(true)}
-          className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8"
+          className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8 hover:bg-mainPurpleHover"
         >
           <FontAwesomeIcon
             icon={faEye}
