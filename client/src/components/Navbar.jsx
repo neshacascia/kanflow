@@ -65,9 +65,12 @@ export default function Navbar() {
             <button
               onClick={() => openModal('add')}
               disabled={board?.columns.length === 0}
-              className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25"
+              className="text-white bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25 md:w-[164px] md:h-12 md:gap-2"
             >
-              <FontAwesomeIcon icon={faPlus} className="text-white" />
+              <FontAwesomeIcon icon={faPlus} className="md:text-sm" />
+              <p className="hidden md:block text-sm font-semibold">
+                Add New Task
+              </p>
             </button>
             <FontAwesomeIcon
               icon={faEllipsisVertical}
