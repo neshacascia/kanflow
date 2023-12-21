@@ -143,7 +143,7 @@ export default function ViewTask({
         </label>
 
         {settingsModal && (
-          <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute transform translate-x-52 translate-y-1/4 rounded-lg shadow-glow p-4 mt-8 md:w-[192px]">
+          <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute transform translate-x-52 translate-y-1/4 rounded-lg shadow-glow p-4 mt-8 md:w-[192px] md:translate-x-80">
             <button
               onClick={() => updateModal('edit')}
               className="text-mediumGrey"
