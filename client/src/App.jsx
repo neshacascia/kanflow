@@ -1,18 +1,10 @@
-import { useContext } from 'react';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  BrowserRouter,
-} from 'react-router-dom';
-import { createPortal } from 'react-dom';
-import { Context } from './context/Context';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './components/Root';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import BoardPage from './pages/BoardPage';
 import Board from './components/Board';
 import LogoutPage from './pages/LogoutPage';
-import Sidebar from './components/Sidebar';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -31,18 +23,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { displaySidebar } = useContext(Context);
-
   return (
     <>
       <RouterProvider router={router} />
-      {displaySidebar &&
-        createPortal(
-          <BrowserRouter>
-            <Sidebar />
-          </BrowserRouter>,
-          document.getElementById('overlay-root')
-        )}
     </>
   );
 }
