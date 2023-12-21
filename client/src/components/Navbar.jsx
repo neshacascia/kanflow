@@ -12,37 +12,40 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { board, modal, openModal, displaySettings, setDisplaySettings } =
-    useContext(Context);
+  const {
+    board,
+    modal,
+    openModal,
+    displaySettings,
+    setDisplaySettings,
+    displaySidebar,
+  } = useContext(Context);
 
   const user = localStorage.getItem('user');
 
   return (
     <nav
       onClick={() => (displaySettings ? setDisplaySettings(false) : null)}
-      className="bg-darkGrey h-16 px-4"
+      className="bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesDark"
     >
       <span className="h-full flex items-center">
         <img src={logo} />
-        {!user && (
-          <p className="text-white text-lg font-semibold tracking-wide ml-4">
-            kanflow
-          </p>
-        )}
+        <p className="text-white text-xl font-semibold tracking-wide px-4 hidden md:block">
+          kanflow
+        </p>
+        <div className="h-full border-r-[1px] border-linesDark mr-4 hidden md:block"></div>
+
         {user && (
           <div className="w-full flex items-center gap-2">
             <div
               onClick={() => openModal('menu')}
-              className="flex items-center gap-2 ml-4 mr-auto cursor-pointer"
+              className="flex items-center gap-2 ml-4 mr-auto cursor-pointer md:hidden"
             >
               <h2 className="text-white text-lg font-semibold">
                 {board?.name}
               </h2>
               {modal === 'menu' ? (
-                <FontAwesomeIcon
-                  icon={faAngleUp}
-                  className="text-mainPurple "
-                />
+                <FontAwesomeIcon icon={faAngleUp} className="text-mainPurple" />
               ) : (
                 <FontAwesomeIcon
                   icon={faAngleDown}
@@ -50,12 +53,24 @@ export default function Navbar() {
                 />
               )}
             </div>
+
+            <h2
+              className={`text-white text-lg font-semibold mr-auto hidden md:block md:text-[20px] ${
+                displaySidebar ? 'ml-[115px]' : ''
+              }`}
+            >
+              {board?.name}
+            </h2>
+
             <button
               onClick={() => openModal('add')}
               disabled={board?.columns.length === 0}
-              className="bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25"
+              className="text-white bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25 md:w-[164px] md:h-12 md:gap-2"
             >
-              <FontAwesomeIcon icon={faPlus} className="text-white" />
+              <FontAwesomeIcon icon={faPlus} className="md:text-sm" />
+              <p className="hidden md:block text-sm font-semibold">
+                Add New Task
+              </p>
             </button>
             <FontAwesomeIcon
               icon={faEllipsisVertical}

@@ -115,7 +115,7 @@ export default function BoardDetails({ board }) {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6">
+      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6 md:w-[480px] md:p-8">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}

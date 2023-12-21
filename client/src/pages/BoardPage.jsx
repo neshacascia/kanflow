@@ -31,9 +31,5 @@ export default function BoardPage() {
     getBoards();
   }, []);
 
-  return (
-    <main>
-      <Board />
-    </main>
-  );
+  return <Board />;
 }
