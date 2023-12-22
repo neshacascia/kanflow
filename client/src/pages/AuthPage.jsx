@@ -16,7 +16,7 @@ export default function AuthPage() {
   }
 
   return (
-    <section>
+    <section className="h-screen relative pt-16 md:pt-20">
       <div>
         <h2>{authValue}</h2>
         <p>
