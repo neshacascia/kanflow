@@ -146,7 +146,7 @@ export default function BoardDetails({ board }) {
 
           <label className="text-white text-xs font-semibold flex flex-col gap-2">
             Board Columns
-            {boardColumns.map((column, ind) => (
+            {boardColumns.map(column => (
               <div key={column.id} className="w-full flex items-center gap-4">
                 <input
                   type="text"
@@ -154,11 +154,7 @@ export default function BoardDetails({ board }) {
                   value={column.columnName}
                   required
                   onChange={e =>
-                    updateColumnName(
-                      column.id || ind,
-                      'columnName',
-                      e.target.value
-                    )
+                    updateColumnName(column.id, 'columnName', e.target.value)
                   }
                   onBlur={() => columnInputBlurHandler(column.id)}
                   className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
@@ -170,7 +166,7 @@ export default function BoardDetails({ board }) {
                 />
                 <FontAwesomeIcon
                   icon={faXmark}
-                  onClick={() => deleteColumnName(column.id || ind)}
+                  onClick={() => deleteColumnName(column.id)}
                   className="text-mediumGrey w-5 h-5 cursor-pointer hover:text-deleteRed"
                 />
               </div>
