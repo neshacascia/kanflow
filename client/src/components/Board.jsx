@@ -81,6 +81,15 @@ export default function Board() {
                 </button>
               </div>
             )}
+            {board.columns.length > 0 && (
+              <div
+                onClick={() => openModal('editBoard')}
+                className="hidden text-mediumGrey bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
+              >
+                <FontAwesomeIcon icon={faPlus} className="text-xs" />
+                New Column
+              </div>
+            )}
           </section>
         )}
 
