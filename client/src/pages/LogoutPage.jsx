@@ -24,5 +24,9 @@ export default function LogoutPage() {
     logout();
   }, []);
 
-  return <div>Logging out...</div>;
+  return (
+    <section className="h-screen relative pt-16 md:pt-20">
+      Logging out...
+    </section>
+  );
 }
