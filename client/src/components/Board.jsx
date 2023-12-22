@@ -24,6 +24,7 @@ export default function Board() {
     setDisplaySettings,
     displaySidebar,
     setDisplaySidebar,
+    setBoards,
   } = useContext(Context);
   const { id } = useParams();
 
@@ -33,20 +34,27 @@ export default function Board() {
 
   useEffect(() => {
     if (id) {
-      async function getBoardData() {
+      async function fetchData() {
         try {
-          const res = await axios.get(`/api/board/${id}`, {
-            withCredentials: true,
-          });
+          const [boardRes, boardsRes] = await Promise.all([
+            axios.get(`/api/board/${id}`, {
+              withCredentials: true,
+            }),
+            axios.get('/api/board/getBoards', {
+              withCredentials: true,
+            }),
+          ]);
 
-          const { board, tasks } = res.data;
+          const { board, tasks } = boardRes.data;
+          const { boards } = boardsRes.data;
           setBoard(board[0]);
           setTasks(tasks);
+          setBoards(boards);
         } catch (err) {
           console.error(err);
         }
       }
-      getBoardData();
+      fetchData();
     }
   }, [id]);
 
