@@ -13,6 +13,7 @@ export default {
         mainPurpleHover: '#A8A4FF',
         redHover: '#FF9898',
         linesDark: '#3E3F4E',
+        column: 'rgba(43, 44, 55, 0.13)',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
