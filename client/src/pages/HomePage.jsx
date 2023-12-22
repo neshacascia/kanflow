@@ -28,16 +28,14 @@ export default function HomePage() {
   return (
     <>
       {user === null && (
-        <main>
-          <nav>
-            <Link to="/login" onClick={() => setAuthValue('Login')}>
-              Login
-            </Link>
-            <Link to="/signup" onClick={() => setAuthValue('Signup')}>
-              Signup
-            </Link>{' '}
-            <button onClick={demoUserLogin}>Demo</button>
-          </nav>
+        <main className="h-screen relative pt-16 md:pt-20">
+          <Link to="/login" onClick={() => setAuthValue('Login')}>
+            Login
+          </Link>
+          <Link to="/signup" onClick={() => setAuthValue('Signup')}>
+            Signup
+          </Link>{' '}
+          <button onClick={demoUserLogin}>Demo</button>
           <h1>Unleash Your Productivity with kanflow</h1>
         </main>
       )}
