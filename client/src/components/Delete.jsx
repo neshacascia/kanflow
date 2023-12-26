@@ -1,7 +1,13 @@
+import { useContext } from 'react';
+import { Context } from '../context/Context';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
 
 export default function Delete({ board, selectedTask, modal, closeModal }) {
+  const { boards } = useContext(Context);
+  const navigate = useNavigate();
+
   async function deleteData() {
     const data = modal === 'deleteTask' ? selectedTask._id : board._id;
 
@@ -10,7 +16,16 @@ export default function Delete({ board, selectedTask, modal, closeModal }) {
         data: { modal, data },
       });
       console.log(res);
-      window.location.reload();
+
+      if (modal === 'deleteTask') {
+        window.location.reload();
+      } else {
+        const previousBoard =
+          boards.findIndex(elem => elem._id === board._id) - 1;
+
+        navigate(`/board/${boards[previousBoard]._id}`);
+      }
+      closeModal();
     } catch (err) {
       console.error(err);
     }
