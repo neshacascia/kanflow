@@ -19,6 +19,7 @@ export default function Navbar() {
     displaySettings,
     setDisplaySettings,
     displaySidebar,
+    boards,
   } = useContext(Context);
 
   const user = localStorage.getItem('user');
@@ -64,7 +65,7 @@ export default function Navbar() {
 
             <button
               onClick={() => openModal('add')}
-              disabled={board?.columns.length === 0}
+              disabled={board?.columns.length === 0 || boards.length === 0}
               className="text-white bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 disabled:opacity-25 md:w-[164px] md:h-12 md:gap-2"
             >
               <FontAwesomeIcon icon={faPlus} className="md:text-sm" />
