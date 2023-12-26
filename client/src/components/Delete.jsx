@@ -20,7 +20,10 @@ export default function Delete({ board, selectedTask, modal, closeModal }) {
       if (modal === 'deleteTask') {
         window.location.reload();
       } else {
-        navigate(`/board/${boards[boards.length - 2]._id}`);
+        const previousBoard =
+          boards.findIndex(elem => elem._id === board._id) - 1;
+
+        navigate(`/board/${boards[previousBoard]._id}`);
       }
       closeModal();
     } catch (err) {
