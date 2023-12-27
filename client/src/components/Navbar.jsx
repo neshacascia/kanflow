@@ -73,15 +73,19 @@ export default function Navbar() {
                 Add New Task
               </p>
             </button>
-            <FontAwesomeIcon
-              icon={faEllipsisVertical}
+            <button
               onClick={() =>
                 displaySettings
                   ? setDisplaySettings(false)
                   : setDisplaySettings(true)
               }
-              className="text-mediumGrey text-lg cursor-pointer"
-            />
+              disabled={boards.length === 0}
+            >
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                className="text-mediumGrey text-lg cursor-pointer"
+              />
+            </button>
           </div>
         )}
       </span>
