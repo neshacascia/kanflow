@@ -21,7 +21,10 @@ export default function BoardPage() {
           setIsLoggedIn(true);
           localStorage.setItem('user', true);
           setBoards(boards);
-          navigate(`/board/${boards[0]._id}`);
+
+          if (boards.length > 0) {
+            navigate(`/board/${boards[0]._id}`);
+          }
         }
       } catch (err) {
         console.error(err);
