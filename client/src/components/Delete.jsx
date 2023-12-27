@@ -21,9 +21,14 @@ export default function Delete({ board, selectedTask, modal, closeModal }) {
         window.location.reload();
       } else {
         const previousBoard =
-          boards.findIndex(elem => elem._id === board._id) - 1;
+          boards?.findIndex(elem => elem._id === board._id) - 1;
 
-        navigate(`/board/${boards[previousBoard]._id}`);
+        if (boards.length !== 1) {
+          navigate(`/board/${boards[previousBoard]._id}`);
+        } else {
+          navigate('/board');
+          window.location.reload();
+        }
       }
       closeModal();
     } catch (err) {
