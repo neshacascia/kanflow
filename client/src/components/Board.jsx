@@ -32,7 +32,7 @@ export default function Board() {
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
-  console.log(boards);
+
   useEffect(() => {
     if (id) {
       async function fetchData() {
