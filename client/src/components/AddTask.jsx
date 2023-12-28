@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
 
@@ -12,8 +11,6 @@ export default function AddTask({
   setIsBoardUpdated,
   closeModal,
 }) {
-  const navigate = useNavigate();
-
   const [titleInputTouched, setTitleInputTouched] = useState(false);
 
   const [subtasks, setSubtasks] = useState([

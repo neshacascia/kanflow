@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import Modal from './Modal';
@@ -21,7 +20,6 @@ export default function ViewTask({
   const [subtasks, setSubtasks] = useState(task.subtasks);
   const [settingsModal, setSettingsModal] = useState(false);
 
-  const navigate = useNavigate();
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
   ).length;
