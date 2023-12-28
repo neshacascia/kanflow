@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
 
-export default function Delete({ board, selectedTask, modal, closeModal }) {
+export default function Delete({
+  board,
+  selectedTask,
+  setIsBoardUpdated,
+  modal,
+  closeModal,
+}) {
   const { boards } = useContext(Context);
   const navigate = useNavigate();
 
@@ -18,7 +24,7 @@ export default function Delete({ board, selectedTask, modal, closeModal }) {
       console.log(res);
 
       if (modal === 'deleteTask') {
-        window.location.reload();
+        setIsBoardUpdated(true);
       } else {
         const previousBoard =
           boards?.findIndex(elem => elem._id === board._id) - 1;
