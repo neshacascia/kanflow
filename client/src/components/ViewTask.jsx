@@ -131,7 +131,7 @@ export default function ViewTask({
           >
             <option value={selectedStatus}>{selectedStatus}</option>
             {columns.map((column, ind) => {
-              if (column !== selectedStatus) {
+              if (column.columnName !== selectedStatus) {
                 return (
                   <option key={ind} value={column.columnName}>
                     {column.columnName}
