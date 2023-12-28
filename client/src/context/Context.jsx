@@ -9,7 +9,7 @@ function ContextProvider(props) {
   const [board, setBoard] = useState();
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
-  const [displaySidebar, setDisplaySidebar] = useState(false);
+  const [displaySidebar, setDisplaySidebar] = useState(true);
 
   function openModal(modal) {
     setModal(null);
