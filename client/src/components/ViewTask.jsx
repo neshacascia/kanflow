@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import Modal from './Modal';
@@ -14,13 +13,13 @@ export default function ViewTask({
   task,
   columns,
   selectedStatus,
+  setIsBoardUpdated,
   openModal,
   closeModal,
 }) {
   const [subtasks, setSubtasks] = useState(task.subtasks);
   const [settingsModal, setSettingsModal] = useState(false);
 
-  const navigate = useNavigate();
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
   ).length;
@@ -40,6 +39,7 @@ export default function ViewTask({
       });
 
       setSubtasks(updatedSubtasks);
+      setIsBoardUpdated(true);
 
       const res = await axios.put('/api/board/setCompletionStatus', {
         taskId: task._id,
@@ -47,7 +47,6 @@ export default function ViewTask({
         completed: completed,
       });
       console.log(res);
-      navigate(0);
     } catch (err) {
       console.error(err);
     }
@@ -59,8 +58,8 @@ export default function ViewTask({
         taskId: task._id,
         status: newStatus,
       });
+      setIsBoardUpdated(true);
       console.log(res);
-      navigate(0);
     } catch (err) {
       console.error(err);
     }

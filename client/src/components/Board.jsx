@@ -32,6 +32,7 @@ export default function Board() {
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
+  const [isBoardUpdated, setIsBoardUpdated] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -51,13 +52,14 @@ export default function Board() {
           setBoard(board[0]);
           setTasks(tasks);
           setBoards(boards);
+          setIsBoardUpdated(false);
         } catch (err) {
           console.error(err);
         }
       }
       fetchData();
     }
-  }, [id]);
+  }, [id, isBoardUpdated]);
 
   return (
     <section className="w-screen h-screen flex">
@@ -133,13 +135,16 @@ export default function Board() {
         )}
 
         {modal === 'menu' && <Menu />}
-        {modal === 'editBoard' && <BoardDetails board={board} />}
+        {modal === 'editBoard' && (
+          <BoardDetails board={board} setIsBoardUpdated={setIsBoardUpdated} />
+        )}
         {modal === 'new' && <BoardDetails board={board} />}
         {modal === 'add' && (
           <AddTask
             id={board._id}
             columns={board.columns}
             closeModal={closeModal}
+            setIsBoardUpdated={setIsBoardUpdated}
           />
         )}
         {modal === 'viewTask' && (
@@ -147,6 +152,7 @@ export default function Board() {
             task={viewTask}
             columns={board.columns}
             selectedStatus={selectedStatus}
+            setIsBoardUpdated={setIsBoardUpdated}
             openModal={openModal}
             closeModal={closeModal}
           />
@@ -156,6 +162,7 @@ export default function Board() {
             id={board._id}
             selectedTask={viewTask}
             columns={board.columns}
+            setIsBoardUpdated={setIsBoardUpdated}
             closeModal={closeModal}
           />
         )}

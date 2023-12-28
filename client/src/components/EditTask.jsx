@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
 
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function EditTask({ id, selectedTask, columns, closeModal }) {
-  const navigate = useNavigate();
-
+export default function EditTask({
+  id,
+  selectedTask,
+  columns,
+  setIsBoardUpdated,
+  closeModal,
+}) {
   const [task, setTask] = useState(selectedTask);
   const [subtasks, setSubtasks] = useState(task.subtasks);
   const [titleInputTouched, setTitleInputTouched] = useState(false);
@@ -84,8 +87,8 @@ export default function EditTask({ id, selectedTask, columns, closeModal }) {
       });
       console.log(res);
       if (res.status === 200) {
+        setIsBoardUpdated(true);
         closeModal();
-        navigate(0);
       }
     } catch (err) {
       console.error(err);
