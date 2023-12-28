@@ -14,6 +14,7 @@ export default function ViewTask({
   task,
   columns,
   selectedStatus,
+  setIsBoardUpdated,
   openModal,
   closeModal,
 }) {
@@ -40,6 +41,7 @@ export default function ViewTask({
       });
 
       setSubtasks(updatedSubtasks);
+      setIsBoardUpdated(true);
 
       const res = await axios.put('/api/board/setCompletionStatus', {
         taskId: task._id,
@@ -47,7 +49,7 @@ export default function ViewTask({
         completed: completed,
       });
       console.log(res);
-      navigate(0);
+      // navigate(0);
     } catch (err) {
       console.error(err);
     }
