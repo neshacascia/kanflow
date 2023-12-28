@@ -20,9 +20,8 @@ export default function Navbar() {
     setDisplaySettings,
     displaySidebar,
     boards,
+    isLoggedIn,
   } = useContext(Context);
-
-  const user = localStorage.getItem('user');
 
   return (
     <nav
@@ -36,7 +35,7 @@ export default function Navbar() {
         </p>
         <div className="h-full border-r-[1px] border-linesDark mr-4 hidden md:block"></div>
 
-        {user && (
+        {isLoggedIn && (
           <div className="w-full flex items-center gap-2">
             <div
               onClick={() => openModal('menu')}
