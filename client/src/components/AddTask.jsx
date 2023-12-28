@@ -6,7 +6,12 @@ import Modal from './Modal';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function AddTask({ id, columns, closeModal }) {
+export default function AddTask({
+  id,
+  columns,
+  setIsBoardUpdated,
+  closeModal,
+}) {
   const navigate = useNavigate();
 
   const [titleInputTouched, setTitleInputTouched] = useState(false);
@@ -94,8 +99,8 @@ export default function AddTask({ id, columns, closeModal }) {
       });
       console.log(res);
       if (res.status === 200) {
+        setIsBoardUpdated(true);
         closeModal();
-        navigate(0);
       }
     } catch (err) {
       console.error(err);

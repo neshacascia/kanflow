@@ -144,6 +144,7 @@ export default function Board() {
             id={board._id}
             columns={board.columns}
             closeModal={closeModal}
+            setIsBoardUpdated={setIsBoardUpdated}
           />
         )}
         {modal === 'viewTask' && (
