@@ -60,8 +60,8 @@ export default function ViewTask({
         taskId: task._id,
         status: newStatus,
       });
+      setIsBoardUpdated(true);
       console.log(res);
-      navigate(0);
     } catch (err) {
       console.error(err);
     }
