@@ -135,7 +135,9 @@ export default function Board() {
         )}
 
         {modal === 'menu' && <Menu />}
-        {modal === 'editBoard' && <BoardDetails board={board} />}
+        {modal === 'editBoard' && (
+          <BoardDetails board={board} setIsBoardUpdated={setIsBoardUpdated} />
+        )}
         {modal === 'new' && <BoardDetails board={board} />}
         {modal === 'add' && (
           <AddTask

@@ -7,7 +7,7 @@ import Modal from './Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function BoardDetails({ board }) {
+export default function BoardDetails({ board, setIsBoardUpdated }) {
   const navigate = useNavigate();
   const { modal, closeModal } = useContext(Context);
 
@@ -104,8 +104,8 @@ export default function BoardDetails({ board }) {
         const res = await axios.put('/api/board/editBoard', { boardData });
 
         if (res.status === 200) {
+          setIsBoardUpdated(true);
           closeModal();
-          window.location.reload();
         }
       }
     } catch (err) {
