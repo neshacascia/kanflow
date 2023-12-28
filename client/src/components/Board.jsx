@@ -26,6 +26,7 @@ export default function Board() {
     setDisplaySidebar,
     setBoards,
     boards,
+    setIsLoggedIn,
   } = useContext(Context);
   const { id } = useParams();
 
@@ -53,6 +54,7 @@ export default function Board() {
           setTasks(tasks);
           setBoards(boards);
           setIsBoardUpdated(false);
+          setIsLoggedIn(true);
         } catch (err) {
           console.error(err);
         }
