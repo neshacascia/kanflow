@@ -183,7 +183,8 @@ export default function AddTask({
             >
               {columns.map((column, ind) => (
                 <option key={ind} value={column.columnName}>
-                  {column.columnName}
+                  {column.columnName.split('')[0].toUpperCase() +
+                    column.columnName.split('').slice(1).join('').toLowerCase()}
                 </option>
               ))}
             </select>
