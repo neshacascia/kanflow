@@ -24,7 +24,7 @@ export default function AuthPage() {
         <h2 className="text-2xl font-semibold">
           {authValue === 'Login' ? 'Welcome back!' : 'Sign Up!'}
         </h2>
-        <p>
+        <p className="text-sm">
           {authValue === 'Signup'
             ? 'Enter your details to create an account'
             : 'Please login to your account'}
