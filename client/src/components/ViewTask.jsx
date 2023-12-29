@@ -128,12 +128,20 @@ export default function ViewTask({
             onChange={e => updateCurrentStatus(e.target.value)}
             className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2 hover:cursor-pointer "
           >
-            <option value={selectedStatus}>{selectedStatus}</option>
+            <option value={selectedStatus}>
+              {selectedStatus.split('')[0].toUpperCase() +
+                selectedStatus.split('').slice(1).join('').toLowerCase()}
+            </option>
             {columns.map((column, ind) => {
               if (column.columnName !== selectedStatus) {
                 return (
                   <option key={ind} value={column.columnName}>
-                    {column.columnName}
+                    {column.columnName.split('')[0].toUpperCase() +
+                      column.columnName
+                        .split('')
+                        .slice(1)
+                        .join('')
+                        .toLowerCase()}
                   </option>
                 );
               }
