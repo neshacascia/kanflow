@@ -68,7 +68,7 @@ export default function AuthPage() {
           )}
           <button
             type="submit"
-            className="text-white bg-mainPurple  font-semibold leading-6 py-3 hover:bg-mainPurpleHover"
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 hover:bg-mainPurpleHover"
           >
             {authValue}
           </button>
