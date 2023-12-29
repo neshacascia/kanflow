@@ -20,7 +20,7 @@ export default function AuthPage() {
   return (
     <section className="h-screen relative flex items-center justify-evenly pt-16 md:pt-20">
       <img src={kanflowImg} className="h-80" />
-      <div className="flex flex-col gap-3">
+      <div className="bg-[#E6E6E6] flex flex-col gap-3 py-4 px-14">
         <h2 className="text-2xl font-semibold">
           {authValue === 'Login' ? 'Welcome back!' : 'Sign Up!'}
         </h2>
@@ -45,7 +45,7 @@ export default function AuthPage() {
             <input
               type="email"
               name="email"
-              className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
           <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
@@ -53,7 +53,7 @@ export default function AuthPage() {
             <input
               type="password"
               name="password"
-              className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
           {authValue === 'Signup' && (
@@ -62,7 +62,7 @@ export default function AuthPage() {
               <input
                 type="password"
                 name="confirmPassword"
-                className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+                className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
               />
             </label>
           )}
