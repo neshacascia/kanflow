@@ -106,6 +106,7 @@ export default function Board() {
               board.columns.map((column, ind) => (
                 <Column
                   key={ind}
+                  ind={ind}
                   name={column.columnName}
                   tasks={tasks}
                   setViewTask={setViewTask}
