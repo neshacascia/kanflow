@@ -38,15 +38,26 @@ export default function AuthPage() {
         <form
           action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
-          className="pt-10"
+          className="flex flex-col gap-3 pt-10"
         >
-          <input type="email" name="email" placeholder="Email" />
-          <input type="password" name="password" placeholder="Password" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+          />
           {authValue === 'Signup' && (
             <input
               type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
+              className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           )}
           <button type="submit">{authValue}</button>
