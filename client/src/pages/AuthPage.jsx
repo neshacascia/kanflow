@@ -74,11 +74,12 @@ export default function AuthPage() {
           </button>
         </form>
 
-        <p>
+        <p className="text-gray-700 text-sm pt-6">
           {authValue === 'Signup'
             ? 'Already have an account? '
             : "Don't have an account? "}
           <Link
+            className="text-black font-semibold"
             to={authValue === 'Signup' ? '/login' : '/signup'}
             onClick={changeAuthValue}
           >
