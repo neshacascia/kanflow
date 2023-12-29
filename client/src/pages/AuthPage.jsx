@@ -38,15 +38,17 @@ export default function AuthPage() {
         <form
           action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
+          className="pt-10"
         >
-          <input type="text" name="userName" placeholder="Username" />
           <input type="email" name="email" placeholder="Email" />
           <input type="password" name="password" placeholder="Password" />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-          />
+          {authValue === 'Signup' && (
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+            />
+          )}
           <button type="submit">{authValue}</button>
         </form>
 
