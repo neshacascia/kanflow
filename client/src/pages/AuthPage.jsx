@@ -38,27 +38,33 @@ export default function AuthPage() {
         <form
           action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
-          className="flex flex-col gap-3 pt-10"
+          className="flex flex-col gap-5 pt-6"
         >
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
-          />
-          {authValue === 'Signup' && (
+          <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
+            Email Address
+            <input
+              type="email"
+              name="email"
+              className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+            />
+          </label>
+          <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
+            Password
             <input
               type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              name="password"
+              className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
+          </label>
+          {authValue === 'Signup' && (
+            <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
+              Confirm Password
+              <input
+                type="password"
+                name="confirmPassword"
+                className="bg-[#E6E6E6] text-white placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              />
+            </label>
           )}
           <button type="submit">{authValue}</button>
         </form>
