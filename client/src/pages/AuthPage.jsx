@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
+import kanflowImg from '../assets/kanflow-img.svg';
+
 export default function AuthPage() {
   const { authValue, setAuthValue } = useContext(Context);
 
@@ -16,7 +18,8 @@ export default function AuthPage() {
   }
 
   return (
-    <section className="h-screen relative pt-16 md:pt-20">
+    <section className="h-screen relative flex items-center justify-evenly pt-16 md:pt-20">
+      <img src={kanflowImg} className="h-80" />
       <div>
         <h2>{authValue}</h2>
         <p>
