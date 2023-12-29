@@ -38,7 +38,7 @@ export default function AuthPage() {
         <form
           action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
-          className="flex flex-col gap-5 pt-6"
+          className="flex flex-col gap-3 pt-4"
         >
           <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
             Email Address
@@ -68,7 +68,7 @@ export default function AuthPage() {
           )}
           <button
             type="submit"
-            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 hover:bg-mainPurpleHover"
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 hover:bg-mainPurpleHover mt-5"
           >
             {authValue}
           </button>
