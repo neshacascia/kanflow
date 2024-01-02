@@ -18,9 +18,9 @@ export default function AuthPage() {
   }
 
   return (
-    <section className="h-screen relative flex flex-col md:flex-row items-center justify-center md:justify-between pt-16 md:pt-20">
-      <img src={kanflowImg} className="h-44 md:h-80 md:pl-20" />
-      <div className="md:bg-[#E6E6E6] md:w-[50%] md:h-full flex flex-col items-center md:items-stretch justify-center gap-3 rounded-lg py-5 md:py-8 md:px-32">
+    <section className="h-screen relative flex flex-col md:flex-row items-center justify-center md:justify-between lg:justify-between pt-16 md:pt-20">
+      <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
+      <div className="md:bg-[#E6E6E6] md:w-[50%] md:h-full flex flex-col items-center md:items-stretch justify-center gap-3 rounded-lg py-5 md:py-8 md:px-10 lg:px-32">
         <h2 className="text-xl md:text-2xl font-semibold tracking-wide">
           {authValue === 'Login' ? 'Welcome back!' : 'Sign Up!'}
         </h2>
