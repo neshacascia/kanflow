@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setAuthValue } = useContext(Context);
+  const { setIsLoggedIn, storeAuthValue } = useContext(Context);
   const user = localStorage.getItem('user');
 
   if (user) {
@@ -29,10 +29,10 @@ export default function HomePage() {
     <>
       {user === null && (
         <main className="h-screen relative pt-16 md:pt-20">
-          <Link to="/login" onClick={() => setAuthValue('Login')}>
+          <Link to="/login" onClick={() => storeAuthValue('Login')}>
             Login
           </Link>
-          <Link to="/signup" onClick={() => setAuthValue('Signup')}>
+          <Link to="/signup" onClick={() => storeAuthValue('Signup')}>
             Signup
           </Link>{' '}
           <button onClick={demoUserLogin}>Demo</button>
