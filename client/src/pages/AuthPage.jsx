@@ -18,13 +18,13 @@ export default function AuthPage() {
   }
 
   return (
-    <section className="h-screen relative flex items-center justify-between pt-16 md:pt-20">
-      <img src={kanflowImg} className="h-80 pl-20" />
-      <div className="bg-[#E6E6E6] w-[50%] h-full flex flex-col justify-center gap-3 rounded-lg py-8 px-32">
-        <h2 className="text-2xl font-semibold tracking-wide">
+    <section className="h-screen relative flex flex-col md:flex-row items-center justify-center md:justify-between pt-16 md:pt-20">
+      <img src={kanflowImg} className="h-44 md:h-80 md:pl-20" />
+      <div className="md:bg-[#E6E6E6] md:w-[50%] md:h-full flex flex-col items-center md:items-stretch justify-center gap-3 rounded-lg py-5 md:py-8 md:px-32">
+        <h2 className="text-xl md:text-2xl font-semibold tracking-wide">
           {authValue === 'Login' ? 'Welcome back!' : 'Sign Up!'}
         </h2>
-        <p className="text-sm">
+        <p className="text-sm text-center md:text-start">
           {authValue === 'Signup'
             ? 'Enter your details to create an account'
             : 'Please login to your account'}
@@ -38,7 +38,7 @@ export default function AuthPage() {
         <form
           action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
           method="POST"
-          className="flex flex-col gap-3 pt-4"
+          className="w-full flex flex-col gap-1 pt-2 md:gap-3 md:pt-4"
         >
           <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
             Email Address
@@ -74,7 +74,7 @@ export default function AuthPage() {
           </button>
         </form>
 
-        <p className="text-gray-700 text-sm pt-6">
+        <p className="text-gray-700 text-sm pt-2 md:pt-6">
           {authValue === 'Signup'
             ? 'Already have an account? '
             : "Don't have an account? "}
