@@ -4,12 +4,27 @@ const Context = createContext();
 
 function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [authValue, setAuthValue] = useState(null);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displaySidebar, setDisplaySidebar] = useState(true);
+
+  function storeAuthValue(value) {
+    if (value === 'Signup') {
+      localStorage.setItem('authValue', 'Signup');
+    } else if (value === 'Login') {
+      localStorage.setItem('authValue', 'Login');
+    }
+  }
+
+  function changeAuthValue(value) {
+    if (value === 'Signup') {
+      localStorage.setItem('authValue', 'Login');
+    } else if (value === 'Login') {
+      localStorage.setItem('authValue', 'Signup');
+    }
+  }
 
   function openModal(modal) {
     setModal(null);
@@ -42,8 +57,8 @@ function ContextProvider(props) {
       value={{
         isLoggedIn,
         setIsLoggedIn,
-        authValue,
-        setAuthValue,
+        storeAuthValue,
+        changeAuthValue,
         boards,
         setBoards,
         board,

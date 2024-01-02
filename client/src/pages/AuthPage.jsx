@@ -5,17 +5,9 @@ import { Context } from '../context/Context';
 import kanflowImg from '../assets/kanflow-img.svg';
 
 export default function AuthPage() {
-  const { authValue, setAuthValue } = useContext(Context);
+  const { changeAuthValue } = useContext(Context);
 
-  function changeAuthValue() {
-    setAuthValue(prevValue => {
-      if (prevValue === 'Signup') {
-        setAuthValue('Login');
-      } else {
-        setAuthValue('Signup');
-      }
-    });
-  }
+  const authValue = localStorage.getItem('authValue');
 
   return (
     <section className="h-screen relative flex flex-col items-center justify-center pt-16 md:flex-row md:justify-between lg:justify-between md:pt-20">
@@ -81,7 +73,7 @@ export default function AuthPage() {
           <Link
             className="text-black font-semibold"
             to={authValue === 'Signup' ? '/login' : '/signup'}
-            onClick={changeAuthValue}
+            onClick={() => changeAuthValue(authValue)}
           >
             {authValue === 'Signup' ? 'Login' : 'Signup'} Now
           </Link>
