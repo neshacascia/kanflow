@@ -37,6 +37,7 @@ export default function AuthPage() {
             <input
               type="email"
               name="email"
+              required
               className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
@@ -45,6 +46,7 @@ export default function AuthPage() {
             <input
               type="password"
               name="password"
+              required
               className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             />
           </label>
@@ -54,6 +56,7 @@ export default function AuthPage() {
               <input
                 type="password"
                 name="confirmPassword"
+                required
                 className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
               />
             </label>
