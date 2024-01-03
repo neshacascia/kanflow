@@ -10,15 +10,49 @@ export default function AuthPage() {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
+  const [enteredPassword, setEnteredPassword] = useState('');
+  const [enteredPasswordTouched, setEnteredPasswordTouched] = useState(false);
+
+  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
+  const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
+    useState(false);
+
   const enteredEmailValidation =
     enteredEmail.trim() !== '' && enteredEmail.includes('@');
   const enteredEmailIsValid = !enteredEmailValidation && enteredEmailTouched;
+
+  const enteredPasswordValidation =
+    enteredPassword.trim() !== '' && enteredPassword.length >= 8;
+  const enteredPasswordIsValid =
+    !enteredPasswordValidation && enteredPasswordTouched;
+
+  const enteredConfirmPasswordValidation =
+    enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
+  const enteredConfirmPasswordIsValid =
+    !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
+
   function emailChangeHandler(e) {
     setEnteredEmail(e.target.value);
   }
 
-  function emailInputBlurHandler(e) {
+  function passwordChangeHandler(e) {
+    setEnteredPassword(e.target.value);
+  }
+
+  function confirmPasswordChangeHandler(e) {
+    setEnteredConfirmPassword(e.target.value);
+  }
+
+  function emailInputBlurHandler() {
     setEnteredEmailTouched(true);
+  }
+
+  function passwordInputBlurHandler() {
+    setEnteredPasswordTouched(true);
+  }
+
+  function confirmPasswordInputBlurHandler() {
+    setEnteredConfirmPasswordTouched(true);
   }
 
   const authValue = localStorage.getItem('authValue');
@@ -66,7 +100,11 @@ export default function AuthPage() {
               name="password"
               required
               minLength={8}
-              className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              onChange={passwordChangeHandler}
+              onBlur={passwordInputBlurHandler}
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                enteredPasswordIsValid ? 'invalid:border-deleteRed' : ''
+              }`}
             />
           </label>
           {authValue === 'Signup' && (
@@ -77,7 +115,13 @@ export default function AuthPage() {
                 name="confirmPassword"
                 required
                 minLength={8}
-                className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+                onChange={confirmPasswordChangeHandler}
+                onBlur={confirmPasswordInputBlurHandler}
+                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  enteredConfirmPasswordIsValid
+                    ? 'invalid:border-deleteRed'
+                    : ''
+                }`}
               />
             </label>
           )}
