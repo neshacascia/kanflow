@@ -36,7 +36,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      if (user.userName === 'demo_user') {
+      if (user.email === process.env.DEMO_USER_EMAIL) {
         return res.redirect('/api/board');
       }
 
