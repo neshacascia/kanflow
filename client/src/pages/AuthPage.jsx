@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
@@ -6,6 +6,20 @@ import kanflowImg from '../assets/kanflow-img.svg';
 
 export default function AuthPage() {
   const { changeAuthValue } = useContext(Context);
+
+  const [enteredEmail, setEnteredEmail] = useState('');
+  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+
+  const enteredEmailValidation =
+    enteredEmail.trim() !== '' && enteredEmail.includes('@');
+  const enteredEmailIsValid = !enteredEmailValidation && enteredEmailTouched;
+  function emailChangeHandler(e) {
+    setEnteredEmail(e.target.value);
+  }
+
+  function emailInputBlurHandler(e) {
+    setEnteredEmailTouched(true);
+  }
 
   const authValue = localStorage.getItem('authValue');
 
@@ -38,7 +52,11 @@ export default function AuthPage() {
               type="email"
               name="email"
               required
-              className="bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              onChange={emailChangeHandler}
+              onBlur={emailInputBlurHandler}
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                enteredEmailIsValid ? 'invalid:border-deleteRed' : ''
+              }`}
             />
           </label>
           <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
