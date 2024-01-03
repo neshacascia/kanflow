@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
@@ -30,6 +30,13 @@ export default function AuthPage() {
     enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
   const enteredConfirmPasswordIsValid =
     !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
+
+  const [passwordsMatch, setPasswordsMatch] = useState();
+
+  useEffect(() => {
+    const arePasswordsEqual = enteredPassword === enteredConfirmPassword;
+    setPasswordsMatch(arePasswordsEqual);
+  }, [enteredPassword, enteredConfirmPassword]);
 
   function emailChangeHandler(e) {
     setEnteredEmail(e.target.value);
@@ -125,6 +132,13 @@ export default function AuthPage() {
               />
             </label>
           )}
+          {!passwordsMatch &&
+            enteredPasswordTouched &&
+            enteredConfirmPasswordTouched && (
+              <p className="text-deleteRed text-sm">
+                Uh oh! The passwords you entered do not match.
+              </p>
+            )}
           <button
             type="submit"
             className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 hover:bg-mainPurpleHover mt-5"
