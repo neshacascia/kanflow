@@ -98,7 +98,7 @@ exports.postSignup = async (req, res, next) => {
     });
 
     const existingUser = await User.findOneAndReplace({
-      $or: [{ email: req.body.email }, { userName: req.body.userName }],
+      $or: [{ email: req.body.email }],
     }).exec();
 
     if (existingUser) {
@@ -109,7 +109,6 @@ exports.postSignup = async (req, res, next) => {
     }
 
     const user = new User({
-      userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
     });
