@@ -29,10 +29,10 @@ export default function HomePage() {
     <>
       {user === null && (
         <main className="h-screen relative pt-16 md:pt-20">
-          <Link to="/login" onClick={() => storeAuthValue('Login')}>
+          <Link to="/login" onClick={() => storeAuthValue('login')}>
             Login
           </Link>
-          <Link to="/signup" onClick={() => storeAuthValue('Signup')}>
+          <Link to="/signup" onClick={() => storeAuthValue('signup')}>
             Signup
           </Link>{' '}
           <button onClick={demoUserLogin}>Demo</button>

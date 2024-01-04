@@ -69,10 +69,10 @@ export default function AuthPage() {
       <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
       <div className="md:bg-[#E6E6E6] md:w-[50%] md:h-full flex flex-col items-center md:items-stretch justify-center gap-3 rounded-lg py-5 md:py-8 md:px-10 lg:px-32">
         <h2 className="text-xl md:text-2xl font-semibold tracking-wide">
-          {authValue === 'Login' ? 'Welcome back!' : 'Sign Up!'}
+          {authValue === 'login' ? 'Welcome back!' : 'Sign Up!'}
         </h2>
         <p className="text-sm text-center md:text-start">
-          {authValue === 'Signup'
+          {authValue === 'signup'
             ? 'Enter your details to create an account'
             : 'Please login to your account'}
         </p>
@@ -83,7 +83,7 @@ export default function AuthPage() {
         <% }) %> <% } %> */}
 
         <form
-          action={authValue === 'Signup' ? '/api/signup' : '/api/login'}
+          action={`/api/${authValue}`}
           method="POST"
           className="w-full flex flex-col gap-1 pt-2 md:gap-3 md:pt-4"
         >
@@ -114,7 +114,7 @@ export default function AuthPage() {
               }`}
             />
           </label>
-          {authValue === 'Signup' && (
+          {authValue === 'signup' && (
             <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
               Confirm Password
               <input
@@ -143,20 +143,20 @@ export default function AuthPage() {
             type="submit"
             className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 hover:bg-mainPurpleHover mt-5"
           >
-            {authValue}
+            {authValue === 'login' ? 'Login' : 'Signup'}
           </button>
         </form>
 
         <p className="text-gray-700 text-sm pt-2 md:pt-6">
-          {authValue === 'Signup'
+          {authValue === 'signup'
             ? 'Already have an account? '
             : "Don't have an account? "}
           <Link
             className="text-black font-semibold"
-            to={authValue === 'Signup' ? '/login' : '/signup'}
+            to={authValue === 'signup' ? '/login' : '/signup'}
             onClick={() => changeAuthValue(authValue)}
           >
-            {authValue === 'Signup' ? 'Login' : 'Signup'} Now
+            {authValue === 'signup' ? 'Login' : 'Signup'} Now
           </Link>
         </p>
       </div>
