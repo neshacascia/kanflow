@@ -99,7 +99,7 @@ exports.postSignup = async (req, res, next) => {
       gmail_remove_dots: false,
     });
 
-    const existingUser = await User.findOneAndReplace({
+    const existingUser = await User.findOne({
       $or: [{ email: req.body.email }],
     }).exec();
 
@@ -107,7 +107,9 @@ exports.postSignup = async (req, res, next) => {
       req.flash('errors', {
         msg: 'Account with that email address or username already exists.',
       });
-      return res.redirect('../signup');
+      return res.status(409).json({
+        msg: 'Account with that email address already exists.',
+      });
     }
 
     const user = new User({
