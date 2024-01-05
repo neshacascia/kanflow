@@ -30,7 +30,9 @@ exports.postLogin = (req, res, next) => {
     }
     if (!user) {
       req.flash('errors', info);
-      return res.redirect('/login');
+      return res
+        .status(401)
+        .json({ msg: 'Login Failed. Please Check Your Email and Password' });
     }
     req.logIn(user, err => {
       if (err) {
