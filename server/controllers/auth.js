@@ -119,7 +119,7 @@ exports.postSignup = async (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.redirect('/board');
+      return res.status(200).json({ msg: 'Success! You are logged in.' });
     });
   } catch (err) {
     return next(err);
