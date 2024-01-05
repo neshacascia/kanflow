@@ -38,6 +38,38 @@ export default function AuthPage() {
     setPasswordsMatch(arePasswordsEqual);
   }, [enteredPassword, enteredConfirmPassword]);
 
+  const [formIsValid, setFormIsValid] = useState(false);
+  useEffect(() => {
+    if (authValue === 'login') {
+      if (
+        enteredEmailValidation &&
+        enteredEmailTouched &&
+        enteredPasswordValidation &&
+        enteredPasswordTouched
+      ) {
+        setFormIsValid(true);
+      }
+    } else {
+      if (
+        enteredEmailValidation &&
+        enteredEmailTouched &&
+        enteredPasswordValidation &&
+        enteredPasswordTouched &&
+        enteredConfirmPasswordValidation &&
+        enteredConfirmPasswordTouched
+      ) {
+        setFormIsValid(true);
+      }
+    }
+  }, [
+    enteredEmailValidation,
+    enteredEmailTouched,
+    enteredPasswordValidation,
+    enteredPasswordTouched,
+    enteredConfirmPasswordValidation,
+    enteredConfirmPasswordTouched,
+  ]);
+
   function emailChangeHandler(e) {
     setEnteredEmail(e.target.value);
   }
