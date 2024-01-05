@@ -40,6 +40,7 @@ export default function AuthPage() {
     setPasswordsMatch(arePasswordsEqual);
   }, [enteredPassword, enteredConfirmPassword]);
 
+  const [errorMessages, setErrorMessages] = useState('');
   const [formIsValid, setFormIsValid] = useState(false);
   useEffect(() => {
     if (authValue === 'login') {
@@ -113,6 +114,7 @@ export default function AuthPage() {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessages(err.response.data.msg);
     }
   }
 
@@ -208,6 +210,11 @@ export default function AuthPage() {
                 Uh oh! The passwords you entered do not match.
               </span>
             )}
+          {errorMessages && (
+            <p className="text-deleteRed text-xs font-semibold">
+              {errorMessages}
+            </p>
+          )}
           <button
             type="submit"
             disabled={!formIsValid}
