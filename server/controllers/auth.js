@@ -41,7 +41,7 @@ exports.postLogin = (req, res, next) => {
       }
 
       req.flash('success', { msg: 'Success! You are logged in.' });
-      return res.redirect(req.session.returnTo || '/board');
+      return res.status(200).json({ msg: 'Success! You are logged in.' });
     });
   })(req, res, next);
 };
