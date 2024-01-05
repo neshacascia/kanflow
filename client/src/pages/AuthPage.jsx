@@ -1,11 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../context/Context';
+import axios from 'axios';
 
 import kanflowImg from '../assets/kanflow-img.svg';
 
 export default function AuthPage() {
   const { changeAuthValue } = useContext(Context);
+  const navigate = useNavigate();
 
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
@@ -96,6 +98,24 @@ export default function AuthPage() {
 
   const authValue = localStorage.getItem('authValue');
 
+  async function submitHandler(e) {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(`/api/${authValue}`, {
+        email: enteredEmail,
+        password: enteredPassword,
+        confirmPassword: enteredConfirmPassword,
+      });
+
+      if (res.status === 200) {
+        navigate('/board');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <section className="h-screen relative flex flex-col items-center justify-center pt-16 md:flex-row md:justify-between lg:justify-between md:pt-20">
       <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
@@ -115,8 +135,9 @@ export default function AuthPage() {
         <% }) %> <% } %> */}
 
         <form
-          action={`/api/${authValue}`}
-          method="POST"
+          // action={`/api/${authValue}`}
+          // method="POST"
+          onSubmit={submitHandler}
           className="w-full flex flex-col gap-1 pt-2 md:gap-3 md:pt-4"
         >
           <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
