@@ -32,7 +32,7 @@ exports.postLogin = (req, res, next) => {
       req.flash('errors', info);
       return res
         .status(401)
-        .json({ msg: 'Login Failed. Please Check Your Email and Password' });
+        .json({ msg: 'Invalid Email or Password. Please Try Again' });
     }
     req.logIn(user, err => {
       if (err) {
