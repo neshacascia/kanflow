@@ -106,14 +106,7 @@ export default function AuthPage() {
             : 'Please login to your account'}
         </p>
 
-        {/* <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => {
-        %>
-        <div class="text-red-500 text-sm"><%= el.msg %></div>
-        <% }) %> <% } %> */}
-
         <form
-          // action={`/api/${authValue}`}
-          // method="POST"
           onSubmit={submitHandler}
           className="w-full flex flex-col gap-1 pt-2 md:gap-3 md:pt-4"
         >
