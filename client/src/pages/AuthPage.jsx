@@ -189,7 +189,8 @@ export default function AuthPage() {
             )}
           <button
             type="submit"
-            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 hover:bg-mainPurpleHover mt-5"
+            disabled={!formIsValid}
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
           </button>
