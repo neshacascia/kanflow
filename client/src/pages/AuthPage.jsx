@@ -19,16 +19,16 @@ export default function AuthPage() {
 
   const enteredEmailValidation =
     enteredEmail.trim() !== '' && enteredEmail.includes('@');
-  const enteredEmailIsValid = !enteredEmailValidation && enteredEmailTouched;
+  const enteredEmailNotValid = !enteredEmailValidation && enteredEmailTouched;
 
   const enteredPasswordValidation =
     enteredPassword.trim() !== '' && enteredPassword.length >= 8;
-  const enteredPasswordIsValid =
+  const enteredPasswordNotValid =
     !enteredPasswordValidation && enteredPasswordTouched;
 
   const enteredConfirmPasswordValidation =
     enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
-  const enteredConfirmPasswordIsValid =
+  const enteredConfirmPasswordNotValid =
     !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
 
   const [passwordsMatch, setPasswordsMatch] = useState();
@@ -96,9 +96,17 @@ export default function AuthPage() {
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailIsValid ? 'invalid:border-deleteRed' : ''
+                enteredEmailNotValid ? 'invalid:border-deleteRed' : ''
               }`}
             />
+            {enteredEmailNotValid && (
+              <span className="text-deleteRed flex">
+                Missing required field.{' '}
+                <span className="hidden md:block">
+                  &nbsp;Please enter valid email.
+                </span>
+              </span>
+            )}
           </label>
           <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
             Password
@@ -106,13 +114,17 @@ export default function AuthPage() {
               type="password"
               name="password"
               required
-              minLength={8}
               onChange={passwordChangeHandler}
               onBlur={passwordInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredPasswordIsValid ? 'invalid:border-deleteRed' : ''
+                enteredPasswordNotValid ? 'invalid:border-deleteRed' : ''
               }`}
             />
+            {enteredPasswordNotValid && (
+              <span className="text-deleteRed flex">
+                Please enter a valid password with a minimum of 8 characters.
+              </span>
+            )}
           </label>
           {authValue === 'signup' && (
             <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
@@ -121,23 +133,27 @@ export default function AuthPage() {
                 type="password"
                 name="confirmPassword"
                 required
-                minLength={8}
                 onChange={confirmPasswordChangeHandler}
                 onBlur={confirmPasswordInputBlurHandler}
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                  enteredConfirmPasswordIsValid
+                  enteredConfirmPasswordNotValid
                     ? 'invalid:border-deleteRed'
                     : ''
                 }`}
               />
+              {enteredConfirmPasswordNotValid && (
+                <span className="text-deleteRed flex">
+                  Please enter a valid password with a minimum of 8 characters.
+                </span>
+              )}
             </label>
           )}
           {!passwordsMatch &&
             enteredPasswordTouched &&
             enteredConfirmPasswordTouched && (
-              <p className="text-deleteRed text-sm">
+              <span className="text-deleteRed text-xs font-semibold">
                 Uh oh! The passwords you entered do not match.
-              </p>
+              </span>
             )}
           <button
             type="submit"
