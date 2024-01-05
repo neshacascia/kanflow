@@ -10,16 +10,6 @@ exports.getLogin = (req, res) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: 'Please enter a valid email address.' });
-  if (validator.isEmpty(req.body.password))
-    validationErrors.push({ msg: 'Password cannot be blank.' });
-
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/login');
-  }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
@@ -29,7 +19,6 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash('errors', info);
       return res
         .status(401)
         .json({ msg: 'Invalid Email or Password. Please Try Again' });
@@ -42,7 +31,6 @@ exports.postLogin = (req, res, next) => {
         return res.redirect('/api/board');
       }
 
-      req.flash('success', { msg: 'Success! You are logged in.' });
       return res.status(200).json({ msg: 'Success! You are logged in.' });
     });
   })(req, res, next);
@@ -78,23 +66,6 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = async (req, res, next) => {
   try {
-    const validationErrors = [];
-
-    if (!validator.isEmail(req.body.email))
-      validationErrors.push({ msg: 'Please enter a valid email address.' });
-
-    if (!validator.isLength(req.body.password, { min: 8 }))
-      validationErrors.push({
-        msg: 'Password must be at least 8 characters long',
-      });
-
-    if (req.body.password !== req.body.confirmPassword)
-      validationErrors.push({ msg: 'Passwords do not match' });
-
-    if (validationErrors.length) {
-      req.flash('errors', validationErrors);
-      return res.redirect('../signup');
-    }
     req.body.email = validator.normalizeEmail(req.body.email, {
       gmail_remove_dots: false,
     });
@@ -104,9 +75,6 @@ exports.postSignup = async (req, res, next) => {
     }).exec();
 
     if (existingUser) {
-      req.flash('errors', {
-        msg: 'Account with that email address or username already exists.',
-      });
       return res.status(409).json({
         msg: 'Account with that email address already exists.',
       });
