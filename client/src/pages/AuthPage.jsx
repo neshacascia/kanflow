@@ -6,6 +6,7 @@ import axios from 'axios';
 import kanflowImg from '../assets/kanflow-img.svg';
 
 export default function AuthPage() {
+  const authValue = localStorage.getItem('authValue');
   const { changeAuthValue } = useContext(Context);
   const navigate = useNavigate();
 
@@ -33,6 +34,13 @@ export default function AuthPage() {
   const enteredConfirmPasswordNotValid =
     !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
 
+  const formIsValid =
+    authValue === 'login'
+      ? enteredEmailValidation && enteredPasswordValidation
+      : enteredEmailValidation &&
+        enteredPasswordValidation &&
+        enteredConfirmPasswordValidation;
+
   const [passwordsMatch, setPasswordsMatch] = useState();
 
   useEffect(() => {
@@ -41,37 +49,6 @@ export default function AuthPage() {
   }, [enteredPassword, enteredConfirmPassword]);
 
   const [errorMessages, setErrorMessages] = useState('');
-  const [formIsValid, setFormIsValid] = useState(false);
-  useEffect(() => {
-    if (authValue === 'login') {
-      if (
-        enteredEmailValidation &&
-        enteredEmailTouched &&
-        enteredPasswordValidation &&
-        enteredPasswordTouched
-      ) {
-        setFormIsValid(true);
-      }
-    } else {
-      if (
-        enteredEmailValidation &&
-        enteredEmailTouched &&
-        enteredPasswordValidation &&
-        enteredPasswordTouched &&
-        enteredConfirmPasswordValidation &&
-        enteredConfirmPasswordTouched
-      ) {
-        setFormIsValid(true);
-      }
-    }
-  }, [
-    enteredEmailValidation,
-    enteredEmailTouched,
-    enteredPasswordValidation,
-    enteredPasswordTouched,
-    enteredConfirmPasswordValidation,
-    enteredConfirmPasswordTouched,
-  ]);
 
   function emailChangeHandler(e) {
     setEnteredEmail(e.target.value);
@@ -96,8 +73,6 @@ export default function AuthPage() {
   function confirmPasswordInputBlurHandler() {
     setEnteredConfirmPasswordTouched(true);
   }
-
-  const authValue = localStorage.getItem('authValue');
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -147,7 +122,6 @@ export default function AuthPage() {
             <input
               type="email"
               name="email"
-              required
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
@@ -168,7 +142,6 @@ export default function AuthPage() {
             <input
               type="password"
               name="password"
-              required
               onChange={passwordChangeHandler}
               onBlur={passwordInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
@@ -187,7 +160,6 @@ export default function AuthPage() {
               <input
                 type="password"
                 name="confirmPassword"
-                required
                 onChange={confirmPasswordChangeHandler}
                 onBlur={confirmPasswordInputBlurHandler}
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
