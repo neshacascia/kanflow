@@ -11,18 +11,18 @@ function ContextProvider(props) {
   const [displaySidebar, setDisplaySidebar] = useState(true);
 
   function storeAuthValue(value) {
-    if (value === 'Signup') {
-      localStorage.setItem('authValue', 'Signup');
-    } else if (value === 'Login') {
-      localStorage.setItem('authValue', 'Login');
+    if (value === 'signup') {
+      localStorage.setItem('authValue', 'signup');
+    } else if (value === 'login') {
+      localStorage.setItem('authValue', 'login');
     }
   }
 
   function changeAuthValue(value) {
-    if (value === 'Signup') {
-      localStorage.setItem('authValue', 'Login');
-    } else if (value === 'Login') {
-      localStorage.setItem('authValue', 'Signup');
+    if (value === 'signup') {
+      localStorage.setItem('authValue', 'login');
+    } else if (value === 'login') {
+      localStorage.setItem('authValue', 'signup');
     }
   }
 

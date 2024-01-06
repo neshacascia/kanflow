@@ -10,16 +10,6 @@ exports.getLogin = (req, res) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: 'Please enter a valid email address.' });
-  if (validator.isEmpty(req.body.password))
-    validationErrors.push({ msg: 'Password cannot be blank.' });
-
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/login');
-  }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
@@ -29,19 +19,19 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash('errors', info);
-      return res.redirect('/login');
+      return res
+        .status(401)
+        .json({ msg: 'Invalid Email or Password. Please Try Again' });
     }
     req.logIn(user, err => {
       if (err) {
         return next(err);
       }
-      if (user.userName === 'demo_user') {
+      if (user.email === process.env.DEMO_USER_EMAIL) {
         return res.redirect('/api/board');
       }
 
-      req.flash('success', { msg: 'Success! You are logged in.' });
-      return res.redirect(req.session.returnTo || '/board');
+      return res.status(200).json({ msg: 'Success! You are logged in.' });
     });
   })(req, res, next);
 };
@@ -76,40 +66,21 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = async (req, res, next) => {
   try {
-    const validationErrors = [];
-
-    if (!validator.isEmail(req.body.email))
-      validationErrors.push({ msg: 'Please enter a valid email address.' });
-
-    if (!validator.isLength(req.body.password, { min: 8 }))
-      validationErrors.push({
-        msg: 'Password must be at least 8 characters long',
-      });
-
-    if (req.body.password !== req.body.confirmPassword)
-      validationErrors.push({ msg: 'Passwords do not match' });
-
-    if (validationErrors.length) {
-      req.flash('errors', validationErrors);
-      return res.redirect('../signup');
-    }
     req.body.email = validator.normalizeEmail(req.body.email, {
       gmail_remove_dots: false,
     });
 
-    const existingUser = await User.findOneAndReplace({
-      $or: [{ email: req.body.email }, { userName: req.body.userName }],
+    const existingUser = await User.findOne({
+      $or: [{ email: req.body.email }],
     }).exec();
 
     if (existingUser) {
-      req.flash('errors', {
-        msg: 'Account with that email address or username already exists.',
+      return res.status(409).json({
+        msg: 'Account with that email address already exists.',
       });
-      return res.redirect('../signup');
     }
 
     const user = new User({
-      userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
     });
@@ -120,17 +91,9 @@ exports.postSignup = async (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.redirect('/board');
+      return res.status(200).json({ msg: 'Success! You are logged in.' });
     });
   } catch (err) {
     return next(err);
-  }
-};
-
-exports.getUser = (req, res) => {
-  if (req.user) {
-    return res.status(200).json({ user: req.user.userName });
-  } else {
-    res.status(401).json({ error: 'Unauthorized' });
   }
 };
