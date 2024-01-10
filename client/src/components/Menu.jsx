@@ -65,7 +65,7 @@ export default function Menu() {
 
         <div
           onClick={() => openModal('new')}
-          className="flex items-center gap-3 py-3 px-6"
+          className="flex items-center gap-3 py-3 px-6 mb-5"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
