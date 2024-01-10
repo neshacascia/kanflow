@@ -143,7 +143,7 @@ export default function AuthPage() {
             />
             {enteredPasswordNotValid && (
               <span className="text-deleteRed flex">
-                Please enter a valid password with a minimum of 8 characters.
+                Password must have a minimum of 8 characters.
               </span>
             )}
           </label>
@@ -163,7 +163,7 @@ export default function AuthPage() {
               />
               {enteredConfirmPasswordNotValid && (
                 <span className="text-deleteRed flex">
-                  Please enter a valid password with a minimum of 8 characters.
+                  Password must have a minimum of 8 characters.
                 </span>
               )}
             </label>
