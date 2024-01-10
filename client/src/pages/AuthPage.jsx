@@ -74,6 +74,11 @@ export default function AuthPage() {
     setEnteredConfirmPasswordTouched(true);
   }
 
+  function changeAuthMethod() {
+    setPasswordsMatch(true);
+    changeAuthValue(authValue);
+  }
+
   async function submitHandler(e) {
     e.preventDefault();
 
@@ -193,7 +198,7 @@ export default function AuthPage() {
           <Link
             className="text-black font-semibold"
             to={authValue === 'signup' ? '/login' : '/signup'}
-            onClick={() => changeAuthValue(authValue)}
+            onClick={changeAuthMethod}
           >
             {authValue === 'signup' ? 'Login' : 'Signup'} Now
           </Link>
