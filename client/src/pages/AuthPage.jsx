@@ -123,10 +123,7 @@ export default function AuthPage() {
             />
             {enteredEmailNotValid && (
               <span className="text-deleteRed flex">
-                Missing required field.{' '}
-                <span className="hidden md:block">
-                  &nbsp;Please enter valid email.
-                </span>
+                Please enter valid email.
               </span>
             )}
           </label>
