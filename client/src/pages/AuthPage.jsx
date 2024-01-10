@@ -108,7 +108,7 @@ export default function AuthPage() {
 
         <form
           onSubmit={submitHandler}
-          className="w-full flex flex-col gap-1 pt-2 md:gap-3 md:pt-4"
+          className="w-full flex flex-col gap-4 pt-2 md:gap-3 md:pt-4"
         >
           <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2">
             Email Address
