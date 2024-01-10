@@ -74,6 +74,11 @@ export default function AuthPage() {
     setEnteredConfirmPasswordTouched(true);
   }
 
+  function changeAuthMethod() {
+    setPasswordsMatch(true);
+    changeAuthValue(authValue);
+  }
+
   async function submitHandler(e) {
     e.preventDefault();
 
@@ -94,7 +99,7 @@ export default function AuthPage() {
   }
 
   return (
-    <section className="h-screen relative flex flex-col items-center justify-center pt-16 md:flex-row md:justify-between lg:justify-between md:pt-20">
+    <section className="h-screen relative flex flex-col items-center justify-center pt-44 mb-28 md:flex-row md:justify-between lg:justify-between md:pt-20 md:-mb-28">
       <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
       <div className="md:bg-[#E6E6E6] md:w-[50%] md:h-full flex flex-col items-center md:items-stretch justify-center gap-3 rounded-lg py-5 md:py-8 md:px-10 lg:px-32">
         <h2 className="text-xl md:text-2xl font-semibold tracking-wide">
@@ -108,9 +113,9 @@ export default function AuthPage() {
 
         <form
           onSubmit={submitHandler}
-          className="w-full flex flex-col gap-1 pt-2 md:gap-3 md:pt-4"
+          className="w-full flex flex-col gap-4 pt-2 md:gap-5 md:pt-4"
         >
-          <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
+          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
             Email Address
             <input
               type="email"
@@ -122,15 +127,12 @@ export default function AuthPage() {
               }`}
             />
             {enteredEmailNotValid && (
-              <span className="text-deleteRed flex">
-                Missing required field.{' '}
-                <span className="hidden md:block">
-                  &nbsp;Please enter valid email.
-                </span>
+              <span className="text-deleteRed flex pb-2">
+                Please enter a valid email.
               </span>
             )}
           </label>
-          <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
+          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
             Password
             <input
               type="password"
@@ -142,13 +144,13 @@ export default function AuthPage() {
               }`}
             />
             {enteredPasswordNotValid && (
-              <span className="text-deleteRed flex">
-                Please enter a valid password with a minimum of 8 characters.
+              <span className="text-deleteRed flex pb-2">
+                Password must have a minimum of 8 characters.
               </span>
             )}
           </label>
           {authValue === 'signup' && (
-            <label className="text-veryDarkGrey text-xs font-semibold flex flex-col gap-2">
+            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
               Confirm Password
               <input
                 type="password"
@@ -163,7 +165,7 @@ export default function AuthPage() {
               />
               {enteredConfirmPasswordNotValid && (
                 <span className="text-deleteRed flex">
-                  Please enter a valid password with a minimum of 8 characters.
+                  Password must have a minimum of 8 characters.
                 </span>
               )}
             </label>
@@ -183,7 +185,7 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={!formIsValid}
-            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5"
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 md:w-[330px]"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
           </button>
@@ -196,7 +198,7 @@ export default function AuthPage() {
           <Link
             className="text-black font-semibold"
             to={authValue === 'signup' ? '/login' : '/signup'}
-            onClick={() => changeAuthValue(authValue)}
+            onClick={changeAuthMethod}
           >
             {authValue === 'signup' ? 'Login' : 'Signup'} Now
           </Link>
