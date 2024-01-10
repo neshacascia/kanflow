@@ -29,8 +29,12 @@ export default function Delete({
         const previousBoard =
           boards?.findIndex(elem => elem._id === board._id) - 1;
 
-        if (boards.length !== 1) {
+        const deletedFirstBoard = boards[0]._id === board._id;
+
+        if (boards.length !== 1 && !deletedFirstBoard) {
           navigate(`/board/${boards[previousBoard]._id}`);
+        } else if (boards.length !== 1 && deletedFirstBoard) {
+          navigate(`/board/${boards[1]._id}`);
         } else {
           navigate('/board');
           window.location.reload();
