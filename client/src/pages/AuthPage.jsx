@@ -123,7 +123,7 @@ export default function AuthPage() {
             />
             {enteredEmailNotValid && (
               <span className="text-deleteRed flex pb-2">
-                Please enter valid email.
+                Please enter a valid email.
               </span>
             )}
           </label>
