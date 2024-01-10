@@ -110,7 +110,7 @@ export default function AuthPage() {
           onSubmit={submitHandler}
           className="w-full flex flex-col gap-4 pt-2 md:gap-3 md:pt-4"
         >
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2">
+          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
             Email Address
             <input
               type="email"
@@ -127,7 +127,7 @@ export default function AuthPage() {
               </span>
             )}
           </label>
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2">
+          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
             Password
             <input
               type="password"
@@ -145,7 +145,7 @@ export default function AuthPage() {
             )}
           </label>
           {authValue === 'signup' && (
-            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2">
+            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
               Confirm Password
               <input
                 type="password"
@@ -180,7 +180,7 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={!formIsValid}
-            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5"
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 md:w-[330px]"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
           </button>
