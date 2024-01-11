@@ -35,7 +35,7 @@ export default function Sidebar() {
               `text-[15px] font-semibold flex items-center gap-3 rounded-menuLink py-3 px-6 ${
                 isActive
                   ? 'text-white bg-mainPurple'
-                  : 'text-mediumGrey hover:bg-white hover:text-mainPurple'
+                  : 'text-mediumGrey hover:bg-lightPurple dark:hover:bg-white hover:text-mainPurple'
               }`
             }
           >
@@ -101,7 +101,7 @@ export default function Sidebar() {
         <div className="pr-6 pt-2">
           <button
             onClick={() => setDisplaySidebar(false)}
-            className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-white hover:text-mainPurple"
+            className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-lightPurple dark:hover:bg-white hover:text-mainPurple"
           >
             <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
             <p className="text-sm font-semibold">Hide Sidebar</p>

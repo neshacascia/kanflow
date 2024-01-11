@@ -36,7 +36,7 @@ export default function Menu() {
                 `text-[15px] font-semibold flex items-center gap-3 rounded-menuLink py-3 pl-6 ${
                   isActive
                     ? 'text-white bg-mainPurple'
-                    : 'text-mediumGrey hover:bg-white hover:text-mainPurple'
+                    : 'text-mediumGrey hover:bg-lightPurple dark:hover:bg-white hover:text-mainPurple'
                 }`
               }
             >
