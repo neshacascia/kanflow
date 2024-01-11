@@ -68,7 +68,7 @@ export default function Board() {
       {displaySidebar && <Sidebar />}
       <main
         onClick={() => setDisplaySettings(false)}
-        className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
+        className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
         {boards.length === 0 && (
           <section className="text-white h-full flex flex-col justify-center items-center gap-4">

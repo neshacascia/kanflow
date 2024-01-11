@@ -26,6 +26,7 @@ export default {
       },
       boxShadow: {
         glow: '0px 10px 20px 0px rgba(54, 78, 126, 0.10)',
+        lightTask: '0px 4px 6px 0px rgba(54, 78, 126, 0.10)',
       },
     },
   },
