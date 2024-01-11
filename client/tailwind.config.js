@@ -15,6 +15,8 @@ export default {
         redHover: '#FF9898',
         linesDark: '#3E3F4E',
         column: 'rgba(43, 44, 55, 0.13)',
+        lightBlack: '#000112',
+        lightGrey: '#F4F7FD',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
