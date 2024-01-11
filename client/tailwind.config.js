@@ -20,6 +20,7 @@ export default {
         lightCheckbox: 'rgba(130, 143, 163, 0.25)',
         lightPurple: 'rgba(99, 95, 199, 0.10)',
         linesLight: '#E4EBFA',
+        lightColumn: 'rgba(233, 239, 250, 0.50)',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
