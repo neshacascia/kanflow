@@ -71,9 +71,9 @@ export default function Board() {
         className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
         {boards.length === 0 && (
-          <section className="text-white h-full flex flex-col justify-center items-center gap-4">
+          <section className="text-lightBlack dark:text-white h-full flex flex-col justify-center items-center gap-4">
             <h2 className="text-2xl font-semibold">Welcome to Kanflow</h2>
-            <p className="text-center pb-3">
+            <p className="text-mediumGrey dark:text-white text-center pb-3">
               Embark on your productivity journey by creating your first board.
             </p>
             <div
