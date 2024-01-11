@@ -136,7 +136,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
               required
               onChange={e => updateBoardName(e.target.value)}
               onBlur={() => setBoardNameInputTouched(true)}
-              className={`bg-transparent text-lightBlack dark:text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              className={`bg-transparent text-lightBlack dark:text-white placeholder:text-lightBlack/25 dark:placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 boardNameInputTouched
                   ? 'invalid:border-deleteRed'
                   : 'border-borderGrey'
@@ -157,7 +157,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
                     updateColumnName(column.id, 'columnName', e.target.value)
                   }
                   onBlur={() => columnInputBlurHandler(column.id)}
-                  className={`bg-transparent text-lightBlack dark:text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                     (column.isTouched === false) &
                     (column.columnName.length === 0)
                       ? 'border-borderGrey'
