@@ -16,7 +16,7 @@ export default function Menu() {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[264px] relative rounded-lg shadow-glow py-4 md:hidden">
+      <div className="bg-white dark:bg-darkGrey w-[264px] relative rounded-lg shadow-glow py-4 md:hidden">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}

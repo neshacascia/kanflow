@@ -8,7 +8,7 @@ export default function ToggleThemeButton() {
   const { toggleTheme } = useContext(Context);
 
   return (
-    <div className="bg-veryDarkGrey flex justify-center gap-6 rounded-md py-3 mx-4">
+    <div className="bg-lightGrey dark:bg-veryDarkGrey flex justify-center gap-6 rounded-md py-3 mx-4">
       <img src={sunIcon} />
 
       <label className="w-12 h-6 relative inline-block">
