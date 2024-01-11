@@ -48,7 +48,7 @@ export default function Delete({
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6 md:w-[480px] md:p-8">
+      <div className="bg-white dark:bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6 md:w-[480px] md:p-8">
         <h2 className="text-deleteRed text-lg font-semibold mb-6">
           Delete this {`${modal === 'deleteTask' ? 'task' : 'board'}`}?
         </h2>
@@ -76,7 +76,7 @@ export default function Delete({
           </button>
           <button
             onClick={closeModal}
-            className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
           >
             Cancel
           </button>
