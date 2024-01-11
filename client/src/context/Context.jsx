@@ -9,7 +9,9 @@ function ContextProvider(props) {
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displaySidebar, setDisplaySidebar] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const initialTheme = localStorage.getItem('theme') || 'dark';
+  const [isDarkMode, setIsDarkMode] = useState(initialTheme === 'dark');
 
   useEffect(() => {
     if (isDarkMode) {
