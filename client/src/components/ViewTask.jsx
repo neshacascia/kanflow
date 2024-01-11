@@ -68,11 +68,13 @@ export default function ViewTask({
   return (
     <Modal>
       <div
-        className="bg-darkGrey w-[343px] h-auto flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8"
+        className="bg-white dark:bg-darkGrey w-[343px] h-auto flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8"
         onClick={() => (settingsModal ? setSettingsModal(false) : null)}
       >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-white text-lg font-semibold">{task.title}</h2>
+          <h2 className="text-lightBlack dark:text-white text-lg font-semibold">
+            {task.title}
+          </h2>
           <FontAwesomeIcon
             icon={faEllipsisVertical}
             onClick={() => setSettingsModal(true)}
@@ -83,7 +85,7 @@ export default function ViewTask({
           {task.description}
         </p>
 
-        <span className="text-white text-xs font-semibold">
+        <span className="text-mediumGrey dark:text-white text-xs font-semibold">
           Subtasks ({`${completedSubtasks} of ${task.subtasks.length}`})
         </span>
 
@@ -91,8 +93,10 @@ export default function ViewTask({
           {subtasks.map((subtask, ind) => (
             <li
               key={ind}
-              className={`bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 hover:bg-mainPurple hover:bg-opacity-25 hover:cursor-pointer ${
-                subtask.completed ? 'text-white/50 line-through' : 'text-white'
+              className={`bg-lightGrey dark:bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 hover:bg-mainPurple hover:bg-opacity-25 hover:cursor-pointer ${
+                subtask.completed
+                  ? 'text-lightBlack/50 dark:text-white/50 line-through'
+                  : 'text-lightBlack dark:text-white'
               }`}
             >
               {subtask.completed ? (
@@ -113,7 +117,7 @@ export default function ViewTask({
                     setCompletionStatus(subtask.id, subtask.completed)
                   }
                   checked={subtask.completed}
-                  className="w-4 h-4"
+                  className="text-white w-4 h-4 border-lightCheckbox border rounded"
                 />
               )}
               {subtask.subtask}
@@ -121,12 +125,12 @@ export default function ViewTask({
           ))}
         </ul>
 
-        <label className="text-white text-xs font-semibold flex flex-col mb-2">
+        <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col mb-2">
           Current Status
           <select
             name="status"
             onChange={e => updateCurrentStatus(e.target.value)}
-            className="bg-transparent text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2 hover:cursor-pointer "
+            className="bg-transparent text-lightBlack dark:text-white text-[13px] font-light border-[1px] rounded border-borderGrey py-3 px-4 mt-2 hover:cursor-pointer "
           >
             <option value={selectedStatus}>
               {selectedStatus.split('')[0].toUpperCase() +
@@ -150,7 +154,7 @@ export default function ViewTask({
         </label>
 
         {settingsModal && (
-          <div className="bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute transform translate-x-52 translate-y-1/4 rounded-lg shadow-glow p-4 mt-8 md:w-[192px] md:translate-x-80">
+          <div className="bg-white dark:bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute transform translate-x-52 translate-y-1/4 rounded-lg shadow-lightSettings dark:shadow-glow p-4 mt-8 md:w-[192px] md:translate-x-80">
             <button
               onClick={() => updateModal('edit')}
               className="text-mediumGrey"

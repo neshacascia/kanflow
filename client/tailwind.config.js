@@ -17,6 +17,7 @@ export default {
         column: 'rgba(43, 44, 55, 0.13)',
         lightBlack: '#000112',
         lightGrey: '#F4F7FD',
+        lightCheckbox: 'rgba(130, 143, 163, 0.25)',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
@@ -27,6 +28,7 @@ export default {
       boxShadow: {
         glow: '0px 10px 20px 0px rgba(54, 78, 126, 0.10)',
         lightTask: '0px 4px 6px 0px rgba(54, 78, 126, 0.10)',
+        lightSettings: '0px 10px 20px 0px rgba(54, 78, 126, 0.25)',
       },
     },
   },
