@@ -106,16 +106,18 @@ export default function AddTask({
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] h-[90vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8">
+      <div className="bg-white dark:bg-darkGrey w-[343px] h-[90vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}
           className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
         />
-        <h2 className="text-white text-lg font-semibold mb-6">Add New Task</h2>
+        <h2 className="text-lightBlack dark:text-white text-lg font-semibold mb-6">
+          Add New Task
+        </h2>
 
         <form onSubmit={addNewTask} className="flex flex-col gap-6">
-          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+          <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
             Title
             <input
               type="text"
@@ -123,7 +125,7 @@ export default function AddTask({
               placeholder="e.g. Take coffee break"
               required
               onBlur={() => setTitleInputTouched(true)}
-              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              className={`bg-transparent text-lightBlack dark:text-white placeholder:text-lightBlack/25 dark:placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 titleInputTouched
                   ? 'invalid:border-deleteRed'
                   : 'border-borderGrey'
@@ -131,16 +133,16 @@ export default function AddTask({
             />
           </label>
 
-          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+          <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
             Description
             <textarea
               name="desc"
               placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
-              className="bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
+              className="bg-transparent text-lightBlack dark:text-white placeholder:text-lightBlack/25 dark:placeholder:text-white/25 text-[13px] font-light leading-6 h-[112px] border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple"
             ></textarea>
           </label>
 
-          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+          <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
             Subtasks{' '}
             {subtasks.map(item => (
               <div key={item.id} className="w-full flex items-center gap-4">
@@ -152,7 +154,7 @@ export default function AddTask({
                     updateSubtask(item.id, 'subtask', e.target.value)
                   }
                   onBlur={() => subtasksInputBlurHandler(item.id)}
-                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  className={`bg-transparent text-lightBlack dark:text-white placeholder:text-lightBlack/25 dark:placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                     (item.isTouched === false) & (item.subtask.length === 0)
                       ? 'border-borderGrey'
                       : 'invalid:border-deleteRed'
@@ -170,16 +172,16 @@ export default function AddTask({
           <button
             type="button"
             onClick={addNewSubtask}
-            className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
           >
             + Add New Subtask
           </button>
 
-          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+          <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
             Status{' '}
             <select
               name="status"
-              className="text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple hover:cursor-pointer"
+              className="text-lightBlack dark:text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple hover:cursor-pointer"
             >
               {columns.map((column, ind) => (
                 <option key={ind} value={column.columnName}>

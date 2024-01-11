@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Context } from '../context/Context';
 import Modal from './Modal';
+import ToggleThemeButton from './ToggleThemeButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -15,7 +16,7 @@ export default function Menu() {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[264px] relative rounded-lg shadow-glow py-4 md:hidden">
+      <div className="bg-white dark:bg-darkGrey w-[264px] relative rounded-lg shadow-glow py-4 md:hidden">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}
@@ -35,7 +36,7 @@ export default function Menu() {
                 `text-[15px] font-semibold flex items-center gap-3 rounded-menuLink py-3 pl-6 ${
                   isActive
                     ? 'text-white bg-mainPurple'
-                    : 'text-mediumGrey hover:bg-white hover:text-mainPurple'
+                    : 'text-mediumGrey hover:bg-lightPurple dark:hover:bg-white hover:text-mainPurple'
                 }`
               }
             >
@@ -64,7 +65,7 @@ export default function Menu() {
 
         <div
           onClick={() => openModal('new')}
-          className="flex items-center gap-3 py-3 px-6"
+          className="flex items-center gap-3 py-3 px-6 mb-5"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +85,8 @@ export default function Menu() {
             + Create New Board
           </button>
         </div>
+
+        <ToggleThemeButton />
 
         <div className="text-mediumGrey flex items items-center justify-end gap-2 px-6 mt-4">
           <Link

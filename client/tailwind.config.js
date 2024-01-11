@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -14,6 +15,12 @@ export default {
         redHover: '#FF9898',
         linesDark: '#3E3F4E',
         column: 'rgba(43, 44, 55, 0.13)',
+        lightBlack: '#000112',
+        lightGrey: '#F4F7FD',
+        lightCheckbox: 'rgba(130, 143, 163, 0.25)',
+        lightPurple: 'rgba(99, 95, 199, 0.10)',
+        linesLight: '#E4EBFA',
+        lightColumn: 'rgba(233, 239, 250, 0.50)',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
@@ -23,6 +30,8 @@ export default {
       },
       boxShadow: {
         glow: '0px 10px 20px 0px rgba(54, 78, 126, 0.10)',
+        lightTask: '0px 4px 6px 0px rgba(54, 78, 126, 0.10)',
+        lightSettings: '0px 10px 20px 0px rgba(54, 78, 126, 0.25)',
       },
     },
   },

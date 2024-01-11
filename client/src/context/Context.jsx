@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 const Context = createContext();
 
@@ -9,6 +9,23 @@ function ContextProvider(props) {
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displaySidebar, setDisplaySidebar] = useState(true);
+
+  const initialTheme = localStorage.getItem('theme') || 'dark';
+  const [isDarkMode, setIsDarkMode] = useState(initialTheme === 'dark');
+
+  useEffect(() => {
+    if (isDarkMode) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  function toggleTheme() {
+    setIsDarkMode(prevState => !prevState);
+  }
 
   function storeAuthValue(value) {
     if (value === 'signup') {
@@ -70,6 +87,9 @@ function ContextProvider(props) {
         setDisplaySettings,
         displaySidebar,
         setDisplaySidebar,
+        toggleTheme,
+        isDarkMode,
+        setIsDarkMode,
       }}
     >
       {props.children}

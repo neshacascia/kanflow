@@ -68,12 +68,12 @@ export default function Board() {
       {displaySidebar && <Sidebar />}
       <main
         onClick={() => setDisplaySettings(false)}
-        className="bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
+        className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
         {boards.length === 0 && (
-          <section className="text-white h-full flex flex-col justify-center items-center gap-4">
+          <section className="text-lightBlack dark:text-white h-full flex flex-col justify-center items-center gap-4">
             <h2 className="text-2xl font-semibold">Welcome to Kanflow</h2>
-            <p className="text-center pb-3">
+            <p className="text-mediumGrey dark:text-white text-center pb-3">
               Embark on your productivity journey by creating your first board.
             </p>
             <div
@@ -128,7 +128,7 @@ export default function Board() {
             {board.columns.length > 0 && (
               <div
                 onClick={() => openModal('editBoard')}
-                className="hidden text-mediumGrey bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
+                className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
               >
                 <FontAwesomeIcon icon={faPlus} className="text-xs" />
                 New Column

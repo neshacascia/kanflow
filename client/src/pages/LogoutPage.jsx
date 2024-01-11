@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 
 export default function LogoutPage() {
-  const { setIsLoggedIn } = useContext(Context);
+  const { setIsLoggedIn, setIsDarkMode } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,6 +13,7 @@ export default function LogoutPage() {
         await axios.get('/api/logout', { withCredentials: true });
 
         setIsLoggedIn(false);
+        setIsDarkMode(true);
         localStorage.removeItem('user');
         console.log('User logged out successfully');
         navigate('/');

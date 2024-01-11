@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
+import ToggleThemeButton from './ToggleThemeButton';
 
 import logo from '../assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,10 +14,10 @@ export default function Sidebar() {
   const { boards, openModal, setDisplaySidebar } = useContext(Context);
 
   return (
-    <div className="bg-darkGrey min-w-[260px] h-screen relative left-0 pt-6 z-20 hidden md:block border-linesDark border-r-[1px]">
+    <div className="bg-white dark:bg-darkGrey min-w-[260px] h-screen relative left-0 pt-6 z-20 hidden md:block border-linesLight dark:border-linesDark border-r-[1px]">
       <div className="flex px-6">
         <img src={logo} />
-        <p className="text-white text-2xl font-semibold tracking-wide ml-4">
+        <p className="text-lightBlack dark:text-white text-2xl font-semibold tracking-wide ml-4">
           kanflow
         </p>
       </div>
@@ -34,7 +35,7 @@ export default function Sidebar() {
               `text-[15px] font-semibold flex items-center gap-3 rounded-menuLink py-3 px-6 ${
                 isActive
                   ? 'text-white bg-mainPurple'
-                  : 'text-mediumGrey hover:bg-white hover:text-mainPurple'
+                  : 'text-mediumGrey hover:bg-lightPurple dark:hover:bg-white hover:text-mainPurple'
               }`
             }
           >
@@ -95,14 +96,17 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <div className="w-full absolute bottom-0 pr-6">
-        <button
-          onClick={() => setDisplaySidebar(false)}
-          className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-white hover:text-mainPurple"
-        >
-          <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
-          <p className="text-sm font-semibold">Hide Sidebar</p>
-        </button>
+      <div className="w-full absolute bottom-0">
+        <ToggleThemeButton />
+        <div className="pr-6 pt-2">
+          <button
+            onClick={() => setDisplaySidebar(false)}
+            className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-lightPurple dark:hover:bg-white hover:text-mainPurple"
+          >
+            <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
+            <p className="text-sm font-semibold">Hide Sidebar</p>
+          </button>
+        </div>
       </div>
     </div>
   );
