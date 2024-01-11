@@ -93,7 +93,7 @@ export default function ViewTask({
           {subtasks.map((subtask, ind) => (
             <li
               key={ind}
-              className={`bg-lightGrey dark:bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 hover:bg-mainPurple hover:bg-opacity-25 hover:cursor-pointer ${
+              className={`bg-lightGrey dark:bg-veryDarkGrey text-xs font-semibold flex items-center gap-4 rounded px-3 py-4 hover:bg-mainPurple dark:hover:bg-mainPurple hover:bg-opacity-25 dark:hover:bg-opacity-25 hover:cursor-pointer ${
                 subtask.completed
                   ? 'text-lightBlack/50 dark:text-white/50 line-through'
                   : 'text-lightBlack dark:text-white'
