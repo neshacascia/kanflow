@@ -88,6 +88,7 @@ function ContextProvider(props) {
         displaySidebar,
         setDisplaySidebar,
         toggleTheme,
+        isDarkMode,
         setIsDarkMode,
       }}
     >

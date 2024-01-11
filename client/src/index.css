@@ -21,11 +21,14 @@
   content: '';
   height: 16px;
   width: 16px;
-  right: 4px;
   bottom: 4px;
   background-color: #fff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+}
+
+.slider:hover {
+  background: #a8a4ff;
 }
 
 input:checked + .slider {
@@ -36,10 +39,16 @@ input:focus + .slider {
   box-shadow: 0 0 1px #fff;
 }
 
-input:checked + .slider:before {
+input:checked + .slider:before + .rightSlider {
   -webkit-transform: translateX(-24px);
   -ms-transform: translateX(-24px);
   transform: translateX(-24px);
+}
+
+input:checked + .slider:before + .leftSlider {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
 }
 
 .slider.round {

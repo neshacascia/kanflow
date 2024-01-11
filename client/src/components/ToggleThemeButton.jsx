@@ -5,7 +5,7 @@ import sunIcon from '../assets/sun.svg';
 import moonIcon from '../assets/moon.svg';
 
 export default function ToggleThemeButton() {
-  const { toggleTheme } = useContext(Context);
+  const { toggleTheme, isDarkMode } = useContext(Context);
 
   return (
     <div className="bg-lightGrey dark:bg-veryDarkGrey flex justify-center gap-6 rounded-md py-3 mx-4">
@@ -13,7 +13,14 @@ export default function ToggleThemeButton() {
 
       <label className="w-12 h-6 relative inline-block">
         <input type="checkbox" className=" w-0 h-0 opacity-0" />
-        <span onClick={toggleTheme} className="slider round"></span>
+        <span
+          onClick={toggleTheme}
+          className={`slider round ${
+            isDarkMode
+              ? 'before:right-[4px] rightSlider'
+              : 'before:left-[4px] leftSlider'
+          }`}
+        ></span>
       </label>
 
       <img src={moonIcon} />
