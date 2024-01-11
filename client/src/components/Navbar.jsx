@@ -26,7 +26,7 @@ export default function Navbar() {
   return (
     <nav
       onClick={() => (displaySettings ? setDisplaySettings(false) : null)}
-      className="bg-white dark:bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesDark"
+      className="bg-white dark:bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesLight dark:border-linesDark"
     >
       <span className="h-full flex items-center">
         <img src={logo} />
