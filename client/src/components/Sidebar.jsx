@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
+import ToggleThemeButton from './ToggleThemeButton';
 
 import logo from '../assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -95,14 +96,17 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <div className="w-full absolute bottom-0 pr-6">
-        <button
-          onClick={() => setDisplaySidebar(false)}
-          className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-white hover:text-mainPurple"
-        >
-          <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
-          <p className="text-sm font-semibold">Hide Sidebar</p>
-        </button>
+      <div className="w-full absolute bottom-0">
+        <ToggleThemeButton />
+        <div className="pr-6 pt-2">
+          <button
+            onClick={() => setDisplaySidebar(false)}
+            className="text-mediumGrey w-full flex items-center gap-2 rounded-menuLink py-3 px-6 mb-12 cursor-pointer hover:bg-white hover:text-mainPurple"
+          >
+            <FontAwesomeIcon icon={faEyeSlash} className="text-xs" />
+            <p className="text-sm font-semibold">Hide Sidebar</p>
+          </button>
+        </div>
       </div>
     </div>
   );
