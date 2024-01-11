@@ -35,6 +35,10 @@ input:checked + .slider {
   background-color: #635fc7;
 }
 
+input:checked + .slider:hover {
+  background: #a8a4ff;
+}
+
 input:focus + .slider {
   box-shadow: 0 0 1px #fff;
 }
