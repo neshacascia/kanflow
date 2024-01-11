@@ -67,16 +67,16 @@ export default function Delete({
           }cannot be reversed.`}
         </p>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <button
             onClick={() => deleteData()}
-            className="text-white bg-deleteRed text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-redHover"
+            className="text-white bg-deleteRed text-[13px] font-semibold leading-6 md:w-[200px] rounded-[20px] py-3 hover:bg-redHover"
           >
             Delete
           </button>
           <button
             onClick={closeModal}
-            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 md:w-[200px] rounded-[20px] py-3"
           >
             Cancel
           </button>
