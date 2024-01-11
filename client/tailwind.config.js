@@ -18,6 +18,7 @@ export default {
         lightBlack: '#000112',
         lightGrey: '#F4F7FD',
         lightCheckbox: 'rgba(130, 143, 163, 0.25)',
+        lightPurple: 'rgba(99, 95, 199, 0.10)',
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
