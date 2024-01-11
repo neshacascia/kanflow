@@ -115,18 +115,18 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
 
   return (
     <Modal>
-      <div className="bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6 md:w-[480px] md:p-8">
+      <div className="bg-white dark:bg-darkGrey w-[343px] relative flex flex-col rounded-md p-6 md:w-[480px] md:p-8">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={closeModal}
           className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
         />
-        <h2 className="text-white text-lg font-semibold mb-6">
+        <h2 className="text-lightBlack dark:text-white text-lg font-semibold mb-6">
           {boardDetails === 'new' ? 'Add New' : 'Edit'} Board
         </h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+          <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
             Board Name{' '}
             <input
               type="text"
@@ -136,7 +136,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
               required
               onChange={e => updateBoardName(e.target.value)}
               onBlur={() => setBoardNameInputTouched(true)}
-              className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              className={`bg-transparent text-lightBlack dark:text-white placeholder:text-white/25 text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 boardNameInputTouched
                   ? 'invalid:border-deleteRed'
                   : 'border-borderGrey'
@@ -144,7 +144,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
             />
           </label>
 
-          <label className="text-white text-xs font-semibold flex flex-col gap-2">
+          <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
             Board Columns
             {boardColumns.map(column => (
               <div key={column.id} className="w-full flex items-center gap-4">
@@ -157,7 +157,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
                     updateColumnName(column.id, 'columnName', e.target.value)
                   }
                   onBlur={() => columnInputBlurHandler(column.id)}
-                  className={`bg-transparent text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  className={`bg-transparent text-lightBlack dark:text-white placeholder:text-white/25 text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                     (column.isTouched === false) &
                     (column.columnName.length === 0)
                       ? 'border-borderGrey'
@@ -176,7 +176,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
           <button
             type="button"
             onClick={addNewColumn}
-            className="text-mainPurple bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
           >
             + Add New Column
           </button>
