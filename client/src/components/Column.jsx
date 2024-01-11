@@ -35,7 +35,7 @@ export default function Column({
         })`}</h3>
       </div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 last:pb-8">
         {columnTasks?.map((task, ind) => (
           <Task
             key={ind}
