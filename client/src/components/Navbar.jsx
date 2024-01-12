@@ -30,7 +30,11 @@ export default function Navbar() {
     >
       <span className="h-full flex items-center">
         <img src={logo} />
-        <p className="text-black dark:text-white text-xl font-semibold tracking-wide px-4 hidden md:block">
+        <p
+          className={`text-black dark:text-white text-xl font-semibold tracking-wide px-4 ${
+            isLoggedIn ? 'hidden' : ''
+          } md:block`}
+        >
           kanflow
         </p>
         <div className="h-full border-r-[1px] border-linesLight dark:border-linesDark mr-4 hidden md:block"></div>
