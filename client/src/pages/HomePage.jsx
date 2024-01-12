@@ -37,10 +37,19 @@ export default function HomePage() {
           </h1>
 
           <div className="flex items-center gap-6 pt-10">
-            <Link to="/signup" onClick={() => storeAuthValue('signup')}>
+            <Link
+              to="/signup"
+              onClick={() => storeAuthValue('signup')}
+              className="bg-mainPurple tracking-wider rounded py-3 px-8 hover:bg-mainPurpleHover"
+            >
               Get Started
             </Link>{' '}
-            <button onClick={demoUserLogin}>Try Demo</button>
+            <button
+              onClick={demoUserLogin}
+              className="tracking-wider border border-[#4568dc] rounded py-3 px-8"
+            >
+              Explore Demo
+            </button>
           </div>
         </main>
       )}
