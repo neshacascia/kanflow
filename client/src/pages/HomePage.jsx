@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
 
-import kanflow from '../assets/app-screenshot.png';
+import kanflow from '../assets/app-dashboard.png';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -30,8 +30,8 @@ export default function HomePage() {
   return (
     <>
       {user === null && (
-        <main className="text-white bg-veryDarkGrey h-screen relative flex flex-col items-center pt-16 md:pt-20">
-          <h1 className="font-home text-6xl font-semibold tracking-wider leading-[65px] text-center w-[800px] pt-20">
+        <main className="text-white bg-veryDarkGrey h-full relative flex flex-col items-center pt-16 md:pt-20">
+          <h1 className="font-home text-6xl font-semibold tracking-wider leading-[65px] text-center w-[800px] pt-16">
             Unleash your <span className="gradient">productivity</span> with
             kanflow
           </h1>
@@ -54,6 +54,10 @@ export default function HomePage() {
             >
               Explore Demo
             </button>
+          </div>
+
+          <div className="w-[1040px] py-20">
+            <img src={kanflow} className="w-full rounded-lg" />
           </div>
         </main>
       )}
