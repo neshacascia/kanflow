@@ -35,6 +35,10 @@ export default function HomePage() {
             Unleash your <span className="gradient">productivity</span> with
             kanflow
           </h1>
+          <p className="text-[18px] pt-4">
+            The ultimate kanban task management solution for seamless and
+            efficient workflow.
+          </p>
 
           <div className="flex items-center gap-6 pt-10">
             <Link
