@@ -31,7 +31,7 @@ export default function HomePage() {
     <>
       {user === null && (
         <main className="text-white bg-veryDarkGrey h-full relative flex flex-col items-center pt-16 md:pt-20">
-          <h1 className="font-home text-6xl font-semibold tracking-wider leading-[65px] text-center w-[800px] pt-16">
+          <h1 className="font-home text-6xl font-semibold tracking-wider leading-[65px] text-center w-[800px] pt-14">
             Unleash your <span className="gradient">productivity</span> with
             kanflow
           </h1>
