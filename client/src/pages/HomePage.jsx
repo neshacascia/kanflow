@@ -35,7 +35,7 @@ export default function HomePage() {
             Unleash your <span className="gradient">productivity</span> with
             kanflow
           </h1>
-          <p className="text-[18px] pt-4">
+          <p className="text-gray-400 text-[18px] pt-4">
             The ultimate kanban task management solution for seamless and
             efficient workflow.
           </p>
