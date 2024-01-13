@@ -1,0 +1,20 @@
+{
+  "features": [
+    {
+      "heading": "Simple and Clear Overview",
+      "description": "Provides real-time insights into the status of your tasks. Create, update, and delete boards and tasks with ease, putting you in complete control"
+    },
+    {
+      "heading": "Subtask Management",
+      "description": "Break down complex tasks into more manageable subtasks. Track progress with ease by marking subtasks as completed"
+    },
+    {
+      "heading": "Adaptable Themes",
+      "description": "Switch between light and dark modes effortlessly, customizing the app's theme to suit your preferred visual environment"
+    },
+    {
+      "heading": "Intuitive Drag-and-Drop",
+      "description": "Enjoy the convenience of dragging and dropping tasks to change their status and effortlessly re-order them within a column. You can add, rename and remove columns at any time to perfectly align with your project needs"
+    }
+  ]
+}

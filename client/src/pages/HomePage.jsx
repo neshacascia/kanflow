@@ -2,7 +2,9 @@ import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
+import Feature from '../components/Feature';
 
+import data from '../../data.json';
 import kanflow from '../assets/app-dashboard.png';
 
 export default function HomePage() {
@@ -73,7 +75,15 @@ export default function HomePage() {
               productivity and promotes an smooth workflow
             </p>
 
-            <div className="grid grid-cols-2 justify-center pt-10"></div>
+            <div className="grid grid-cols-2 justify-center gap-8 pt-16">
+              {data.features.map((feature, ind) => (
+                <Feature
+                  key={ind}
+                  heading={feature.heading}
+                  description={feature.description}
+                />
+              ))}
+            </div>
           </section>
         </main>
       )}
