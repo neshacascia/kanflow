@@ -1,17 +1,17 @@
 {
   "features": [
     {
-      "icon": "/src/assets/simple.png",
+      "icon": "/src/assets/simple.svg",
       "heading": "Simple and Clear Overview",
       "description": "Provides real-time insights into the status of your tasks. Create, update, and delete boards and tasks with ease, putting you in complete control"
     },
     {
-      "icon": "/src/assets/subtask.png",
+      "icon": "/src/assets/subtask.svg",
       "heading": "Subtask Management",
       "description": "Break down complex tasks into more manageable subtasks. Track progress with ease by marking subtasks as completed"
     },
     {
-      "icon": "/src/assets/theme.png",
+      "icon": "/src/assets/theme.svg",
       "heading": "Adaptable Themes",
       "description": "Switch between light and dark modes effortlessly, customizing the app's theme to suit your preferred visual environment"
     },
