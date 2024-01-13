@@ -79,6 +79,7 @@ export default function HomePage() {
               {data.features.map((feature, ind) => (
                 <Feature
                   key={ind}
+                  icon={feature.icon}
                   heading={feature.heading}
                   description={feature.description}
                 />
