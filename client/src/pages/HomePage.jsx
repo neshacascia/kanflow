@@ -71,8 +71,8 @@ export default function HomePage() {
             <p className="text-gray-800 text-[17px] tracking-wide w-[700px] pt-4">
               Kanflow embraces simiplicity and minimalism, providing users with
               a clean and easy-to-navigate workspace. By focusing on the
-              essentials, we empower users with a solution that enhances
-              productivity and promotes an smooth workflow
+              essentials, we empower users with a solution that boosts
+              productivity and promotes a smooth workflow
             </p>
 
             <div className="grid grid-cols-2 justify-center gap-8 pt-16">
