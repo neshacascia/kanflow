@@ -176,7 +176,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
           <button
             type="button"
             onClick={addNewColumn}
-            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3"
+            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-lightPurple/25"
           >
             + Add New Column
           </button>
