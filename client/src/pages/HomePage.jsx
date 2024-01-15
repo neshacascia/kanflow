@@ -67,7 +67,7 @@ export default function HomePage() {
 
           <section
             id="features"
-            className="bg-lightGrey flex flex-col px-6 lg:px-40 pb-20"
+            className="bg-lightGrey flex flex-col px-6 lg:px-24 pb-20"
           >
             <h2 className="text-[#372c51] font-home text-3xl md:text-5xl font-semibold tracking-wider pt-20">
               Features&#8212;
@@ -79,7 +79,7 @@ export default function HomePage() {
               productivity and promotes a smooth workflow
             </p>
 
-            <div className="grid md:grid-cols-2 justify-center gap-8 pt-16">
+            <div className="grid md:grid-cols-2 justify-center gap-8 lg:gap-10 pt-16">
               {data.features.map((feature, ind) => (
                 <Feature
                   key={ind}
