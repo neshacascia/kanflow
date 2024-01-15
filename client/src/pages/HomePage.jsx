@@ -35,7 +35,7 @@ export default function HomePage() {
       {user === null && (
         <main>
           <section className="text-white bg-veryDarkGrey h-full relative flex flex-col items-center pt-20 md:pt-20">
-            <h1 className="font-home text-4xl md:text-6xl font-semibold tracking-wider leading-[65px] text-center md:w-[800px] pt-14">
+            <h1 className="font-home text-4xl md:text-[55px] lg:text-6xl font-semibold tracking-wider leading-[65px] text-center md:w-[800px] pt-14">
               Unleash your <span className="gradient">productivity</span> with
               kanflow
             </h1>
@@ -67,7 +67,7 @@ export default function HomePage() {
 
           <section
             id="features"
-            className="bg-lightGrey flex flex-col px-10 md:px-40 pb-20"
+            className="bg-lightGrey flex flex-col px-6 lg:px-40 pb-20"
           >
             <h2 className="text-[#372c51] font-home text-3xl md:text-5xl font-semibold tracking-wider pt-20">
               Features&#8212;
