@@ -67,19 +67,19 @@ export default function HomePage() {
 
           <section
             id="features"
-            className="bg-lightGrey flex flex-col px-40 pb-20"
+            className="bg-lightGrey flex flex-col px-10 md:px-40 pb-20"
           >
-            <h2 className="text-[#372c51] font-home text-5xl font-semibold tracking-wider pt-20">
+            <h2 className="text-[#372c51] font-home text-3xl md:text-5xl font-semibold tracking-wider pt-20">
               Features&#8212;
             </h2>
-            <p className="text-gray-800 text-[17px] tracking-wide w-[700px] pt-4">
+            <p className="text-gray-800 md:text-[17px] tracking-wide md:w-[700px] pt-4">
               Kanflow embraces simiplicity and minimalism, providing users with
               a clean and easy-to-navigate workspace. By focusing on the
               essentials, we empower users with a solution that boosts
               productivity and promotes a smooth workflow
             </p>
 
-            <div className="grid grid-cols-2 justify-center gap-8 pt-16">
+            <div className="grid md:grid-cols-2 justify-center gap-8 pt-16">
               {data.features.map((feature, ind) => (
                 <Feature
                   key={ind}
