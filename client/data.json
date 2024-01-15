@@ -2,21 +2,29 @@
   "features": [
     {
       "icon": "/src/assets/simple.svg",
+      "attribute": "https://www.flaticon.com/free-icons/kanban",
+      "attributeTitle": "Kanban icons created by Lizel Arina",
       "heading": "Simple and Clear Overview",
       "description": "Provides real-time insights into the status of your tasks. Create, update, and delete boards and tasks with ease, putting you in complete control"
     },
     {
       "icon": "/src/assets/subtask.svg",
+      "attribute": "https://www.flaticon.com/free-icons/subtask",
+      "attributeTitle": "Subtask icons created by Shah Rukh Qureshi",
       "heading": "Subtask Management",
       "description": "Break down complex tasks into more manageable subtasks. Track progress with ease by marking them as completed"
     },
     {
       "icon": "/src/assets/theme.svg",
+      "attribute": "https://www.flaticon.com/free-icons/dark-mode",
+      "attributeTitle": "Dark mode icons created by Anggara",
       "heading": "Adaptable Themes",
       "description": "Switch between light and dark mode effortlessly, customizing the app's theme to suit your preferred visual environment"
     },
     {
       "icon": "/src/assets/drag-and-drop.svg",
+      "attribute": "https://www.flaticon.com/free-icons/drag-and-drop",
+      "attributeTitle": "Drag and drop icons created by Bharat Icons",
       "heading": "Intuitive Drag-and-Drop",
       "description": "Enjoy the convenience of dragging and dropping tasks to change their status and re-order them within a column. You can add, rename and remove columns at any time to perfectly align with your project needs"
     }

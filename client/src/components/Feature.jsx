@@ -1,11 +1,20 @@
-export default function Feature({ icon, heading, description }) {
+export default function Feature({
+  icon,
+  attribute,
+  alt,
+  heading,
+  description,
+}) {
   return (
     <div className="w-[400px] md:w-[355px] lg:w-[450px] flex items-start gap-4 md:gap-3">
       <div className="bg-gray-200 rounded-full">
-        <img
-          src={icon}
-          className="max-w-[50px] lg:max-w-[60px] p-4 object-contain"
-        />
+        <a href={attribute}>
+          <img
+            src={icon}
+            alt={alt}
+            className="max-w-[50px] lg:max-w-[60px] p-4 object-contain"
+          />
+        </a>
       </div>
 
       <div>

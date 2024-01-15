@@ -84,6 +84,8 @@ export default function HomePage() {
                 <Feature
                   key={ind}
                   icon={feature.icon}
+                  attribute={feature.attribute}
+                  alt={feature.attributeTitle}
                   heading={feature.heading}
                   description={feature.description}
                 />
