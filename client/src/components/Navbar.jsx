@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Context } from '../context/Context';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../assets/logo.svg';
 
@@ -24,6 +24,8 @@ export default function Navbar() {
     isLoggedIn,
     storeAuthValue,
   } = useContext(Context);
+
+  const location = useLocation();
 
   return (
     <nav
@@ -49,9 +51,11 @@ export default function Navbar() {
               : 'text-white flex items-center gap-6 ml-auto z-10'
           }`}
         >
-          <a href="#features" className="text-sm tracking-wider border-b">
-            Features
-          </a>
+          {location.pathname === '/' && (
+            <a href="#features" className="text-sm tracking-wider border-b">
+              Features
+            </a>
+          )}
           <Link
             to="/login"
             onClick={() => storeAuthValue('login')}
