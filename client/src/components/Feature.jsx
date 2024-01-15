@@ -1,10 +1,12 @@
 export default function Feature({ icon, heading, description }) {
   return (
     <div className="w-[450px] flex items-start gap-4">
-      <img src={icon} className="bg-gray-300 rounded-full p-3" />
+      <div className="bg-gray-200 rounded-full">
+        <img src={icon} className="max-w-[60px] p-4 object-contain" />
+      </div>
 
       <div>
-        <h3 className="text-lightBlack text-2xl font-home font-semibold">
+        <h3 className="text-[#372c51] text-2xl font-home font-semibold">
           {heading}
         </h3>
         <p className="text-gray-700 text-[15px] font-light pt-3">
