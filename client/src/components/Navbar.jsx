@@ -49,6 +49,9 @@ export default function Navbar() {
               : 'text-white flex items-center gap-6 ml-auto z-10'
           }`}
         >
+          <a href="#features" className="text-sm tracking-wider border-b">
+            Features
+          </a>
           <Link
             to="/login"
             onClick={() => storeAuthValue('login')}
