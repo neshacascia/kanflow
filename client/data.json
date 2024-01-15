@@ -8,17 +8,17 @@
     {
       "icon": "/src/assets/subtask.svg",
       "heading": "Subtask Management",
-      "description": "Break down complex tasks into more manageable subtasks. Track progress with ease by marking subtasks as completed"
+      "description": "Break down complex tasks into more manageable subtasks. Track progress with ease by marking them as completed"
     },
     {
       "icon": "/src/assets/theme.svg",
       "heading": "Adaptable Themes",
-      "description": "Switch between light and dark modes effortlessly, customizing the app's theme to suit your preferred visual environment"
+      "description": "Switch between light and dark mode effortlessly, customizing the app's theme to suit your preferred visual environment"
     },
     {
       "icon": "/src/assets/drag-and-drop.svg",
       "heading": "Intuitive Drag-and-Drop",
-      "description": "Enjoy the convenience of dragging and dropping tasks to change their status and effortlessly re-order them within a column. You can add, rename and remove columns at any time to perfectly align with your project needs"
+      "description": "Enjoy the convenience of dragging and dropping tasks to change their status and re-order them within a column. You can add, rename and remove columns at any time to perfectly align with your project needs"
     }
   ]
 }

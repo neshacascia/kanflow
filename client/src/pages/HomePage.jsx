@@ -76,7 +76,7 @@ export default function HomePage() {
               Kanflow embraces simiplicity and minimalism, providing users with
               a clean and easy-to-navigate workspace. By focusing on the
               essentials, we empower users with a solution that boosts
-              productivity and promotes a smooth workflow
+              productivity and promotes a smooth workflow.
             </p>
 
             <div className="grid md:grid-cols-2 justify-center gap-8 lg:gap-10 pt-16">
