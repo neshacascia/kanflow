@@ -113,9 +113,9 @@ export default function AuthPage() {
 
         <form
           onSubmit={submitHandler}
-          className="w-full flex flex-col gap-4 pt-2 md:gap-5 md:pt-4"
+          className="w-full flex flex-col items-center gap-4 pt-2 md:gap-5 md:pt-4"
         >
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
+          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
             Email Address
             <input
               type="email"
@@ -132,7 +132,7 @@ export default function AuthPage() {
               </span>
             )}
           </label>
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
+          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
             <input
               type="password"
@@ -150,7 +150,7 @@ export default function AuthPage() {
             )}
           </label>
           {authValue === 'signup' && (
-            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-[330px]">
+            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
               Confirm Password
               <input
                 type="password"
@@ -185,7 +185,7 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={!formIsValid}
-            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 md:w-[330px]"
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 w-full"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
           </button>
