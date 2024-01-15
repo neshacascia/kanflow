@@ -13,6 +13,7 @@ import Sidebar from './Sidebar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function Board() {
   const {
@@ -30,6 +31,7 @@ export default function Board() {
   } = useContext(Context);
   const { id } = useParams();
 
+  const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
   const [selectedStatus, setSelectedStatus] = useState();
@@ -50,6 +52,7 @@ export default function Board() {
 
           const { board, tasks } = boardRes.data;
           const { boards } = boardsRes.data;
+          setLoading(false);
           setBoard(board[0]);
           setTasks(tasks);
           setBoards(boards);
@@ -68,9 +71,10 @@ export default function Board() {
       {displaySidebar && <Sidebar />}
       <main
         onClick={() => setDisplaySettings(false)}
-        className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
+        className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col justify-center px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
-        {boards.length === 0 && (
+        {loading && <LoadingSpinner />}
+        {!loading && boards.length === 0 && (
           <section className="text-lightBlack dark:text-white h-full flex flex-col justify-center items-center gap-4">
             <h2 className="text-2xl font-semibold">Welcome to Kanflow</h2>
             <p className="text-mediumGrey dark:text-white text-center pb-3">
