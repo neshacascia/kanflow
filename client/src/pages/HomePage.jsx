@@ -60,7 +60,7 @@ export default function HomePage() {
               </button>
             </div>
 
-            <div className="md:w-[1040px] py-20 px-6">
+            <div className="lg:w-[1040px] py-20 px-6">
               <img src={kanflow} className="w-full rounded-lg" />
             </div>
           </section>
