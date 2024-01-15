@@ -16,7 +16,7 @@
       "description": "Switch between light and dark modes effortlessly, customizing the app's theme to suit your preferred visual environment"
     },
     {
-      "icon": "/src/assets/drag-and-drop.png",
+      "icon": "/src/assets/drag-and-drop.svg",
       "heading": "Intuitive Drag-and-Drop",
       "description": "Enjoy the convenience of dragging and dropping tasks to change their status and effortlessly re-order them within a column. You can add, rename and remove columns at any time to perfectly align with your project needs"
     }
