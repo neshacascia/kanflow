@@ -64,8 +64,11 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section className="bg-lightGrey flex flex-col px-40">
-            <h2 className="text-[#273762] font-home text-5xl font-semibold tracking-wider pt-20">
+          <section
+            id="features"
+            className="bg-lightGrey flex flex-col px-40 pb-20"
+          >
+            <h2 className="text-[#372c51] font-home text-5xl font-semibold tracking-wider pt-20">
               Features&#8212;
             </h2>
             <p className="text-gray-800 text-[17px] tracking-wide w-[700px] pt-4">
