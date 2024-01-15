@@ -6,6 +6,7 @@ import Feature from '../components/Feature';
 
 import data from '../../data.json';
 import kanflow from '../assets/app-dashboard.png';
+import logo from '../assets/logo.svg';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -89,6 +90,27 @@ export default function HomePage() {
               ))}
             </div>
           </section>
+
+          <footer className="text-white bg-veryDarkGrey flex items-center py-4 px-6">
+            <img src={logo} className="z-10" />
+            <p className="text-xl font-semibold tracking-wide px-4">kanflow</p>
+            <div className="flex items-center gap-6 ml-auto">
+              <Link
+                to="/login"
+                onClick={() => storeAuthValue('login')}
+                className="text-sm tracking-wider"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => storeAuthValue('signup')}
+                className="bg-mainPurple text-sm  tracking-wider py-2 px-4 rounded hover:bg-mainPurpleHover"
+              >
+                Signup
+              </Link>{' '}
+            </div>
+          </footer>
         </main>
       )}
     </>
