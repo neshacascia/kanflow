@@ -123,7 +123,7 @@ export default function AuthPage() {
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailNotValid ? 'invalid:border-deleteRed' : ''
+                enteredEmailNotValid ? 'border-deleteRed' : ''
               }`}
             />
             {enteredEmailNotValid && (
@@ -140,7 +140,7 @@ export default function AuthPage() {
               onChange={passwordChangeHandler}
               onBlur={passwordInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredPasswordNotValid ? 'invalid:border-deleteRed' : ''
+                enteredPasswordNotValid ? 'border-deleteRed' : ''
               }`}
             />
             {enteredPasswordNotValid && (
@@ -158,9 +158,7 @@ export default function AuthPage() {
                 onChange={confirmPasswordChangeHandler}
                 onBlur={confirmPasswordInputBlurHandler}
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                  enteredConfirmPasswordNotValid
-                    ? 'invalid:border-deleteRed'
-                    : ''
+                  enteredConfirmPasswordNotValid ? 'border-deleteRed' : ''
                 }`}
               />
               {enteredConfirmPasswordNotValid && (
