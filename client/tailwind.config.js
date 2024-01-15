@@ -24,6 +24,7 @@ export default {
       },
       fontFamily: {
         body: ['Plus Jakarta Sans'],
+        home: ['Josefin Sans'],
       },
       borderRadius: {
         menuLink: '0px 100px 100px 0px;',

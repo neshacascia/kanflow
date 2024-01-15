@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Context } from '../context/Context';
+import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../assets/logo.svg';
 
@@ -21,7 +22,10 @@ export default function Navbar() {
     displaySidebar,
     boards,
     isLoggedIn,
+    storeAuthValue,
   } = useContext(Context);
+
+  const location = useLocation();
 
   return (
     <nav
@@ -29,11 +33,44 @@ export default function Navbar() {
       className="bg-white dark:bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesLight dark:border-linesDark"
     >
       <span className="h-full flex items-center">
-        <img src={logo} />
-        <p className="text-black dark:text-white text-xl font-semibold tracking-wide px-4 hidden md:block">
+        <img src={logo} className="z-10" />
+        <Link
+          to="/"
+          className={`text-black dark:text-white text-xl font-semibold tracking-wide px-4 z-10 ${
+            isLoggedIn ? 'hidden' : ''
+          } md:block`}
+        >
           kanflow
-        </p>
+        </Link>
         <div className="h-full border-r-[1px] border-linesLight dark:border-linesDark mr-4 hidden md:block"></div>
+
+        <div
+          className={`${
+            isLoggedIn
+              ? 'hidden'
+              : 'text-white flex items-center gap-6 ml-auto z-10'
+          }`}
+        >
+          {location.pathname === '/' && (
+            <a href="#features" className="text-sm tracking-wider border-b">
+              Features
+            </a>
+          )}
+          <Link
+            to="/login"
+            onClick={() => storeAuthValue('login')}
+            className="text-sm tracking-wider"
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            onClick={() => storeAuthValue('signup')}
+            className="bg-mainPurple text-sm  tracking-wider py-2 px-4 rounded hover:bg-mainPurpleHover"
+          >
+            Signup
+          </Link>{' '}
+        </div>
 
         {isLoggedIn && (
           <div className="w-full flex items-center gap-2">
