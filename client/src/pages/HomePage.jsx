@@ -34,12 +34,12 @@ export default function HomePage() {
     <>
       {user === null && (
         <main>
-          <section className="text-white bg-veryDarkGrey h-full relative flex flex-col items-center pt-16 md:pt-20">
-            <h1 className="font-home text-6xl font-semibold tracking-wider leading-[65px] text-center w-[800px] pt-14">
+          <section className="text-white bg-veryDarkGrey h-full relative flex flex-col items-center pt-20 md:pt-20">
+            <h1 className="font-home text-4xl md:text-6xl font-semibold tracking-wider leading-[65px] text-center md:w-[800px] pt-14">
               Unleash your <span className="gradient">productivity</span> with
               kanflow
             </h1>
-            <p className="text-gray-400 text-[18px] pt-4">
+            <p className="text-gray-400 md:text-[18px] text-center pt-4 px-6">
               The ultimate kanban task management solution for seamless and
               efficient workflow.
             </p>
@@ -60,7 +60,7 @@ export default function HomePage() {
               </button>
             </div>
 
-            <div className="w-[1040px] py-20">
+            <div className="md:w-[1040px] py-20 px-6">
               <img src={kanflow} className="w-full rounded-lg" />
             </div>
           </section>
