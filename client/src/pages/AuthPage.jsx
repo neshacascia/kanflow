@@ -102,7 +102,7 @@ export default function AuthPage() {
     <section className="h-screen relative flex flex-col items-center justify-center pt-44 mb-28 md:flex-row md:justify-between lg:justify-between md:pt-20 md:-mb-28">
       <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
       <div className="md:bg-[#E6E6E6] md:w-[50%] md:h-full flex flex-col items-center md:items-stretch justify-center gap-3 rounded-lg py-5 md:py-8 md:px-10 lg:px-32">
-        <h2 className="text-xl md:text-2xl font-semibold tracking-wide">
+        <h2 className="text-xl font-home md:text-3xl font-bold tracking-wide">
           {authValue === 'login' ? 'Welcome back!' : 'Sign Up!'}
         </h2>
         <p className="text-sm text-center md:text-start">
