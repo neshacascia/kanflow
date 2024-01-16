@@ -61,7 +61,11 @@ export default function HomePage() {
             </div>
 
             <div className="lg:w-[1040px] py-20 px-6">
-              <img src={kanflow} className="w-full rounded-lg" />
+              <img
+                src={kanflow}
+                alt="Kanflow desktop dashboard"
+                className="w-full rounded-lg"
+              />
             </div>
           </section>
 
