@@ -10,10 +10,10 @@ import ViewTask from './ViewTask';
 import EditTask from './EditTask';
 import Delete from './Delete';
 import Sidebar from './Sidebar';
+import LoadingSpinner from './LoadingSpinner';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
-import LoadingSpinner from './LoadingSpinner';
 
 export default function Board() {
   const {
@@ -63,6 +63,8 @@ export default function Board() {
         }
       }
       fetchData();
+    } else {
+      setLoading(false);
     }
   }, [id, isBoardUpdated]);
 
