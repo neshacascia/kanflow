@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function LogoutPage() {
   const { setIsLoggedIn, setIsDarkMode } = useContext(Context);
@@ -26,8 +27,9 @@ export default function LogoutPage() {
   }, []);
 
   return (
-    <section className="h-screen relative pt-16 md:pt-20">
-      Logging out...
+    <section className="text-white bg-veryDarkGrey font-semibold text-lg w-screen h-screen relative flex flex-col justify-center items-center pt-16 md:pt-20">
+      <p>Logging out...</p>
+      <LoadingSpinner />
     </section>
   );
 }
