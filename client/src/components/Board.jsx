@@ -104,7 +104,7 @@ export default function Board() {
             </div>
           </section>
         )}
-        {board && (
+        {!loading && board && (
           <section className="h-full flex gap-3 pt-6">
             {board.columns.length > 0 ? (
               board.columns.map((column, ind) => (
