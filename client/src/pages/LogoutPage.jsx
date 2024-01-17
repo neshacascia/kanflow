@@ -5,7 +5,7 @@ import { Context } from '../context/Context';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function LogoutPage() {
-  const { setIsLoggedIn, setIsDarkMode } = useContext(Context);
+  const { setIsLoggedIn, setIsDarkMode, setBoard } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +15,7 @@ export default function LogoutPage() {
 
         setIsLoggedIn(false);
         setIsDarkMode(true);
+        setBoard();
         localStorage.removeItem('user');
         console.log('User logged out successfully');
         navigate('/');
