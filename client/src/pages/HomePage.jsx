@@ -20,10 +20,13 @@ export default function HomePage() {
 
   async function demoUserLogin() {
     try {
-      const res = await axios.post('/api/login', {
-        email: import.meta.env.VITE_DEMO_USER_EMAIL,
-        password: import.meta.env.VITE_DEMO_USER_PASSWORD,
-      });
+      const res = await axios.post(
+        'https://plain-poncho-hen.cyclic.app/api/login',
+        {
+          email: import.meta.env.VITE_DEMO_USER_EMAIL,
+          password: import.meta.env.VITE_DEMO_USER_PASSWORD,
+        }
+      );
       navigate('/board');
     } catch (err) {
       console.error(err);
