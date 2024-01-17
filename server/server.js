@@ -17,6 +17,9 @@ require('dotenv').config({ path: './config/.env' });
 // passport config
 require('./config/passport')(passport);
 
+// sessions
+const sessionStore = MongoStore.create({ mongoUrl: process.env.DB_STRING });
+
 app.use(
   cors({
     origin: 'https://nc-kanflow.vercel.app/',
@@ -34,7 +37,7 @@ app.use(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+    store: sessionStore,
   })
 );
 
