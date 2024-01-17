@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo').default;
 const flash = require('express-flash');
 const logger = require('morgan');
 const connectDB = require('./config/database');
+const cors = require('cors');
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
 
@@ -16,6 +17,7 @@ require('dotenv').config({ path: './config/.env' });
 // passport config
 require('./config/passport')(passport);
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
