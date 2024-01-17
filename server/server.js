@@ -16,8 +16,6 @@ require('dotenv').config({ path: './config/.env' });
 // passport config
 require('./config/passport')(passport);
 
-connectDB();
-
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -42,6 +40,8 @@ app.use(flash());
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`The server is running on port ${process.env.PORT}.`);
+connectDB().then(() => {
+  app.listen(process.env.PORT, () => {
+    console.log(`The server is running on port ${process.env.PORT}.`);
+  });
 });
