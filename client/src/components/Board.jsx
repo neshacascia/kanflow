@@ -140,6 +140,7 @@ export default function Board() {
             id={board._id}
             selectedTask={viewTask}
             columns={board.columns}
+            selectedStatus={selectedStatus}
             setIsBoardUpdated={setIsBoardUpdated}
             closeModal={closeModal}
           />

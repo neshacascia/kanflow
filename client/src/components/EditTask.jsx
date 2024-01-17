@@ -9,6 +9,7 @@ export default function EditTask({
   id,
   selectedTask,
   columns,
+  selectedStatus,
   setIsBoardUpdated,
   closeModal,
 }) {
@@ -179,12 +180,24 @@ export default function EditTask({
               name="status"
               className="text-lightBlack dark:text-white bg-transparent text-[13px] font-light leading-6 w-full border-[1px] rounded border-borderGrey py-3 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple hover:cursor-pointer"
             >
-              {columns.map((column, ind) => (
-                <option key={ind} value={column.columnName}>
-                  {column.columnName.split('')[0].toUpperCase() +
-                    column.columnName.split('').slice(1).join('').toLowerCase()}
-                </option>
-              ))}
+              <option value={selectedStatus}>
+                {selectedStatus.split('')[0].toUpperCase() +
+                  selectedStatus.split('').slice(1).join('').toLowerCase()}
+              </option>
+              {columns.map((column, ind) => {
+                if (column.columnName !== selectedStatus) {
+                  return (
+                    <option key={ind} value={column.columnName}>
+                      {column.columnName.split('')[0].toUpperCase() +
+                        column.columnName
+                          .split('')
+                          .slice(1)
+                          .join('')
+                          .toLowerCase()}
+                    </option>
+                  );
+                }
+              })}
             </select>
           </label>
           <button
