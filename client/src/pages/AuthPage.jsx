@@ -168,7 +168,8 @@ export default function AuthPage() {
               )}
             </label>
           )}
-          {!passwordsMatch &&
+          {authValue === 'signup' &&
+            !passwordsMatch &&
             enteredPasswordTouched &&
             enteredConfirmPasswordTouched && (
               <span className="text-deleteRed text-xs font-semibold">
