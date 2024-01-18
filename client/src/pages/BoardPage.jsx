@@ -16,9 +16,12 @@ export default function BoardPage() {
   useEffect(() => {
     async function getBoards() {
       try {
-        const res = await axios.get('/api/board/getBoards', {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          'https://kanflow-server.onrender.com/api/board/getBoards',
+          {
+            withCredentials: true,
+          }
+        );
 
         const { user, boards } = res.data;
 

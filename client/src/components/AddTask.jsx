@@ -91,9 +91,12 @@ export default function AddTask({
     };
 
     try {
-      const res = await axios.post('/api/board/addTask', {
-        taskData,
-      });
+      const res = await axios.post(
+        'https://kanflow-server.onrender.com/api/board/addTask',
+        {
+          taskData,
+        }
+      );
       console.log(res);
       if (res.status === 200) {
         setIsBoardUpdated(true);

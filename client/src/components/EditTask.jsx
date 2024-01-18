@@ -83,9 +83,12 @@ export default function EditTask({
     };
 
     try {
-      const res = await axios.put('/api/board/editTask', {
-        taskData,
-      });
+      const res = await axios.put(
+        'https://kanflow-server.onrender.com/api/board/editTask',
+        {
+          taskData,
+        }
+      );
       console.log(res);
       if (res.status === 200) {
         setIsBoardUpdated(true);

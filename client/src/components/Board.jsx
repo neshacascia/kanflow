@@ -41,12 +41,15 @@ export default function Board() {
       async function fetchData() {
         try {
           const [boardRes, boardsRes] = await Promise.all([
-            axios.get(`/api/board/${id}`, {
+            axios.get(`https://kanflow-server.onrender.com/api/board/${id}`, {
               withCredentials: true,
             }),
-            axios.get('/api/board/getBoards', {
-              withCredentials: true,
-            }),
+            axios.get(
+              'https://kanflow-server.onrender.com/api/board/getBoards',
+              {
+                withCredentials: true,
+              }
+            ),
           ]);
 
           const { board, tasks } = boardRes.data;

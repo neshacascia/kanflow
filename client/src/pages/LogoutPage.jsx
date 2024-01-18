@@ -12,7 +12,9 @@ export default function LogoutPage() {
   useEffect(() => {
     async function logout() {
       try {
-        await axios.get('/api/logout', { withCredentials: true });
+        await axios.get('https://kanflow-server.onrender.com/api/logout', {
+          withCredentials: true,
+        });
 
         setIsLoggedIn(false);
         setIsDarkMode(true);

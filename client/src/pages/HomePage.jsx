@@ -21,7 +21,7 @@ export default function HomePage() {
   async function demoUserLogin() {
     try {
       const res = await axios.post(
-        'https://plain-poncho-hen.cyclic.app/api/login',
+        'https://kanflow-server.onrender.com/api/login',
         {
           email: import.meta.env.VITE_DEMO_USER_EMAIL,
           password: import.meta.env.VITE_DEMO_USER_PASSWORD,
