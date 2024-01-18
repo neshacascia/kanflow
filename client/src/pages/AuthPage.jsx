@@ -83,11 +83,14 @@ export default function AuthPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`/api/${authValue}`, {
-        email: enteredEmail,
-        password: enteredPassword,
-        confirmPassword: enteredConfirmPassword,
-      });
+      const res = await axios.post(
+        `https://kanflow-server.onrender.com/api/${authValue}`,
+        {
+          email: enteredEmail,
+          password: enteredPassword,
+          confirmPassword: enteredConfirmPassword,
+        }
+      );
 
       if (res.status === 200) {
         navigate('/board');

@@ -18,9 +18,12 @@ export default function Delete({
     const data = modal === 'deleteTask' ? selectedTask._id : board._id;
 
     try {
-      const res = await axios.delete('/api/board/delete', {
-        data: { modal, data },
-      });
+      const res = await axios.delete(
+        'https://kanflow-server.onrender.com/api/board/delete',
+        {
+          data: { modal, data },
+        }
+      );
       console.log(res);
 
       if (modal === 'deleteTask') {

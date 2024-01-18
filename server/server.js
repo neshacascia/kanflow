@@ -17,13 +17,11 @@ require('dotenv').config({ path: './config/.env' });
 // passport config
 require('./config/passport')(passport);
 
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-    exposedHeaders: ['Access-Control-Allow-Origin'],
-  })
-);
+const corsOptions = {
+  origin: 'https://nc-kanflow.onrender.com/',
+};
+
+app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
