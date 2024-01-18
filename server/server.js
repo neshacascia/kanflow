@@ -19,7 +19,7 @@ require('./config/passport')(passport);
 
 app.use(
   cors({
-    origin: 'https://kanflow-git-server-configs-neshacascia.vercel.app/',
+    origin: 'http://localhost:5173',
     credentials: true,
     exposedHeaders: ['Access-Control-Allow-Origin'],
   })
