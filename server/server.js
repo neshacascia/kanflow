@@ -19,6 +19,7 @@ require('./config/passport')(passport);
 
 const corsOptions = {
   origin: 'https://nc-kanflow.onrender.com',
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
