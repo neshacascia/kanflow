@@ -106,7 +106,13 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
       } else {
         const res = await axios.put(
           'https://kanflow-server.onrender.com/api/board/editBoard',
-          { boardData }
+          { boardData },
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
         );
 
         if (res.status === 200) {

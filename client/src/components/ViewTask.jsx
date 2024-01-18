@@ -62,6 +62,12 @@ export default function ViewTask({
         {
           taskId: task._id,
           status: newStatus,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
       setIsBoardUpdated(true);

@@ -20,6 +20,9 @@ export default function BoardPage() {
           'https://kanflow-server.onrender.com/api/board/getBoards',
           {
             withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
           }
         );
 

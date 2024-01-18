@@ -95,6 +95,12 @@ export default function AddTask({
         'https://kanflow-server.onrender.com/api/board/addTask',
         {
           taskData,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
       console.log(res);
