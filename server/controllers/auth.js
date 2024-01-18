@@ -28,7 +28,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       if (user.email === process.env.DEMO_USER_EMAIL) {
-        return res.redirect('/api/board');
+        return res.redirect('/board');
       }
 
       return res.status(200).json({ msg: 'Success! You are logged in.' });
