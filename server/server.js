@@ -18,7 +18,7 @@ require('dotenv').config({ path: './config/.env' });
 require('./config/passport')(passport);
 
 const corsOptions = {
-  origin: 'https://nc-kanflow.onrender.com/',
+  origin: 'https://nc-kanflow.onrender.com',
 };
 
 app.use(cors(corsOptions));
