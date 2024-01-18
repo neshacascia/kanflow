@@ -89,6 +89,12 @@ export default function AuthPage() {
           email: enteredEmail,
           password: enteredPassword,
           confirmPassword: enteredConfirmPassword,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
 

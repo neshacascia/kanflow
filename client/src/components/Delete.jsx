@@ -22,6 +22,12 @@ export default function Delete({
         'https://kanflow-server.onrender.com/api/board/delete',
         {
           data: { modal, data },
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
       console.log(res);

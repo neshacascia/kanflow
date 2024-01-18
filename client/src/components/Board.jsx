@@ -48,6 +48,9 @@ export default function Board() {
               'https://kanflow-server.onrender.com/api/board/getBoards',
               {
                 withCredentials: true,
+                headers: {
+                  'Content-Type': 'application/json',
+                },
               }
             ),
           ]);

@@ -14,6 +14,9 @@ export default function LogoutPage() {
       try {
         await axios.get('https://kanflow-server.onrender.com/api/logout', {
           withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
 
         setIsLoggedIn(false);
