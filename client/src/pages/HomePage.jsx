@@ -26,7 +26,12 @@ export default function HomePage() {
           email: import.meta.env.VITE_DEMO_USER_EMAIL,
           password: import.meta.env.VITE_DEMO_USER_PASSWORD,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
       navigate('/board');
     } catch (err) {
