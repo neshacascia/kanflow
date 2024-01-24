@@ -84,7 +84,7 @@ export default function EditTask({
 
     try {
       const res = await axios.put(
-        'https://kanflow-server.onrender.com/api/board/editTask',
+        '/api/board/editTask',
         {
           taskData,
         },

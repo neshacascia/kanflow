@@ -93,10 +93,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
 
     try {
       if (boardDetails === 'new') {
-        const res = await axios.post(
-          'https://kanflow-server.onrender.com/api/board/createBoard',
-          { boardData }
-        );
+        const res = await axios.post('/api/board/createBoard', { boardData });
         const { boardId } = res.data;
 
         if (res.status === 200) {
@@ -105,7 +102,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
         }
       } else {
         const res = await axios.put(
-          'https://kanflow-server.onrender.com/api/board/editBoard',
+          '/api/board/editBoard',
           { boardData },
           {
             withCredentials: true,

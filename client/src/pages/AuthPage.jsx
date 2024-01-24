@@ -84,7 +84,7 @@ export default function AuthPage() {
 
     try {
       const res = await axios.post(
-        `https://kanflow-server.onrender.com/api/${authValue}`,
+        `/api/${authValue}`,
         {
           email: enteredEmail,
           password: enteredPassword,

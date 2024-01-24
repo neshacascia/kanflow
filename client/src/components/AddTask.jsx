@@ -92,7 +92,7 @@ export default function AddTask({
 
     try {
       const res = await axios.post(
-        'https://kanflow-server.onrender.com/api/board/addTask',
+        '/api/board/addTask',
         {
           taskData,
         },

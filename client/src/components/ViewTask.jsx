@@ -41,14 +41,11 @@ export default function ViewTask({
       setSubtasks(updatedSubtasks);
       setIsBoardUpdated(true);
 
-      const res = await axios.put(
-        'https://kanflow-server.onrender.com/api/board/setCompletionStatus',
-        {
-          taskId: task._id,
-          subtaskId: id,
-          completed: completed,
-        }
-      );
+      const res = await axios.put('/api/board/setCompletionStatus', {
+        taskId: task._id,
+        subtaskId: id,
+        completed: completed,
+      });
       console.log(res);
     } catch (err) {
       console.error(err);
@@ -58,7 +55,7 @@ export default function ViewTask({
   async function updateCurrentStatus(newStatus) {
     try {
       const res = await axios.put(
-        'https://kanflow-server.onrender.com/api/board/updateStatus',
+        '/api/board/updateStatus',
         {
           taskId: task._id,
           status: newStatus,
