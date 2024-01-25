@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Context } from '../context/Context';
 import { Link, useLocation } from 'react-router-dom';
 
-import logo from '../assets/logo.svg';
+import logo from '../../public/assets/logo.svg';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

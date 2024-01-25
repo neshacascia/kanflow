@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
 
-import kanflowImg from '../assets/kanflow-img.svg';
+import kanflowImg from '../../public/assets/kanflow-img.svg';
 
 export default function AuthPage() {
   const authValue = localStorage.getItem('authValue');
@@ -84,7 +84,7 @@ export default function AuthPage() {
 
     try {
       const res = await axios.post(
-        `https://kanflow-server.onrender.com/api/${authValue}`,
+        `/api/${authValue}`,
         {
           email: enteredEmail,
           password: enteredPassword,

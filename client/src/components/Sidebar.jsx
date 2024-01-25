@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import ToggleThemeButton from './ToggleThemeButton';
 
-import logo from '../assets/logo.svg';
+import logo from '../../public/assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,

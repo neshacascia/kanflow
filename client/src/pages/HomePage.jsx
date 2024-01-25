@@ -5,8 +5,8 @@ import axios from 'axios';
 import Feature from '../components/Feature';
 
 import data from '../../data.json';
-import kanflow from '../assets/app-dashboard.png';
-import logo from '../assets/logo.svg';
+import kanflow from '../../public/assets/app-dashboard.png';
+import logo from '../../public/assets/logo.svg';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function HomePage() {
   async function demoUserLogin() {
     try {
       const res = await axios.post(
-        'https://kanflow-server.onrender.com/api/login',
+        '/api/login',
         {
           email: import.meta.env.VITE_DEMO_USER_EMAIL,
           password: import.meta.env.VITE_DEMO_USER_PASSWORD,

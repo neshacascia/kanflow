@@ -19,7 +19,7 @@ export default function Delete({
 
     try {
       const res = await axios.delete(
-        'https://kanflow-server.onrender.com/api/board/delete',
+        '/api/board/delete',
         {
           data: { modal, data },
         },
