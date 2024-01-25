@@ -41,11 +41,20 @@ export default function ViewTask({
       setSubtasks(updatedSubtasks);
       setIsBoardUpdated(true);
 
-      const res = await axios.put('/api/board/setCompletionStatus', {
-        taskId: task._id,
-        subtaskId: id,
-        completed: completed,
-      });
+      const res = await axios.put(
+        '/api/board/setCompletionStatus',
+        {
+          taskId: task._id,
+          subtaskId: id,
+          completed: completed,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.error(err);

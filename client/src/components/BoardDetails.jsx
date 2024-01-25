@@ -93,7 +93,16 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
 
     try {
       if (boardDetails === 'new') {
-        const res = await axios.post('/api/board/createBoard', { boardData });
+        const res = await axios.post(
+          '/api/board/createBoard',
+          { boardData },
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
         const { boardId } = res.data;
 
         if (res.status === 200) {
