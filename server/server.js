@@ -38,9 +38,6 @@ app.use(
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
     cookie: {
       secure: true,
-      sameSite: 'None',
-      path: '/',
-      domain: 'kanflow.onrender.com',
     },
   })
 );
