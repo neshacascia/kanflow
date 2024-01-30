@@ -14,6 +14,10 @@ exports.postLogin = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
+  if (req.body.email === process.env.DEMO_USER_EMAIL) {
+    req.body.password = process.env.DEMO_USER_PASSWORD;
+  }
+
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return next(err);
