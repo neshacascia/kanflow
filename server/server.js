@@ -36,10 +36,12 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
-    // cookie: {
-    //   secure: true,
-    //   sameSite: 'None',
-    // },
+    cookie: {
+      secure: true,
+      sameSite: 'None',
+      path: '/',
+      domain: 'https://kanflow.onrender.com',
+    },
   })
 );
 
