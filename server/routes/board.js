@@ -14,4 +14,9 @@ router.put('/updateStatus', boardController.updateStatus);
 router.put('/setCompletionStatus', boardController.setCompletionStatus);
 router.delete('/delete', boardController.delete);
 
+router.get('/test', (req, res) => {
+  req.session.test = 'Hello, this is a test.';
+  res.send('Test route.');
+});
+
 module.exports = router;

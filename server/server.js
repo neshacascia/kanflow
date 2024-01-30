@@ -50,11 +50,6 @@ app.get('/', (req, res) => {
   res.send("Hello, welcome to Kanflow's server!");
 });
 
-app.get('/test', (req, res) => {
-  req.session.test = 'Hello, this is a test.';
-  res.send('Test route.');
-});
-
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
