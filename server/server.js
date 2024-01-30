@@ -20,6 +20,7 @@ app.use(
   cors({
     origin: 'https://kanflow.onrender.com',
     credentials: true,
+    exposedHeaders: ['set-cookie'],
   })
 );
 
