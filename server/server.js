@@ -40,7 +40,7 @@ app.use(
       secure: true,
       sameSite: 'None',
       path: '/',
-      domain: 'https://kanflow.onrender.com',
+      domain: 'kanflow.onrender.com',
     },
   })
 );
