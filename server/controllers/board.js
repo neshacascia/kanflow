@@ -3,6 +3,12 @@ const Board = require('../models/Board');
 const Task = require('../models/Task');
 
 module.exports = {
+  test: (req, res) => {
+    req.session.test = 'Hello, this is a test.';
+    console.log('Req session:', req.session);
+    console.log('Req user:', req.user);
+    res.send('Test route.');
+  },
   getIndex: (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
   },
