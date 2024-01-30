@@ -34,6 +34,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', (req, res) => {
+  res.send("Hello, welcome to Kanflow's server!");
+});
+
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
