@@ -36,9 +36,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
-    cookie: {
-      secure: true,
-    },
+    // cookie: {
+    //   secure: true,
+    // },
   })
 );
 
