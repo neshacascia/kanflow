@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -14,6 +15,13 @@ require('dotenv').config({ path: './config/.env' });
 
 // passport config
 require('./config/passport')(passport);
+
+app.use(
+  cors({
+    origin: 'https://kanflow.onrender.com',
+    credentials: true,
+  })
+);
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
