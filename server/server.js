@@ -56,6 +56,10 @@ app.get('/', (req, res) => {
 app.use('/api', homeRoutes);
 app.use('/api/board', ensureAuth, boardRoutes);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(staticPath, 'index.html'));
+});
+
 connectDB().then(() => {
   app.listen(process.env.PORT, () => {
     console.log(`The server is running on port ${process.env.PORT}.`);
