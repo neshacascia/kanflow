@@ -61,10 +61,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(staticPath, 'index.html'));
 });
 
-app.use((req, res, next) => {
-  res.sendFile(path.join(staticPath, 'index.html'));
-});
-
 connectDB().then(() => {
   app.listen(process.env.PORT, () => {
     console.log(`The server is running on port ${process.env.PORT}.`);
