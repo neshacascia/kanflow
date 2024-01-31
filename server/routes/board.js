@@ -14,6 +14,4 @@ router.put('/updateStatus', boardController.updateStatus);
 router.put('/setCompletionStatus', boardController.setCompletionStatus);
 router.delete('/delete', boardController.delete);
 
-router.get('/test', boardController.test);
-
 module.exports = router;

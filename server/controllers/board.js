@@ -3,25 +3,18 @@ const Board = require('../models/Board');
 const Task = require('../models/Task');
 
 module.exports = {
-  test: (req, res) => {
-    req.session.test = 'Hello, this is a test.';
-    console.log('Req session:', req.session);
-    console.log('Req user:', req.user);
-    res.send('Test route.');
-  },
-  getIndex: (req, res) => {
-    res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
-  },
   getBoards: async (req, res) => {
     try {
-      const userId = req.user && req.user.id;
+      console.log('Req:', req);
+      console.log('Req session:', req.session);
+      // const userId = req.user && req.user.id;
 
-      if (!userId) {
-        console.log('User is not logged in');
-        return res.status(401).json({ message: 'Unauthorized' });
-      }
-      const boards = await Board.find({ userId: req.user.id }).lean();
-      res.status(200).json({ boards: boards, user: req.user.id });
+      // if (!userId) {
+      //   console.log('User is not logged in');
+      //   return res.status(401).json({ message: 'Unauthorized' });
+      // }
+      // const boards = await Board.find({ userId: req.user.id }).lean();
+      // res.status(200).json({ boards: boards, user: req.user.id });
     } catch (err) {
       console.error(err);
     }
