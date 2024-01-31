@@ -41,13 +41,13 @@ export default function Board() {
       async function fetchData() {
         try {
           const [boardRes, boardsRes] = await Promise.all([
-            axios.get(`/api/board/${id}`, {
+            axios.get(`https://kanflow-server.cyclic.app/api/board/${id}`, {
               withCredentials: true,
               headers: {
                 'Content-Type': 'application/json',
               },
             }),
-            axios.get('/api/board/getBoards', {
+            axios.get('https://kanflow-server.cyclic.app/api/board/getBoards', {
               withCredentials: true,
               headers: {
                 'Content-Type': 'application/json',

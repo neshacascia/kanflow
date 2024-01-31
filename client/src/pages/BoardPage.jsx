@@ -16,12 +16,15 @@ export default function BoardPage() {
   useEffect(() => {
     async function getBoards() {
       try {
-        const res = await axios.get('/api/board/getBoards', {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const res = await axios.get(
+          'https://kanflow-server.cyclic.app/api/board/getBoards',
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
         const { user, boards } = res.data;
 
