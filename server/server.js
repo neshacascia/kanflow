@@ -38,6 +38,7 @@ app.use(
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
     cookie: {
       secure: true,
+      httpOnly: true,
       sameSite: 'None',
     },
   })
