@@ -11,7 +11,7 @@ const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
 const { ensureAuth } = require('./middleware/auth');
-const staticPath = path.join(__dirname, 'build');
+const staticPath = path.join(__dirname, '../client/dist');
 
 require('dotenv').config({ path: './config/.env' });
 
