@@ -24,6 +24,7 @@ app.use(
   })
 );
 
+app.set('trust proxy', 1);
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,9 +37,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
-    // cookie: {
-    //   secure: true,
-    // },
+    cookie: {
+      secure: true,
+      sameSite: 'none',
+    },
   })
 );
 
