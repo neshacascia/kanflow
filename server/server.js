@@ -10,6 +10,7 @@ const logger = require('morgan');
 const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
+const { ensureAuth } = require('./middleware/auth');
 
 require('dotenv').config({ path: './config/.env' });
 
@@ -53,7 +54,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', homeRoutes);
-app.use('/api/board', boardRoutes);
+app.use('/api/board', ensureAuth, boardRoutes);
 
 connectDB().then(() => {
   app.listen(process.env.PORT, () => {
