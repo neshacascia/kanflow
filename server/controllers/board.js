@@ -5,16 +5,14 @@ const Task = require('../models/Task');
 module.exports = {
   getBoards: async (req, res) => {
     try {
-      console.log('Req:', req);
-      console.log('Req session:', req.session);
-      // const userId = req.user && req.user.id;
+      const userId = req.user && req.user.id;
 
-      // if (!userId) {
-      //   console.log('User is not logged in');
-      //   return res.status(401).json({ message: 'Unauthorized' });
-      // }
-      // const boards = await Board.find({ userId: req.user.id }).lean();
-      // res.status(200).json({ boards: boards, user: req.user.id });
+      if (!userId) {
+        console.log('User is not logged in');
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      const boards = await Board.find({ userId: req.user.id }).lean();
+      res.status(200).json({ boards: boards, user: req.user.id });
     } catch (err) {
       console.error(err);
     }
