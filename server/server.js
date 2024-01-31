@@ -20,7 +20,6 @@ app.use(
   cors({
     origin: 'https://kanflow.onrender.com',
     credentials: true,
-    // exposedHeaders: ['set-cookie'],
   })
 );
 
@@ -39,7 +38,7 @@ app.use(
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
     cookie: {
       secure: true,
-      sameSite: 'none',
+      sameSite: 'None',
     },
   })
 );

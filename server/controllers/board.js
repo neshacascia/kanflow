@@ -4,7 +4,6 @@ const Task = require('../models/Task');
 
 module.exports = {
   getBoards: async (req, res) => {
-    console.log('getBoards Req User:', req.user);
     try {
       const userId = req.user && req.user.id;
 
