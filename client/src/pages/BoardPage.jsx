@@ -38,9 +38,9 @@ export default function BoardPage() {
           } else {
             setWelcomeMessage(true);
           }
-          // } else {
-          //   navigate('/');
-          //   console.log('User is not logged in');
+        } else {
+          navigate('/');
+          console.log('User is not logged in');
         }
       } catch (err) {
         console.error(err);
