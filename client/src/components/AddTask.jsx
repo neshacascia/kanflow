@@ -92,7 +92,7 @@ export default function AddTask({
 
     try {
       const res = await axios.post(
-        '/api/board/addTask',
+        'https://kanflow-server.cyclic.app/api/board/addTask',
         {
           taskData,
         },

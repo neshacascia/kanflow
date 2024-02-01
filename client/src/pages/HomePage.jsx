@@ -21,7 +21,7 @@ export default function HomePage() {
   async function demoUserLogin() {
     try {
       const res = await axios.post(
-        '/api/login',
+        'https://kanflow-server.cyclic.app/api/login',
         {
           email: import.meta.env.VITE_DEMO_USER_EMAIL,
           password: import.meta.env.VITE_DEMO_USER_PASSWORD,
@@ -33,7 +33,9 @@ export default function HomePage() {
           },
         }
       );
-      navigate('/board');
+      if (res.status === 200) {
+        navigate('/board');
+      }
     } catch (err) {
       console.error(err);
     }
