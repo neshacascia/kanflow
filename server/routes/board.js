@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const boardController = require('../controllers/board');
-const { ensureGuest, ensureAuth } = require('../middleware/auth');
+const { ensureAuth } = require('../middleware/auth');
 
 router.get('/getBoards', ensureAuth, boardController.getBoards);
 router.get('/:id', ensureAuth, boardController.getBoard);
