@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -10,13 +11,21 @@ const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
 
+const staticPath = path.join(__dirname, '../client/dist');
+
 require('dotenv').config({ path: './config/.env' });
 
 // passport config
 require('./config/passport')(passport);
 
-connectDB();
+app.use(
+  cors({
+    origin: 'https://kanflow.onrender.com',
+    credentials: true,
+  })
+);
 
+app.set('trust proxy', 1);
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,6 +38,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'None',
+    },
   })
 );
 
@@ -36,9 +50,19 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', (req, res) => {
+  res.send("Hello, welcome to Kanflow's server!");
+});
+
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`The server is running on port ${process.env.PORT}.`);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(staticPath, 'index.html'));
+});
+
+connectDB().then(() => {
+  app.listen(process.env.PORT, () => {
+    console.log(`The server is running on port ${process.env.PORT}.`);
+  });
 });
