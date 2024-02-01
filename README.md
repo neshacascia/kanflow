@@ -19,8 +19,8 @@
 ## Features
 #### Home Page:
 - Call to action buttons for signing up and logging into an account
-- Explore Demo button to test out the application as a demo user
-- Features section highlighting the app's features
+- Explore Demo button to allow users to test out the application as a demo user
+- Features section highlighting the app's key functionalities
 
 #### Auth Page:
 - User authentication supported with Passport.js LocalStrategy with email and password encryption using Bcrypt password-hashing
