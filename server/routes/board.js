@@ -4,11 +4,11 @@ const boardController = require('../controllers/board');
 const { ensureGuest, ensureAuth } = require('../middleware/auth');
 
 router.get('/', ensureGuest, (req, res) => {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
+  //   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  //   res.header('Expires', '-1');
+  //   res.header('Pragma', 'no-cache');
 
-  res.redirect('/');
+  res.status(302).redirect('https://kanflow.onrender.com/');
 });
 
 router.get('/getBoards', ensureAuth, boardController.getBoards);
