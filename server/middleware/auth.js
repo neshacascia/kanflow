@@ -3,7 +3,7 @@ module.exports = {
     if (req.isAuthenticated()) {
       return next();
     } else {
-      res.redirect('https://kanflow.onrender.com/');
+      res.redirect('https://kanflow.onrender.com');
     }
   },
   ensureGuest: function (req, res, next) {
