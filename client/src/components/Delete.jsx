@@ -22,8 +22,6 @@ export default function Delete({
         'https://kanflow-server.cyclic.app/api/board/delete',
         {
           data: { modal, data },
-        },
-        {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
