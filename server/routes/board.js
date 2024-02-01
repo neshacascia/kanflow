@@ -4,10 +4,13 @@ const boardController = require('../controllers/board');
 const { ensureGuest, ensureAuth } = require('../middleware/auth');
 
 router.get('/', ensureGuest, (req, res) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+
   res.redirect('/');
 });
 
-// router.get('/', ensureAuth, boardController.getIndex);
 router.get('/getBoards', ensureAuth, boardController.getBoards);
 router.get('/:id', ensureAuth, boardController.getBoard);
 router.post('/createBoard', ensureAuth, boardController.createBoard);
