@@ -1,5 +1,5 @@
 # kanflow
-Kanflow is the ultimate kanban task management solution. Users can create, update, and delete boards and tasks, and break complex tasks into manageable subtasks. Features intuitive drag-and-drop functionality to change task's status and re-order them in a column.
+> Kanflow is the ultimate kanban task management solution, embracing simplicity and minimalism, providing users with a clean and easy-to-navigate workspace. Users can create, update, and delete boards and tasks, and break complex tasks into manageable subtasks. Features intuitive drag-and-drop functionality to change task's status and re-order them in a column.
 
 ## Demo
 [Live Demo](https://kanflow.onrender.com/)
@@ -8,10 +8,11 @@ Kanflow is the ultimate kanban task management solution. Users can create, updat
 
 ## Built with
 - React, Vite
-- Express, Node
-- Mongoose, MongoDB
+- Express.js, Node.js
+- Mongoose.js, MongoDB
 - Passport.js
 - TailwindCSS
+- HTML5/CSS3
 - Client hosted on Render
 - Server hosted on Cyclic
 
@@ -22,7 +23,7 @@ Kanflow is the ultimate kanban task management solution. Users can create, updat
 - Features section highlighting the app's features
 
 #### Auth Page:
-- User authentication supported with Passport.js LocalStrategy with email and password authentication
+- User authentication supported with Passport.js LocalStrategy with email and password encryption using Bcrypt password-hashing
 - Custom form validation for login and sign up pages
 
 #### Board Page:
