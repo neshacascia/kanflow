@@ -3,6 +3,9 @@ const Board = require('../models/Board');
 const Task = require('../models/Task');
 
 module.exports = {
+  getIndex: (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
+  },
   getBoards: async (req, res) => {
     try {
       const userId = req.user && req.user.id;
