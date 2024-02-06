@@ -43,7 +43,7 @@ app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+  res.sendFile(path.resolve('/var/task', 'client', 'dist', 'index.html'));
 });
 
 connectDB().then(() => {
