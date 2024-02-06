@@ -16,12 +16,12 @@ require('dotenv').config({ path: './config/.env' });
 // passport config
 require('./config/passport')(passport);
 
-app.use(
-  cors({
-    origin: 'https://kanflow.onrender.com',
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: 'https://kanflow.onrender.com',
+//     credentials: true,
+//   })
+// );
 
 app.set('trust proxy', 1);
 app.use(express.static(path.join(__dirname, './client/dist')));
