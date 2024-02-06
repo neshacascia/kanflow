@@ -39,6 +39,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', (req, res) => {
+  console.log('Hello');
+});
+
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
