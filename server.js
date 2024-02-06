@@ -42,6 +42,9 @@ app.use(passport.session());
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
+const indexPath = path.resolve(__dirname, 'client', 'dist', 'index.html');
+console.log('Resolved indexPath:', indexPath);
+
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist/index.html'));
 });
