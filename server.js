@@ -16,7 +16,7 @@ require('dotenv').config({ path: './config/.env' });
 require('./config/passport')(passport);
 
 app.set('trust proxy', 1);
-app.use(express.static(path.join('client/dist')));
+app.use(express.static(path.join(__dirname, './client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -39,15 +39,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-  console.log('Hello');
-});
-
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join('client/dist/index.html', { root: '.' }));
+  res.sendFile(path.join(__dirname, './client/dist/index.html'));
 });
 
 connectDB().then(() => {
