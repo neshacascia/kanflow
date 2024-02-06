@@ -6,6 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const connectDB = require('./config/database');
+const PORT = process.env.PORT || 3000;
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
 
@@ -46,7 +47,7 @@ app.get('*', (req, res) => {
 });
 
 connectDB().then(() => {
-  app.listen(process.env.PORT || 3000, () => {
-    console.log(`The server is running on port ${process.env.PORT}.`);
+  app.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}.`);
   });
 });
