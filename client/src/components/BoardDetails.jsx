@@ -94,7 +94,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
     try {
       if (boardDetails === 'new') {
         const res = await axios.post(
-          'https://kanflow-server.cyclic.app/api/board/createBoard',
+          'https://kanflow.cyclic.app/api/board/createBoard',
           { boardData },
           {
             withCredentials: true,
@@ -111,7 +111,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
         }
       } else {
         const res = await axios.put(
-          'https://kanflow-server.cyclic.app/api/board/editBoard',
+          'https://kanflow.cyclic.app/api/board/editBoard',
           { boardData },
           {
             withCredentials: true,

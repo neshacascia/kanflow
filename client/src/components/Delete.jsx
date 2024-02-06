@@ -19,7 +19,7 @@ export default function Delete({
 
     try {
       const res = await axios.delete(
-        'https://kanflow-server.cyclic.app/api/board/delete',
+        'https://kanflow.cyclic.app/api/board/delete',
         {
           data: { modal, data },
           withCredentials: true,

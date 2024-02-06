@@ -17,7 +17,7 @@ export default function BoardPage() {
     async function getBoards() {
       try {
         const res = await axios.get(
-          'https://kanflow-server.cyclic.app/api/board/getBoards',
+          'https://kanflow.cyclic.app/api/board/getBoards',
           {
             withCredentials: true,
             headers: {

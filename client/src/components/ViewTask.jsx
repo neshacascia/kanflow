@@ -42,7 +42,7 @@ export default function ViewTask({
       setIsBoardUpdated(true);
 
       const res = await axios.put(
-        'https://kanflow-server.cyclic.app/api/board/setCompletionStatus',
+        'https://kanflow.cyclic.app/api/board/setCompletionStatus',
         {
           taskId: task._id,
           subtaskId: id,
@@ -64,7 +64,7 @@ export default function ViewTask({
   async function updateCurrentStatus(newStatus) {
     try {
       const res = await axios.put(
-        'https://kanflow-server.cyclic.app/api/board/updateStatus',
+        'https://kanflow.cyclic.app/api/board/updateStatus',
         {
           taskId: task._id,
           status: newStatus,

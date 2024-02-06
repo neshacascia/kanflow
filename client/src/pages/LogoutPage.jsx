@@ -12,7 +12,7 @@ export default function LogoutPage() {
   useEffect(() => {
     async function logout() {
       try {
-        await axios.get('https://kanflow-server.cyclic.app/api/logout', {
+        await axios.get('https://kanflow.cyclic.app/api/logout', {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',

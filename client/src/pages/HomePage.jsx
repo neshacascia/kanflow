@@ -21,10 +21,9 @@ export default function HomePage() {
   async function demoUserLogin() {
     try {
       const res = await axios.post(
-        'https://kanflow-server.cyclic.app/api/login',
+        'https://kanflow.cyclic.app/api/login',
         {
           email: import.meta.env.VITE_DEMO_USER_EMAIL,
-          password: import.meta.env.VITE_DEMO_USER_PASSWORD,
         },
         {
           withCredentials: true,

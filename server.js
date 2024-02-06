@@ -1,35 +1,32 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const logger = require('morgan');
 const connectDB = require('./config/database');
+const PORT = process.env.PORT || 3000;
+
+// run NODE_ENV=development node server.js to start in dev
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
-
-const staticPath = path.join(__dirname, '../client/dist');
 
 require('dotenv').config({ path: './config/.env' });
 
 // passport config
 require('./config/passport')(passport);
 
-app.use(
-  cors({
-    origin: 'https://kanflow.onrender.com',
-    credentials: true,
-  })
-);
-
 app.set('trust proxy', 1);
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, './client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(logger('dev'));
+
+isDevelopment &&
+  app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 // sessions
 app.use(
@@ -41,7 +38,7 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: true,
-      sameSite: 'None',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     },
   })
 );
@@ -50,19 +47,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-  res.send("Hello, welcome to Kanflow's server!");
-});
-
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(staticPath, 'index.html'));
+  res.sendFile(path.resolve(__dirname, './client/dist/index.html'));
 });
 
 connectDB().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`The server is running on port ${process.env.PORT}.`);
+  app.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}.`);
   });
 });

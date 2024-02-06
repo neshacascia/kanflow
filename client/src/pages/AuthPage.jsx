@@ -84,7 +84,7 @@ export default function AuthPage() {
 
     try {
       const res = await axios.post(
-        `https://kanflow-server.cyclic.app/api/${authValue}`,
+        `https://kanflow.cyclic.app/api/${authValue}`,
         {
           email: enteredEmail,
           password: enteredPassword,
