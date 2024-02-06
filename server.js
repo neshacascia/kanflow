@@ -11,8 +11,6 @@ const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
 
-const staticPath = path.join(__dirname, '../client/dist');
-
 require('dotenv').config({ path: './config/.env' });
 
 // passport config
@@ -26,7 +24,7 @@ app.use(
 );
 
 app.set('trust proxy', 1);
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, './client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('dev'));
@@ -54,7 +52,7 @@ app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(staticPath, 'index.html'));
+  res.sendFile(path.join(__dirname, './client/dist/index.html'));
 });
 
 connectDB().then(() => {
