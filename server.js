@@ -1,12 +1,17 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const connectDB = require('./config/database');
 const PORT = process.env.PORT || 3000;
+
+// run NODE_ENV=development node server.js to start in dev
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
 
@@ -19,6 +24,9 @@ app.set('trust proxy', 1);
 app.use(express.static(path.join(__dirname, './client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+isDevelopment &&
+  app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 // sessions
 app.use(
