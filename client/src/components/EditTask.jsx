@@ -84,7 +84,7 @@ export default function EditTask({
 
     try {
       const res = await axios.put(
-        'https://kanflow-server.cyclic.app/api/board/editTask',
+        'https://kanflow.cyclic.app/api/board/editTask',
         {
           taskData,
         },
