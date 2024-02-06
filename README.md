@@ -2,7 +2,7 @@
 > Kanflow is the ultimate kanban task management solution, embracing simplicity and minimalism, providing users with a clean and easy-to-navigate workspace. Users can create, update, and delete boards and tasks, and break complex tasks into manageable subtasks. Features intuitive drag-and-drop functionality to change task's status and re-order them in a column.
 
 ## Demo
-[Live Demo](https://kanflow.onrender.com/)
+[Live Demo](https://kanflow.cyclic.app/)
 
 <img src="./client/public/assets/kanflow.gif" alt="" border="0" width="100%">
 
@@ -13,8 +13,7 @@
 - Passport.js
 - TailwindCSS
 - HTML5/CSS3
-- Client hosted on Render
-- Server hosted on Cyclic
+- Hosted on Cyclic
 
 ## Features
 #### Home Page:
