@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import errorPage from '../../public/assets/404.svg';
 
 export default function ErrorPage() {
@@ -14,7 +16,8 @@ export default function ErrorPage() {
           to="/"
           className="text-white bg-mainPurple tracking-wider py-3 px-4 rounded hover:bg-mainPurpleHover"
         >
-          Go Back Home
+          <FontAwesomeIcon icon={faArrowLeftLong} />
+          &nbsp;&nbsp;Go Back
         </Link>
       </section>
 
