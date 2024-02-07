@@ -9,11 +9,15 @@ const MongoStore = require('connect-mongo');
 const connectDB = require('./config/database');
 const PORT = process.env.PORT || 3000;
 
+const homeRoutes = require('./routes/home');
+const boardRoutes = require('./routes/board');
+
 // run NODE_ENV=development node server.js to start in dev
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const homeRoutes = require('./routes/home');
-const boardRoutes = require('./routes/board');
+const cookieSettings = isDevelopment
+  ? { SameSite: 'None', Secure: 'false', maxAge: 7 * 24 * 60 * 60 * 1000 }
+  : { secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 };
 
 require('dotenv').config({ path: './config/.env' });
 
@@ -35,11 +39,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
-    cookie: {
-      secure: true,
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    },
+    cookie: cookieSettings,
   })
 );
 

@@ -3,6 +3,7 @@ import { Context } from '../context/Context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
+import { baseURL } from '../api';
 
 export default function Delete({
   board,
@@ -18,16 +19,13 @@ export default function Delete({
     const data = modal === 'deleteTask' ? selectedTask._id : board._id;
 
     try {
-      const res = await axios.delete(
-        'https://kanflow.cyclic.app/api/board/delete',
-        {
-          data: { modal, data },
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const res = await axios.delete(`${baseURL}/board/delete`, {
+        data: { modal, data },
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       console.log(res);
 
       if (modal === 'deleteTask') {

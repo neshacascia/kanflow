@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
+import { baseURL } from '../api';
 
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -92,7 +93,7 @@ export default function AddTask({
 
     try {
       const res = await axios.post(
-        'https://kanflow.cyclic.app/api/board/addTask',
+        `${baseURL}/board/addTask`,
         {
           taskData,
         },

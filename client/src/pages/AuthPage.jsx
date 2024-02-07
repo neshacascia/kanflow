@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
+import { baseURL } from '../api';
 
 import kanflowImg from '../../public/assets/kanflow-img.svg';
 
@@ -84,7 +85,7 @@ export default function AuthPage() {
 
     try {
       const res = await axios.post(
-        `https://kanflow.cyclic.app/api/${authValue}`,
+        `${baseURL}/${authValue}`,
         {
           email: enteredEmail,
           password: enteredPassword,

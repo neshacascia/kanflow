@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 import Board from '../components/Board';
 import WelcomeMessage from '../components/WelcomeMessage';
+import { baseURL } from '../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -16,15 +17,12 @@ export default function BoardPage() {
   useEffect(() => {
     async function getBoards() {
       try {
-        const res = await axios.get(
-          'https://kanflow.cyclic.app/api/board/getBoards',
-          {
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const res = await axios.get(`${baseURL}/board/getBoards`, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
         const { user, boards } = res.data;
 

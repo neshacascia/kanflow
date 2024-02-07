@@ -11,6 +11,7 @@ import EditTask from './EditTask';
 import Delete from './Delete';
 import Sidebar from './Sidebar';
 import LoadingSpinner from './LoadingSpinner';
+import { baseURL } from '../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -41,13 +42,13 @@ export default function Board() {
       async function fetchData() {
         try {
           const [boardRes, boardsRes] = await Promise.all([
-            axios.get(`https://kanflow.cyclic.app/api/board/${id}`, {
+            axios.get(`${baseURL}/board/${id}`, {
               withCredentials: true,
               headers: {
                 'Content-Type': 'application/json',
               },
             }),
-            axios.get('https://kanflow.cyclic.app/api/board/getBoards', {
+            axios.get(`${baseURL}/board/getBoards`, {
               withCredentials: true,
               headers: {
                 'Content-Type': 'application/json',
