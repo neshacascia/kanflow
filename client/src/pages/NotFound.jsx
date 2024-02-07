@@ -14,7 +14,7 @@ export default function NotFound() {
         </p>
         <Link
           to="/"
-          className="text-white bg-mainPurple tracking-wider py-3 px-4 rounded hover:bg-mainPurpleHover"
+          className="text-white bg-mainPurple tracking-wider py-3 px-6 rounded hover:bg-mainPurpleHover"
         >
           <FontAwesomeIcon icon={faArrowLeftLong} />
           &nbsp;&nbsp;Go Back
