@@ -5,7 +5,7 @@ import AuthPage from './pages/AuthPage';
 import BoardPage from './pages/BoardPage';
 import Board from './components/Board';
 import LogoutPage from './pages/LogoutPage';
-import NotFound from './pages/NotFound';
+import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       { path: 'board', element: <BoardPage /> },
       { path: 'board/:id', element: <Board /> },
       { path: 'logout', element: <LogoutPage /> },
-      { path: '*', element: <NotFound /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ]);
