@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Modal from './Modal';
+import { baseURL } from '../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -42,7 +43,7 @@ export default function ViewTask({
       setIsBoardUpdated(true);
 
       const res = await axios.put(
-        'https://kanflow.cyclic.app/api/board/setCompletionStatus',
+        `${baseURL}/board/setCompletionStatus`,
         {
           taskId: task._id,
           subtaskId: id,
@@ -64,7 +65,7 @@ export default function ViewTask({
   async function updateCurrentStatus(newStatus) {
     try {
       const res = await axios.put(
-        'https://kanflow.cyclic.app/api/board/updateStatus',
+        `${baseURL}/board/updateStatus`,
         {
           taskId: task._id,
           status: newStatus,

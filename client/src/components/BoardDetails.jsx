@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
 import Modal from './Modal';
+import { baseURL } from '../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -94,7 +95,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
     try {
       if (boardDetails === 'new') {
         const res = await axios.post(
-          'https://kanflow.cyclic.app/api/board/createBoard',
+          `${baseURL}/board/createBoard`,
           { boardData },
           {
             withCredentials: true,
@@ -111,7 +112,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
         }
       } else {
         const res = await axios.put(
-          'https://kanflow.cyclic.app/api/board/editBoard',
+          `${baseURL}/board/editBoard`,
           { boardData },
           {
             withCredentials: true,

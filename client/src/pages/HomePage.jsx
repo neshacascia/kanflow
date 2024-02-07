@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
 import Feature from '../components/Feature';
+import { baseURL } from '../api';
 
 import data from '../../data.json';
 import kanflow from '../../public/assets/app-dashboard.png';
@@ -21,7 +22,7 @@ export default function HomePage() {
   async function demoUserLogin() {
     try {
       const res = await axios.post(
-        'https://kanflow.cyclic.app/api/login',
+        `${baseURL}/login`,
         {
           email: import.meta.env.VITE_DEMO_USER_EMAIL,
         },

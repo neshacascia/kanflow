@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { baseURL } from '../api';
 
 export default function LogoutPage() {
   const { setIsLoggedIn, setIsDarkMode, setBoards, setBoard } =
@@ -12,7 +13,7 @@ export default function LogoutPage() {
   useEffect(() => {
     async function logout() {
       try {
-        await axios.get('https://kanflow.cyclic.app/api/logout', {
+        await axios.get(`${baseURL}/logout`, {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
