@@ -24,6 +24,7 @@ module.exports = {
       res.status(200).json({ board, tasks });
     } catch (err) {
       console.error(err);
+      return res.status(404).json({ error: 'Board not found' });
     }
   },
   createBoard: async (req, res) => {
