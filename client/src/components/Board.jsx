@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
 import Column from './Column';
@@ -30,6 +30,7 @@ export default function Board() {
     setIsLoggedIn,
   } = useContext(Context);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [tasks, setTasks] = useState();
   const [viewTask, setViewTask] = useState();
@@ -65,6 +66,7 @@ export default function Board() {
           setIsBoardUpdated(false);
           setIsLoggedIn(true);
         } catch (err) {
+          navigate('/error');
           console.error(err);
         } finally {
           setLoadingData(false);
