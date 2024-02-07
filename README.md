@@ -36,10 +36,9 @@
 ## Running this Project Locally
 #### Server
 In one terminal:
-1. `cd` to the `server` directory
-2. Create `.env` variables `PORT` and `DB_STRING`
-3. Run `npm install` to install all relevant packages and dependencies
-4. Run `npm run dev` to start a dev server and view the project in your browser
+1. Create `.env` variables `PORT` and `DB_STRING`
+2. Run `npm install` to install all relevant packages and dependencies
+3. Run `NODE_ENV=development node server.js` to start a dev server and view the project in your browser
 
 #### Client
 In a second terminal:
@@ -55,4 +54,4 @@ In a second terminal:
 - [ ] Search and Filters
   - Easily find and filter tasks based on keywords, tags, or other criteria, streamlining the search process
 - [ ] Integration with Calendar
-  - Sync tasks and due dates with user's calendar for a consolidated view of your schedule
+  - Sync tasks and due dates with the user's calendar for a consolidated view of your schedule
