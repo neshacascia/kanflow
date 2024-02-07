@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import errorPage from '../../public/assets/404.svg';
 
-export default function ErrorPage() {
+export default function NotFound() {
   return (
     <main className="bg-lightGrey h-screen flex flex-col-reverse justify-center gap-6 md:flex-row md:justify-around md:items-center pt-10 md:pt-20 md:px-10">
       <section className="text-darkGrey items-center flex flex-col md:items-start gap-6">
