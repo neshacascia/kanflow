@@ -26,6 +26,7 @@ export default function Navbar() {
   } = useContext(Context);
 
   const location = useLocation();
+  const user = localStorage.getItem('user');
 
   return (
     <nav
@@ -59,14 +60,18 @@ export default function Navbar() {
           <Link
             to="/login"
             onClick={() => storeAuthValue('login')}
-            className="text-sm tracking-wider"
+            className={`${user ? 'hidden' : 'text-sm tracking-wider'}`}
           >
             Login
           </Link>
           <Link
             to="/signup"
             onClick={() => storeAuthValue('signup')}
-            className="bg-mainPurple text-sm  tracking-wider py-2 px-4 rounded hover:bg-mainPurpleHover"
+            className={`${
+              user
+                ? 'hidden'
+                : 'bg-mainPurple text-sm  tracking-wider py-2 px-4 rounded hover:bg-mainPurpleHover'
+            }`}
           >
             Signup
           </Link>{' '}
