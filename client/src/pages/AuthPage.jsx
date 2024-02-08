@@ -113,14 +113,14 @@ export default function AuthPage() {
       <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
       <div className="md:bg-[#E6E6E6] md:w-[45%] md:h-full flex flex-col items-center md:items-center justify-center gap-3 rounded-lg py-5 md:py-8 md:px-4">
         <h2 className="text-xl font-home md:text-3xl font-bold tracking-wide">
-          {authValue === 'login' ? 'Login to your Acount' : 'Create an Account'}
+          {authValue === 'login' ? 'Login' : 'Create an Account'}
         </h2>
 
         <form
           onSubmit={submitHandler}
           className="w-full flex flex-col items-center gap-4 pt-2 md:gap-5 md:pt-2 max-w-[400px]"
         >
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
+          <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Email Address
             <input
               type="email"
@@ -133,12 +133,12 @@ export default function AuthPage() {
               }`}
             />
             {enteredEmailNotValid && (
-              <span className="text-deleteRed flex pb-1">
+              <span className="text-deleteRed text-xs flex pb-1">
                 Please enter a valid email.
               </span>
             )}
           </label>
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
+          <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
             <input
               type="password"
@@ -151,13 +151,13 @@ export default function AuthPage() {
               }`}
             />
             {enteredPasswordNotValid && (
-              <span className="text-deleteRed flex pb-1">
+              <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
               </span>
             )}
           </label>
           {authValue === 'signup' && (
-            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
+            <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
               Confirm Password
               <input
                 type="password"
@@ -170,7 +170,7 @@ export default function AuthPage() {
                 }`}
               />
               {enteredConfirmPasswordNotValid && (
-                <span className="text-deleteRed flex">
+                <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
               )}
