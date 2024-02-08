@@ -128,7 +128,7 @@ export default function AuthPage() {
               placeholder="name@email.com"
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded-md py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 enteredEmailNotValid ? 'border-deleteRed' : ''
               }`}
             />
@@ -146,7 +146,7 @@ export default function AuthPage() {
               placeholder="••••••••"
               onChange={passwordChangeHandler}
               onBlur={passwordInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded-md py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                 enteredPasswordNotValid ? 'border-deleteRed' : ''
               }`}
             />
@@ -165,7 +165,7 @@ export default function AuthPage() {
                 placeholder="••••••••"
                 onChange={confirmPasswordChangeHandler}
                 onBlur={confirmPasswordInputBlurHandler}
-                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded-md py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                   enteredConfirmPasswordNotValid ? 'border-deleteRed' : ''
                 }`}
               />
@@ -192,7 +192,7 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={!formIsValid}
-            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 rounded-md py-3 enabled:hover:bg-mainPurpleHover mt-5 w-full"
+            className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 w-full"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
           </button>
