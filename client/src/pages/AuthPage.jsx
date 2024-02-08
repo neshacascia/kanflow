@@ -130,6 +130,7 @@ export default function AuthPage() {
             <input
               type="email"
               name="email"
+              placeholder="name@email.com"
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
@@ -147,6 +148,7 @@ export default function AuthPage() {
             <input
               type="password"
               name="password"
+              placeholder="••••••••"
               onChange={passwordChangeHandler}
               onBlur={passwordInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
@@ -165,6 +167,7 @@ export default function AuthPage() {
               <input
                 type="password"
                 name="confirmPassword"
+                placeholder="••••••••"
                 onChange={confirmPasswordChangeHandler}
                 onBlur={confirmPasswordInputBlurHandler}
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
