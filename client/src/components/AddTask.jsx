@@ -203,7 +203,7 @@ export default function AddTask({
           </label>
           <button
             type="submit"
-            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover"
+            className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover mb-6"
           >
             Create Task
           </button>

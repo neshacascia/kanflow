@@ -5,6 +5,8 @@ import axios from 'axios';
 import { baseURL } from '../api';
 
 import kanflowImg from '../../public/assets/kanflow-img.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function AuthPage() {
   const authValue = localStorage.getItem('authValue');
@@ -51,6 +53,10 @@ export default function AuthPage() {
 
   const [errorMessages, setErrorMessages] = useState('');
 
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
+    useState(false);
+
   function emailChangeHandler(e) {
     setEnteredEmail(e.target.value);
   }
@@ -78,6 +84,14 @@ export default function AuthPage() {
   function changeAuthMethod() {
     setPasswordsMatch(true);
     changeAuthValue(authValue);
+  }
+
+  function handleTogglePassword() {
+    setPasswordVisibility(prevState => !prevState);
+  }
+
+  function handleToggleConfirmPassword() {
+    setConfirmPasswordVisibility(prevState => !prevState);
   }
 
   async function submitHandler(e) {
@@ -113,66 +127,85 @@ export default function AuthPage() {
       <img src={kanflowImg} className="h-44 md:h-60 md:pl-4 lg:h-80 xl:pl-20" />
       <div className="md:bg-[#E6E6E6] md:w-[45%] md:h-full flex flex-col items-center md:items-center justify-center gap-3 rounded-lg py-5 md:py-8 md:px-4">
         <h2 className="text-xl font-home md:text-3xl font-bold tracking-wide">
-          {authValue === 'login' ? 'Welcome back!' : 'Sign Up!'}
+          {authValue === 'login' ? 'Login' : 'Create an Account'}
         </h2>
-        <p className="text-sm text-center">
-          {authValue === 'signup'
-            ? 'Enter your details to create an account'
-            : 'Please login to your account'}
-        </p>
 
         <form
           onSubmit={submitHandler}
-          className="w-full flex flex-col items-center gap-4 pt-2 md:gap-5 md:pt-4 max-w-[400px]"
+          className="w-full flex flex-col items-center gap-4 pt-2 md:gap-5 md:pt-2 max-w-[400px]"
         >
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
+          <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Email Address
             <input
               type="email"
               name="email"
+              placeholder="name@email.com"
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailNotValid ? 'border-deleteRed' : ''
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
             />
             {enteredEmailNotValid && (
-              <span className="text-deleteRed flex pb-2">
+              <span className="text-deleteRed text-xs flex pb-1">
                 Please enter a valid email.
               </span>
             )}
           </label>
-          <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
+          <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
-            <input
-              type="password"
-              name="password"
-              onChange={passwordChangeHandler}
-              onBlur={passwordInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredPasswordNotValid ? 'border-deleteRed' : ''
+            <div
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
+                enteredPasswordNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
-            />
+            >
+              {' '}
+              <input
+                type={passwordVisibility ? 'text' : 'password'}
+                name="password"
+                placeholder="••••••••"
+                onChange={passwordChangeHandler}
+                onBlur={passwordInputBlurHandler}
+                className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
+              />
+              <FontAwesomeIcon
+                icon={passwordVisibility ? faEyeSlash : faEye}
+                onClick={handleTogglePassword}
+                className="text-gray-400 pr-4 cursor-pointer"
+              />
+            </div>
             {enteredPasswordNotValid && (
-              <span className="text-deleteRed flex pb-2">
+              <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
               </span>
             )}
           </label>
           {authValue === 'signup' && (
-            <label className="text-veryDarkGrey text-xs font-semibold w-72 flex flex-col gap-2 md:w-full">
+            <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
               Confirm Password
-              <input
-                type="password"
-                name="confirmPassword"
-                onChange={confirmPasswordChangeHandler}
-                onBlur={confirmPasswordInputBlurHandler}
-                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                  enteredConfirmPasswordNotValid ? 'border-deleteRed' : ''
+              <div
+                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
+                  enteredConfirmPasswordNotValid
+                    ? 'border-deleteRed'
+                    : 'border-gray-300'
                 }`}
-              />
+              >
+                <input
+                  type={confirmPasswordVisibility ? 'text' : 'password'}
+                  name="confirmPassword"
+                  placeholder="••••••••"
+                  onChange={confirmPasswordChangeHandler}
+                  onBlur={confirmPasswordInputBlurHandler}
+                  className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
+                />
+                <FontAwesomeIcon
+                  icon={confirmPasswordVisibility ? faEyeSlash : faEye}
+                  onClick={handleToggleConfirmPassword}
+                  className="text-gray-400 pr-4 cursor-pointer"
+                />
+              </div>
               {enteredConfirmPasswordNotValid && (
-                <span className="text-deleteRed flex">
+                <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
               )}

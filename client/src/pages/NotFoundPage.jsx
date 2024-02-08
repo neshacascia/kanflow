@@ -9,7 +9,7 @@ export default function NotFoundPage() {
     <main className="bg-lightGrey h-screen flex flex-col-reverse justify-center gap-6 md:flex-row md:justify-around md:items-center pt-10 md:pt-20 md:px-10">
       <section className="text-darkGrey items-center flex flex-col md:items-start gap-6">
         <h1 className="text-4xl md:text-5xl font-semibold">Page Not Found</h1>
-        <p className="text-lg pb-12">
+        <p className="text-lg text-center pb-12 md:text-left">
           Oops, we can't seem to find the page you're looking for!
         </p>
         <Link
@@ -26,7 +26,11 @@ export default function NotFoundPage() {
           href="https://www.vecteezy.com/free-vector/404"
           className="h-full flex"
         >
-          <img src={errorPage} alt="404 Vectors by Vecteezy" />
+          <img
+            src={errorPage}
+            alt="404 Vectors by Vecteezy"
+            className="w-full"
+          />
         </a>
       </div>
     </main>
