@@ -5,6 +5,8 @@ import axios from 'axios';
 import { baseURL } from '../api';
 
 import kanflowImg from '../../public/assets/kanflow-img.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function AuthPage() {
   const authValue = localStorage.getItem('authValue');
@@ -51,6 +53,10 @@ export default function AuthPage() {
 
   const [errorMessages, setErrorMessages] = useState('');
 
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
+    useState(false);
+
   function emailChangeHandler(e) {
     setEnteredEmail(e.target.value);
   }
@@ -78,6 +84,14 @@ export default function AuthPage() {
   function changeAuthMethod() {
     setPasswordsMatch(true);
     changeAuthValue(authValue);
+  }
+
+  function handleTogglePassword() {
+    setPasswordVisibility(prevState => !prevState);
+  }
+
+  function handleToggleConfirmPassword() {
+    setConfirmPasswordVisibility(prevState => !prevState);
   }
 
   async function submitHandler(e) {
@@ -140,16 +154,26 @@ export default function AuthPage() {
           </label>
           <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
-            <input
-              type="password"
-              name="password"
-              placeholder="••••••••"
-              onChange={passwordChangeHandler}
-              onBlur={passwordInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+            <div
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] border-gray-300 rounded focus-within:ring-1 focus-within:ring-mainPurple ${
                 enteredPasswordNotValid ? 'border-deleteRed' : ''
               }`}
-            />
+            >
+              {' '}
+              <input
+                type={passwordVisibility ? 'text' : 'password'}
+                name="password"
+                placeholder="••••••••"
+                onChange={passwordChangeHandler}
+                onBlur={passwordInputBlurHandler}
+                className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
+              />
+              <FontAwesomeIcon
+                icon={passwordVisibility ? faEyeSlash : faEye}
+                onClick={handleTogglePassword}
+                className="pr-4 cursor-pointer"
+              />
+            </div>
             {enteredPasswordNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
@@ -159,16 +183,25 @@ export default function AuthPage() {
           {authValue === 'signup' && (
             <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
               Confirm Password
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="••••••••"
-                onChange={confirmPasswordChangeHandler}
-                onBlur={confirmPasswordInputBlurHandler}
-                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              <div
+                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] border-gray-300 rounded focus-within:ring-1 focus-within:ring-mainPurple ${
                   enteredConfirmPasswordNotValid ? 'border-deleteRed' : ''
                 }`}
-              />
+              >
+                <input
+                  type={confirmPasswordVisibility ? 'text' : 'password'}
+                  name="confirmPassword"
+                  placeholder="••••••••"
+                  onChange={confirmPasswordChangeHandler}
+                  onBlur={confirmPasswordInputBlurHandler}
+                  className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
+                />
+                <FontAwesomeIcon
+                  icon={confirmPasswordVisibility ? faEyeSlash : faEye}
+                  onClick={handleToggleConfirmPassword}
+                  className="pr-4 cursor-pointer"
+                />
+              </div>
               {enteredConfirmPasswordNotValid && (
                 <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
