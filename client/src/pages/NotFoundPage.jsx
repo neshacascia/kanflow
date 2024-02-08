@@ -26,7 +26,11 @@ export default function NotFoundPage() {
           href="https://www.vecteezy.com/free-vector/404"
           className="h-full flex"
         >
-          <img src={errorPage} alt="404 Vectors by Vecteezy" />
+          <img
+            src={errorPage}
+            alt="404 Vectors by Vecteezy"
+            className="w-full"
+          />
         </a>
       </div>
     </main>
