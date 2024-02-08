@@ -171,7 +171,7 @@ export default function AuthPage() {
               <FontAwesomeIcon
                 icon={passwordVisibility ? faEyeSlash : faEye}
                 onClick={handleTogglePassword}
-                className="pr-4 cursor-pointer"
+                className="text-gray-400 pr-4 cursor-pointer"
               />
             </div>
             {enteredPasswordNotValid && (
@@ -201,7 +201,7 @@ export default function AuthPage() {
                 <FontAwesomeIcon
                   icon={confirmPasswordVisibility ? faEyeSlash : faEye}
                   onClick={handleToggleConfirmPassword}
-                  className="pr-4 cursor-pointer"
+                  className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
               {enteredConfirmPasswordNotValid && (
