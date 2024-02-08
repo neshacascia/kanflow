@@ -88,8 +88,8 @@ export default function HomePage() {
               Features&#8212;
             </h2>
             <p className="text-gray-800 md:text-[17px] tracking-wide md:w-[700px] pt-4">
-              Kanflow embraces simiplicity and minimalism, providing users with
-              a clean and easy-to-navigate workspace. By focusing on the
+              Kanflow embraces simplicity and minimalism, providing users with a
+              clean and easy-to-navigate workspace. By focusing on the
               essentials, we empower users with a solution that boosts
               productivity and promotes a smooth workflow.
             </p>
