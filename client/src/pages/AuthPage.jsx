@@ -142,8 +142,8 @@ export default function AuthPage() {
               placeholder="name@email.com"
               onChange={emailChangeHandler}
               onBlur={emailInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] border-gray-300 rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailNotValid ? 'border-deleteRed' : ''
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
             />
             {enteredEmailNotValid && (
@@ -155,8 +155,8 @@ export default function AuthPage() {
           <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
             <div
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] border-gray-300 rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                enteredPasswordNotValid ? 'border-deleteRed' : ''
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
+                enteredPasswordNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
             >
               {' '}
@@ -184,8 +184,10 @@ export default function AuthPage() {
             <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
               Confirm Password
               <div
-                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] border-gray-300 rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                  enteredConfirmPasswordNotValid ? 'border-deleteRed' : ''
+                className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
+                  enteredConfirmPasswordNotValid
+                    ? 'border-deleteRed'
+                    : 'border-gray-300'
                 }`}
               >
                 <input
