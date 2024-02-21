@@ -12,6 +12,9 @@ export default function Task({
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: task._id,
+      data: {
+        type: 'task',
+      },
     });
 
   const completedSubtasks = task.subtasks.filter(
