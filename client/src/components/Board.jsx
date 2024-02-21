@@ -90,6 +90,12 @@ export default function Board() {
     }
   }, [id, isBoardUpdated]);
 
+  function handleDragStart(e) {}
+
+  function handleDragMove(e) {}
+
+  function handleDragEnd(e) {}
+
   return (
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
@@ -100,7 +106,13 @@ export default function Board() {
         {loadingData ? (
           <LoadingSpinner />
         ) : (
-          <DndContext sensors={sensors} collisionDetection={closestCorners}>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragStart={handleDragStart}
+            onDragMove={handleDragMove}
+            onDragEnd={handleDragEnd}
+          >
             <section className="h-full flex gap-3 pt-6">
               {board.columns.length > 0 ? (
                 board.columns.map((column, ind) => (
