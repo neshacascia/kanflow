@@ -12,6 +12,15 @@ import Delete from './Delete';
 import Sidebar from './Sidebar';
 import LoadingSpinner from './LoadingSpinner';
 import { baseURL } from '../api';
+import {
+  DndContext,
+  useSensors,
+  useSensor,
+  PointerSensor,
+  KeyboardSensor,
+  closestCorners,
+} from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -37,6 +46,11 @@ export default function Board() {
   const [selectedStatus, setSelectedStatus] = useState();
   const [isBoardUpdated, setIsBoardUpdated] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
 
   useEffect(() => {
     if (id) {
@@ -86,40 +100,42 @@ export default function Board() {
         {loadingData ? (
           <LoadingSpinner />
         ) : (
-          <section className="h-full flex gap-3 pt-6">
-            {board.columns.length > 0 ? (
-              board.columns.map((column, ind) => (
-                <Column
-                  key={ind}
-                  ind={ind}
-                  name={column.columnName}
-                  tasks={tasks}
-                  setViewTask={setViewTask}
-                  setSelectedStatus={setSelectedStatus}
-                  openModal={openModal}
-                />
-              ))
-            ) : (
-              <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
-                <p className="text-mediumGrey text-lg font-semibold text-center">
-                  This board is empty. Create a new column to get started.
-                </p>
-                <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
-                  <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
-                  <p onClick={() => openModal('editBoard')}>Add New Column</p>
-                </button>
-              </div>
-            )}
-            {board.columns.length > 0 && (
-              <div
-                onClick={() => openModal('editBoard')}
-                className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
-              >
-                <FontAwesomeIcon icon={faPlus} className="text-xs" />
-                New Column
-              </div>
-            )}
-          </section>
+          <DndContext sensors={sensors} collisionDetection={closestCorners}>
+            <section className="h-full flex gap-3 pt-6">
+              {board.columns.length > 0 ? (
+                board.columns.map((column, ind) => (
+                  <Column
+                    key={ind}
+                    ind={ind}
+                    name={column.columnName}
+                    tasks={tasks}
+                    setViewTask={setViewTask}
+                    setSelectedStatus={setSelectedStatus}
+                    openModal={openModal}
+                  />
+                ))
+              ) : (
+                <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
+                  <p className="text-mediumGrey text-lg font-semibold text-center">
+                    This board is empty. Create a new column to get started.
+                  </p>
+                  <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
+                    <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
+                    <p onClick={() => openModal('editBoard')}>Add New Column</p>
+                  </button>
+                </div>
+              )}
+              {board.columns.length > 0 && (
+                <div
+                  onClick={() => openModal('editBoard')}
+                  className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
+                >
+                  <FontAwesomeIcon icon={faPlus} className="text-xs" />
+                  New Column
+                </div>
+              )}
+            </section>
+          </DndContext>
         )}
         {modal === 'menu' && <Menu />}
         {modal === 'editBoard' && (
