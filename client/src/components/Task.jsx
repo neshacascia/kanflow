@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 export default function Task({
   task,
@@ -7,6 +9,10 @@ export default function Task({
   openModal,
 }) {
   const [taskHovered, setTaskHovered] = useState(false);
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: task._id,
+    });
 
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
@@ -20,6 +26,13 @@ export default function Task({
 
   return (
     <div
+      ref={setNodeRef}
+      style={{
+        transition,
+        transform: CSS.Translate.toString(transform),
+      }}
+      {...attributes}
+      {...listeners}
       onClick={() => handleTaskClick(task.status)}
       onMouseOver={() => setTaskHovered(true)}
       onMouseLeave={() => setTaskHovered(false)}
