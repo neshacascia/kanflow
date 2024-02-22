@@ -9,13 +9,19 @@ export default function Task({
   openModal,
 }) {
   const [taskHovered, setTaskHovered] = useState(false);
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: task._id,
-      data: {
-        type: 'task',
-      },
-    });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: task._id,
+    data: {
+      type: 'task',
+    },
+  });
 
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
@@ -39,7 +45,9 @@ export default function Task({
       onClick={() => handleTaskClick(task.status)}
       onMouseOver={() => setTaskHovered(true)}
       onMouseLeave={() => setTaskHovered(false)}
-      className="bg-white dark:bg-darkGrey w-[280px] flex flex-col gap-2 rounded-lg shadow-lightTask dark:shadow-task py-6 px-4 cursor-pointer hover:text-mainPurple"
+      className={`bg-white dark:bg-darkGrey w-[280px] flex flex-col gap-2 rounded-lg shadow-lightTask dark:shadow-task py-6 px-4 cursor-pointer hover:text-mainPurple ${
+        isDragging && 'opacity-50'
+      }`}
     >
       <p
         className={`text-sm font-medium tracking-[0.015em] ${
