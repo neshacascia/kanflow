@@ -11,7 +11,7 @@ export default function Task({
   const [taskHovered, setTaskHovered] = useState(false);
   const {
     attributes,
-    listeners: { onPointerDown, ...otherListeners },
+    listeners,
     setNodeRef,
     transform,
     transition,
@@ -41,7 +41,7 @@ export default function Task({
         transform: CSS.Translate.toString(transform),
       }}
       {...attributes}
-      {...otherListeners}
+      {...listeners}
       onClick={() => handleTaskClick(task.status)}
       onMouseOver={() => setTaskHovered(true)}
       onMouseLeave={() => setTaskHovered(false)}
