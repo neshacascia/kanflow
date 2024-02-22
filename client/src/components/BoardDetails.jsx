@@ -25,8 +25,8 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
     boardDetails === 'editBoard'
       ? board?.columns
       : [
-          { id: uuidv4(), columnName: 'Todo', isTouched: false },
-          { id: uuidv4(), columnName: 'Doing', isTouched: false },
+          { id: uuidv4(), columnName: 'Todo', tasks: [], isTouched: false },
+          { id: uuidv4(), columnName: 'Doing', tasks: [], isTouched: false },
         ]
   );
 
@@ -49,6 +49,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
     const newColumn = {
       id: uuidv4(),
       columnName: '',
+      tasks: [],
       isTouched: false,
     };
 
@@ -89,6 +90,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
       id: board?._id,
       name,
       columns,
+      tasks: [],
     };
 
     try {
