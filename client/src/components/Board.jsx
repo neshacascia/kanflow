@@ -50,6 +50,9 @@ export default function Board() {
   const [isBoardUpdated, setIsBoardUpdated] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
 
+  const [activeId, setActiveId] = useState(null);
+  const [currentContainerId, setCurrentContainerId] = useState();
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
