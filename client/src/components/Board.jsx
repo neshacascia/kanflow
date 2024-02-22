@@ -20,7 +20,10 @@ import {
   KeyboardSensor,
   closestCorners,
 } from '@dnd-kit/core';
-import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -113,40 +116,44 @@ export default function Board() {
             onDragMove={handleDragMove}
             onDragEnd={handleDragEnd}
           >
-            <section className="h-full flex gap-3 pt-6">
-              {board.columns.length > 0 ? (
-                board.columns.map((column, ind) => (
-                  <Column
-                    key={ind}
-                    ind={ind}
-                    name={column.columnName}
-                    tasks={tasks}
-                    setViewTask={setViewTask}
-                    setSelectedStatus={setSelectedStatus}
-                    openModal={openModal}
-                  />
-                ))
-              ) : (
-                <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
-                  <p className="text-mediumGrey text-lg font-semibold text-center">
-                    This board is empty. Create a new column to get started.
-                  </p>
-                  <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
-                    <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
-                    <p onClick={() => openModal('editBoard')}>Add New Column</p>
-                  </button>
-                </div>
-              )}
-              {board.columns.length > 0 && (
-                <div
-                  onClick={() => openModal('editBoard')}
-                  className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
-                >
-                  <FontAwesomeIcon icon={faPlus} className="text-xs" />
-                  New Column
-                </div>
-              )}
-            </section>
+            <SortableContext items={board.columns.map((column, ind) => ind)}>
+              <section className="h-full flex gap-3 pt-6">
+                {board.columns.length > 0 ? (
+                  board.columns.map((column, ind) => (
+                    <Column
+                      key={ind}
+                      ind={ind}
+                      name={column.columnName}
+                      tasks={tasks}
+                      setViewTask={setViewTask}
+                      setSelectedStatus={setSelectedStatus}
+                      openModal={openModal}
+                    />
+                  ))
+                ) : (
+                  <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
+                    <p className="text-mediumGrey text-lg font-semibold text-center">
+                      This board is empty. Create a new column to get started.
+                    </p>
+                    <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
+                      <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
+                      <p onClick={() => openModal('editBoard')}>
+                        Add New Column
+                      </p>
+                    </button>
+                  </div>
+                )}
+                {board.columns.length > 0 && (
+                  <div
+                    onClick={() => openModal('editBoard')}
+                    className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
+                  >
+                    <FontAwesomeIcon icon={faPlus} className="text-xs" />
+                    New Column
+                  </div>
+                )}
+              </section>
+            </SortableContext>
           </DndContext>
         )}
         {modal === 'menu' && <Menu />}
