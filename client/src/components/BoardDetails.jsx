@@ -4,6 +4,7 @@ import { Context } from '../context/Context';
 import axios from 'axios';
 import Modal from './Modal';
 import { baseURL } from '../api';
+import { v4 as uuidv4 } from 'uuid';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -24,8 +25,8 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
     boardDetails === 'editBoard'
       ? board?.columns
       : [
-          { id: 0, columnName: 'Todo', isTouched: false },
-          { id: 1, columnName: 'Doing', isTouched: false },
+          { id: uuidv4(), columnName: 'Todo', isTouched: false },
+          { id: uuidv4(), columnName: 'Doing', isTouched: false },
         ]
   );
 
@@ -45,10 +46,8 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
   }
 
   function addNewColumn() {
-    const maxId = Math.max(...boardColumns.map(column => column.id));
-
     const newColumn = {
-      id: maxId + 1,
+      id: uuidv4(),
       columnName: '',
       isTouched: false,
     };
