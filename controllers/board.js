@@ -20,12 +20,11 @@ module.exports = {
   getBoard: async (req, res) => {
     try {
       const board = await Board.find({ _id: req.params.id });
-      const tasks = await Task.find({ boardId: req.params.id });
 
       if (board.length === 0) {
         return res.status(404).json({ error: 'Board not found' });
       }
-      res.status(200).json({ board, tasks });
+      res.status(200).json({ board });
     } catch (err) {
       console.error(err);
       return res.status(404).json({ error: 'Board not found' });
@@ -64,13 +63,26 @@ module.exports = {
   },
   addTask: async (req, res) => {
     try {
-      await Task.create({
+      const { id: boardId } = req.body.taskData;
+      const board = await Board.findById(boardId);
+
+      const newTask = await Task.create({
         title: req.body.taskData.title,
         description: req.body.taskData.description,
         subtasks: req.body.taskData.subtasks,
         status: req.body.taskData.status,
         boardId: req.body.taskData.id,
       });
+
+      const columnIndex = board.columns.findIndex(
+        column => column.columnName === req.body.taskData.status
+      );
+
+      board.columns[columnIndex].tasks.push(newTask);
+
+      board.markModified('columns');
+      await board.save();
+
       console.log('Task has been added');
       res.status(200).json('Task has been added');
     } catch (err) {
