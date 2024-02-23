@@ -113,6 +113,18 @@ export default function Board() {
 
       setTasks(updatedTasks);
 
+      const tasksByStatus = {};
+
+      updatedTasks.forEach(task => {
+        const status = task.status;
+
+        if (tasksByStatus[status]) {
+          tasksByStatus[status].push(task);
+        } else {
+          tasksByStatus[status] = [task];
+        }
+      });
+
       try {
         await axios.put(`${baseURL}/board/reorderTasks`, {
           boardId: id,
