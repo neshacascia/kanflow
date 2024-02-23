@@ -61,6 +61,34 @@ module.exports = {
       console.error(err);
     }
   },
+  reorderTasks: async (req, res) => {
+    try {
+      const board = await Board.findById(req.body.boardId);
+
+      for (const status in req.body.tasks) {
+        if (req.body.tasks.hasOwnProperty(status)) {
+          const tasksForStatus = req.body.tasks[status];
+
+          const columnIndex = board.columns.findIndex(
+            column => column.columnName === status
+          );
+
+          if (columnIndex !== -1) {
+            board.columns[columnIndex].tasks = [];
+            board.columns[columnIndex].tasks.push(...tasksForStatus);
+          }
+        }
+      }
+
+      board.markModified('columns');
+      await board.save();
+
+      console.log('Tasks has been reordered');
+      res.status(200).json('Tasks has been reordered');
+    } catch (err) {
+      console.error(err);
+    }
+  },
   addTask: async (req, res) => {
     try {
       const { id: boardId } = req.body.taskData;
