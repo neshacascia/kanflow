@@ -98,7 +98,32 @@ export default function Board() {
     }
   }, [id, isBoardUpdated]);
 
-  function handleDragEnd(e) {}
+  async function handleDragEnd(e) {
+    const { over, active } = e;
+
+    if (over) {
+      // reorder tasks within the same column
+      const updatedTasks = [...tasks];
+      const oldIndex = tasks.findIndex(task => task._id === active.id);
+      const newIndex = tasks.findIndex(task => task._id === over.id);
+
+      // move the task to the new index
+      updatedTasks.splice(oldIndex, 1);
+      updatedTasks.splice(newIndex, 0, tasks[oldIndex]);
+
+      setTasks(updatedTasks);
+
+      try {
+        await axios.put(`${baseURL}/board/reorderTasks`, {
+          boardId: id,
+          tasks: tasksByStatus,
+        });
+        // setIsBoardUpdated(true);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
 
   return (
     <section className="w-screen h-screen flex">
