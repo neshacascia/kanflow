@@ -50,9 +50,6 @@ export default function Board() {
   const [isBoardUpdated, setIsBoardUpdated] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
 
-  const [activeId, setActiveId] = useState(null);
-  const [currentContainerId, setCurrentContainerId] = useState();
-
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
@@ -77,11 +74,16 @@ export default function Board() {
             }),
           ]);
 
-          const { board, tasks } = boardRes.data;
+          const { board } = boardRes.data;
           const { boards } = boardsRes.data;
 
           setBoard(board[0]);
-          setTasks(tasks);
+          setTasks(
+            board[0].columns?.reduce(
+              (acc, column) => [...acc, ...column.tasks],
+              []
+            )
+          );
           setBoards(boards);
           setIsBoardUpdated(false);
           setIsLoggedIn(true);
@@ -95,10 +97,6 @@ export default function Board() {
       fetchData();
     }
   }, [id, isBoardUpdated]);
-
-  function handleDragStart(e) {}
-
-  function handleDragMove(e) {}
 
   function handleDragEnd(e) {}
 
@@ -115,16 +113,15 @@ export default function Board() {
           <DndContext
             sensors={sensors}
             collisionDetection={closestCorners}
-            onDragStart={handleDragStart}
-            onDragMove={handleDragMove}
             onDragEnd={handleDragEnd}
           >
-            <SortableContext items={board.columns.map((column, ind) => ind)}>
+            <SortableContext items={board.columns.map(column => column.id)}>
               <section className="h-full flex gap-3 pt-6">
                 {board.columns.length > 0 ? (
                   board.columns.map((column, ind) => (
                     <Column
-                      key={ind}
+                      key={column.id}
+                      id={column.id}
                       ind={ind}
                       name={column.columnName}
                       tasks={tasks}
