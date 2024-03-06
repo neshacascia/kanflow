@@ -93,6 +93,7 @@ export default function AddTask({
     const title = formData.get('title');
     const description = formData.get('desc');
     const status = formData.get('status');
+    const order = tasksCountByStatus[status] + 1 || 1;
 
     const taskData = {
       id,
@@ -100,6 +101,7 @@ export default function AddTask({
       description,
       subtasks,
       status,
+      order,
     };
 
     try {
