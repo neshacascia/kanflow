@@ -1,4 +1,5 @@
 import Task from './Task';
+import { SortableContext } from '@dnd-kit/sortable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -36,15 +37,17 @@ export default function Column({
       </div>
 
       <div className="flex flex-col gap-5 last:pb-8">
-        {columnTasks?.map((task, ind) => (
-          <Task
-            key={ind}
-            task={task}
-            setViewTask={setViewTask}
-            setSelectedStatus={setSelectedStatus}
-            openModal={openModal}
-          />
-        ))}
+        <SortableContext items={columnTasks?.map(task => task._id)}>
+          {columnTasks?.map((task, ind) => (
+            <Task
+              key={ind}
+              task={task}
+              setViewTask={setViewTask}
+              setSelectedStatus={setSelectedStatus}
+              openModal={openModal}
+            />
+          ))}
+        </SortableContext>
       </div>
     </section>
   );
