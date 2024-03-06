@@ -129,6 +129,7 @@ export default function Board() {
         {modal === 'add' && (
           <AddTask
             id={board._id}
+            tasks={tasks}
             columns={board.columns}
             closeModal={closeModal}
             setIsBoardUpdated={setIsBoardUpdated}
