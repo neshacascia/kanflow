@@ -17,6 +17,10 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  order: {
+    type: Number,
+    required: true,
+  },
   boardId: {
     type: String,
     required: true,

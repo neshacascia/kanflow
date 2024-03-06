@@ -69,6 +69,7 @@ module.exports = {
         description: req.body.taskData.description,
         subtasks: req.body.taskData.subtasks,
         status: req.body.taskData.status,
+        order: req.body.taskData.order,
         boardId: req.body.taskData.id,
       });
       console.log('Task has been added');
