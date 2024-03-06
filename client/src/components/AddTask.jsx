@@ -8,11 +8,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function AddTask({
   id,
+  tasks,
   columns,
   setIsBoardUpdated,
   closeModal,
 }) {
   const [titleInputTouched, setTitleInputTouched] = useState(false);
+
+  const tasksCountByStatus = tasks.reduce((acc, task) => {
+    const { status } = task;
+
+    if (!acc[status]) {
+      acc[status] = 0;
+    }
+    acc[status]++;
+    return acc;
+  }, {});
 
   const [subtasks, setSubtasks] = useState([
     {
