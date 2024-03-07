@@ -23,13 +23,19 @@ module.exports = {
   },
   getBoard: async (req, res) => {
     try {
-      const board = await Board.find({ _id: req.params.id });
-      const tasks = await Task.find({ boardId: req.params.id });
+      const userBoards = await Board.findOne({
+        userId: req.user.id,
+      });
 
-      if (board.length === 0) {
+      if (!userBoards) {
         return res.status(404).json({ error: 'Board not found' });
       }
-      res.status(200).json({ board, tasks });
+
+      const board = userBoards.boards.find(board =>
+        board._id.equals(new ObjectId(req.params.id))
+      );
+
+      res.status(200).json({ board });
     } catch (err) {
       console.error(err);
       return res.status(404).json({ error: 'Board not found' });
