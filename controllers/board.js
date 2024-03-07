@@ -13,7 +13,10 @@ module.exports = {
         return res.status(401).json({ message: 'Unauthorized' });
       }
       const boards = await Board.find({ userId: req.user.id }).lean();
-      res.status(200).json({ boards: boards, user: req.user.id });
+      res.status(200).json({
+        boards: boards.length > 0 ? boards[0].boards : [],
+        user: req.user.id,
+      });
     } catch (err) {
       console.error(err);
     }
