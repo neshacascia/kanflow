@@ -77,11 +77,10 @@ export default function Board() {
             }),
           ]);
 
-          const { board, tasks } = boardRes.data;
+          const { board } = boardRes.data;
           const { boards } = boardsRes.data;
 
-          setBoard(board[0]);
-          setTasks(tasks);
+          setBoard(board);
           setBoards(boards);
           setIsBoardUpdated(false);
           setIsLoggedIn(true);
