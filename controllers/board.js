@@ -19,6 +19,7 @@ module.exports = {
       });
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   getBoard: async (req, res) => {
@@ -38,7 +39,7 @@ module.exports = {
       res.status(200).json({ board });
     } catch (err) {
       console.error(err);
-      return res.status(404).json({ error: 'Board not found' });
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   createBoard: async (req, res) => {
@@ -68,6 +69,7 @@ module.exports = {
       res.status(200).json({ boardId: newBoard._id });
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   editBoard: async (req, res) => {
@@ -85,6 +87,7 @@ module.exports = {
       res.status(200).json('Board has been updated');
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   addTask: async (req, res) => {
@@ -101,6 +104,7 @@ module.exports = {
       res.status(200).json('Task has been added');
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   editTask: async (req, res) => {
@@ -121,6 +125,7 @@ module.exports = {
       res.status(200).json('Task has been updated');
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   updateStatus: async (req, res) => {
@@ -133,6 +138,7 @@ module.exports = {
       res.status(200).json("Task's status has been updated");
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   setCompletionStatus: async (req, res) => {
@@ -158,6 +164,7 @@ module.exports = {
       }
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   delete: async (req, res) => {
@@ -174,6 +181,7 @@ module.exports = {
       }
     } catch (err) {
       console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 };
