@@ -1,6 +1,7 @@
 const path = require('path');
 const Board = require('../models/Board');
 const Task = require('../models/Task');
+const { ObjectId } = require('mongodb');
 
 module.exports = {
   getBoards: async (req, res) => {
@@ -34,11 +35,26 @@ module.exports = {
   createBoard: async (req, res) => {
     try {
       console.log(req.body);
-      const newBoard = await Board.create({
-        name: req.body.boardData.name,
-        columns: req.body.boardData.columns,
-        userId: req.user.id,
-      });
+      const { boardData } = req.body;
+
+      const newBoard = await Board.findOneAndUpdate(
+        {
+          userId: req.user.id,
+        },
+        {
+          $push: {
+            boards: {
+              _id: new ObjectId(),
+              name: boardData.name,
+              columns: boardData.columns.map(column => ({
+                ...column,
+                tasks: [],
+              })),
+            },
+          },
+        },
+        { upsert: true, new: true }
+      );
       console.log('Board has been added');
       res.status(200).json({ boardId: newBoard._id });
     } catch (err) {
