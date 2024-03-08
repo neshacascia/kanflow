@@ -95,23 +95,24 @@ module.exports = {
     try {
       const { taskData } = req.body;
 
-      const taskObject = {};
-      taskObject[`boards.${taskData.boardIndex}.tasks`] = {
-        _id: new ObjectId(),
-        title: taskData.title,
-        description: taskData.description,
-        subtasks: taskData.subtasks,
-        status: taskData.status,
-        boardId: taskData.boardId,
+      const taskObject = {
+        $push: {
+          [`boards.${taskData.boardIndex}.tasks`]: {
+            _id: new ObjectId(),
+            title: taskData.title,
+            description: taskData.description,
+            subtasks: taskData.subtasks,
+            status: taskData.status,
+            boardId: taskData.boardId,
+          },
+        },
       };
 
       await Board.findOneAndUpdate(
         {
           userId: req.user.id,
         },
-        {
-          $push: taskObject,
-        },
+        taskObject,
         {
           new: true,
         }
