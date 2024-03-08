@@ -103,7 +103,6 @@ module.exports = {
             description: taskData.description,
             subtasks: taskData.subtasks,
             status: taskData.status,
-            boardId: taskData.boardId,
           },
         },
       };

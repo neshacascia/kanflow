@@ -97,7 +97,6 @@ export default function AddTask({
     // const order = tasks?.length > 0 ? tasks.length++ : 0;
 
     const taskData = {
-      boardId: id,
       boardIndex,
       title,
       description,
