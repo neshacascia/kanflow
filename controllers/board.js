@@ -124,19 +124,31 @@ module.exports = {
     }
   },
   editTask: async (req, res) => {
-    console.log(req.body.taskData);
     try {
-      await Task.updateOne(
-        { _id: req.body.taskData.taskId },
-        {
-          $set: {
-            title: req.body.taskData.title,
-            description: req.body.taskData.description,
-            subtasks: req.body.taskData.subtasks,
-            status: req.body.taskData.status,
+      const { taskData } = req.body;
+
+      const taskObject = {
+        $set: {
+          [`boards.${taskData.boardIndex}.tasks.${taskData.taskIndex}`]: {
+            _id: taskData._id,
+            title: taskData.title,
+            description: taskData.description,
+            subtasks: taskData.subtasks,
+            status: taskData.status,
           },
+        },
+      };
+
+      await Board.findOneAndUpdate(
+        {
+          userId: req.user.id,
+        },
+        taskObject,
+        {
+          new: true,
         }
       );
+
       console.log('Task has been updated');
       res.status(200).json('Task has been updated');
     } catch (err) {
