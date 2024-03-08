@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function AddTask({
   id,
+  boardIndex,
   tasks,
   columns,
   setIsBoardUpdated,
@@ -15,15 +16,15 @@ export default function AddTask({
 }) {
   const [titleInputTouched, setTitleInputTouched] = useState(false);
 
-  const tasksCountByStatus = tasks.reduce((acc, task) => {
-    const { status } = task;
+  // const tasksCountByStatus = tasks.reduce((acc, task) => {
+  //   const { status } = task;
 
-    if (!acc[status]) {
-      acc[status] = 0;
-    }
-    acc[status]++;
-    return acc;
-  }, {});
+  //   if (!acc[status]) {
+  //     acc[status] = 0;
+  //   }
+  //   acc[status]++;
+  //   return acc;
+  // }, {});
 
   const [subtasks, setSubtasks] = useState([
     {
@@ -93,15 +94,16 @@ export default function AddTask({
     const title = formData.get('title');
     const description = formData.get('desc');
     const status = formData.get('status');
-    const order = tasksCountByStatus[status] + 1 || 1;
+    // const order = tasks?.length > 0 ? tasks.length++ : 0;
 
     const taskData = {
-      id,
+      boardId: id,
+      boardIndex,
       title,
       description,
       subtasks,
       status,
-      order,
+      // order,
     };
 
     try {
