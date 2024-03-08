@@ -7,7 +7,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function EditTask({
-  id,
+  boardIndex,
+  tasks,
   selectedTask,
   columns,
   selectedStatus,
@@ -73,9 +74,11 @@ export default function EditTask({
     const title = formData.get('title');
     const description = formData.get('desc');
     const status = formData.get('status');
+    const taskIndex = tasks.findIndex(task => task._id === task._id);
 
     const taskData = {
-      id,
+      boardIndex,
+      taskIndex,
       taskId: task._id,
       title,
       description,
