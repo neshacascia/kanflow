@@ -11,7 +11,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function ViewTask({
+  boardIndex,
   task,
+  tasks,
   columns,
   selectedStatus,
   setIsBoardUpdated,
@@ -24,6 +26,8 @@ export default function ViewTask({
   const completedSubtasks = task.subtasks.filter(
     task => task.completed === true
   ).length;
+
+  const taskIndex = tasks.findIndex(task => task._id === task._id);
 
   function updateModal(modalType) {
     closeModal();
@@ -63,12 +67,18 @@ export default function ViewTask({
   }
 
   async function updateCurrentStatus(newStatus) {
+    const taskData = {
+      boardIndex,
+      taskIndex,
+      taskId: task._id,
+      status: newStatus,
+    };
+
     try {
       const res = await axios.put(
         `${baseURL}/board/updateStatus`,
         {
-          taskId: task._id,
-          status: newStatus,
+          taskData,
         },
         {
           withCredentials: true,
