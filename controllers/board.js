@@ -158,9 +158,23 @@ module.exports = {
   },
   updateStatus: async (req, res) => {
     try {
-      await Task.updateOne(
-        { _id: req.body.taskId },
-        { $set: { status: req.body.status } }
+      const { taskData } = req.body;
+
+      const taskObject = {
+        $set: {
+          [`boards.${taskData.boardIndex}.tasks.${taskData.taskIndex}.status`]:
+            taskData.status,
+        },
+      };
+
+      await Board.findOneAndUpdate(
+        {
+          userId: req.user.id,
+        },
+        taskObject,
+        {
+          new: true,
+        }
       );
       console.log("Task's status has been updated");
       res.status(200).json("Task's status has been updated");
