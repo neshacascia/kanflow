@@ -91,61 +91,13 @@ module.exports = {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
-  // addTask: async (req, res) => {
-  //   console.log(req.body);
-  //   const { taskData } = req.body;
-
-  //   try {
-  //     const userBoards = await Board.findOne({
-  //       userId: req.user.id,
-  //     });
-
-  //     const board = userBoards.boards.find(board =>
-  //       board._id.equals(new ObjectId(taskData.boardId))
-  //     );
-
-  //     const targetColumn = board.columns.find(
-  //       column => column.columnName === taskData.status
-  //     );
-
-  //     const newTask = {
-  //       title: taskData.title,
-  //       description: taskData.description,
-  //       subtasks: taskData.subtasks,
-  //       status: taskData.status,
-  //       order: taskData.order,
-  //       boardId: taskData.boardId,
-  //     };
-
-  //     targetColumn.tasks.push(newTask);
-  //     await userBoards.save();
-
-  //     console.log('Task has been added');
-  //     res.status(200).json('Task has been added');
-  //   } catch (err) {
-  //     console.error(err);
-  //     return res.status(500).json({ error: 'Internal Server Error' });
-  //   }
-  // },
   addTask: async (req, res) => {
-    console.log(req.body);
-    const { taskData } = req.body;
-
     try {
-      const userBoards = await Board.findOneAndUpdate({
-        userId: req.user.id,
-        'boards._id': new ObjectId(taskData.boardId),
-      });
+      const { taskData } = req.body;
 
-      // const board = userBoards.boards.find(board =>
-      //   board._id.equals(new ObjectId(taskData.boardId))
-      // );
-
-      // const targetColumn = board.columns.find(
-      //   column => column.columnName === taskData.status
-      // );
-
-      const newTask = {
+      const taskObject = {};
+      taskObject[`boards.${taskData.boardIndex}.tasks`] = {
+        _id: new ObjectId(),
         title: taskData.title,
         description: taskData.description,
         subtasks: taskData.subtasks,
@@ -154,9 +106,17 @@ module.exports = {
         boardId: taskData.boardId,
       };
 
-      targetColumn.tasks.push(newTask);
-      await userBoards.save();
-
+      await Board.findOneAndUpdate(
+        {
+          userId: req.user.id,
+        },
+        {
+          $push: taskObject,
+        },
+        {
+          new: true,
+        }
+      );
       console.log('Task has been added');
       res.status(200).json('Task has been added');
     } catch (err) {
