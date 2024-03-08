@@ -163,7 +163,9 @@ export default function Board() {
         )}
         {modal === 'viewTask' && (
           <ViewTask
+            boardIndex={boardIndex}
             task={viewTask}
+            tasks={tasks}
             columns={board.columns}
             selectedStatus={selectedStatus}
             setIsBoardUpdated={setIsBoardUpdated}
