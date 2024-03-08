@@ -173,7 +173,8 @@ export default function Board() {
         )}
         {modal === 'edit' && (
           <EditTask
-            id={board._id}
+            boardIndex={boardIndex}
+            tasks={tasks}
             selectedTask={viewTask}
             columns={board.columns}
             selectedStatus={selectedStatus}
