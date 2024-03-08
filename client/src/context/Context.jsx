@@ -6,6 +6,7 @@ function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
+  const [boardIndex, setBoardIndex] = useState();
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displaySidebar, setDisplaySidebar] = useState(true);
@@ -80,6 +81,8 @@ function ContextProvider(props) {
         setBoards,
         board,
         setBoard,
+        boardIndex,
+        setBoardIndex,
         modal,
         openModal,
         closeModal,
