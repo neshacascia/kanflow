@@ -72,15 +72,18 @@ module.exports = {
   },
   editBoard: async (req, res) => {
     try {
-      await Board.updateOne(
-        { _id: req.body.boardData.id },
-        {
-          $set: {
-            name: req.body.boardData.name,
-            columns: req.body.boardData.columns,
-          },
-        }
-      );
+      const { boardData } = req.body;
+
+      const updateObject = {
+        $set: {
+          [`boards.${boardData.boardIndex}.name`]: boardData.name,
+          [`boards.${boardData.boardIndex}.columns`]: boardData.columns,
+        },
+      };
+
+      await Board.findOneAndUpdate({ userId: req.user.id }, updateObject, {
+        new: true,
+      });
       console.log('Board has been updated');
       res.status(200).json('Board has been updated');
     } catch (err) {
