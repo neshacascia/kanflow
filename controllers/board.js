@@ -99,7 +99,6 @@ module.exports = {
         description: taskData.description,
         subtasks: taskData.subtasks,
         status: taskData.status,
-        order: taskData.order,
         boardId: taskData.boardId,
       };
 
