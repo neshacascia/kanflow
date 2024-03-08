@@ -29,6 +29,8 @@ export default function Board() {
   const {
     board,
     setBoard,
+    boardIndex,
+    setBoardIndex,
     modal,
     openModal,
     closeModal,
@@ -82,6 +84,7 @@ export default function Board() {
 
           setBoard(board);
           setBoards(boards);
+          setBoardIndex(boards.findIndex(board => board._id === id));
           setIsBoardUpdated(false);
           setIsLoggedIn(true);
         } catch (err) {
@@ -150,6 +153,7 @@ export default function Board() {
         {modal === 'add' && (
           <AddTask
             id={board._id}
+            boardIndex={boardIndex}
             tasks={tasks}
             columns={board.columns}
             closeModal={closeModal}
