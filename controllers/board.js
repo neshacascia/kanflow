@@ -55,10 +55,7 @@ module.exports = {
             boards: {
               _id: new ObjectId(),
               name: boardData.name,
-              columns: boardData.columns.map(column => ({
-                ...column,
-                tasks: [],
-              })),
+              columns: boardData.columns.map(column => column),
             },
           },
         },
