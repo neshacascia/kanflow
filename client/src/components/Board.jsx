@@ -83,6 +83,7 @@ export default function Board() {
           const { boards } = boardsRes.data;
 
           setBoard(board);
+          setTasks(board.tasks);
           setBoards(boards);
           setBoardIndex(boards.findIndex(board => board._id === id));
           setIsBoardUpdated(false);
