@@ -186,6 +186,8 @@ export default function Board() {
         )}
         {modal === 'deleteTask' && (
           <Delete
+            boardIndex={boardIndex}
+            tasks={tasks}
             selectedTask={viewTask}
             setIsBoardUpdated={setIsBoardUpdated}
             modal={modal}
