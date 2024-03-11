@@ -221,7 +221,6 @@ module.exports = {
     }
   },
   delete: async (req, res) => {
-    console.log(req.body);
     try {
       const { boardIndex, modal, data } = req.body;
       if (modal === 'deleteTask') {
@@ -248,7 +247,27 @@ module.exports = {
         console.log('Task has been deleted');
         res.status(200).json('Task has been deleted');
       } else {
-        await Board.deleteOne({ _id: req.body.data });
+        await Board.updateOne(
+          {
+            userId: req.user.id,
+          },
+          {
+            $unset: {
+              [`boards.${boardIndex}`]: 1,
+            },
+          }
+        );
+
+        await Board.updateOne(
+          {
+            userId: req.user.id,
+          },
+          {
+            $pull: {
+              boards: null,
+            },
+          }
+        );
         console.log('Board has been deleted');
         res.status(200).json('Board has been deleted');
       }
