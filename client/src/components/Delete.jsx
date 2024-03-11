@@ -7,6 +7,8 @@ import { baseURL } from '../api';
 
 export default function Delete({
   board,
+  boardIndex,
+  tasks,
   selectedTask,
   setIsBoardUpdated,
   modal,
@@ -14,13 +16,14 @@ export default function Delete({
 }) {
   const { boards } = useContext(Context);
   const navigate = useNavigate();
+  const taskIndex = tasks.findIndex(task => selectedTask._id === task._id);
 
   async function deleteData() {
-    const data = modal === 'deleteTask' ? selectedTask._id : board._id;
+    const data = modal === 'deleteTask' ? taskIndex : board._id;
 
     try {
       const res = await axios.delete(`${baseURL}/board/delete`, {
-        data: { modal, data },
+        data: { boardIndex, modal, data },
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
