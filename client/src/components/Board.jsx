@@ -195,7 +195,12 @@ export default function Board() {
           />
         )}
         {modal === 'deleteBoard' && (
-          <Delete board={board} modal={modal} closeModal={closeModal} />
+          <Delete
+            boardIndex={boardIndex}
+            board={board}
+            modal={modal}
+            closeModal={closeModal}
+          />
         )}
         <button
           onClick={() => setDisplaySidebar(true)}
