@@ -185,20 +185,31 @@ module.exports = {
   },
   setCompletionStatus: async (req, res) => {
     try {
-      if (req.body.completed) {
-        await Task.updateOne(
-          { _id: req.body.taskId, 'subtasks.id': req.body.subtaskId },
-          { $set: { 'subtasks.$.completed': false } }
-        );
+      const { taskData } = req.body;
+
+      const updateObject = {
+        $set: {
+          [`boards.${taskData.boardIndex}.tasks.${taskData.taskIndex}.subtasks.${taskData.subtaskId}.completed`]:
+            !taskData.completed,
+        },
+      };
+
+      await Board.findOneAndUpdate(
+        {
+          userId: req.user.id,
+        },
+        updateObject,
+        {
+          new: true,
+        }
+      );
+
+      if (taskData.completed) {
         console.log('Subtask has been marked incompleted');
         res
           .status(200)
           .json("Subtask's completion status has been marked incompleted");
       } else {
-        await Task.updateOne(
-          { _id: req.body.taskId, 'subtasks.id': req.body.subtaskId },
-          { $set: { 'subtasks.$.completed': true } }
-        );
         console.log('Subtask has been marked completed');
         res
           .status(200)
