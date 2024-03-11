@@ -43,7 +43,12 @@ export default function EditTask({
 
     setSubtasks(prevState => [
       ...prevState,
-      { id: maxId + 1, subtask: '', completed: false, isTouched: false },
+      {
+        id: subtasks.length >= 1 ? maxId + 1 : 0,
+        subtask: '',
+        completed: false,
+        isTouched: false,
+      },
     ]);
   }
 
