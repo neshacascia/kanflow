@@ -223,8 +223,28 @@ module.exports = {
   delete: async (req, res) => {
     console.log(req.body);
     try {
-      if (req.body.modal === 'deleteTask') {
-        await Task.deleteOne({ _id: req.body.data });
+      const { boardIndex, modal, data } = req.body;
+      if (modal === 'deleteTask') {
+        await Board.updateOne(
+          {
+            userId: req.user.id,
+          },
+          {
+            $unset: { [`boards.${boardIndex}.tasks.${data}`]: 1 },
+          }
+        );
+
+        await Board.updateOne(
+          {
+            userId: req.user.id,
+          },
+          {
+            $pull: {
+              [`boards.${boardIndex}.tasks`]: null,
+            },
+          }
+        );
+
         console.log('Task has been deleted');
         res.status(200).json('Task has been deleted');
       } else {
