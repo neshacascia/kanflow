@@ -16,7 +16,7 @@ export default function Delete({
 }) {
   const { boards } = useContext(Context);
   const navigate = useNavigate();
-  const taskIndex = tasks.findIndex(task => selectedTask._id === task._id);
+  const taskIndex = tasks?.findIndex(task => selectedTask._id === task._id);
 
   async function deleteData() {
     const data = modal === 'deleteTask' ? taskIndex : board._id;
