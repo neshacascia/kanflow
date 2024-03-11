@@ -27,7 +27,9 @@ export default function ViewTask({
     task => task.completed === true
   ).length;
 
-  const taskIndex = tasks.findIndex(task => task._id === task._id);
+  const taskIndex = tasks.findIndex(
+    selectedTask => task._id === selectedTask._id
+  );
 
   function updateModal(modalType) {
     closeModal();
@@ -46,12 +48,18 @@ export default function ViewTask({
       setSubtasks(updatedSubtasks);
       setIsBoardUpdated(true);
 
+      const taskData = {
+        boardIndex,
+        taskIndex,
+        taskId: task._id,
+        subtaskId: id,
+        completed: completed,
+      };
+
       const res = await axios.put(
         `${baseURL}/board/setCompletionStatus`,
         {
-          taskId: task._id,
-          subtaskId: id,
-          completed: completed,
+          taskData,
         },
         {
           withCredentials: true,
