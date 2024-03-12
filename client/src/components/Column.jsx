@@ -12,7 +12,7 @@ export default function Column({
   setSelectedStatus,
   openModal,
 }) {
-  const columnTasks = tasks?.filter(task => task.status === name);
+  const columnTasks = tasks?.filter(task => task.status === name) || [];
 
   const columnColours = [
     'text-red-500',
