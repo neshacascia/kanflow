@@ -79,12 +79,12 @@ export default function EditTask({
     const title = formData.get('title');
     const description = formData.get('desc');
     const status = formData.get('status');
-    const taskIndex = tasks.findIndex(task => task._id === task._id);
+    const taskIndex = tasks.findIndex(task => selectedTask._id === task._id);
 
     const taskData = {
       boardIndex,
       taskIndex,
-      taskId: task._id,
+      _id: task._id,
       title,
       description,
       subtasks,
