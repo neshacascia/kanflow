@@ -37,6 +37,9 @@
 #### Cookies and Monorepo
 Initially, the client-side was hosted on Render and the server-side was hosted on Cyclic. However, I began to encounter authentication issues with Chrome and Safari. Despite successfully authentication, I would receive a 401 Unauthorized status code upon redirection in the application because my cookies were not getting stored correctly. After researching and consulting both StackOverflow and the Express documentation, I implemented `app.set('trust proxy', 1)`, allowing the correct navigation to the `/board` path for logged-in users. While this resolves the issue for most browsers, Safari continued to pose more challenges due to its strict third-party cookie policies. To solve this, I opted to consolidate both the client and server components into a single repository hosted on Cyclic. This helped address the issues related to CORS limitations and Safari's third-party cookie policies. By serving the client-side code through the server, both components share the same origin, eliminating any cross-origin issues and allowing for seamless routing.
 
+#### Loading state
+To enhance user experience and provide clear feedback during loading processes, I created a `loading` state, used to conditionally render a spinner component, offering users a visual cue. I integrated this `loading` state into both the logout process, as well as into the `Board` component to indicate that the system is processing their request or that data is being fetched, ensuring users are aware of the ongoing processes. 
+
 ## Running this Project Locally
 #### Server
 In one terminal:
