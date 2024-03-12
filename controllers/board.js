@@ -276,4 +276,30 @@ module.exports = {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
+  reorderTasks: async (req, res) => {
+    try {
+      const { tasksData } = req.body;
+
+      const tasksObject = {
+        $set: {
+          [`boards.${tasksData.boardIndex}.tasks`]: tasksData.updatedTasks,
+        },
+      };
+
+      await Board.findOneAndUpdate(
+        {
+          userId: req.user.id,
+        },
+        tasksObject,
+        {
+          new: true,
+        }
+      );
+      console.log('Tasks has been reordered');
+      res.status(200).json('Tasks has been reordered');
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  },
 };
