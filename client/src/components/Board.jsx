@@ -99,6 +99,37 @@ export default function Board() {
     }
   }, [id, isBoardUpdated]);
 
+  async function handleDragEnd(e) {
+    const { over, active } = e;
+
+    if (over) {
+      // reorder tasks within the same column
+      const updatedTasks = [...tasks];
+      const oldIndex = tasks.findIndex(task => task._id === active.id);
+      const newIndex = tasks.findIndex(task => task._id === over.id);
+
+      // move the task to the new index
+      updatedTasks.splice(oldIndex, 1);
+      updatedTasks.splice(newIndex, 0, tasks[oldIndex]);
+
+      setTasks(updatedTasks);
+
+      const tasksData = {
+        boardIndex,
+        updatedTasks,
+      };
+
+      try {
+        const res = await axios.put(`${baseURL}/board/reorderTasks`, {
+          tasksData,
+        });
+        console.log(res);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
   return (
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
@@ -109,7 +140,11 @@ export default function Board() {
         {loadingData ? (
           <LoadingSpinner />
         ) : (
-          <DndContext sensors={sensors} collisionDetection={closestCorners}>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragEnd={handleDragEnd}
+          >
             <section className="h-full flex gap-3 pt-6">
               {board.columns.length > 0 ? (
                 board.columns.map((column, ind) => (
