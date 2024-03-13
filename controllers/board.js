@@ -1,6 +1,5 @@
 const path = require('path');
 const Board = require('../models/Board');
-const Task = require('../models/Task');
 const { ObjectId } = require('mongodb');
 
 module.exports = {
