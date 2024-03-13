@@ -130,9 +130,6 @@ export default function Board() {
     }
   }
 
-  console.log('Board:', board);
-  console.log('Columns:', board.columns);
-
   return (
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
@@ -149,8 +146,8 @@ export default function Board() {
             onDragEnd={handleDragEnd}
           >
             <section className="h-full flex gap-3 pt-6">
-              {board.columns.length > 0 ? (
-                board.columns.map((column, ind) => (
+              {board.columns?.length > 0 ? (
+                board.columns?.map((column, ind) => (
                   <Column
                     key={ind}
                     ind={ind}
