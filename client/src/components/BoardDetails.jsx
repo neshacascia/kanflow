@@ -10,7 +10,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetails({ board, setIsBoardUpdated }) {
   const navigate = useNavigate();
-  const { modal, closeModal } = useContext(Context);
+  const { boardIndex, modal, closeModal } = useContext(Context);
 
   const boardDetails = modal;
 
@@ -88,6 +88,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
 
     const boardData = {
       id: board?._id,
+      boardIndex,
       name,
       columns,
     };

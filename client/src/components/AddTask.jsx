@@ -7,7 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function AddTask({
-  id,
+  boardIndex,
   columns,
   setIsBoardUpdated,
   closeModal,
@@ -51,7 +51,12 @@ export default function AddTask({
 
     setSubtasks(prevState => [
       ...prevState,
-      { id: maxId + 1, subtask: '', completed: false, isTouched: false },
+      {
+        id: subtasks.length >= 1 ? maxId + 1 : 0,
+        subtask: '',
+        completed: false,
+        isTouched: false,
+      },
     ]);
   }
 
@@ -84,7 +89,7 @@ export default function AddTask({
     const status = formData.get('status');
 
     const taskData = {
-      id,
+      boardIndex,
       title,
       description,
       subtasks,

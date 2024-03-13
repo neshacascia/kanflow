@@ -12,6 +12,15 @@ import Delete from './Delete';
 import Sidebar from './Sidebar';
 import LoadingSpinner from './LoadingSpinner';
 import { baseURL } from '../api';
+import {
+  DndContext,
+  useSensors,
+  useSensor,
+  PointerSensor,
+  KeyboardSensor,
+  closestCorners,
+} from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +29,8 @@ export default function Board() {
   const {
     board,
     setBoard,
+    boardIndex,
+    setBoardIndex,
     modal,
     openModal,
     closeModal,
@@ -37,6 +48,17 @@ export default function Board() {
   const [selectedStatus, setSelectedStatus] = useState();
   const [isBoardUpdated, setIsBoardUpdated] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   useEffect(() => {
     if (id) {
@@ -57,12 +79,13 @@ export default function Board() {
             }),
           ]);
 
-          const { board, tasks } = boardRes.data;
+          const { board } = boardRes.data;
           const { boards } = boardsRes.data;
 
-          setBoard(board[0]);
-          setTasks(tasks);
+          setBoard(board);
+          setTasks(board.tasks);
           setBoards(boards);
+          setBoardIndex(boards.findIndex(board => board._id === id));
           setIsBoardUpdated(false);
           setIsLoggedIn(true);
         } catch (err) {
@@ -76,6 +99,37 @@ export default function Board() {
     }
   }, [id, isBoardUpdated]);
 
+  async function handleDragEnd(e) {
+    const { over, active } = e;
+
+    if (over) {
+      // reorder tasks within the same column
+      const updatedTasks = [...tasks];
+      const oldIndex = tasks.findIndex(task => task._id === active.id);
+      const newIndex = tasks.findIndex(task => task._id === over.id);
+
+      // move the task to the new index
+      updatedTasks.splice(oldIndex, 1);
+      updatedTasks.splice(newIndex, 0, tasks[oldIndex]);
+
+      setTasks(updatedTasks);
+
+      const tasksData = {
+        boardIndex,
+        updatedTasks,
+      };
+
+      try {
+        const res = await axios.put(`${baseURL}/board/reorderTasks`, {
+          tasksData,
+        });
+        console.log(res);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
   return (
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
@@ -86,40 +140,46 @@ export default function Board() {
         {loadingData ? (
           <LoadingSpinner />
         ) : (
-          <section className="h-full flex gap-3 pt-6">
-            {board.columns.length > 0 ? (
-              board.columns.map((column, ind) => (
-                <Column
-                  key={ind}
-                  ind={ind}
-                  name={column.columnName}
-                  tasks={tasks}
-                  setViewTask={setViewTask}
-                  setSelectedStatus={setSelectedStatus}
-                  openModal={openModal}
-                />
-              ))
-            ) : (
-              <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
-                <p className="text-mediumGrey text-lg font-semibold text-center">
-                  This board is empty. Create a new column to get started.
-                </p>
-                <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
-                  <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
-                  <p onClick={() => openModal('editBoard')}>Add New Column</p>
-                </button>
-              </div>
-            )}
-            {board.columns.length > 0 && (
-              <div
-                onClick={() => openModal('editBoard')}
-                className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
-              >
-                <FontAwesomeIcon icon={faPlus} className="text-xs" />
-                New Column
-              </div>
-            )}
-          </section>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragEnd={handleDragEnd}
+          >
+            <section className="h-full flex gap-3 pt-6">
+              {board.columns.length > 0 ? (
+                board.columns.map((column, ind) => (
+                  <Column
+                    key={ind}
+                    ind={ind}
+                    name={column.columnName}
+                    tasks={tasks}
+                    setViewTask={setViewTask}
+                    setSelectedStatus={setSelectedStatus}
+                    openModal={openModal}
+                  />
+                ))
+              ) : (
+                <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
+                  <p className="text-mediumGrey text-lg font-semibold text-center">
+                    This board is empty. Create a new column to get started.
+                  </p>
+                  <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
+                    <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
+                    <p onClick={() => openModal('editBoard')}>Add New Column</p>
+                  </button>
+                </div>
+              )}
+              {board.columns.length > 0 && (
+                <div
+                  onClick={() => openModal('editBoard')}
+                  className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
+                >
+                  <FontAwesomeIcon icon={faPlus} className="text-xs" />
+                  New Column
+                </div>
+              )}
+            </section>
+          </DndContext>
         )}
         {modal === 'menu' && <Menu />}
         {modal === 'editBoard' && (
@@ -128,7 +188,7 @@ export default function Board() {
         {modal === 'new' && <BoardDetails board={board} />}
         {modal === 'add' && (
           <AddTask
-            id={board._id}
+            boardIndex={boardIndex}
             columns={board.columns}
             closeModal={closeModal}
             setIsBoardUpdated={setIsBoardUpdated}
@@ -136,7 +196,9 @@ export default function Board() {
         )}
         {modal === 'viewTask' && (
           <ViewTask
+            boardIndex={boardIndex}
             task={viewTask}
+            tasks={tasks}
             columns={board.columns}
             selectedStatus={selectedStatus}
             setIsBoardUpdated={setIsBoardUpdated}
@@ -146,7 +208,8 @@ export default function Board() {
         )}
         {modal === 'edit' && (
           <EditTask
-            id={board._id}
+            boardIndex={boardIndex}
+            tasks={tasks}
             selectedTask={viewTask}
             columns={board.columns}
             selectedStatus={selectedStatus}
@@ -156,6 +219,8 @@ export default function Board() {
         )}
         {modal === 'deleteTask' && (
           <Delete
+            boardIndex={boardIndex}
+            tasks={tasks}
             selectedTask={viewTask}
             setIsBoardUpdated={setIsBoardUpdated}
             modal={modal}
@@ -163,7 +228,12 @@ export default function Board() {
           />
         )}
         {modal === 'deleteBoard' && (
-          <Delete board={board} modal={modal} closeModal={closeModal} />
+          <Delete
+            boardIndex={boardIndex}
+            board={board}
+            modal={modal}
+            closeModal={closeModal}
+          />
         )}
         <button
           onClick={() => setDisplaySidebar(true)}

@@ -15,6 +15,7 @@ router.put(
   ensureAuth,
   boardController.setCompletionStatus
 );
+router.put('/reorderTasks', ensureAuth, boardController.reorderTasks);
 router.delete('/delete', ensureAuth, boardController.delete);
 
 module.exports = router;
