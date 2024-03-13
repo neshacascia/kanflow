@@ -188,9 +188,7 @@ export default function Board() {
         {modal === 'new' && <BoardDetails board={board} />}
         {modal === 'add' && (
           <AddTask
-            id={board._id}
             boardIndex={boardIndex}
-            tasks={tasks}
             columns={board.columns}
             closeModal={closeModal}
             setIsBoardUpdated={setIsBoardUpdated}

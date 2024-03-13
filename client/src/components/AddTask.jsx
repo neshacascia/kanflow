@@ -7,24 +7,12 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function AddTask({
-  id,
   boardIndex,
-  tasks,
   columns,
   setIsBoardUpdated,
   closeModal,
 }) {
   const [titleInputTouched, setTitleInputTouched] = useState(false);
-
-  // const tasksCountByStatus = tasks.reduce((acc, task) => {
-  //   const { status } = task;
-
-  //   if (!acc[status]) {
-  //     acc[status] = 0;
-  //   }
-  //   acc[status]++;
-  //   return acc;
-  // }, {});
 
   const [subtasks, setSubtasks] = useState([
     {
@@ -99,7 +87,6 @@ export default function AddTask({
     const title = formData.get('title');
     const description = formData.get('desc');
     const status = formData.get('status');
-    // const order = tasks?.length > 0 ? tasks.length++ : 0;
 
     const taskData = {
       boardIndex,
@@ -107,7 +94,6 @@ export default function AddTask({
       description,
       subtasks,
       status,
-      // order,
     };
 
     try {
