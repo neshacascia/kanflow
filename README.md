@@ -40,6 +40,9 @@ Initially, the client-side was hosted on Render and the server-side was hosted o
 #### Loading state
 To enhance user experience and provide clear feedback during loading processes, I created a `loading` state, used to conditionally render a spinner component, offering users a visual cue. I integrated this `loading` state into both the logout process, as well as into the `Board` component to indicate that the system is processing their request or that data is being fetched, ensuring users are aware of the ongoing processes. 
 
+#### Database Restructure for Improved Organization
+Initially, each board was a document stored in one collection, while tasks were stored separately in another collection. To identify which tasks belonged to which user and board, I relied on the corresponding board ID for filtering. However, when it came to implementing the drag-and-drop functionality, I recognized a great need for a more structured approach to enhance organization and maintain task reordering effectively. To fix this, I revamped the data structure by storing each user as a document in the collection. Within this document would contain a `boards` array to accommodate multiple boards. Each board element would contain a `tasks` array to store individual tasks specific to that board. This restructuring not only significantly improved the readability and organization of the database but also ensured seamless updating of task reordering.
+
 ## Running this Project Locally
 #### Server
 In one terminal:
