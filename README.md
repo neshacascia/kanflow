@@ -43,6 +43,11 @@ To enhance user experience and provide clear feedback during loading processes, 
 #### Database Restructure for Improved Organization
 Initially, each board was a document stored in one collection, while tasks were stored separately in another collection. To identify which tasks belonged to which user and board, I relied on the corresponding board ID for filtering. However, when it came to implementing the drag-and-drop functionality, I recognized a great need for a more structured approach to enhance organization and maintain task reordering effectively. To fix this, I revamped the data structure by storing each user as a document in the collection. Within this document would contain a `boards` array to accommodate multiple boards. Each board element would contain a `tasks` array to store individual tasks specific to that board. This restructuring not only significantly improved the readability and organization of the database but also ensured seamless updating of task reordering.
 
+#### Optimizing State Management with Local Storage & Context API
+Upon successful authentication, a `user` property with a value of `true` is added to the localStorage and is removed upon logout. This eliminated the need for redundant execution of my previous `checkAuthentication()` function and unnecessary GET requests, as I would leverage this stored property, enhancing the rendering efficiency of the homepage.
+
+The Context API is utilized quite extensively for state management throughout this application. One instance was to help minimize unnecessary page refreshes and optimize the user experience by introducing a new state `isBoardUpdated`. This state is designed to track any changes that require the board to be updated. I modified the logic within tasks-related operations (adding a new task, editing a task, changing subtask completion or task status) and editing the board, to then update the `isBoardUpdated` state to `true`. This ensures seamless tracking of changes and that the latest data is efficiently fetched without resorting to a manual page reload. 
+
 ## Running this Project Locally
 #### Server
 In one terminal:
