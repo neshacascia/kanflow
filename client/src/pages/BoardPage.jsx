@@ -30,7 +30,7 @@ export default function BoardPage() {
           setIsLoggedIn(true);
           localStorage.setItem('user', true);
           setBoards(boards);
-
+          console.log(boards);
           if (boards.length > 0) {
             navigate(`/board/${boards[0]._id}`);
           } else {
