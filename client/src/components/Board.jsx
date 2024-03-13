@@ -130,6 +130,8 @@ export default function Board() {
     }
   }
 
+  console.log('Board:', board);
+
   return (
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
