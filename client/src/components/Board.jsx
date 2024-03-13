@@ -131,6 +131,7 @@ export default function Board() {
   }
 
   console.log('Board:', board);
+  console.log('Columns:', board.columns);
 
   return (
     <section className="w-screen h-screen flex">
