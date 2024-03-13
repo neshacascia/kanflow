@@ -48,6 +48,10 @@ Upon successful authentication, a `user` property with a value of `true` is adde
 
 The Context API is utilized quite extensively for state management throughout this application. One instance was to help minimize unnecessary page refreshes and optimize the user experience by introducing a new state `isBoardUpdated`. This state is designed to track any changes that require the board to be updated. I modified the logic within tasks-related operations (adding a new task, editing a task, changing subtask completion or task status) and editing the board, to then update the `isBoardUpdated` state to `true`. This ensures seamless tracking of changes and that the latest data is efficiently fetched without resorting to a manual page reload. 
 
+## Lessons Learned
+- using template literals to dynamically build the field path and utilize MongoDB's array update operators
+- greater understanding of CORS and third-party cookie policies
+
 ## Running this Project Locally
 #### Server
 In one terminal:
