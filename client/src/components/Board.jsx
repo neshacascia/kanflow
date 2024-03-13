@@ -137,7 +137,7 @@ export default function Board() {
         onClick={() => setDisplaySettings(false)}
         className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col justify-center px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
-        {loadingData ? (
+        {/* {loadingData ? (
           <LoadingSpinner />
         ) : (
           <DndContext
@@ -146,8 +146,8 @@ export default function Board() {
             onDragEnd={handleDragEnd}
           >
             <section className="h-full flex gap-3 pt-6">
-              {board.columns?.length > 0 ? (
-                board.columns?.map((column, ind) => (
+              {board.columns.length > 0 ? (
+                board.columns.map((column, ind) => (
                   <Column
                     key={ind}
                     ind={ind}
@@ -180,7 +180,7 @@ export default function Board() {
               )}
             </section>
           </DndContext>
-        )}
+        )} */}
         {modal === 'menu' && <Menu />}
         {modal === 'editBoard' && (
           <BoardDetails board={board} setIsBoardUpdated={setIsBoardUpdated} />
