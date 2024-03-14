@@ -20,7 +20,10 @@ import {
   KeyboardSensor,
   closestCorners,
 } from '@dnd-kit/core';
-import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -99,6 +102,20 @@ export default function Board() {
     }
   }, [id, isBoardUpdated]);
 
+  function findContainer(id) {
+    const task = tasks.find(task => task._id === id);
+
+    if (task) {
+      const column = board.columns.find(
+        column => column.columnName === task.status
+      );
+
+      if (column) {
+        return column.id;
+      }
+    }
+  }
+
   async function handleDragEnd(e) {
     const { over, active } = e;
 
@@ -148,6 +165,9 @@ export default function Board() {
             <section className="h-full flex gap-3 pt-6">
               {board.columns.length > 0 ? (
                 board.columns.map((column, ind) => (
+                  // <SortableContext
+                  //   items={board.columns.map(column => column.id)}
+                  // >
                   <Column
                     key={ind}
                     ind={ind}
@@ -157,6 +177,7 @@ export default function Board() {
                     setSelectedStatus={setSelectedStatus}
                     openModal={openModal}
                   />
+                  // </SortableContext>
                 ))
               ) : (
                 <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
