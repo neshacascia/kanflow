@@ -1,6 +1,6 @@
 import Task from './Task';
 import { useSortable, SortableContext } from '@dnd-kit/sortable';
-import { closestCenter } from '@dnd-kit/core';
+import { DragOverlay } from '@dnd-kit/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ export default function Column({
   setViewTask,
   setSelectedStatus,
   openModal,
+  activeTask,
 }) {
   const { setNodeRef } = useSortable({ id: name });
   const columnTasks = tasks?.filter(task => task.status === name) || [];
@@ -50,6 +51,11 @@ export default function Column({
             />
           ))}
         </SortableContext>
+        {activeTask && (
+          <DragOverlay>
+            <Task task={activeTask} />
+          </DragOverlay>
+        )}
       </div>
     </section>
   );
