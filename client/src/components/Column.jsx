@@ -1,6 +1,6 @@
 import Task from './Task';
-import { useSortable, SortableContext } from '@dnd-kit/sortable';
-import { DragOverlay } from '@dnd-kit/core';
+import { SortableContext } from '@dnd-kit/sortable';
+import { DragOverlay, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ export default function Column({
   openModal,
   activeTask,
 }) {
-  const { setNodeRef } = useSortable({ id: name });
+  const { setNodeRef } = useDroppable({ id: name });
 
   const dropAnimation = {
     keyframes({ transform }) {
