@@ -130,6 +130,7 @@ export default function Board() {
       const oldIndex = tasks.findIndex(task => task._id === active.id);
       const newIndex = tasks.findIndex(task => task._id === over.id);
 
+      // if newIndex is -1, it means it's moving to a different column
       if (newIndex === -1) {
         updatedTasks[oldIndex].status = over.id;
       } else {
