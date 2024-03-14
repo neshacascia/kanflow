@@ -46,7 +46,7 @@ export default function Task({
       onClick={() => handleTaskClick(task.status)}
       onMouseOver={() => setTaskHovered(true)}
       onMouseLeave={() => setTaskHovered(false)}
-      className={`bg-white dark:bg-darkGrey w-[280px] flex flex-col gap-2 rounded-lg shadow-lightTask dark:shadow-task py-6 px-4 cursor-pointer hover:text-mainPurple ${
+      className={`bg-white dark:bg-darkGrey w-[280px] flex flex-col gap-2 rounded-lg shadow-lightTask dark:shadow-task py-6 px-4 cursor-pointer hover:text-mainPurple touch-none ${
         isDragging && 'opacity-50'
       }`}
     >
