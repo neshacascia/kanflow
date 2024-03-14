@@ -129,7 +129,6 @@ export default function Board() {
         updatedTasks[oldIndex].status = over.id;
       } else {
         const overContainer = findContainer(over.id);
-        console.log(overContainer);
         updatedTasks[oldIndex].status = board.columns[overContainer].columnName;
       }
 
