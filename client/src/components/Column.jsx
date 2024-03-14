@@ -1,6 +1,7 @@
 import Task from './Task';
 import { useSortable, SortableContext } from '@dnd-kit/sortable';
 import { DragOverlay } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +16,25 @@ export default function Column({
   activeTask,
 }) {
   const { setNodeRef } = useSortable({ id: name });
+
+  const dropAnimation = {
+    keyframes({ transform }) {
+      return [
+        { transform: CSS.Transform.toString(transform.initial) },
+        {
+          transform: CSS.Transform.toString({
+            ...transform.final,
+            scaleX: 0.94,
+            scaleY: 0.94,
+          }),
+        },
+      ];
+    },
+    sideEffects({ active }) {
+      active.node.style.opacity = '0';
+    },
+  };
+
   const columnTasks = tasks?.filter(task => task.status === name) || [];
 
   const columnColours = [
@@ -52,7 +72,7 @@ export default function Column({
           ))}
         </SortableContext>
         {activeTask && (
-          <DragOverlay>
+          <DragOverlay dropAnimation={dropAnimation}>
             <Task task={activeTask} />
           </DragOverlay>
         )}
