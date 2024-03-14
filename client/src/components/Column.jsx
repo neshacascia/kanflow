@@ -1,5 +1,6 @@
 import Task from './Task';
-import { SortableContext } from '@dnd-kit/sortable';
+import { useSortable, SortableContext } from '@dnd-kit/sortable';
+import { closestCenter } from '@dnd-kit/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +13,7 @@ export default function Column({
   setSelectedStatus,
   openModal,
 }) {
+  const { setNodeRef } = useSortable({ id: name });
   const columnTasks = tasks?.filter(task => task.status === name) || [];
 
   const columnColours = [
@@ -25,7 +27,7 @@ export default function Column({
   ];
 
   return (
-    <section className="min-w-[280px] pr-4">
+    <section ref={setNodeRef} className="min-w-[280px] pr-4">
       <div className="flex gap-3">
         <FontAwesomeIcon
           icon={faCircle}
