@@ -125,6 +125,14 @@ export default function Board() {
       const oldIndex = tasks.findIndex(task => task._id === active.id);
       const newIndex = tasks.findIndex(task => task._id === over.id);
 
+      if (newIndex === -1) {
+        updatedTasks[oldIndex].status = over.id;
+      } else {
+        const overContainer = findContainer(over.id);
+        console.log(overContainer);
+        updatedTasks[oldIndex].status = board.columns[overContainer].columnName;
+      }
+
       // move the task to the new index
       updatedTasks.splice(oldIndex, 1);
       updatedTasks.splice(newIndex, 0, tasks[oldIndex]);
@@ -165,9 +173,6 @@ export default function Board() {
             <section className="h-full flex gap-3 pt-6">
               {board.columns.length > 0 ? (
                 board.columns.map((column, ind) => (
-                  // <SortableContext
-                  //   items={board.columns.map(column => column.id)}
-                  // >
                   <Column
                     key={ind}
                     ind={ind}
@@ -177,7 +182,6 @@ export default function Board() {
                     setSelectedStatus={setSelectedStatus}
                     openModal={openModal}
                   />
-                  // </SortableContext>
                 ))
               ) : (
                 <div className="w-full flex flex-col justify-center items-center gap-6 pb-16">
