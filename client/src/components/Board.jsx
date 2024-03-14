@@ -52,6 +52,8 @@ export default function Board() {
   const [isBoardUpdated, setIsBoardUpdated] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
 
+  const [activeTask, setActiveTask] = useState(null);
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -116,6 +118,12 @@ export default function Board() {
     }
   }
 
+  function handleDragStart(e) {
+    const { active } = e;
+
+    setActiveTask(tasks.find(task => task._id === active.id));
+  }
+
   async function handleDragEnd(e) {
     const { over, active } = e;
 
@@ -137,6 +145,7 @@ export default function Board() {
       updatedTasks.splice(newIndex, 0, tasks[oldIndex]);
 
       setTasks(updatedTasks);
+      setActiveTask(null);
 
       const tasksData = {
         boardIndex,
@@ -167,6 +176,7 @@ export default function Board() {
           <DndContext
             sensors={sensors}
             collisionDetection={closestCorners}
+            onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           >
             <section className="h-full flex gap-3 pt-6">
@@ -180,6 +190,7 @@ export default function Board() {
                     setViewTask={setViewTask}
                     setSelectedStatus={setSelectedStatus}
                     openModal={openModal}
+                    activeTask={activeTask}
                   />
                 ))
               ) : (
