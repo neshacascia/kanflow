@@ -154,7 +154,6 @@ export default function Board() {
         const res = await axios.put(`${baseURL}/board/reorderTasks`, {
           tasksData,
         });
-        console.log(res);
       } catch (err) {
         console.error(err);
       }
