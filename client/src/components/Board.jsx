@@ -49,6 +49,8 @@ export default function Board() {
   const [isBoardUpdated, setIsBoardUpdated] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
 
+  const [activeTask, setActiveTask] = useState(null);
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -99,6 +101,26 @@ export default function Board() {
     }
   }, [id, isBoardUpdated]);
 
+  function findContainer(id) {
+    const task = tasks.find(task => task._id === id);
+
+    if (task) {
+      const column = board.columns.find(
+        column => column.columnName === task.status
+      );
+
+      if (column) {
+        return column.id;
+      }
+    }
+  }
+
+  function handleDragStart(e) {
+    const { active } = e;
+
+    setActiveTask(tasks.find(task => task._id === active.id));
+  }
+
   async function handleDragEnd(e) {
     const { over, active } = e;
 
@@ -108,11 +130,20 @@ export default function Board() {
       const oldIndex = tasks.findIndex(task => task._id === active.id);
       const newIndex = tasks.findIndex(task => task._id === over.id);
 
+      // if newIndex is -1, it means it's moving to a different column
+      if (newIndex === -1) {
+        updatedTasks[oldIndex].status = over.id;
+      } else {
+        const overContainer = findContainer(over.id);
+        updatedTasks[oldIndex].status = board.columns[overContainer].columnName;
+      }
+
       // move the task to the new index
       updatedTasks.splice(oldIndex, 1);
       updatedTasks.splice(newIndex, 0, tasks[oldIndex]);
 
       setTasks(updatedTasks);
+      setActiveTask(null);
 
       const tasksData = {
         boardIndex,
@@ -123,7 +154,6 @@ export default function Board() {
         const res = await axios.put(`${baseURL}/board/reorderTasks`, {
           tasksData,
         });
-        console.log(res);
       } catch (err) {
         console.error(err);
       }
@@ -143,6 +173,7 @@ export default function Board() {
           <DndContext
             sensors={sensors}
             collisionDetection={closestCorners}
+            onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           >
             <section className="h-full flex gap-3 pt-6">
@@ -156,6 +187,7 @@ export default function Board() {
                     setViewTask={setViewTask}
                     setSelectedStatus={setSelectedStatus}
                     openModal={openModal}
+                    activeTask={activeTask}
                   />
                 ))
               ) : (

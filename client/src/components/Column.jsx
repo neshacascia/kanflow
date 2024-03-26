@@ -1,5 +1,7 @@
 import Task from './Task';
 import { SortableContext } from '@dnd-kit/sortable';
+import { DragOverlay, useDroppable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +13,28 @@ export default function Column({
   setViewTask,
   setSelectedStatus,
   openModal,
+  activeTask,
 }) {
+  const { setNodeRef } = useDroppable({ id: name });
+
+  const dropAnimation = {
+    keyframes({ transform }) {
+      return [
+        { transform: CSS.Transform.toString(transform.initial) },
+        {
+          transform: CSS.Transform.toString({
+            ...transform.final,
+            scaleX: 0.94,
+            scaleY: 0.94,
+          }),
+        },
+      ];
+    },
+    sideEffects({ active }) {
+      active.node.style.opacity = '0';
+    },
+  };
+
   const columnTasks = tasks?.filter(task => task.status === name) || [];
 
   const columnColours = [
@@ -25,7 +48,7 @@ export default function Column({
   ];
 
   return (
-    <section className="min-w-[280px] pr-4">
+    <section ref={setNodeRef} className="min-w-[280px] pr-4">
       <div className="flex gap-3">
         <FontAwesomeIcon
           icon={faCircle}
@@ -48,6 +71,11 @@ export default function Column({
             />
           ))}
         </SortableContext>
+        {activeTask && (
+          <DragOverlay dropAnimation={dropAnimation}>
+            <Task task={activeTask} />
+          </DragOverlay>
+        )}
       </div>
     </section>
   );
