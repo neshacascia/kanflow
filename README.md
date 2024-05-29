@@ -2,7 +2,7 @@
 > Kanflow is the ultimate kanban task management solution, embracing simplicity and minimalism, providing users with a clean and easy-to-navigate workspace. Users can create, update, and delete boards and tasks, and break complex tasks into manageable subtasks. Features intuitive drag-and-drop functionality to change task's status and re-order them in a column.
 
 ## Demo
-[Live Demo](https://kanflow.cyclic.app/)
+[Live Demo](https://kanflow.up.railway.app/)
 
 <img src="./client/public/assets/kanflow.gif" alt="" border="0" width="100%">
 
@@ -13,7 +13,7 @@
 - Passport.js
 - TailwindCSS
 - HTML5/CSS3
-- Hosted on Cyclic
+- Hosted on Railway
 
 ## Features
 #### Home Page:
@@ -35,6 +35,8 @@
 
 ## Optimizations
 #### Cookies and Monorepo
+#### UPDATE: As of May 2024, Cyclic has shut down its services. I have now migrated my app to Railway for hosting.
+
 Initially, the client-side was hosted on Render and the server-side was hosted on Cyclic. However, I began to encounter authentication issues with Chrome and Safari. Despite successfully authentication, I would receive a 401 Unauthorized status code upon redirection in the application because my cookies were not getting stored correctly. After researching and consulting both StackOverflow and the Express documentation, I implemented `app.set('trust proxy', 1)`, allowing the correct navigation to the `/board` path for logged-in users. While this resolves the issue for most browsers, Safari continued to pose more challenges due to its strict third-party cookie policies. To solve this, I opted to consolidate both the client and server components into a single repository hosted on Cyclic. This helped address the issues related to CORS limitations and Safari's third-party cookie policies. By serving the client-side code through the server, both components share the same origin, eliminating any cross-origin issues and allowing for seamless routing.
 
 #### Loading state
