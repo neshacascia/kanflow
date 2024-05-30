@@ -64,6 +64,8 @@ function ContextProvider(props) {
       setModal('deleteTask');
     } else if (modal === 'deleteBoard') {
       setModal('deleteBoard');
+    } else if (modal === 'userProfile') {
+      setModal('userProfile');
     }
   }
 
