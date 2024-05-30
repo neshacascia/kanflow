@@ -180,7 +180,10 @@ export default function Navbar() {
 
           <ul className="text-[13px] flex flex-col gap-5 font-semibold pl-3">
             <li>
-              <button className="text-sm">
+              <button
+                onClick={() => openModal('userProfile')}
+                className="text-sm"
+              >
                 <FontAwesomeIcon icon={faGear} className="text-xl pr-4" />
                 Manage account
               </button>
