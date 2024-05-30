@@ -10,6 +10,7 @@ import {
   faPlus,
   faAngleDown,
   faAngleUp,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
@@ -126,6 +127,12 @@ export default function Navbar() {
                 icon={faEllipsisVertical}
                 className="text-mediumGrey text-lg cursor-pointer"
               />
+            </button>
+
+            <button>
+              <div className="bg-mainPurple w-11 h-11 flex justify-center items-center rounded-full ml-4">
+                <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
+              </div>
             </button>
           </div>
         )}
