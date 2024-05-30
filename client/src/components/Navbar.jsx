@@ -138,7 +138,7 @@ export default function Navbar() {
               />
             </button>
 
-            <div className="h-20 border-mediumGrey border-l mx-4"></div>
+            <div className="h-20 border-linesLight dark:border-linesDark border-l mx-4"></div>
 
             <button
               onClick={() =>
