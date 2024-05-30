@@ -24,6 +24,8 @@ export default function Navbar() {
     boards,
     isLoggedIn,
     storeAuthValue,
+    displayUserProfile,
+    setDisplayUserProfile,
   } = useContext(Context);
 
   const location = useLocation();
@@ -129,7 +131,15 @@ export default function Navbar() {
               />
             </button>
 
-            <button>
+            <div className="h-full border-mediumGrey border-l-[1px]">.</div>
+
+            <button
+              onClick={() =>
+                displayUserProfile
+                  ? setDisplayUserProfile(false)
+                  : setDisplayUserProfile(true)
+              }
+            >
               <div className="bg-mainPurple w-11 h-11 flex justify-center items-center rounded-full ml-4">
                 <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
               </div>
