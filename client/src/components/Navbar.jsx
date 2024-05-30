@@ -138,7 +138,7 @@ export default function Navbar() {
               />
             </button>
 
-            <div className="h-full border-mediumGrey border-l-[1px]">.</div>
+            <div className="h-20 border-mediumGrey border-l mx-4"></div>
 
             <button
               onClick={() =>
@@ -147,7 +147,7 @@ export default function Navbar() {
                   : setDisplayUserProfile(true)
               }
             >
-              <div className="bg-[#706dc2da] w-11 h-11 flex justify-center items-center rounded-full ml-4">
+              <div className="bg-[#706dc2da] w-11 h-11 flex justify-center items-center rounded-full mr-4">
                 <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
               </div>
             </button>
