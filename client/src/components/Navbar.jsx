@@ -33,9 +33,14 @@ export default function Navbar() {
   const location = useLocation();
   const user = localStorage.getItem('user');
 
+  function closeModals() {
+    displaySettings ? setDisplaySettings(false) : null;
+    displayUserProfile ? setDisplayUserProfile(false) : null;
+  }
+
   return (
     <nav
-      onClick={() => (displaySettings ? setDisplaySettings(false) : null)}
+      onClick={closeModals}
       className="bg-white dark:bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesLight dark:border-linesDark"
     >
       <span className="h-full flex items-center">
