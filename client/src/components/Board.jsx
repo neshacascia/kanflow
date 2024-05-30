@@ -39,6 +39,7 @@ export default function Board() {
     setDisplaySidebar,
     setBoards,
     setIsLoggedIn,
+    setDisplayUserProfile,
   } = useContext(Context);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -164,7 +165,10 @@ export default function Board() {
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
       <main
-        onClick={() => setDisplaySettings(false)}
+        onClick={() => {
+          setDisplaySettings(false);
+          setDisplayUserProfile(false);
+        }}
         className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col justify-center px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
         {loadingData ? (
