@@ -10,6 +10,7 @@ function ContextProvider(props) {
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displaySidebar, setDisplaySidebar] = useState(true);
+  const [displayUserProfile, setDisplayUserProfile] = useState(false);
 
   const initialTheme = localStorage.getItem('theme') || 'dark';
   const [isDarkMode, setIsDarkMode] = useState(initialTheme === 'dark');
@@ -93,6 +94,8 @@ function ContextProvider(props) {
         toggleTheme,
         isDarkMode,
         setIsDarkMode,
+        displayUserProfile,
+        setDisplayUserProfile,
       }}
     >
       {props.children}
