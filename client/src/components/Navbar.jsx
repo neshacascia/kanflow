@@ -28,10 +28,11 @@ export default function Navbar() {
     storeAuthValue,
     displayUserProfile,
     setDisplayUserProfile,
+    user,
   } = useContext(Context);
 
   const location = useLocation();
-  const user = localStorage.getItem('user');
+  const isUser = localStorage.getItem('user');
 
   function closeModals() {
     displaySettings ? setDisplaySettings(false) : null;
@@ -70,7 +71,7 @@ export default function Navbar() {
           <Link
             to="/login"
             onClick={() => storeAuthValue('login')}
-            className={`${user ? 'hidden' : 'text-sm tracking-wider'}`}
+            className={`${isUser ? 'hidden' : 'text-sm tracking-wider'}`}
           >
             Login
           </Link>
@@ -78,7 +79,7 @@ export default function Navbar() {
             to="/signup"
             onClick={() => storeAuthValue('signup')}
             className={`${
-              user
+              isUser
                 ? 'hidden'
                 : 'bg-mainPurple text-sm  tracking-wider py-2 px-4 rounded hover:bg-mainPurpleHover'
             }`}
@@ -174,8 +175,11 @@ export default function Navbar() {
 
       {displayUserProfile && (
         <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow p-8 -mt-2">
-          <div className="bg-[#706dc2f5] w-11 h-11 flex justify-center items-center rounded-full mb-7">
-            <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
+          <div className="h-full flex items-center gap-5 mb-7">
+            <div className="bg-[#706dc2f5] w-11 h-11 flex justify-center items-center rounded-full">
+              <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
+            </div>
+            <p className="text-[#171717] text-sm font-semibold">{user.email}</p>
           </div>
 
           <ul className="text-[13px] flex flex-col gap-5 font-semibold pl-3">
@@ -184,7 +188,7 @@ export default function Navbar() {
                 onClick={() => openModal('userProfile')}
                 className="text-sm"
               >
-                <FontAwesomeIcon icon={faGear} className="text-xl pr-4" />
+                <FontAwesomeIcon icon={faGear} className="text-lg pr-8" />
                 Manage account
               </button>
             </li>
@@ -192,7 +196,7 @@ export default function Navbar() {
               <Link to="/logout" className="text-sm flex items-center">
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
-                  className="text-xl pr-4"
+                  className="text-lg pr-8"
                 />
                 Log out
               </Link>
