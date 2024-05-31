@@ -174,35 +174,37 @@ export default function Navbar() {
       )}
 
       {displayUserProfile && (
-        <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow p-8 -mt-2">
-          <div className="h-full flex items-center gap-5 mb-7">
+        <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
+          <div className="h-full flex items-center gap-5 pl-8 mb-5">
             <div className="bg-[#706dc2f5] w-11 h-11 flex justify-center items-center rounded-full">
               <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
             </div>
             <p className="text-[#171717] text-sm font-semibold">{user.email}</p>
           </div>
 
-          <ul className="text-[13px] flex flex-col gap-5 font-semibold pl-3">
-            <li>
+          <ul className="text-[13px] w-full flex flex-col  font-semibold ">
+            <li className="hover:bg-[#ededed] py-3">
               <button
                 onClick={() => openModal('userProfile')}
                 className="text-sm"
               >
-                <FontAwesomeIcon icon={faGear} className="text-lg pr-8" />
+                <FontAwesomeIcon
+                  icon={faGear}
+                  className="text-base pl-11 pr-8"
+                />
                 Manage account
               </button>
             </li>
-            <li>
+            <li className="hover:bg-[#ededed] py-3">
               <Link to="/logout" className="text-sm flex items-center">
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
-                  className="text-lg pr-8"
+                  className="text-base pl-11 pr-8"
                 />
                 Log out
               </Link>
             </li>
           </ul>
-          <div className="text-mediumGrey flex items items-center justify-end gap-2 px-6 mt-4"></div>
         </div>
       )}
     </nav>
