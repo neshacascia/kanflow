@@ -9,6 +9,7 @@ import AddTask from './AddTask';
 import ViewTask from './ViewTask';
 import EditTask from './EditTask';
 import Delete from './Delete';
+import UserProfile from './UserProfile';
 import Sidebar from './Sidebar';
 import LoadingSpinner from './LoadingSpinner';
 import { baseURL } from '../api';
@@ -271,6 +272,7 @@ export default function Board() {
             closeModal={closeModal}
           />
         )}
+        {modal === 'userProfile' && <UserProfile />}
         <button
           onClick={() => setDisplaySidebar(true)}
           className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8 hover:bg-mainPurpleHover"
