@@ -183,17 +183,12 @@ export default function Navbar() {
           </div>
 
           <ul className="text-[13px] w-full flex flex-col  font-semibold ">
-            <li className="hover:bg-[#ededed] py-3">
-              <button
-                onClick={() => openModal('userProfile')}
-                className="text-sm"
-              >
-                <FontAwesomeIcon
-                  icon={faGear}
-                  className="text-base pl-11 pr-8"
-                />
-                Manage account
-              </button>
+            <li
+              onClick={() => openModal('userProfile')}
+              className="text-sm hover:bg-[#ededed] py-3 hover:cursor-pointer"
+            >
+              <FontAwesomeIcon icon={faGear} className="text-base pl-11 pr-8" />
+              Manage account
             </li>
             <li className="hover:bg-[#ededed] py-3">
               <Link to="/logout" className="text-sm flex items-center">
