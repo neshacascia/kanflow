@@ -9,7 +9,7 @@ import {
 export default function UserProfile({ user }) {
   return (
     <Modal>
-      <div className="bg-white dark:bg-darkGrey h-[90vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[480px] md:p-8">
+      <div className="bg-white dark:bg-darkGrey h-[82vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[560px] md:p-8">
         <h2 className="text-lightBlack dark:text-white text-lg font-semibold">
           Account
         </h2>
@@ -97,7 +97,7 @@ export default function UserProfile({ user }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-8 md:flex-row mt-10">
+        <div className="w-full flex flex-col justify-between gap-8 md:flex-row mt-10">
           <button className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-lightPurple/25">
             Save Changes
           </button>
