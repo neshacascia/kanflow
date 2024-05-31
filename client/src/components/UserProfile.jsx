@@ -10,7 +10,7 @@ export default function UserProfile({ user }) {
   return (
     <Modal>
       <div className="bg-white dark:bg-darkGrey h-[82vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[560px] md:p-8">
-        <h2 className="text-lightBlack dark:text-white text-lg font-semibold">
+        <h2 className="text-lightBlack dark:text-white text-xl font-semibold">
           Account
         </h2>
         <p className="text-mediumGrey dark:text-white text-sm font-semibold pt-2 pb-10">
@@ -29,7 +29,7 @@ export default function UserProfile({ user }) {
 
               <label
                 for="avatar"
-                className="text-white bg-mainPurple text-[13px] font-semibold leading-6 flex items-center gap-3 rounded py-[6px] px-4 hover:bg-mainPurpleHover hover:cursor-pointer mt-6"
+                className="text-white bg-mainPurple text-xs font-semibold leading-6 flex items-center gap-3 rounded py-[6px] px-4 hover:bg-mainPurpleHover hover:cursor-pointer mt-6"
               >
                 <input
                   type="file"
