@@ -148,7 +148,7 @@ export default function Navbar() {
                   : setDisplayUserProfile(true)
               }
             >
-              <div className="bg-[#706dc2da] w-11 h-11 flex justify-center items-center rounded-full mr-4">
+              <div className="bg-[#706dc2da] w-11 h-11 flex justify-center items-center rounded-full mr-2">
                 <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
               </div>
             </button>
