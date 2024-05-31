@@ -96,9 +96,14 @@ export default function UserProfile({ user }) {
             </div>
           </div>
         </div>
-        <div>
-          <button>Save Changes</button>
-          <button>Delete account</button>
+
+        <div className="flex flex-col gap-8 md:flex-row mt-10">
+          <button className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-lightPurple/25">
+            Save Changes
+          </button>
+          <button className="text-white bg-deleteRed text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-redHover">
+            Delete Account
+          </button>
         </div>
       </div>
     </Modal>
