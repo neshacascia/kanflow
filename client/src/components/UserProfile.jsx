@@ -18,7 +18,7 @@ export default function UserProfile({ user }) {
         </p>
 
         <div className="flex">
-          <div className="flex gap-14">
+          <div className="w-full flex gap-14">
             <div className="flex flex-col items-center">
               <div className="bg-[#706dc2da] w-16 h-16 flex justify-center items-center rounded-full">
                 <FontAwesomeIcon
@@ -43,17 +43,62 @@ export default function UserProfile({ user }) {
               </label>
             </div>
 
-            <h3>Email</h3>
-          </div>
-          <div className="flex flex-col">
-            <h2>Security</h2>
-            <h3>Password</h3>
-          </div>
+            <div className="w-full flex flex-col gap-10">
+              <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
+                Email
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="e.g. Take coffee break"
+                  value={user.email}
+                  required
+                  className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                />
+              </label>
 
-          <div>
-            <button>Save Changes</button>
-            <button>Delete account</button>
+              <div className="flex flex-col gap-6">
+                <h2 className="text-lightBlack dark:text-white text-lg font-semibold -mb-2">
+                  Change password
+                </h2>
+                <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
+                  Current password
+                  <input
+                    type="password"
+                    name="title"
+                    placeholder="********"
+                    required
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                  />
+                </label>
+
+                <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
+                  New password
+                  <input
+                    type="password"
+                    name="title"
+                    placeholder="********"
+                    required
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                  />
+                </label>
+
+                <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
+                  Confirm password
+                  <input
+                    type="password"
+                    name="title"
+                    placeholder="********"
+                    required
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                  />
+                </label>
+              </div>
+            </div>
           </div>
+        </div>
+        <div>
+          <button>Save Changes</button>
+          <button>Delete account</button>
         </div>
       </div>
     </Modal>
