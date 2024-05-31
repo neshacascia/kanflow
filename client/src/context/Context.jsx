@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 const Context = createContext();
 
 function ContextProvider(props) {
+  const [user, setUser] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
@@ -76,6 +77,8 @@ function ContextProvider(props) {
   return (
     <Context.Provider
       value={{
+        user,
+        setUser,
         isLoggedIn,
         setIsLoggedIn,
         storeAuthValue,
