@@ -28,6 +28,8 @@ import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
   const {
+    user,
+    setUser,
     board,
     setBoard,
     boardIndex,
@@ -84,7 +86,8 @@ export default function Board() {
           ]);
 
           const { board } = boardRes.data;
-          const { boards } = boardsRes.data;
+          const { boards, user } = boardsRes.data;
+          setUser(user);
 
           setBoard(board);
           setTasks(board.tasks);
@@ -272,7 +275,7 @@ export default function Board() {
             closeModal={closeModal}
           />
         )}
-        {modal === 'userProfile' && <UserProfile />}
+        {modal === 'userProfile' && <UserProfile user={user} />}
         <button
           onClick={() => setDisplaySidebar(true)}
           className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8 hover:bg-mainPurpleHover"
