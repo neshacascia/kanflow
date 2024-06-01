@@ -10,7 +10,7 @@ import {
   faArrowUpFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function UserProfile({ user }) {
+export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal } = useContext(Context);
 
   const [newPassword, setNewPassword] = useState('');
@@ -27,7 +27,27 @@ export default function UserProfile({ user }) {
 
     const email = formData.get('email');
     const password = formData.get('newPassword');
-    console.log(email, password);
+
+    try {
+      const res = await axios.put(
+        `${baseURL}/account/updateAccount`,
+        { email, password },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log(res);
+      if (res.status === 200) {
+        setIsBoardUpdated(true);
+        closeModal();
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
