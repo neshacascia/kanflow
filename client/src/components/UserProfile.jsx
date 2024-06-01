@@ -1,4 +1,8 @@
+import { useContext, useState } from 'react';
+import { Context } from '../context/Context';
 import Modal from './Modal';
+import { baseURL } from '../api';
+import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -7,9 +11,31 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function UserProfile({ user }) {
+  const { closeModal } = useContext(Context);
+
+  const [newPassword, setNewPassword] = useState('');
+
+  function handleNewPasswordChange(e) {
+    setNewPassword(e.target.value);
+  }
+
+  async function updateUserData(e) {
+    console.log('hello');
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const email = formData.get('email');
+    const password = formData.get('newPassword');
+    console.log(email, password);
+  }
+
   return (
     <Modal>
-      <div className="bg-white dark:bg-darkGrey h-[82vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[560px] md:p-8">
+      <form
+        onSubmit={updateUserData}
+        className="bg-white dark:bg-darkGrey h-[82vh] relative flex flex-col rounded-md p-6 overflow-y-auto md:w-[560px] md:p-8"
+      >
         <h2 className="text-lightBlack dark:text-white text-xl font-semibold">
           Account
         </h2>
@@ -28,7 +54,7 @@ export default function UserProfile({ user }) {
               </div>
 
               <label
-                for="avatar"
+                htmlFor="avatar"
                 className="text-white bg-mainPurple text-xs font-semibold leading-6 flex items-center gap-3 rounded py-[6px] px-4 hover:bg-mainPurpleHover hover:cursor-pointer mt-6"
               >
                 <input
@@ -43,14 +69,17 @@ export default function UserProfile({ user }) {
               </label>
             </div>
 
-            <div className="w-full flex flex-col gap-10">
+            <div
+              onSubmit={updateUserData}
+              className="w-full flex flex-col gap-10"
+            >
               <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
                 Email
                 <input
                   type="text"
-                  name="title"
+                  name="email"
                   placeholder="e.g. Take coffee break"
-                  value={user.email}
+                  defaultValue={user.email}
                   required
                   className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                 />
@@ -64,9 +93,8 @@ export default function UserProfile({ user }) {
                   Current password
                   <input
                     type="password"
-                    name="title"
+                    name="currentPassword"
                     placeholder="********"
-                    required
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                   />
                 </label>
@@ -75,9 +103,9 @@ export default function UserProfile({ user }) {
                   New password
                   <input
                     type="password"
-                    name="title"
+                    name="newPassword"
                     placeholder="********"
-                    required
+                    onChange={handleNewPasswordChange}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                   />
                 </label>
@@ -86,9 +114,9 @@ export default function UserProfile({ user }) {
                   Confirm password
                   <input
                     type="password"
-                    name="title"
+                    name="confirmPassword"
                     placeholder="********"
-                    required
+                    required={newPassword}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                   />
                 </label>
@@ -98,14 +126,20 @@ export default function UserProfile({ user }) {
         </div>
 
         <div className="w-full flex flex-col justify-between gap-8 md:flex-row mt-10">
-          <button className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-lightPurple/25">
+          <button
+            type="submit"
+            className="text-mainPurple bg-lightPurple dark:bg-white text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-lightPurple/25"
+          >
             Save Changes
           </button>
-          <button className="text-white bg-deleteRed text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-redHover">
+          <button
+            type="button"
+            className="text-white bg-deleteRed text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-redHover"
+          >
             Delete Account
           </button>
         </div>
-      </div>
+      </form>
     </Modal>
   );
 }
