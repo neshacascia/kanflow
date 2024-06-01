@@ -275,7 +275,9 @@ export default function Board() {
             closeModal={closeModal}
           />
         )}
-        {modal === 'userProfile' && <UserProfile user={user} />}
+        {modal === 'userProfile' && (
+          <UserProfile user={user} setIsBoardUpdated={setIsBoardUpdated} />
+        )}
         <button
           onClick={() => setDisplaySidebar(true)}
           className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8 hover:bg-mainPurpleHover"
