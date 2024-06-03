@@ -23,6 +23,8 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
     setPasswordsMatch(arePasswordsEqual);
   }, [newPassword, confirmPassword]);
 
+  const [errorMessages, setErrorMessages] = useState('');
+
   function handleNewPasswordChange(e) {
     setNewPassword(e.target.value);
   }
@@ -32,7 +34,6 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
   }
 
   async function updateUserData(e) {
-    console.log('hello');
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -52,6 +53,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
           },
         }
       );
+
       console.log(res);
 
       if (res.status === 200) {
@@ -60,6 +62,9 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
       }
     } catch (err) {
       console.error(err);
+      if (err.response) {
+        setErrorMessages(err.response.data.msg);
+      }
     }
   }
 
