@@ -38,12 +38,13 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
     const formData = new FormData(e.target);
 
     const email = formData.get('email');
-    const password = passwordsMatch ? formData.get('newPassword') : null;
+    const newPassword = passwordsMatch ? formData.get('newPassword') : null;
+    const currentPassword = formData.get('currentPassword');
 
     try {
       const res = await axios.put(
         `${baseURL}/account/updateAccount`,
-        { email, password },
+        { email, newPassword, currentPassword },
         {
           withCredentials: true,
           headers: {
@@ -51,8 +52,8 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
           },
         }
       );
-
       console.log(res);
+
       if (res.status === 200) {
         setIsBoardUpdated(true);
         closeModal();
