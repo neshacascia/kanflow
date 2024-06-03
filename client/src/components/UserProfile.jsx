@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Context } from '../context/Context';
 import Modal from './Modal';
 import { baseURL } from '../api';
@@ -14,9 +14,21 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal } = useContext(Context);
 
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [passwordsMatch, setPasswordsMatch] = useState();
+
+  useEffect(() => {
+    const arePasswordsEqual = newPassword === confirmPassword;
+    setPasswordsMatch(arePasswordsEqual);
+  }, [newPassword, confirmPassword]);
 
   function handleNewPasswordChange(e) {
     setNewPassword(e.target.value);
+  }
+
+  function handleConfirmPasswordChange(e) {
+    setConfirmPassword(e.target.value);
   }
 
   async function updateUserData(e) {
@@ -26,7 +38,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
     const formData = new FormData(e.target);
 
     const email = formData.get('email');
-    const password = formData.get('newPassword');
+    const password = passwordsMatch ? formData.get('newPassword') : null;
 
     try {
       const res = await axios.put(
@@ -137,6 +149,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     name="confirmPassword"
                     placeholder="********"
                     required={newPassword}
+                    onChange={handleConfirmPasswordChange}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                   />
                 </label>
