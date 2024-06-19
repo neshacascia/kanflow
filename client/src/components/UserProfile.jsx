@@ -13,10 +13,34 @@ import {
 export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal } = useContext(Context);
 
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [enteredCurrentPasswordTouched, setEnteredCurrentPasswordTouched] =
+    useState(false);
+
   const [newPassword, setNewPassword] = useState('');
+  const [enteredNewPasswordTouched, setEnteredNewPasswordTouched] =
+    useState(false);
+
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
+    useState(false);
 
   const [passwordsMatch, setPasswordsMatch] = useState();
+
+  const enteredCurrentPasswordValidation =
+    currentPassword.trim() !== '' && currentPassword.length >= 8;
+  const enteredCurrentPasswordNotValid =
+    !enteredCurrentPasswordValidation && enteredCurrentPasswordTouched;
+
+  const enteredNewPasswordValidation =
+    newPassword.trim() !== '' && newPassword.length >= 8;
+  const enteredNewPasswordNotValid =
+    !enteredNewPasswordValidation && enteredNewPasswordTouched;
+
+  const enteredConfirmPasswordValidation =
+    confirmPassword.trim() !== '' && confirmPassword.length >= 8;
+  const enteredConfirmPasswordNotValid =
+    !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
 
   useEffect(() => {
     const arePasswordsEqual = newPassword === confirmPassword;
@@ -25,12 +49,28 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
 
   const [errorMessages, setErrorMessages] = useState('');
 
+  function handleCurrentPasswordChange(e) {
+    setCurrentPassword(e.target.value);
+  }
+
   function handleNewPasswordChange(e) {
     setNewPassword(e.target.value);
   }
 
   function handleConfirmPasswordChange(e) {
     setConfirmPassword(e.target.value);
+  }
+
+  function currentPasswordInputBlurHandler() {
+    setEnteredCurrentPasswordTouched(true);
+  }
+
+  function newPasswordInputBlurHandler() {
+    setEnteredNewPasswordTouched(true);
+  }
+
+  function confirmPasswordInputBlurHandler() {
+    setEnteredConfirmPasswordTouched(true);
   }
 
   async function updateUserData(e) {
@@ -133,6 +173,8 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     type="password"
                     name="currentPassword"
                     placeholder="********"
+                    onChange={handleCurrentPasswordChange}
+                    onBlur={currentPasswordInputBlurHandler}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                       errorMessages ? 'border-deleteRed' : ''
                     }`}
@@ -140,6 +182,11 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                   {errorMessages && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       {errorMessages}
+                    </span>
+                  )}
+                  {enteredCurrentPasswordNotValid && (
+                    <span className="text-deleteRed text-xs flex pb-1">
+                      Password must have a minimum of 8 characters.
                     </span>
                   )}
                 </label>
@@ -151,8 +198,14 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     name="newPassword"
                     placeholder="********"
                     onChange={handleNewPasswordChange}
+                    onBlur={newPasswordInputBlurHandler}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                   />
+                  {enteredNewPasswordNotValid && (
+                    <span className="text-deleteRed text-xs flex pb-1">
+                      Password must have a minimum of 8 characters.
+                    </span>
+                  )}
                 </label>
 
                 <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
@@ -163,8 +216,14 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     placeholder="********"
                     required={newPassword}
                     onChange={handleConfirmPasswordChange}
+                    onBlur={confirmPasswordInputBlurHandler}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                   />
+                  {enteredConfirmPasswordNotValid && (
+                    <span className="text-deleteRed text-xs flex pb-1">
+                      Password must have a minimum of 8 characters.
+                    </span>
+                  )}
                 </label>
               </div>
             </div>
