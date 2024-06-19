@@ -80,7 +80,6 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
 
     const email = formData.get('email');
     const newPassword = passwordsMatch ? formData.get('newPassword') : null;
-    const currentPassword = formData.get('currentPassword');
 
     try {
       const res = await axios.put(
