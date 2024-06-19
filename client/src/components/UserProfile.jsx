@@ -104,7 +104,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
       }
     } catch (err) {
       console.error(err);
-      console.log(err.response.status);
+
       if (err.response.status === 401) {
         setErrorMessages(prevState => ({
           ...prevState,
@@ -112,7 +112,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
         }));
       }
 
-      if (err.response.status === 403) {
+      if (err.response.status === 403 || err.response.status === 409) {
         setErrorMessages(prevState => ({
           ...prevState,
           email: err.response.data.msg,
@@ -120,7 +120,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
       }
     }
   }
-  console.log(errorMessages);
+
   return (
     <Modal>
       <form
