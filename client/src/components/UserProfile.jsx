@@ -224,6 +224,11 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                       Password must have a minimum of 8 characters.
                     </span>
                   )}
+                  {!passwordsMatch && (
+                    <span className="text-deleteRed text-xs flex pb-1">
+                      Passwords do not match. Please try again.
+                    </span>
+                  )}
                 </label>
               </div>
             </div>
