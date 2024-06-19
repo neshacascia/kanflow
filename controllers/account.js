@@ -9,6 +9,11 @@ module.exports = {
 
     try {
       if (email) {
+        if (req.user.id === process.env.DEMO_USER_ID) {
+          return res.status(403).json({
+            msg: 'Email changes are not permitted for demo accounts. ',
+          });
+        }
         await User.findOneAndUpdate(
           {
             _id: req.user.id,
@@ -21,6 +26,11 @@ module.exports = {
         console.log("User's email has been updated");
       }
       if (req.body.currentPassword) {
+        if (req.user.id === process.env.DEMO_USER_ID) {
+          return res.status(401).json({
+            msg: 'Password changes are not permitted for demo accounts. ',
+          });
+        }
         const isMatch = await bcrypt.compare(
           req.body.currentPassword,
           user.password
