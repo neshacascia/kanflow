@@ -14,6 +14,17 @@ module.exports = {
             msg: 'Email changes are not permitted for demo accounts. ',
           });
         }
+
+        const existingUser = await User.findOne({
+          email: req.body.email,
+        }).exec();
+
+        if (existingUser) {
+          return res.status(409).json({
+            msg: 'An account with that email address already exists.',
+          });
+        }
+
         await User.findOneAndUpdate(
           {
             _id: req.user.id,
