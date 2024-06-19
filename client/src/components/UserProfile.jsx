@@ -133,8 +133,15 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     type="password"
                     name="currentPassword"
                     placeholder="********"
-                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                      errorMessages ? 'border-deleteRed' : ''
+                    }`}
                   />
+                  {errorMessages && (
+                    <span className="text-deleteRed text-xs flex pb-1">
+                      {errorMessages}
+                    </span>
+                  )}
                 </label>
 
                 <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
