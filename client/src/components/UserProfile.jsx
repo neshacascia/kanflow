@@ -47,7 +47,10 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
     setPasswordsMatch(arePasswordsEqual);
   }, [newPassword, confirmPassword]);
 
-  const [errorMessages, setErrorMessages] = useState('');
+  const [errorMessages, setErrorMessages] = useState({
+    email: '',
+    password: '',
+  });
 
   function handleCurrentPasswordChange(e) {
     setCurrentPassword(e.target.value);
@@ -101,12 +104,23 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
       }
     } catch (err) {
       console.error(err);
-      if (err.response) {
-        setErrorMessages(err.response.data.msg);
+      console.log(err.response.status);
+      if (err.response.status === 401) {
+        setErrorMessages(prevState => ({
+          ...prevState,
+          password: err.response.data.msg,
+        }));
+      }
+
+      if (err.response.status === 403) {
+        setErrorMessages(prevState => ({
+          ...prevState,
+          email: err.response.data.msg,
+        }));
       }
     }
   }
-
+  console.log(errorMessages);
   return (
     <Modal>
       <form
@@ -160,6 +174,11 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                   required
                   className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                 />
+                {errorMessages['email'] && (
+                  <span className="text-deleteRed text-xs flex pb-1">
+                    {errorMessages['email']}
+                  </span>
+                )}
               </label>
 
               <div className="flex flex-col gap-6">
@@ -175,14 +194,15 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     onChange={handleCurrentPasswordChange}
                     onBlur={currentPasswordInputBlurHandler}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      errorMessages || enteredCurrentPasswordNotValid
+                      errorMessages['password'] ||
+                      enteredCurrentPasswordNotValid
                         ? 'border-deleteRed'
                         : ''
                     }`}
                   />
-                  {errorMessages && (
+                  {errorMessages['password'] && (
                     <span className="text-deleteRed text-xs flex pb-1">
-                      {errorMessages}
+                      {errorMessages['password']}
                     </span>
                   )}
                   {enteredCurrentPasswordNotValid && (
