@@ -176,7 +176,9 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     onChange={handleCurrentPasswordChange}
                     onBlur={currentPasswordInputBlurHandler}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      errorMessages ? 'border-deleteRed' : ''
+                      errorMessages || enteredCurrentPasswordNotValid
+                        ? 'border-deleteRed'
+                        : ''
                     }`}
                   />
                   {errorMessages && (
@@ -199,7 +201,11 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     placeholder="********"
                     onChange={handleNewPasswordChange}
                     onBlur={newPasswordInputBlurHandler}
-                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                      enteredNewPasswordNotValid || !passwordsMatch
+                        ? 'border-deleteRed'
+                        : ''
+                    }`}
                   />
                   {enteredNewPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
@@ -217,7 +223,11 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                     required={newPassword}
                     onChange={handleConfirmPasswordChange}
                     onBlur={confirmPasswordInputBlurHandler}
-                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                      enteredConfirmPasswordNotValid || !passwordsMatch
+                        ? 'border-deleteRed'
+                        : ''
+                    }`}
                   />
                   {enteredConfirmPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
