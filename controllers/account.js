@@ -3,7 +3,6 @@ const path = require('path');
 const User = require('../models/User');
 const Board = require('../models/Board');
 const cloudinary = require('../middleware/cloudinary');
-const { ObjectId } = require('mongodb');
 
 module.exports = {
   updateAccount: async (req, res) => {
@@ -103,8 +102,9 @@ module.exports = {
         cloudinaryId: result.public_id,
       });
 
+      console.log('Avatar photo has been updated!');
       return res.status(200).json({
-        message: 'Avatar photo updated!',
+        message: 'Avatar photo has been updated!',
         avatarLink: result.secure_url,
       });
     } catch (err) {
