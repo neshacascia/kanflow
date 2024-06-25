@@ -10,5 +10,6 @@ router.post(
   upload.single('avatar'),
   accountController.updateAvatar
 );
+router.delete('/deleteAccount', ensureAuth, accountController.deleteAccount);
 
 module.exports = router;
