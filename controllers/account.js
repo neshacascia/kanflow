@@ -88,8 +88,16 @@ module.exports = {
     try {
       const result = await cloudinary.uploader.upload(req.file.path);
 
+      const optimizedUrl = cloudinary.url(result.public_id, {
+        fetch_format: 'auto',
+        quality: 'auto',
+        width: 900,
+        height: 900,
+        crop: 'limit',
+      });
+
       await User.findByIdAndUpdate(userId, {
-        avatar: result.secure_url,
+        avatar: optimizedUrl,
         cloudinaryId: result.public_id,
       });
 
