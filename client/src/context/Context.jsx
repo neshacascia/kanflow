@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 const Context = createContext();
 
 function ContextProvider(props) {
+  const [user, setUser] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
@@ -10,6 +11,7 @@ function ContextProvider(props) {
   const [modal, setModal] = useState(null);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displaySidebar, setDisplaySidebar] = useState(true);
+  const [displayUserProfile, setDisplayUserProfile] = useState(false);
 
   const initialTheme = localStorage.getItem('theme') || 'dark';
   const [isDarkMode, setIsDarkMode] = useState(initialTheme === 'dark');
@@ -63,6 +65,10 @@ function ContextProvider(props) {
       setModal('deleteTask');
     } else if (modal === 'deleteBoard') {
       setModal('deleteBoard');
+    } else if (modal === 'userProfile') {
+      setModal('userProfile');
+    } else if (modal === 'deleteAccount') {
+      setModal('deleteAccount');
     }
   }
 
@@ -73,6 +79,8 @@ function ContextProvider(props) {
   return (
     <Context.Provider
       value={{
+        user,
+        setUser,
         isLoggedIn,
         setIsLoggedIn,
         storeAuthValue,
@@ -93,6 +101,8 @@ function ContextProvider(props) {
         toggleTheme,
         isDarkMode,
         setIsDarkMode,
+        displayUserProfile,
+        setDisplayUserProfile,
       }}
     >
       {props.children}

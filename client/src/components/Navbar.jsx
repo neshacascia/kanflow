@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Context } from '../context/Context';
 import { Link, useLocation } from 'react-router-dom';
+import DefaultAvatar from './DefaultAvatar';
 
 import logo from '../../public/assets/logo.svg';
 
@@ -10,6 +11,8 @@ import {
   faPlus,
   faAngleDown,
   faAngleUp,
+  faGear,
+  faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
@@ -23,14 +26,22 @@ export default function Navbar() {
     boards,
     isLoggedIn,
     storeAuthValue,
+    displayUserProfile,
+    setDisplayUserProfile,
+    user,
   } = useContext(Context);
 
   const location = useLocation();
-  const user = localStorage.getItem('user');
+  const isUser = localStorage.getItem('user');
+
+  function closeModals() {
+    displaySettings ? setDisplaySettings(false) : null;
+    displayUserProfile ? setDisplayUserProfile(false) : null;
+  }
 
   return (
     <nav
-      onClick={() => (displaySettings ? setDisplaySettings(false) : null)}
+      onClick={closeModals}
       className="bg-white dark:bg-darkGrey w-screen h-16 absolute px-4 md:h-20 md:border-b-[1px] border-linesLight dark:border-linesDark"
     >
       <span className="h-full flex items-center">
@@ -60,7 +71,7 @@ export default function Navbar() {
           <Link
             to="/login"
             onClick={() => storeAuthValue('login')}
-            className={`${user ? 'hidden' : 'text-sm tracking-wider'}`}
+            className={`${isUser ? 'hidden' : 'text-sm tracking-wider'}`}
           >
             Login
           </Link>
@@ -68,7 +79,7 @@ export default function Navbar() {
             to="/signup"
             onClick={() => storeAuthValue('signup')}
             className={`${
-              user
+              isUser
                 ? 'hidden'
                 : 'bg-mainPurple text-sm  tracking-wider py-2 px-4 rounded hover:bg-mainPurpleHover'
             }`}
@@ -127,6 +138,25 @@ export default function Navbar() {
                 className="text-mediumGrey text-lg cursor-pointer"
               />
             </button>
+
+            <div className="h-16 md:h-20 border-linesLight dark:border-linesDark border-l mx-4"></div>
+
+            <button
+              onClick={() =>
+                displayUserProfile
+                  ? setDisplayUserProfile(false)
+                  : setDisplayUserProfile(true)
+              }
+            >
+              {user.avatar ? (
+                <img
+                  src={user.avatar}
+                  className="w-11 h-11 rounded-full mr-2"
+                />
+              ) : (
+                <DefaultAvatar size="11" />
+              )}
+            </button>
           </div>
         )}
       </span>
@@ -145,6 +175,38 @@ export default function Navbar() {
           >
             Delete Board
           </button>
+        </div>
+      )}
+
+      {displayUserProfile && (
+        <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
+          <div className="h-full flex items-center gap-5 pl-8 mb-5">
+            {user.avatar ? (
+              <img src={user.avatar} className="w-11 h-11 rounded-full mr-2" />
+            ) : (
+              <DefaultAvatar size="11" />
+            )}
+            <p className="text-[#171717] text-sm font-semibold">{user.email}</p>
+          </div>
+
+          <ul className="text-[13px] w-full flex flex-col  font-semibold ">
+            <li
+              onClick={() => openModal('userProfile')}
+              className="text-sm hover:bg-[#ededed] py-3 hover:cursor-pointer"
+            >
+              <FontAwesomeIcon icon={faGear} className="text-base pl-11 pr-8" />
+              Manage account
+            </li>
+            <li className="hover:bg-[#ededed] py-3">
+              <Link to="/logout" className="text-sm flex items-center">
+                <FontAwesomeIcon
+                  icon={faArrowRightFromBracket}
+                  className="text-base pl-11 pr-8"
+                />
+                Log out
+              </Link>
+            </li>
+          </ul>
         </div>
       )}
     </nav>

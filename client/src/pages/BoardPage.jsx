@@ -11,7 +11,8 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardPage() {
   const [welcomeMessage, setWelcomeMessage] = useState(null);
-  const { setIsLoggedIn, setBoards, setDisplaySidebar } = useContext(Context);
+  const { setIsLoggedIn, setUser, setBoards, setDisplaySidebar } =
+    useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function BoardPage() {
         if (user) {
           setIsLoggedIn(true);
           localStorage.setItem('user', true);
+          setUser(user);
           setBoards(boards);
 
           if (boards.length > 0) {

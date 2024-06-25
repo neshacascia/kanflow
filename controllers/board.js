@@ -1,4 +1,5 @@
 const path = require('path');
+const User = require('../models/User');
 const Board = require('../models/Board');
 const { ObjectId } = require('mongodb');
 
@@ -11,10 +12,15 @@ module.exports = {
         console.log('User is not logged in');
         return res.status(401).json({ message: 'Unauthorized' });
       }
+      const user = await User.find({ _id: req.user.id }).lean();
       const boards = await Board.find({ userId: req.user.id }).lean();
       res.status(200).json({
         boards: boards.length > 0 ? boards[0].boards : [],
-        user: req.user.id,
+        user: {
+          userId: req.user.id,
+          email: user[0].email,
+          avatar: user[0].avatar,
+        },
       });
     } catch (err) {
       console.error(err);

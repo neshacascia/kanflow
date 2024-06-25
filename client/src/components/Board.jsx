@@ -9,6 +9,7 @@ import AddTask from './AddTask';
 import ViewTask from './ViewTask';
 import EditTask from './EditTask';
 import Delete from './Delete';
+import UserProfile from './UserProfile';
 import Sidebar from './Sidebar';
 import LoadingSpinner from './LoadingSpinner';
 import { baseURL } from '../api';
@@ -27,6 +28,8 @@ import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
   const {
+    user,
+    setUser,
     board,
     setBoard,
     boardIndex,
@@ -39,6 +42,7 @@ export default function Board() {
     setDisplaySidebar,
     setBoards,
     setIsLoggedIn,
+    setDisplayUserProfile,
   } = useContext(Context);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -82,7 +86,8 @@ export default function Board() {
           ]);
 
           const { board } = boardRes.data;
-          const { boards } = boardsRes.data;
+          const { boards, user } = boardsRes.data;
+          setUser(user);
 
           setBoard(board);
           setTasks(board.tasks);
@@ -164,7 +169,10 @@ export default function Board() {
     <section className="w-screen h-screen flex">
       {displaySidebar && <Sidebar />}
       <main
-        onClick={() => setDisplaySettings(false)}
+        onClick={() => {
+          setDisplaySettings(false);
+          setDisplayUserProfile(false);
+        }}
         className="bg-lightGrey dark:bg-veryDarkGrey w-screen h-screen flex flex-col justify-center px-4 pt-16 overflow-x-auto md:px-6 md:pt-20"
       >
         {loadingData ? (
@@ -266,6 +274,12 @@ export default function Board() {
             modal={modal}
             closeModal={closeModal}
           />
+        )}
+        {modal === 'userProfile' && (
+          <UserProfile user={user} setIsBoardUpdated={setIsBoardUpdated} />
+        )}
+        {modal === 'deleteAccount' && (
+          <Delete user={user} modal={modal} closeModal={closeModal} />
         )}
         <button
           onClick={() => setDisplaySidebar(true)}

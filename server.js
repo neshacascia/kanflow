@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 const homeRoutes = require('./routes/home');
 const boardRoutes = require('./routes/board');
+const accountRoutes = require('./routes/account');
 
 // run NODE_ENV=development node server.js to start in dev
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -49,6 +50,7 @@ app.use(passport.session());
 
 app.use('/api', homeRoutes);
 app.use('/api/board', boardRoutes);
+app.use('/api/account', accountRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist/index.html'));
