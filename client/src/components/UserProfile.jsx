@@ -168,7 +168,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
               {user.avatar ? (
                 <img src={user.avatar} className="w-16 h-16 rounded-full" />
               ) : (
-                <DefaultAvatar size="18" />
+                <DefaultAvatar size="16" />
               )}
 
               <label
