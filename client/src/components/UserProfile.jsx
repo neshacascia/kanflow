@@ -14,6 +14,8 @@ import {
 export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal } = useContext(Context);
 
+  const [avatarURL, setAvatarURL] = useState(user.avatar);
+
   const [currentPassword, setCurrentPassword] = useState('');
   const [enteredCurrentPasswordTouched, setEnteredCurrentPasswordTouched] =
     useState(false);
@@ -77,20 +79,14 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
     setEnteredConfirmPasswordTouched(true);
   }
 
-  async function updateUserData(e) {
-    e.preventDefault();
+  async function handleAvatarChange(e) {
+    const file = e.target.files[0];
 
-    const formData = new FormData(e.target);
+    if (file) {
+      const avatarFormData = new FormData();
+      avatarFormData.append('avatar', file);
 
-    const email = formData.get('email');
-    const newPassword = passwordsMatch ? formData.get('newPassword') : null;
-    const avatar = formData.get('avatar');
-
-    try {
-      if (avatar && avatar.size > 0) {
-        const avatarFormData = new FormData();
-        avatarFormData.append('avatar', avatar);
-
+      try {
         const res = await axios.post(
           `${baseURL}/account/updateAvatar`,
           avatarFormData,
@@ -103,16 +99,28 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
         );
 
         console.log(res);
-        if (res.status === 200) {
-          setIsBoardUpdated(true);
-          closeModal();
-        }
 
-        if (res.status !== 200) {
+        if (res.status === 200) {
+          setAvatarURL(res.data.avatarLink);
+          setIsBoardUpdated(true);
+        } else {
           throw new Error('Failed to update avatar');
         }
+      } catch (err) {
+        console.error(err);
       }
+    }
+  }
 
+  async function updateUserData(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const email = formData.get('email');
+    const newPassword = passwordsMatch ? formData.get('newPassword') : null;
+
+    try {
       const res = await axios.put(
         `${baseURL}/account/updateAccount`,
         { email, newPassword, currentPassword },
@@ -165,8 +173,8 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
         <div className="flex">
           <div className="w-full flex gap-14">
             <div className="flex flex-col items-center">
-              {user.avatar ? (
-                <img src={user.avatar} className="w-16 h-16 rounded-full" />
+              {avatarURL ? (
+                <img src={avatarURL} className="w-16 h-16 rounded-full" />
               ) : (
                 <DefaultAvatar size="16" />
               )}
@@ -180,6 +188,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
                   id="avatar"
                   name="avatar"
                   accept="image/png, image/jpeg"
+                  onChange={handleAvatarChange}
                   className="hidden"
                 />
                 <FontAwesomeIcon icon={faArrowUpFromBracket} />
