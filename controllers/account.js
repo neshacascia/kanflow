@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const path = require('path');
 const User = require('../models/User');
+const cloudinary = require('../middleware/cloudinary');
 
 module.exports = {
   updateAccount: async (req, res) => {
@@ -77,6 +78,25 @@ module.exports = {
         }
       }
       res.status(200).json({ msg: "User's account has been updated" });
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  updateAvatar: async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      await User.findByIdAndUpdate(userId, {
+        avatar: result.secure_url,
+        cloudinaryId: result.public_id,
+      });
+
+      return res.status(200).json({
+        message: 'Avatar photo updated!',
+        avatarLink: result.secure_url,
+      });
     } catch (err) {
       console.error(err);
     }
