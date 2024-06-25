@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const path = require('path');
 const User = require('../models/User');
+const Board = require('../models/Board');
 const cloudinary = require('../middleware/cloudinary');
+const { ObjectId } = require('mongodb');
 
 module.exports = {
   updateAccount: async (req, res) => {
@@ -107,6 +109,26 @@ module.exports = {
       });
     } catch (err) {
       console.error(err);
+    }
+  },
+  deleteAccount: async (req, res) => {
+    const userId = req.user.id;
+    try {
+      await User.findByIdAndDelete(userId);
+      await Board.deleteMany({ userId: userId });
+
+      console.log(
+        'Account and associated boards have been deleted successfully.'
+      );
+      res.status(200).json({
+        message:
+          'Account and associated boards have been deleted successfully.',
+      });
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ message: 'An error occurred while deleting the account.' });
     }
   },
 };
