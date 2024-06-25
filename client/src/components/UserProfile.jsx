@@ -83,8 +83,35 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
 
     const email = formData.get('email');
     const newPassword = passwordsMatch ? formData.get('newPassword') : null;
+    const avatar = formData.get('avatar');
 
     try {
+      if (avatar && avatar.size > 0) {
+        const avatarFormData = new FormData();
+        avatarFormData.append('avatar', avatar);
+
+        const res = await axios.post(
+          `${baseURL}/account/updateAvatar`,
+          avatarFormData,
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+
+        console.log(res);
+        if (res.status === 200) {
+          setIsBoardUpdated(true);
+          closeModal();
+        }
+
+        if (res.status !== 200) {
+          throw new Error('Failed to update avatar');
+        }
+      }
+
       const res = await axios.put(
         `${baseURL}/account/updateAccount`,
         { email, newPassword, currentPassword },
