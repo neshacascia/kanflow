@@ -6,10 +6,7 @@ import { baseURL } from '../api';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faUser,
-  faArrowUpFromBracket,
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal } = useContext(Context);
