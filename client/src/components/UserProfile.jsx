@@ -8,7 +8,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-export default function UserProfile({ user, setIsBoardUpdated, modal }) {
+export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal, openModal } = useContext(Context);
 
   const [avatarURL, setAvatarURL] = useState(user.avatar);
