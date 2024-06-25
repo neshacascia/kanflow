@@ -16,7 +16,11 @@ module.exports = {
       const boards = await Board.find({ userId: req.user.id }).lean();
       res.status(200).json({
         boards: boards.length > 0 ? boards[0].boards : [],
-        user: { userId: req.user.id, email: user[0].email },
+        user: {
+          userId: req.user.id,
+          email: user[0].email,
+          avatar: user[0].avatar,
+        },
       });
     } catch (err) {
       console.error(err);
