@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Context } from '../context/Context';
 import Modal from './Modal';
+import DefaultAvatar from './DefaultAvatar';
 import { baseURL } from '../api';
 import axios from 'axios';
 
@@ -164,12 +165,11 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
         <div className="flex">
           <div className="w-full flex gap-14">
             <div className="flex flex-col items-center">
-              <div className="bg-[#706dc2da] w-16 h-16 flex justify-center items-center rounded-full">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-white text-2xl"
-                />
-              </div>
+              {user.avatar ? (
+                <img src={user.avatar} className="w-16 h-16 rounded-full" />
+              ) : (
+                <DefaultAvatar size="18" />
+              )}
 
               <label
                 htmlFor="avatar"

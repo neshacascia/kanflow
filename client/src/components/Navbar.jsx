@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Context } from '../context/Context';
 import { Link, useLocation } from 'react-router-dom';
+import DefaultAvatar from './DefaultAvatar';
 
 import logo from '../../public/assets/logo.svg';
 
@@ -10,7 +11,6 @@ import {
   faPlus,
   faAngleDown,
   faAngleUp,
-  faUser,
   faGear,
   faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
@@ -148,9 +148,14 @@ export default function Navbar() {
                   : setDisplayUserProfile(true)
               }
             >
-              <div className="bg-[#706dc2da] w-11 h-11 flex justify-center items-center rounded-full mr-2">
-                <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
-              </div>
+              {user.avatar ? (
+                <img
+                  src={user.avatar}
+                  className="w-11 h-11 rounded-full mr-2"
+                />
+              ) : (
+                <DefaultAvatar size="11" />
+              )}
             </button>
           </div>
         )}
@@ -176,9 +181,11 @@ export default function Navbar() {
       {displayUserProfile && (
         <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
           <div className="h-full flex items-center gap-5 pl-8 mb-5">
-            <div className="bg-[#706dc2f5] w-11 h-11 flex justify-center items-center rounded-full">
-              <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
-            </div>
+            {user.avatar ? (
+              <img src={user.avatar} className="w-11 h-11 rounded-full mr-2" />
+            ) : (
+              <DefaultAvatar size="11" />
+            )}
             <p className="text-[#171717] text-sm font-semibold">{user.email}</p>
           </div>
 
