@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '../context/Context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -18,6 +18,8 @@ export default function Delete({
   const { boards } = useContext(Context);
   const navigate = useNavigate();
   const taskIndex = tasks?.findIndex(task => selectedTask._id === task._id);
+
+  const [errorMessages, setErrorMessages] = useState();
 
   async function deleteData() {
     const data = modal === 'deleteTask' ? taskIndex : board._id;
@@ -68,9 +70,14 @@ export default function Delete({
 
       if (res.status === 200) {
         navigate('/logout');
+        closeModal();
       }
     } catch (err) {
       console.error(err);
+
+      if (err.response.status === 403) {
+        setErrorMessages(err.response.data.msg);
+      }
     }
   }
 
@@ -120,6 +127,12 @@ export default function Delete({
               Are you sure you want to delete your account along with all your
               board(s) and tasks. This action cannot be reversed.
             </p>
+
+            {errorMessages && (
+              <span className="text-deleteRed text-xs font-bold flex justify-center pb-6">
+                {errorMessages}
+              </span>
+            )}
             <div className="flex flex-col gap-4 md:flex-row">
               <button
                 onClick={() => handleDeleteAccount()}
