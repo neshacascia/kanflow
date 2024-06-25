@@ -8,8 +8,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-export default function UserProfile({ user, setIsBoardUpdated }) {
-  const { closeModal } = useContext(Context);
+export default function UserProfile({ user, setIsBoardUpdated, modal }) {
+  const { closeModal, openModal } = useContext(Context);
 
   const [avatarURL, setAvatarURL] = useState(user.avatar);
 
@@ -306,6 +306,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
           </button>
           <button
             type="button"
+            onClick={() => openModal('deleteAccount')}
             className="text-white bg-deleteRed text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-redHover"
           >
             Delete Account
