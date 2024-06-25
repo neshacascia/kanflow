@@ -173,7 +173,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
               {avatarURL ? (
                 <img src={avatarURL} className="w-16 h-16 rounded-full" />
               ) : (
-                <DefaultAvatar size="16" />
+                <DefaultAvatar size="16" avatar="text-xl" />
               )}
 
               <label
