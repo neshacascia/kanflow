@@ -113,6 +113,13 @@ module.exports = {
   },
   deleteAccount: async (req, res) => {
     const userId = req.user.id;
+
+    if (userId === process.env.DEMO_USER_ID) {
+      return res.status(403).json({
+        msg: 'Demo accounts cannot be deleted.',
+      });
+    }
+
     try {
       await User.findByIdAndDelete(userId);
       await Board.deleteMany({ userId: userId });
