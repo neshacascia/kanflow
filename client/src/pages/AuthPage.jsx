@@ -25,43 +25,35 @@ export default function AuthPage() {
     confirmPassword: false,
   });
 
-  // const [enteredEmail, setEnteredEmail] = useState('');
-  // const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+  const enteredEmailValidation =
+    formInputs.email.trim() !== '' && formInputs.email.includes('@');
+  const enteredEmailNotValid = !enteredEmailValidation && formTouched.email;
 
-  // const [enteredPassword, setEnteredPassword] = useState('');
-  // const [enteredPasswordTouched, setEnteredPasswordTouched] = useState(false);
+  const enteredPasswordValidation =
+    formInputs.password.trim() !== '' && formInputs.password.length >= 8;
+  const enteredPasswordNotValid =
+    !enteredPasswordValidation && formTouched.password;
 
-  // const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
-  // const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
-  //   useState(false);
+  const enteredConfirmPasswordValidation =
+    formInputs.confirmPassword.trim() !== '' &&
+    formInputs.confirmPassword.length >= 8;
+  const enteredConfirmPasswordNotValid =
+    !enteredConfirmPasswordValidation && formInputs.confirmPassword;
 
-  // const enteredEmailValidation =
-  //   enteredEmail.trim() !== '' && enteredEmail.includes('@');
-  // const enteredEmailNotValid = !enteredEmailValidation && enteredEmailTouched;
-
-  // const enteredPasswordValidation =
-  //   enteredPassword.trim() !== '' && enteredPassword.length >= 8;
-  // const enteredPasswordNotValid =
-  //   !enteredPasswordValidation && enteredPasswordTouched;
-
-  // const enteredConfirmPasswordValidation =
-  //   enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
-  // const enteredConfirmPasswordNotValid =
-  //   !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
-
-  // const formIsValid =
-  //   authValue === 'login'
-  //     ? enteredEmailValidation && enteredPasswordValidation
-  //     : enteredEmailValidation &&
-  //       enteredPasswordValidation &&
-  //       enteredConfirmPasswordValidation;
+  const formIsValid =
+    authValue === 'login'
+      ? enteredEmailValidation && enteredPasswordValidation
+      : enteredEmailValidation &&
+        enteredPasswordValidation &&
+        enteredConfirmPasswordValidation;
 
   const [passwordsMatch, setPasswordsMatch] = useState();
 
-  // useEffect(() => {
-  //   const arePasswordsEqual = enteredPassword === enteredConfirmPassword;
-  //   setPasswordsMatch(arePasswordsEqual);
-  // }, [enteredPassword, enteredConfirmPassword]);
+  useEffect(() => {
+    const arePasswordsEqual =
+      formInputs.password === formInputs.confirmPassword;
+    setPasswordsMatch(arePasswordsEqual);
+  }, [formInputs.password, formInputs.confirmPassword]);
 
   const [errorMessages, setErrorMessages] = useState('');
 
@@ -91,42 +83,18 @@ export default function AuthPage() {
     });
   }
 
-  // function emailChangeHandler(e) {
-  //   setEnteredEmail(e.target.value);
-  // }
+  function changeAuthMethod() {
+    setPasswordsMatch(true);
+    changeAuthValue(authValue);
+  }
 
-  // function passwordChangeHandler(e) {
-  //   setEnteredPassword(e.target.value);
-  // }
+  function handleTogglePassword() {
+    setPasswordVisibility(prevState => !prevState);
+  }
 
-  // function confirmPasswordChangeHandler(e) {
-  //   setEnteredConfirmPassword(e.target.value);
-  // }
-
-  // function emailInputBlurHandler() {
-  //   setEnteredEmailTouched(true);
-  // }
-
-  // function passwordInputBlurHandler() {
-  //   setEnteredPasswordTouched(true);
-  // }
-
-  // function confirmPasswordInputBlurHandler() {
-  //   setEnteredConfirmPasswordTouched(true);
-  // }
-
-  // function changeAuthMethod() {
-  //   setPasswordsMatch(true);
-  //   changeAuthValue(authValue);
-  // }
-
-  // function handleTogglePassword() {
-  //   setPasswordVisibility(prevState => !prevState);
-  // }
-
-  // function handleToggleConfirmPassword() {
-  //   setConfirmPasswordVisibility(prevState => !prevState);
-  // }
+  function handleToggleConfirmPassword() {
+    setConfirmPasswordVisibility(prevState => !prevState);
+  }
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -135,9 +103,9 @@ export default function AuthPage() {
       const res = await axios.post(
         `${baseURL}/${authValue}`,
         {
-          email: enteredEmail,
-          password: enteredPassword,
-          confirmPassword: enteredConfirmPassword,
+          email: formInputs.email,
+          password: formInputs.password,
+          confirmPassword: formInputs.confirmPassword,
         },
         {
           withCredentials: true,
@@ -176,29 +144,22 @@ export default function AuthPage() {
               placeholder="name@email.com"
               onChange={handleInputChange}
               onBlur={handleInputTouched}
-              // onChange={emailChangeHandler}
-              // onBlur={emailInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
-              // className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-              //   enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
-              // }`}
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
+              }`}
             />
-            {/* {enteredEmailNotValid && (
+            {enteredEmailNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Please enter a valid email.
               </span>
-            )} */}
+            )}
           </label>
           <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
-            {/* <div
+            <div
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
                 enteredPasswordNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
-            > */}
-            <div
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple 
-               `}
             >
               <input
                 type={passwordVisibility ? 'text' : 'password'}
@@ -206,21 +167,19 @@ export default function AuthPage() {
                 placeholder="••••••••"
                 onChange={handleInputChange}
                 onBlur={handleInputTouched}
-                // onChange={passwordChangeHandler}
-                // onBlur={passwordInputBlurHandler}
                 className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
               />
               <FontAwesomeIcon
                 icon={passwordVisibility ? faEyeSlash : faEye}
-                // onClick={handleTogglePassword}
+                onClick={handleTogglePassword}
                 className="text-gray-400 pr-4 cursor-pointer"
               />
             </div>
-            {/* {enteredPasswordNotValid && (
+            {enteredPasswordNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
               </span>
-            )} */}
+            )}
           </label>
           {authValue === 'signup' && (
             <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
@@ -238,27 +197,25 @@ export default function AuthPage() {
                   placeholder="••••••••"
                   onChange={handleInputChange}
                   onBlur={handleInputTouched}
-                  // onChange={confirmPasswordChangeHandler}
-                  // onBlur={confirmPasswordInputBlurHandler}
                   className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
                 />
                 <FontAwesomeIcon
                   icon={confirmPasswordVisibility ? faEyeSlash : faEye}
-                  // onClick={handleToggleConfirmPassword}
+                  onClick={handleToggleConfirmPassword}
                   className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
-              {/* {enteredConfirmPasswordNotValid && (
+              {enteredConfirmPasswordNotValid && (
                 <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
-              )} */}
+              )}
             </label>
           )}
-          {/* {authValue === 'signup' &&
+          {authValue === 'signup' &&
             !passwordsMatch &&
-            enteredPasswordTouched &&
-            enteredConfirmPasswordTouched && (
+            formTouched.password &&
+            formTouched.confirmPassword && (
               <span className="text-deleteRed text-xs font-semibold">
                 Uh oh! The passwords you entered do not match.
               </span>
@@ -267,10 +224,10 @@ export default function AuthPage() {
             <p className="text-deleteRed text-xs font-semibold">
               {errorMessages}
             </p>
-          )} */}
+          )}
           <button
             type="submit"
-            // disabled={!formIsValid}
+            disabled={!formIsValid}
             className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 w-full"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
@@ -284,7 +241,7 @@ export default function AuthPage() {
           <Link
             className="text-black font-semibold"
             to={authValue === 'signup' ? '/login' : '/signup'}
-            // onClick={changeAuthMethod}
+            onClick={changeAuthMethod}
           >
             {authValue === 'signup' ? 'Login' : 'Signup'} Now
           </Link>
