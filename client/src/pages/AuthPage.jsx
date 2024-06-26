@@ -13,43 +13,49 @@ export default function AuthPage() {
   const { changeAuthValue } = useContext(Context);
   const navigate = useNavigate();
 
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+  const [formInputs, setFormInputs] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-  const [enteredPassword, setEnteredPassword] = useState('');
-  const [enteredPasswordTouched, setEnteredPasswordTouched] = useState(false);
+  // const [enteredEmail, setEnteredEmail] = useState('');
+  // const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
-  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
-  const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
-    useState(false);
+  // const [enteredPassword, setEnteredPassword] = useState('');
+  // const [enteredPasswordTouched, setEnteredPasswordTouched] = useState(false);
 
-  const enteredEmailValidation =
-    enteredEmail.trim() !== '' && enteredEmail.includes('@');
-  const enteredEmailNotValid = !enteredEmailValidation && enteredEmailTouched;
+  // const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
+  // const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
+  //   useState(false);
 
-  const enteredPasswordValidation =
-    enteredPassword.trim() !== '' && enteredPassword.length >= 8;
-  const enteredPasswordNotValid =
-    !enteredPasswordValidation && enteredPasswordTouched;
+  // const enteredEmailValidation =
+  //   enteredEmail.trim() !== '' && enteredEmail.includes('@');
+  // const enteredEmailNotValid = !enteredEmailValidation && enteredEmailTouched;
 
-  const enteredConfirmPasswordValidation =
-    enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
-  const enteredConfirmPasswordNotValid =
-    !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
+  // const enteredPasswordValidation =
+  //   enteredPassword.trim() !== '' && enteredPassword.length >= 8;
+  // const enteredPasswordNotValid =
+  //   !enteredPasswordValidation && enteredPasswordTouched;
 
-  const formIsValid =
-    authValue === 'login'
-      ? enteredEmailValidation && enteredPasswordValidation
-      : enteredEmailValidation &&
-        enteredPasswordValidation &&
-        enteredConfirmPasswordValidation;
+  // const enteredConfirmPasswordValidation =
+  //   enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
+  // const enteredConfirmPasswordNotValid =
+  //   !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
+
+  // const formIsValid =
+  //   authValue === 'login'
+  //     ? enteredEmailValidation && enteredPasswordValidation
+  //     : enteredEmailValidation &&
+  //       enteredPasswordValidation &&
+  //       enteredConfirmPasswordValidation;
 
   const [passwordsMatch, setPasswordsMatch] = useState();
 
-  useEffect(() => {
-    const arePasswordsEqual = enteredPassword === enteredConfirmPassword;
-    setPasswordsMatch(arePasswordsEqual);
-  }, [enteredPassword, enteredConfirmPassword]);
+  // useEffect(() => {
+  //   const arePasswordsEqual = enteredPassword === enteredConfirmPassword;
+  //   setPasswordsMatch(arePasswordsEqual);
+  // }, [enteredPassword, enteredConfirmPassword]);
 
   const [errorMessages, setErrorMessages] = useState('');
 
@@ -57,42 +63,53 @@ export default function AuthPage() {
   const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
     useState(false);
 
-  function emailChangeHandler(e) {
-    setEnteredEmail(e.target.value);
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+
+    setFormInputs(prevState => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
   }
 
-  function passwordChangeHandler(e) {
-    setEnteredPassword(e.target.value);
-  }
+  // function emailChangeHandler(e) {
+  //   setEnteredEmail(e.target.value);
+  // }
 
-  function confirmPasswordChangeHandler(e) {
-    setEnteredConfirmPassword(e.target.value);
-  }
+  // function passwordChangeHandler(e) {
+  //   setEnteredPassword(e.target.value);
+  // }
 
-  function emailInputBlurHandler() {
-    setEnteredEmailTouched(true);
-  }
+  // function confirmPasswordChangeHandler(e) {
+  //   setEnteredConfirmPassword(e.target.value);
+  // }
 
-  function passwordInputBlurHandler() {
-    setEnteredPasswordTouched(true);
-  }
+  // function emailInputBlurHandler() {
+  //   setEnteredEmailTouched(true);
+  // }
 
-  function confirmPasswordInputBlurHandler() {
-    setEnteredConfirmPasswordTouched(true);
-  }
+  // function passwordInputBlurHandler() {
+  //   setEnteredPasswordTouched(true);
+  // }
 
-  function changeAuthMethod() {
-    setPasswordsMatch(true);
-    changeAuthValue(authValue);
-  }
+  // function confirmPasswordInputBlurHandler() {
+  //   setEnteredConfirmPasswordTouched(true);
+  // }
 
-  function handleTogglePassword() {
-    setPasswordVisibility(prevState => !prevState);
-  }
+  // function changeAuthMethod() {
+  //   setPasswordsMatch(true);
+  //   changeAuthValue(authValue);
+  // }
 
-  function handleToggleConfirmPassword() {
-    setConfirmPasswordVisibility(prevState => !prevState);
-  }
+  // function handleTogglePassword() {
+  //   setPasswordVisibility(prevState => !prevState);
+  // }
+
+  // function handleToggleConfirmPassword() {
+  //   setConfirmPasswordVisibility(prevState => !prevState);
+  // }
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -140,45 +157,51 @@ export default function AuthPage() {
               type="email"
               name="email"
               placeholder="name@email.com"
-              onChange={emailChangeHandler}
-              onBlur={emailInputBlurHandler}
-              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
-              }`}
+              onChange={handleInputChange}
+              // onChange={emailChangeHandler}
+              // onBlur={emailInputBlurHandler}
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
+              // className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+              //   enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
+              // }`}
             />
-            {enteredEmailNotValid && (
+            {/* {enteredEmailNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Please enter a valid email.
               </span>
-            )}
+            )} */}
           </label>
           <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
             Password
-            <div
+            {/* <div
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
                 enteredPasswordNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
+            > */}
+            <div
+              className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple 
+               `}
             >
-              {' '}
               <input
                 type={passwordVisibility ? 'text' : 'password'}
                 name="password"
                 placeholder="••••••••"
-                onChange={passwordChangeHandler}
-                onBlur={passwordInputBlurHandler}
+                onChange={handleInputChange}
+                // onChange={passwordChangeHandler}
+                // onBlur={passwordInputBlurHandler}
                 className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
               />
               <FontAwesomeIcon
                 icon={passwordVisibility ? faEyeSlash : faEye}
-                onClick={handleTogglePassword}
+                // onClick={handleTogglePassword}
                 className="text-gray-400 pr-4 cursor-pointer"
               />
             </div>
-            {enteredPasswordNotValid && (
+            {/* {enteredPasswordNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
               </span>
-            )}
+            )} */}
           </label>
           {authValue === 'signup' && (
             <label className="text-veryDarkGrey text-[13px] font-semibold w-72 flex flex-col gap-2 md:w-full">
@@ -194,24 +217,25 @@ export default function AuthPage() {
                   type={confirmPasswordVisibility ? 'text' : 'password'}
                   name="confirmPassword"
                   placeholder="••••••••"
-                  onChange={confirmPasswordChangeHandler}
-                  onBlur={confirmPasswordInputBlurHandler}
+                  onChange={handleInputChange}
+                  // onChange={confirmPasswordChangeHandler}
+                  // onBlur={confirmPasswordInputBlurHandler}
                   className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
                 />
                 <FontAwesomeIcon
                   icon={confirmPasswordVisibility ? faEyeSlash : faEye}
-                  onClick={handleToggleConfirmPassword}
+                  // onClick={handleToggleConfirmPassword}
                   className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
-              {enteredConfirmPasswordNotValid && (
+              {/* {enteredConfirmPasswordNotValid && (
                 <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
-              )}
+              )} */}
             </label>
           )}
-          {authValue === 'signup' &&
+          {/* {authValue === 'signup' &&
             !passwordsMatch &&
             enteredPasswordTouched &&
             enteredConfirmPasswordTouched && (
@@ -223,10 +247,10 @@ export default function AuthPage() {
             <p className="text-deleteRed text-xs font-semibold">
               {errorMessages}
             </p>
-          )}
+          )} */}
           <button
             type="submit"
-            disabled={!formIsValid}
+            // disabled={!formIsValid}
             className="text-white bg-mainPurple font-semibold tracking-wide leading-6 py-3 enabled:hover:bg-mainPurpleHover mt-5 w-full"
           >
             {authValue === 'login' ? 'Login' : 'Signup'}
@@ -240,7 +264,7 @@ export default function AuthPage() {
           <Link
             className="text-black font-semibold"
             to={authValue === 'signup' ? '/login' : '/signup'}
-            onClick={changeAuthMethod}
+            // onClick={changeAuthMethod}
           >
             {authValue === 'signup' ? 'Login' : 'Signup'} Now
           </Link>
