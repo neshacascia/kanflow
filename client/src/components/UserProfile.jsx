@@ -11,7 +11,7 @@ import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 export default function UserProfile({ user, setIsBoardUpdated }) {
   const { closeModal, openModal } = useContext(Context);
 
-  const [avatarURL, setAvatarURL] = useState(user.avatar);
+  const [avatarImg, setAvatarImg] = useState(user.avatar);
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [enteredCurrentPasswordTouched, setEnteredCurrentPasswordTouched] =
@@ -98,7 +98,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
         console.log(res);
 
         if (res.status === 200) {
-          setAvatarURL(res.data.avatarLink);
+          setAvatarImg(res.data.avatarLink);
           setIsBoardUpdated(true);
         } else {
           throw new Error('Failed to update avatar');
@@ -170,8 +170,8 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
         <div className="flex">
           <div className="w-full flex gap-14">
             <div className="flex flex-col items-center">
-              {avatarURL ? (
-                <img src={avatarURL} className="w-16 h-16 rounded-full" />
+              {avatarImg ? (
+                <img src={avatarImg} className="w-16 h-16 rounded-full" />
               ) : (
                 <DefaultAvatar size="16" avatar="text-xl" />
               )}
