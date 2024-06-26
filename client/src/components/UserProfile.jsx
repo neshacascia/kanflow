@@ -8,7 +8,11 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-export default function UserProfile({ user, setIsBoardUpdated }) {
+export default function UserProfile({
+  user,
+  setIsBoardUpdated,
+  setBoardPageUpdated,
+}) {
   const { closeModal, openModal } = useContext(Context);
 
   const [avatarImg, setAvatarImg] = useState(user.avatar);
@@ -99,7 +103,9 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
 
         if (res.status === 200) {
           setAvatarImg(res.data.avatarLink);
-          setIsBoardUpdated(true);
+          setIsBoardUpdated
+            ? setIsBoardUpdated(true)
+            : setBoardPageUpdated(true);
         } else {
           throw new Error('Failed to update avatar');
         }
@@ -132,7 +138,7 @@ export default function UserProfile({ user, setIsBoardUpdated }) {
       console.log(res);
 
       if (res.status === 200) {
-        setIsBoardUpdated(true);
+        setIsBoardUpdated ? setIsBoardUpdated(true) : setBoardPageUpdated(true);
         closeModal();
       }
     } catch (err) {

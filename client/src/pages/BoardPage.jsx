@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 import Board from '../components/Board';
 import WelcomeMessage from '../components/WelcomeMessage';
+import UserProfile from '../components/UserProfile';
 import { baseURL } from '../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +12,8 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardPage() {
   const [welcomeMessage, setWelcomeMessage] = useState(null);
-  const { setIsLoggedIn, setUser, setBoards, setDisplaySidebar } =
+  const [boardPageUpdated, setBoardPageUpdated] = useState(false);
+  const { setIsLoggedIn, setUser, setBoards, setDisplaySidebar, modal, user } =
     useContext(Context);
   const navigate = useNavigate();
 
@@ -48,7 +50,7 @@ export default function BoardPage() {
     }
 
     getBoards();
-  }, []);
+  }, [boardPageUpdated]);
 
   return (
     <section>
@@ -62,6 +64,9 @@ export default function BoardPage() {
           className="text-white text-xs py-5 pr-2"
         />
       </button>
+      {modal === 'userProfile' && (
+        <UserProfile user={user} setBoardPageUpdated={setBoardPageUpdated} />
+      )}
     </section>
   );
 }
