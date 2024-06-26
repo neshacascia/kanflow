@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../../context/Context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Modal from '../ui/Modal';
+import Modal from '@components/ui/Modal';
 import { baseURL } from '../../api';
 
 export default function Delete({

@@ -2,16 +2,16 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../../context/Context';
-import Column from './Column';
-import Menu from '../layout/Menu';
-import BoardDetails from './BoardDetails';
-import AddTask from '../tasks/AddTask';
-import ViewTask from '../tasks/ViewTask';
-import EditTask from '../tasks/EditTask';
-import Delete from './Delete';
-import UserProfile from '../profile/UserProfile';
-import Sidebar from '../layout/Sidebar';
-import LoadingSpinner from '../ui/LoadingSpinner';
+import Column from '@components/board/Column';
+import Menu from '@components/layout/Menu';
+import BoardDetails from '@components/board/BoardDetails';
+import AddTask from '@components/tasks/AddTask';
+import ViewTask from '@components/tasks/ViewTask';
+import EditTask from '@components/tasks/EditTask';
+import Delete from '@components/board/Delete';
+import UserProfile from '@components/profile/UserProfile';
+import Sidebar from '@components/layout/Sidebar';
+import LoadingSpinner from '@components/ui/LoadingSpinner';
 import { baseURL } from '../../api';
 import {
   DndContext,

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import axios from 'axios';
-import Feature from '../components/Feature';
+import Feature from '@components/Feature';
 import { baseURL } from '../api';
 
 import data from '../../data.json';

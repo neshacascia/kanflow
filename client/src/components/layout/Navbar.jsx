@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
 import { Link, useLocation } from 'react-router-dom';
-import DefaultAvatar from '../profile/DefaultAvatar';
+import DefaultAvatar from '@components/profile/DefaultAvatar';
 
 import logo from '../../../public/assets/logo.svg';
 

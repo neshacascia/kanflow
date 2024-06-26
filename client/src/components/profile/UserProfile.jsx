@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Context } from '../../context/Context';
-import Modal from '../ui/Modal';
-import DefaultAvatar from './DefaultAvatar';
+import Modal from '@components/ui/Modal';
+import DefaultAvatar from '@components/profile/DefaultAvatar';
 import { baseURL } from '../../api';
 import axios from 'axios';
 
