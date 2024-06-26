@@ -57,9 +57,10 @@ export default function AuthPage() {
 
   const [errorMessages, setErrorMessages] = useState('');
 
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
-    useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -88,12 +89,13 @@ export default function AuthPage() {
     changeAuthValue(authValue);
   }
 
-  function handleTogglePassword() {
-    setPasswordVisibility(prevState => !prevState);
-  }
-
-  function handleToggleConfirmPassword() {
-    setConfirmPasswordVisibility(prevState => !prevState);
+  function handleTogglePassword(name) {
+    setPasswordVisibility(prevState => {
+      return {
+        ...prevState,
+        [name]: !prevState[name],
+      };
+    });
   }
 
   async function submitHandler(e) {
@@ -162,7 +164,7 @@ export default function AuthPage() {
               }`}
             >
               <input
-                type={passwordVisibility ? 'text' : 'password'}
+                type={passwordVisibility.password ? 'text' : 'password'}
                 name="password"
                 placeholder="••••••••"
                 onChange={handleInputChange}
@@ -170,8 +172,8 @@ export default function AuthPage() {
                 className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
               />
               <FontAwesomeIcon
-                icon={passwordVisibility ? faEyeSlash : faEye}
-                onClick={handleTogglePassword}
+                icon={passwordVisibility.password ? faEyeSlash : faEye}
+                onClick={() => handleTogglePassword('password')}
                 className="text-gray-400 pr-4 cursor-pointer"
               />
             </div>
@@ -192,7 +194,9 @@ export default function AuthPage() {
                 }`}
               >
                 <input
-                  type={confirmPasswordVisibility ? 'text' : 'password'}
+                  type={
+                    passwordVisibility.confirmPassword ? 'text' : 'password'
+                  }
                   name="confirmPassword"
                   placeholder="••••••••"
                   onChange={handleInputChange}
@@ -200,8 +204,8 @@ export default function AuthPage() {
                   className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
                 />
                 <FontAwesomeIcon
-                  icon={confirmPasswordVisibility ? faEyeSlash : faEye}
-                  onClick={handleToggleConfirmPassword}
+                  icon={passwordVisibility.confirmPassword ? faEyeSlash : faEye}
+                  onClick={() => handleTogglePassword('confirmPassword')}
                   className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
