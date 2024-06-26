@@ -53,16 +53,12 @@ export default function AuthPage() {
     formTouched
   );
 
-  const confirmPasswordNotValid = isFieldNotValid(
-    'confirmPassword',
-    formInputs.confirmPassword,
-    formInputs,
-    formTouched
-  );
-
   const confirmPasswordLengthValid =
     formInputs.confirmPassword.trim() !== '' &&
     formInputs.confirmPassword.length >= 8;
+
+  const confirmPasswordNotValid =
+    !confirmPasswordLengthValid && formTouched.confirmPassword;
 
   const formIsValid =
     authValue === 'login'
@@ -99,7 +95,7 @@ export default function AuthPage() {
       };
     });
   }
-
+  console.log(confirmPasswordNotValid);
   function handleInputTouched(e) {
     const { name } = e.target;
 
@@ -236,7 +232,7 @@ export default function AuthPage() {
                   className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
-              {!confirmPasswordLengthValid && (
+              {confirmPasswordNotValid && (
                 <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
