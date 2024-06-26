@@ -95,7 +95,7 @@ export default function AuthPage() {
       };
     });
   }
-  console.log(confirmPasswordNotValid);
+
   function handleInputTouched(e) {
     const { name } = e.target;
 
