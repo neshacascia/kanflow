@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Context } from '../../context/Context';
+import { BoardContext } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
 import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
 import logo from '../../../public/assets/logo.svg';
@@ -11,7 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar() {
-  const { boards, openModal, setDisplaySidebar } = useContext(Context);
+  const { boards, openModal } = useContext(BoardContext);
+  const { setDisplaySidebar } = useContext(UIContext);
 
   return (
     <div className="bg-white dark:bg-darkGrey min-w-[260px] h-screen relative left-0 pt-6 z-20 hidden md:block border-linesLight dark:border-linesDark border-r-[1px]">

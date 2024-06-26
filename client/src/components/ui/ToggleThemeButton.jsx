@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { Context } from '../../context/Context';
+import { UIContext } from '../../context/UIContext';
 
 import sunIcon from '../../../public/assets/sun.svg';
 import moonIcon from '../../../public/assets/moon.svg';
 
 export default function ToggleThemeButton() {
-  const { toggleTheme, isDarkMode } = useContext(Context);
+  const { toggleTheme, isDarkMode } = useContext(UIContext);
 
   return (
     <div className="bg-lightGrey dark:bg-veryDarkGrey flex justify-center gap-6 rounded-md py-3 mx-4">

@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Context } from '../context/Context';
+import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { baseURL } from '../api';
 
@@ -10,7 +10,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function AuthPage() {
   const authValue = localStorage.getItem('authValue');
-  const { changeAuthValue } = useContext(Context);
+  const { changeAuthValue } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formInputs, setFormInputs] = useState({

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Context } from '../../context/Context';
+import { BoardContext } from '../../context/BoardContext';
 import axios from 'axios';
 import Modal from '@components/ui/Modal';
 import { baseURL } from '../../api';
@@ -10,7 +10,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetails({ board, setIsBoardUpdated }) {
   const navigate = useNavigate();
-  const { boardIndex, modal, closeModal } = useContext(Context);
+  const { boardIndex, modal, closeModal } = useContext(BoardContext);
 
   const boardDetails = modal;
 

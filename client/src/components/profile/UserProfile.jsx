@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { Context } from '../../context/Context';
+import { BoardContext } from '../../context/BoardContext';
 import Modal from '@components/ui/Modal';
 import DefaultAvatar from '@components/profile/DefaultAvatar';
 import { baseURL } from '../../api';
@@ -13,7 +13,7 @@ export default function UserProfile({
   setIsBoardUpdated,
   setBoardPageUpdated,
 }) {
-  const { closeModal, openModal } = useContext(Context);
+  const { closeModal, openModal } = useContext(BoardContext);
 
   const [avatarImg, setAvatarImg] = useState(user.avatar);
 

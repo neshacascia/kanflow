@@ -1,13 +1,16 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Context } from '../context/Context';
+import { AuthContext } from '../context/AuthContext';
+import { BoardContext } from '../context/BoardContext';
+import { UIContext } from '../context/UIContext';
 import LoadingSpinner from '@components/ui/LoadingSpinner';
 import { baseURL } from '../api';
 
 export default function LogoutPage() {
-  const { setIsLoggedIn, setIsDarkMode, setBoards, setBoard } =
-    useContext(Context);
+  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setBoards, setBoard } = useContext(BoardContext);
+  const { setIsDarkMode } = useContext(UIContext);
   const navigate = useNavigate();
 
   useEffect(() => {

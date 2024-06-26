@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Context } from '../../context/Context';
+import { BoardContext } from '../../context/BoardContext';
 import Modal from '@components/ui/Modal';
 import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
-  const { boards, openModal, closeModal } = useContext(Context);
+  const { boards, openModal, closeModal } = useContext(BoardContext);
   const location = useLocation();
 
   return (

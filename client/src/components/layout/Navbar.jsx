@@ -1,5 +1,7 @@
 import { useContext } from 'react';
-import { Context } from '../../context/Context';
+import { AuthContext } from '../../context/AuthContext';
+import { BoardContext } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
 import { Link, useLocation } from 'react-router-dom';
 import DefaultAvatar from '@components/profile/DefaultAvatar';
 
@@ -16,20 +18,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
+  const { user, isLoggedIn, storeAuthValue } = useContext(AuthContext);
+  const { board, boards, modal, openModal } = useContext(BoardContext);
   const {
-    board,
-    modal,
-    openModal,
     displaySettings,
     setDisplaySettings,
     displaySidebar,
-    boards,
-    isLoggedIn,
-    storeAuthValue,
     displayUserProfile,
     setDisplayUserProfile,
-    user,
-  } = useContext(Context);
+  } = useContext(UIContext);
 
   const location = useLocation();
   const isUser = localStorage.getItem('user');

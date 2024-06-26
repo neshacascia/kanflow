@@ -1,7 +1,9 @@
 import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Context } from '../context/Context';
+import { AuthContext } from '../context/AuthContext';
+import { BoardContext } from '../context/BoardContext';
+import { UIContext } from '../context/UIContext';
 import Board from '@components/board/Board';
 import WelcomeMessage from '@components/board/WelcomeMessage';
 import UserProfile from '@components/profile/UserProfile';
@@ -13,8 +15,9 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 export default function BoardPage() {
   const [welcomeMessage, setWelcomeMessage] = useState(null);
   const [boardPageUpdated, setBoardPageUpdated] = useState(false);
-  const { setIsLoggedIn, setUser, setBoards, setDisplaySidebar, modal, user } =
-    useContext(Context);
+  const { user, setUser, setIsLoggedIn } = useContext(AuthContext);
+  const { setBoards, modal } = useContext(BoardContext);
+  const { setDisplaySidebar } = useContext(UIContext);
   const navigate = useNavigate();
 
   useEffect(() => {

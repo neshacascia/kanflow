@@ -1,10 +1,12 @@
 import { useContext } from 'react';
-import { Context } from '../../context/Context';
+import { BoardContext } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
 import Sidebar from '@components/layout/Sidebar';
 import BoardDetails from './BoardDetails';
 
 export default function WelcomeMessage() {
-  const { openModal, displaySidebar, modal, board } = useContext(Context);
+  const { openModal, modal, board } = useContext(BoardContext);
+  const { displaySidebar } = useContext(UIContext);
 
   return (
     <section className="w-screen h-screen flex">

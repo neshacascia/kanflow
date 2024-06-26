@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Context } from '../../context/Context';
+import { AuthContext } from '../../context/AuthContext';
+import { BoardContext } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
 import Column from '@components/board/Column';
 import Menu from '@components/layout/Menu';
 import BoardDetails from '@components/board/BoardDetails';
@@ -27,23 +29,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
+  const { user, setUser, setIsLoggedIn } = useContext(AuthContext);
   const {
-    user,
-    setUser,
     board,
     setBoard,
+    setBoards,
     boardIndex,
     setBoardIndex,
     modal,
     openModal,
     closeModal,
+  } = useContext(BoardContext);
+  const {
     setDisplaySettings,
     displaySidebar,
     setDisplaySidebar,
-    setBoards,
-    setIsLoggedIn,
     setDisplayUserProfile,
-  } = useContext(Context);
+  } = useContext(UIContext);
   const { id } = useParams();
   const navigate = useNavigate();
 

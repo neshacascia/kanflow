@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { Context } from '../../context/Context';
+import { BoardContext } from '../../context/BoardContext';
 
 export default function Modal({ children }) {
-  const { closeModal } = useContext(Context);
+  const { closeModal } = useContext(BoardContext);
 
   function handleModalClick(e) {
     e.stopPropagation();
