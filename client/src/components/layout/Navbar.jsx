@@ -179,7 +179,7 @@ export default function Navbar() {
       )}
 
       {displayUserProfile && (
-        <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
+        <div className="text-mediumGrey bg-white text-xs leading-6 w-[310px] md:w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
           <div className="h-full flex items-center gap-5 pl-8 mb-5">
             {user.avatar ? (
               <img src={user.avatar} className="w-11 h-11 rounded-full mr-2" />
