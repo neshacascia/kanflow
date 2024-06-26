@@ -50,9 +50,7 @@ export default function AuthPage() {
   const [passwordsMatch, setPasswordsMatch] = useState();
 
   useEffect(() => {
-    const arePasswordsEqual =
-      formInputs.password === formInputs.confirmPassword;
-    setPasswordsMatch(arePasswordsEqual);
+    setPasswordsMatch(formInputs.password === formInputs.confirmPassword);
   }, [formInputs.password, formInputs.confirmPassword]);
 
   const [errorMessages, setErrorMessages] = useState('');
