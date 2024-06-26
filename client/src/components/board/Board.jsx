@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Context } from '../context/Context';
+import { Context } from '../../context/Context';
 import Column from './Column';
-import Menu from './Menu';
+import Menu from '../layout/Menu';
 import BoardDetails from './BoardDetails';
-import AddTask from './AddTask';
-import ViewTask from './ViewTask';
-import EditTask from './EditTask';
+import AddTask from '../tasks/AddTask';
+import ViewTask from '../tasks/ViewTask';
+import EditTask from '../tasks/EditTask';
 import Delete from './Delete';
-import UserProfile from './UserProfile';
-import Sidebar from './Sidebar';
-import LoadingSpinner from './LoadingSpinner';
-import { baseURL } from '../api';
+import UserProfile from '../profile/UserProfile';
+import Sidebar from '../layout/Sidebar';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import { baseURL } from '../../api';
 import {
   DndContext,
   useSensors,

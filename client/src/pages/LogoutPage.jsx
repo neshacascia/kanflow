@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
-import LoadingSpinner from '../components/LoadingSpinner';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { baseURL } from '../api';
 
 export default function LogoutPage() {

@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
-import { Context } from '../context/Context';
-import Modal from './Modal';
+import { Context } from '../../context/Context';
+import Modal from '../ui/Modal';
 import DefaultAvatar from './DefaultAvatar';
-import { baseURL } from '../api';
+import { baseURL } from '../../api';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

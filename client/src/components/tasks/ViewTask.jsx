@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
-import Modal from './Modal';
-import { baseURL } from '../api';
+import Modal from '../ui/Modal';
+import { baseURL } from '../../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

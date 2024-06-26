@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { Context } from '../context/Context';
-import Sidebar from './Sidebar';
+import { Context } from '../../context/Context';
+import Sidebar from '../layout/Sidebar';
 import BoardDetails from './BoardDetails';
 
 export default function WelcomeMessage() {

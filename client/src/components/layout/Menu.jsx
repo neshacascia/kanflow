@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Context } from '../../context/Context';
-import Modal from '../Modal';
-import ToggleThemeButton from '../ToggleThemeButton';
+import Modal from '../ui/Modal';
+import ToggleThemeButton from '../ui/ToggleThemeButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

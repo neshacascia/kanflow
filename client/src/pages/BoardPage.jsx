@@ -2,9 +2,9 @@ import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/Context';
-import Board from '../components/Board';
-import WelcomeMessage from '../components/WelcomeMessage';
-import UserProfile from '../components/UserProfile';
+import Board from '../components/board/Board';
+import WelcomeMessage from '../components/board/WelcomeMessage';
+import UserProfile from '../components/profile/UserProfile';
 import { baseURL } from '../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

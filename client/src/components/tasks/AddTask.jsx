@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import Modal from './Modal';
-import { baseURL } from '../api';
+import Modal from '../ui/Modal';
+import { baseURL } from '../../api';
 
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

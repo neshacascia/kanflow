@@ -1,4 +1,4 @@
-import Task from './Task';
+import Task from '../tasks/Task';
 import { SortableContext } from '@dnd-kit/sortable';
 import { DragOverlay, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';

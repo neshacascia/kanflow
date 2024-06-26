@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Context } from '../context/Context';
+import { Context } from '../../context/Context';
 import axios from 'axios';
-import Modal from './Modal';
-import { baseURL } from '../api';
+import Modal from '../ui/Modal';
+import { baseURL } from '../../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';

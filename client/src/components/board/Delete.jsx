@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
-import { Context } from '../context/Context';
+import { Context } from '../../context/Context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Modal from './Modal';
-import { baseURL } from '../api';
+import Modal from '../ui/Modal';
+import { baseURL } from '../../api';
 
 export default function Delete({
   board,

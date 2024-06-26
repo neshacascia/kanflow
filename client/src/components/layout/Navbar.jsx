@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
 import { Link, useLocation } from 'react-router-dom';
-import DefaultAvatar from '../DefaultAvatar';
+import DefaultAvatar from '../profile/DefaultAvatar';
 
-import logo from '../../public/assets/logo.svg';
+import logo from '../../../public/assets/logo.svg';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

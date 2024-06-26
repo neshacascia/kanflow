@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { Context } from '../context/Context';
+import { Context } from '../../context/Context';
 
-import sunIcon from '../../public/assets/sun.svg';
-import moonIcon from '../../public/assets/moon.svg';
+import sunIcon from '../../../public/assets/sun.svg';
+import moonIcon from '../../../public/assets/moon.svg';
 
 export default function ToggleThemeButton() {
   const { toggleTheme, isDarkMode } = useContext(Context);
