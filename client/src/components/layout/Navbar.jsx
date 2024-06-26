@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { Context } from '../context/Context';
+import { Context } from '../../context/Context';
 import { Link, useLocation } from 'react-router-dom';
-import DefaultAvatar from './DefaultAvatar';
+import DefaultAvatar from '../DefaultAvatar';
 
 import logo from '../../public/assets/logo.svg';
 
