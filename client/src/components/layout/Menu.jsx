@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { BoardContext } from '../../context/BoardContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
 import Modal from '@components/ui/Modal';
 import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
@@ -61,7 +61,7 @@ export default function Menu() {
         </div>
 
         <div
-          onClick={() => openModal('new')}
+          onClick={() => openModal(MODAL_TYPES.newBoard)}
           className="flex items-center gap-3 py-3 px-6 mb-5"
         >
           <svg

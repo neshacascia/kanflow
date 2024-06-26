@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { BoardContext } from '../../context/BoardContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
 import { UIContext } from '../../context/UIContext';
 import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
@@ -65,7 +65,7 @@ export default function Sidebar() {
       </div>
 
       <div
-        onClick={() => openModal('new')}
+        onClick={() => openModal(MODAL_TYPES.newBoard)}
         className="flex items-center gap-3 py-3 px-6"
       >
         <svg

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
-import { BoardContext } from '../../context/BoardContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
 import { UIContext } from '../../context/UIContext';
 import Column from '@components/board/Column';
 import Menu from '@components/layout/Menu';
@@ -207,13 +207,15 @@ export default function Board() {
                   </p>
                   <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
                     <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
-                    <p onClick={() => openModal('editBoard')}>Add New Column</p>
+                    <p onClick={() => openModal(MODAL_TYPES.editBoard)}>
+                      Add New Column
+                    </p>
                   </button>
                 </div>
               )}
               {board.columns.length > 0 && (
                 <div
-                  onClick={() => openModal('editBoard')}
+                  onClick={() => openModal(MODAL_TYPES.editBoard)}
                   className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
                 >
                   <FontAwesomeIcon icon={faPlus} className="text-xs" />
@@ -227,8 +229,8 @@ export default function Board() {
         {modal === 'editBoard' && (
           <BoardDetails board={board} setIsBoardUpdated={setIsBoardUpdated} />
         )}
-        {modal === 'new' && <BoardDetails board={board} />}
-        {modal === 'add' && (
+        {modal === 'newBoard' && <BoardDetails board={board} />}
+        {modal === 'addTask' && (
           <AddTask
             boardIndex={boardIndex}
             columns={board.columns}
@@ -248,7 +250,7 @@ export default function Board() {
             closeModal={closeModal}
           />
         )}
-        {modal === 'edit' && (
+        {modal === 'editTask' && (
           <EditTask
             boardIndex={boardIndex}
             tasks={tasks}

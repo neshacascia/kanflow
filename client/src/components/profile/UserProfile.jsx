@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { BoardContext } from '../../context/BoardContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
 import Modal from '@components/ui/Modal';
 import DefaultAvatar from '@components/profile/DefaultAvatar';
 import { baseURL } from '../../api';
@@ -312,7 +312,7 @@ export default function UserProfile({
           </button>
           <button
             type="button"
-            onClick={() => openModal('deleteAccount')}
+            onClick={() => openModal(MODAL_TYPES.deleteAccount)}
             className="text-white bg-deleteRed text-[13px] font-semibold leading-6 md:w-[200px] rounded py-3 hover:bg-redHover"
           >
             Delete Account

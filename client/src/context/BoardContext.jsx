@@ -2,35 +2,30 @@ import { createContext, useState } from 'react';
 
 const BoardContext = createContext();
 
+const MODAL_TYPES = {
+  menu: 'menu',
+  newBoard: 'newBoard',
+  editBoard: 'editBoard',
+  addTask: 'addTask',
+  editTask: 'editTask',
+  viewTask: 'viewTask',
+  deleteTask: 'deleteTask',
+  deleteBoard: 'deleteBoard',
+  userProfile: 'userProfile',
+  deleteAccount: 'deleteAccount',
+};
+
 function BoardContextProvider(props) {
   const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState();
   const [boardIndex, setBoardIndex] = useState();
   const [modal, setModal] = useState(null);
 
-  function openModal(modal) {
-    setModal(null);
+  function openModal(modalKey) {
+    const modalType = MODAL_TYPES[modalKey];
 
-    if (modal === 'menu') {
-      setModal('menu');
-    } else if (modal === 'editBoard') {
-      setModal('editBoard');
-    } else if (modal === 'new') {
-      setModal('new');
-    } else if (modal === 'add') {
-      setModal('add');
-    } else if (modal === 'edit') {
-      setModal('edit');
-    } else if (modal === 'viewTask') {
-      setModal('viewTask');
-    } else if (modal === 'deleteTask') {
-      setModal('deleteTask');
-    } else if (modal === 'deleteBoard') {
-      setModal('deleteBoard');
-    } else if (modal === 'userProfile') {
-      setModal('userProfile');
-    } else if (modal === 'deleteAccount') {
-      setModal('deleteAccount');
+    if (modalType) {
+      setModal(modalType);
     }
   }
 
@@ -58,4 +53,4 @@ function BoardContextProvider(props) {
   );
 }
 
-export { BoardContext, BoardContextProvider };
+export { BoardContext, BoardContextProvider, MODAL_TYPES };

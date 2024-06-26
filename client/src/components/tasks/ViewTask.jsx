@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { MODAL_TYPES } from '../../context/BoardContext';
 import Modal from '@components/ui/Modal';
 import { baseURL } from '../../api';
 
@@ -193,13 +194,13 @@ export default function ViewTask({
         {settingsModal && (
           <div className="bg-white dark:bg-veryDarkGrey text-xs font-light leading-6 w-[150px] flex flex-col items-start gap-4 absolute transform translate-x-52 translate-y-1/4 rounded-lg shadow-lightSettings dark:shadow-glow p-4 mt-8 md:w-[192px] md:translate-x-80">
             <button
-              onClick={() => updateModal('edit')}
+              onClick={() => updateModal(MODAL_TYPES.editTask)}
               className="text-mediumGrey"
             >
               Edit Task
             </button>
             <button
-              onClick={() => updateModal('deleteTask')}
+              onClick={() => updateModal(MODAL_TYPES.deleteTask)}
               className="text-deleteRed"
             >
               Delete Task

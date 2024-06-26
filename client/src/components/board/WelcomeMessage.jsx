@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { BoardContext } from '../../context/BoardContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
 import { UIContext } from '../../context/UIContext';
 import Sidebar from '@components/layout/Sidebar';
 import BoardDetails from './BoardDetails';
@@ -18,7 +18,7 @@ export default function WelcomeMessage() {
             Embark on your productivity journey by creating your first board.
           </p>
           <div
-            onClick={() => openModal('new')}
+            onClick={() => openModal(MODAL_TYPES.newBoard)}
             className="flex items-center gap-3 py-3 px-6"
           >
             <svg
@@ -40,7 +40,7 @@ export default function WelcomeMessage() {
             </button>
           </div>
         </section>
-        {modal === 'new' && <BoardDetails board={board} />}
+        {modal === 'newBoard' && <BoardDetails board={board} />}
       </main>
     </section>
   );
