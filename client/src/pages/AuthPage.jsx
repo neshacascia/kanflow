@@ -25,27 +25,56 @@ export default function AuthPage() {
     confirmPassword: false,
   });
 
-  const enteredEmailValidation =
-    formInputs.email.trim() !== '' && formInputs.email.includes('@');
-  const enteredEmailNotValid = !enteredEmailValidation && formTouched.email;
+  const validationSchema = {
+    email: value => value.trim() !== '' && value.includes('@'),
+    password: value => value.trim() !== '' && value.length >= 8,
+    confirmPassword: (value, formInputs) => value === formInputs.password,
+  };
 
-  const enteredPasswordValidation =
-    formInputs.password.trim() !== '' && formInputs.password.length >= 8;
-  const enteredPasswordNotValid =
-    !enteredPasswordValidation && formTouched.password;
+  function validateField(name, value, formInputs) {
+    return validationSchema[name](value, formInputs);
+  }
 
-  const enteredConfirmPasswordValidation =
+  function isFieldNotValid(name, value, formInputs, touched) {
+    return !validateField(name, value, formInputs) && touched[name];
+  }
+
+  const emailNotValid = isFieldNotValid(
+    'email',
+    formInputs.email,
+    formInputs,
+    formTouched
+  );
+
+  const passwordNotValid = isFieldNotValid(
+    'password',
+    formInputs.password,
+    formInputs,
+    formTouched
+  );
+
+  const confirmPasswordNotValid = isFieldNotValid(
+    'confirmPassword',
+    formInputs.confirmPassword,
+    formInputs,
+    formTouched
+  );
+
+  const confirmPasswordLengthValid =
     formInputs.confirmPassword.trim() !== '' &&
     formInputs.confirmPassword.length >= 8;
-  const enteredConfirmPasswordNotValid =
-    !enteredConfirmPasswordValidation && formInputs.confirmPassword;
 
   const formIsValid =
     authValue === 'login'
-      ? enteredEmailValidation && enteredPasswordValidation
-      : enteredEmailValidation &&
-        enteredPasswordValidation &&
-        enteredConfirmPasswordValidation;
+      ? validateField('email', formInputs.email, formInputs) &&
+        validateField('password', formInputs.password, formInputs)
+      : validateField('email', formInputs.email, formInputs) &&
+        validateField('password', formInputs.password, formInputs) &&
+        validateField(
+          'confirmPassword',
+          formInputs.confirmPassword,
+          formInputs
+        );
 
   const [passwordsMatch, setPasswordsMatch] = useState();
 
@@ -145,10 +174,10 @@ export default function AuthPage() {
               onChange={handleInputChange}
               onBlur={handleInputTouched}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
+                emailNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
             />
-            {enteredEmailNotValid && (
+            {emailNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Please enter a valid email.
               </span>
@@ -158,7 +187,7 @@ export default function AuthPage() {
             Password
             <div
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                enteredPasswordNotValid ? 'border-deleteRed' : 'border-gray-300'
+                passwordNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
             >
               <input
@@ -175,7 +204,7 @@ export default function AuthPage() {
                 className="text-gray-400 pr-4 cursor-pointer"
               />
             </div>
-            {enteredPasswordNotValid && (
+            {passwordNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
               </span>
@@ -186,7 +215,7 @@ export default function AuthPage() {
               Confirm Password
               <div
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                  enteredConfirmPasswordNotValid
+                  confirmPasswordNotValid
                     ? 'border-deleteRed'
                     : 'border-gray-300'
                 }`}
@@ -207,7 +236,7 @@ export default function AuthPage() {
                   className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
-              {enteredConfirmPasswordNotValid && (
+              {!confirmPasswordLengthValid && (
                 <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
