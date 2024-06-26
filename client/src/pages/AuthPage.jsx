@@ -19,6 +19,12 @@ export default function AuthPage() {
     confirmPassword: '',
   });
 
+  const [formTouched, setFormTouched] = useState({
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
+
   // const [enteredEmail, setEnteredEmail] = useState('');
   // const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
@@ -70,6 +76,17 @@ export default function AuthPage() {
       return {
         ...prevState,
         [name]: value,
+      };
+    });
+  }
+
+  function handleInputTouched(e) {
+    const { name } = e.target;
+
+    setFormTouched(prevState => {
+      return {
+        ...prevState,
+        [name]: true,
       };
     });
   }
@@ -158,6 +175,7 @@ export default function AuthPage() {
               name="email"
               placeholder="name@email.com"
               onChange={handleInputChange}
+              onBlur={handleInputTouched}
               // onChange={emailChangeHandler}
               // onBlur={emailInputBlurHandler}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
@@ -187,6 +205,7 @@ export default function AuthPage() {
                 name="password"
                 placeholder="••••••••"
                 onChange={handleInputChange}
+                onBlur={handleInputTouched}
                 // onChange={passwordChangeHandler}
                 // onBlur={passwordInputBlurHandler}
                 className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
@@ -218,6 +237,7 @@ export default function AuthPage() {
                   name="confirmPassword"
                   placeholder="••••••••"
                   onChange={handleInputChange}
+                  onBlur={handleInputTouched}
                   // onChange={confirmPasswordChangeHandler}
                   // onBlur={confirmPasswordInputBlurHandler}
                   className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
