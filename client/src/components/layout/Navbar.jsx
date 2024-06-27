@@ -145,9 +145,9 @@ export default function Navbar() {
                   : setDisplayUserProfile(true)
               }
             >
-              {user.avatar ? (
+              {user?.avatar ? (
                 <img
-                  src={user.avatar}
+                  src={user?.avatar}
                   className="w-11 h-11 rounded-full mr-2"
                 />
               ) : (
