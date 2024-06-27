@@ -24,29 +24,73 @@ export default function UserProfile({
   });
 
   const [formTouched, setFormTouched] = useState({
+    email: false,
     currentPassword: false,
     newPassword: false,
     confirmNewPassword: false,
   });
 
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [passwordsMatch, setPasswordsMatch] = useState();
 
-  const enteredCurrentPasswordValidation =
-    formInputs.currentPassword.trim() !== '' &&
-    formInputs.currentPassword.length >= 8;
-  const enteredCurrentPasswordNotValid =
-    !enteredCurrentPasswordValidation && formTouched.currentPassword;
+  const validationSchema = {
+    email: value => value.trim() !== '' && value.includes('@'),
+    currentPassword: value => value.trim() !== '' && value.length >= 8,
+    newPassword: value => value.trim() !== '' && value.length >= 8,
+    confirmNewPassword: (value, formInputs) => value === formInputs.newPassword,
+  };
 
-  const enteredNewPasswordValidation =
-    formInputs.newPassword.trim() !== '' && formInputs.newPassword.length >= 8;
-  const enteredNewPasswordNotValid =
-    !enteredNewPasswordValidation && formTouched.newPassword;
+  function validateField(name, value, formInputs) {
+    return validationSchema[name](value, formInputs);
+  }
 
-  const enteredConfirmPasswordValidation =
+  function isFieldNotValid(name, value, formInputs, touched) {
+    return !validateField(name, value, formInputs) && touched[name];
+  }
+
+  const emailNotValid = isFieldNotValid(
+    'email',
+    formInputs.email,
+    formInputs,
+    formTouched
+  );
+
+  const currentPasswordNotValid = isFieldNotValid(
+    'currentPassword',
+    formInputs.currentPassword,
+    formInputs,
+    formTouched
+  );
+
+  const newPasswordNotValid = isFieldNotValid(
+    'newPassword',
+    formInputs.newPassword,
+    formInputs,
+    formTouched
+  );
+
+  const confirmNewPasswordLengthValid =
     formInputs.confirmNewPassword.trim() !== '' &&
     formInputs.confirmNewPassword.length >= 8;
-  const enteredConfirmPasswordNotValid =
-    !enteredConfirmPasswordValidation && formTouched.confirmNewPassword;
+
+  const confirmNewPasswordNotValid =
+    !confirmNewPasswordLengthValid && formTouched.confirmNewPassword;
+
+  const formIsValid =
+    (validateField('email', formInputs.email, formInputs) &&
+      formTouched.email) ||
+    (validateField('email', formInputs.email, formInputs) &&
+      !formTouched.email &&
+      validateField(
+        'currentPassword',
+        formInputs.currentPassword,
+        formInputs
+      ) &&
+      validateField('newPassword', formInputs.newPassword, formInputs) &&
+      validateField(
+        'confirmNewPassword',
+        formInputs.confirmNewPassword,
+        formInputs
+      ));
 
   useEffect(() => {
     setPasswordsMatch(formInputs.newPassword === formInputs.confirmNewPassword);
@@ -54,6 +98,7 @@ export default function UserProfile({
 
   const [errorMessages, setErrorMessages] = useState({
     email: '',
+    currentPassword: '',
     password: '',
   });
 
@@ -117,42 +162,60 @@ export default function UserProfile({
   async function updateUserData(e) {
     e.preventDefault();
 
-    const email = formInputs.email;
-    const newPassword = passwordsMatch ? formInputs.newPassword : null;
+    if (emailNotValid) {
+      setErrorMessages(prevState => {
+        return {
+          ...prevState,
+          ['email']: 'Please enter a valid email.',
+        };
+      });
+    } else if (formInputs.newPassword && !formInputs.currentPassword) {
+      setErrorMessages(prevState => {
+        return {
+          ...prevState,
+          ['currentPassword']: 'Please enter your current password.',
+        };
+      });
+    } else if (formIsValid) {
+      const email = formInputs.email;
+      const newPassword = passwordsMatch ? formInputs.newPassword : null;
 
-    try {
-      const res = await axios.put(
-        `${baseURL}/account/updateAccount`,
-        { email, newPassword, currentPassword: formInputs.currentPassword },
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      try {
+        const res = await axios.put(
+          `${baseURL}/account/updateAccount`,
+          { email, newPassword, currentPassword: formInputs.currentPassword },
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        console.log(res);
+
+        if (res.status === 200) {
+          setIsBoardUpdated
+            ? setIsBoardUpdated(true)
+            : setBoardPageUpdated(true);
+          closeModal();
         }
-      );
+      } catch (err) {
+        console.error(err);
 
-      console.log(res);
+        if (err.response.status === 401) {
+          setErrorMessages(prevState => ({
+            ...prevState,
+            currentPassword: err.response.data.msg,
+          }));
+        }
 
-      if (res.status === 200) {
-        setIsBoardUpdated ? setIsBoardUpdated(true) : setBoardPageUpdated(true);
-        closeModal();
-      }
-    } catch (err) {
-      console.error(err);
-
-      if (err.response.status === 401) {
-        setErrorMessages(prevState => ({
-          ...prevState,
-          password: err.response.data.msg,
-        }));
-      }
-
-      if (err.response.status === 403 || err.response.status === 409) {
-        setErrorMessages(prevState => ({
-          ...prevState,
-          email: err.response.data.msg,
-        }));
+        if (err.response.status === 403 || err.response.status === 409) {
+          setErrorMessages(prevState => ({
+            ...prevState,
+            email: err.response.data.msg,
+          }));
+        }
       }
     }
   }
@@ -208,9 +271,10 @@ export default function UserProfile({
                 <input
                   type="text"
                   name="email"
-                  placeholder="e.g. Take coffee break"
+                  placeholder="name@email.com"
                   defaultValue={user.email}
                   onChange={handleInputChange}
+                  onBlur={handleInputTouched}
                   required
                   className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                 />
@@ -234,18 +298,17 @@ export default function UserProfile({
                     onChange={handleInputChange}
                     onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      errorMessages['password'] ||
-                      enteredCurrentPasswordNotValid
+                      errorMessages['password'] || currentPasswordNotValid
                         ? 'border-deleteRed'
                         : ''
                     }`}
                   />
-                  {errorMessages['password'] && (
+                  {errorMessages['currentPassword'] && (
                     <span className="text-deleteRed text-xs flex pb-1">
-                      {errorMessages['password']}
+                      {errorMessages['currentPassword']}
                     </span>
                   )}
-                  {enteredCurrentPasswordNotValid && (
+                  {currentPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       Password must have a minimum of 8 characters.
                     </span>
@@ -261,12 +324,12 @@ export default function UserProfile({
                     onChange={handleInputChange}
                     onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      enteredNewPasswordNotValid || !passwordsMatch
+                      newPasswordNotValid || !passwordsMatch
                         ? 'border-deleteRed'
                         : ''
                     }`}
                   />
-                  {enteredNewPasswordNotValid && (
+                  {newPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       Password must have a minimum of 8 characters.
                     </span>
@@ -283,12 +346,12 @@ export default function UserProfile({
                     onChange={handleInputChange}
                     onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      enteredConfirmPasswordNotValid || !passwordsMatch
+                      confirmNewPasswordNotValid || !passwordsMatch
                         ? 'border-deleteRed'
                         : ''
                     }`}
                   />
-                  {enteredConfirmPasswordNotValid && (
+                  {confirmNewPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       Password must have a minimum of 8 characters.
                     </span>
