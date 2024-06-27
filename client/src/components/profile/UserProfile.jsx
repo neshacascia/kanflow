@@ -15,69 +15,70 @@ export default function UserProfile({
 }) {
   const { closeModal, openModal } = useContext(BoardContext);
 
-  const [avatarImg, setAvatarImg] = useState(user.avatar);
+  const [formInputs, setFormInputs] = useState({
+    avatarImg: user.avatar,
+    email: user.email,
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+  });
 
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [enteredCurrentPasswordTouched, setEnteredCurrentPasswordTouched] =
-    useState(false);
-
-  const [newPassword, setNewPassword] = useState('');
-  const [enteredNewPasswordTouched, setEnteredNewPasswordTouched] =
-    useState(false);
-
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
-    useState(false);
+  const [formTouched, setFormTouched] = useState({
+    currentPassword: false,
+    newPassword: false,
+    confirmNewPassword: false,
+  });
 
   const [passwordsMatch, setPasswordsMatch] = useState();
 
   const enteredCurrentPasswordValidation =
-    currentPassword.trim() !== '' && currentPassword.length >= 8;
+    formInputs.currentPassword.trim() !== '' &&
+    formInputs.currentPassword.length >= 8;
   const enteredCurrentPasswordNotValid =
-    !enteredCurrentPasswordValidation && enteredCurrentPasswordTouched;
+    !enteredCurrentPasswordValidation && formTouched.currentPassword;
 
   const enteredNewPasswordValidation =
-    newPassword.trim() !== '' && newPassword.length >= 8;
+    formInputs.newPassword.trim() !== '' && formInputs.newPassword.length >= 8;
   const enteredNewPasswordNotValid =
-    !enteredNewPasswordValidation && enteredNewPasswordTouched;
+    !enteredNewPasswordValidation && formTouched.newPassword;
 
   const enteredConfirmPasswordValidation =
-    confirmPassword.trim() !== '' && confirmPassword.length >= 8;
+    formInputs.confirmNewPassword.trim() !== '' &&
+    formInputs.confirmNewPassword.length >= 8;
   const enteredConfirmPasswordNotValid =
-    !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
+    !enteredConfirmPasswordValidation && formTouched.confirmNewPassword;
 
   useEffect(() => {
-    const arePasswordsEqual = newPassword === confirmPassword;
+    const arePasswordsEqual =
+      formInputs.newPassword === formInputs.confirmNewPassword;
     setPasswordsMatch(arePasswordsEqual);
-  }, [newPassword, confirmPassword]);
+  }, [formInputs.newPassword, formInputs.confirmNewPassword]);
 
   const [errorMessages, setErrorMessages] = useState({
     email: '',
     password: '',
   });
 
-  function handleCurrentPasswordChange(e) {
-    setCurrentPassword(e.target.value);
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+
+    setFormInputs(prevState => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
   }
 
-  function handleNewPasswordChange(e) {
-    setNewPassword(e.target.value);
-  }
+  function handleInputTouched(e) {
+    const { name } = e.target;
 
-  function handleConfirmPasswordChange(e) {
-    setConfirmPassword(e.target.value);
-  }
-
-  function currentPasswordInputBlurHandler() {
-    setEnteredCurrentPasswordTouched(true);
-  }
-
-  function newPasswordInputBlurHandler() {
-    setEnteredNewPasswordTouched(true);
-  }
-
-  function confirmPasswordInputBlurHandler() {
-    setEnteredConfirmPasswordTouched(true);
+    setFormTouched(prevState => {
+      return {
+        ...prevState,
+        [name]: true,
+      };
+    });
   }
 
   async function handleAvatarChange(e) {
@@ -118,15 +119,13 @@ export default function UserProfile({
   async function updateUserData(e) {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-
-    const email = formData.get('email');
-    const newPassword = passwordsMatch ? formData.get('newPassword') : null;
+    const email = formInputs.email;
+    const newPassword = passwordsMatch ? formInputs.newPassword : null;
 
     try {
       const res = await axios.put(
         `${baseURL}/account/updateAccount`,
-        { email, newPassword, currentPassword },
+        { email, newPassword, currentPassword: formInputs.currentPassword },
         {
           withCredentials: true,
           headers: {
@@ -176,8 +175,11 @@ export default function UserProfile({
         <div className="flex">
           <div className="w-full flex gap-14">
             <div className="flex flex-col items-center">
-              {avatarImg ? (
-                <img src={avatarImg} className="w-16 h-16 rounded-full" />
+              {formInputs.avatarImg ? (
+                <img
+                  src={formInputs.avatarImg}
+                  className="w-16 h-16 rounded-full"
+                />
               ) : (
                 <DefaultAvatar size="16" avatar="text-xl" />
               )}
@@ -210,6 +212,7 @@ export default function UserProfile({
                   name="email"
                   placeholder="e.g. Take coffee break"
                   defaultValue={user.email}
+                  onChange={handleInputChange}
                   required
                   className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple`}
                 />
@@ -230,8 +233,8 @@ export default function UserProfile({
                     type="password"
                     name="currentPassword"
                     placeholder="********"
-                    onChange={handleCurrentPasswordChange}
-                    onBlur={currentPasswordInputBlurHandler}
+                    onChange={handleInputChange}
+                    onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                       errorMessages['password'] ||
                       enteredCurrentPasswordNotValid
@@ -257,8 +260,8 @@ export default function UserProfile({
                     type="password"
                     name="newPassword"
                     placeholder="********"
-                    onChange={handleNewPasswordChange}
-                    onBlur={newPasswordInputBlurHandler}
+                    onChange={handleInputChange}
+                    onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                       enteredNewPasswordNotValid || !passwordsMatch
                         ? 'border-deleteRed'
@@ -276,11 +279,11 @@ export default function UserProfile({
                   Confirm password
                   <input
                     type="password"
-                    name="confirmPassword"
+                    name="confirmNewPassword"
                     placeholder="********"
-                    required={newPassword}
-                    onChange={handleConfirmPasswordChange}
-                    onBlur={confirmPasswordInputBlurHandler}
+                    required={formInputs.newPassword}
+                    onChange={handleInputChange}
+                    onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
                       enteredConfirmPasswordNotValid || !passwordsMatch
                         ? 'border-deleteRed'
