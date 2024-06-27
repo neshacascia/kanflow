@@ -146,7 +146,12 @@ export default function UserProfile({
         console.log(res);
 
         if (res.status === 200) {
-          setAvatarImg(res.data.avatarLink);
+          setFormInputs(prevState => {
+            return {
+              ...prevState,
+              ['avatarImg']: res.data.avatarLink,
+            };
+          });
           setIsBoardUpdated
             ? setIsBoardUpdated(true)
             : setBoardPageUpdated(true);
