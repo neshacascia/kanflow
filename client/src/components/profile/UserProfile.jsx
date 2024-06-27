@@ -162,60 +162,58 @@ export default function UserProfile({
   async function updateUserData(e) {
     e.preventDefault();
 
+    function setError(field, message) {
+      setErrorMessages(prevState => {
+        return {
+          ...prevState,
+          [field]: message,
+        };
+      });
+    }
+
     if (emailNotValid) {
-      setErrorMessages(prevState => {
-        return {
-          ...prevState,
-          ['email']: 'Please enter a valid email.',
-        };
-      });
-    } else if (formInputs.newPassword && !formInputs.currentPassword) {
-      setErrorMessages(prevState => {
-        return {
-          ...prevState,
-          ['currentPassword']: 'Please enter your current password.',
-        };
-      });
-    } else if (formIsValid) {
-      const email = formInputs.email;
-      const newPassword = passwordsMatch ? formInputs.newPassword : null;
+      setError('email', 'Please enter a valid email.');
+      return;
+    }
 
-      try {
-        const res = await axios.put(
-          `${baseURL}/account/updateAccount`,
-          { email, newPassword, currentPassword: formInputs.currentPassword },
-          {
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+    if (formInputs.newPassword && !formInputs.currentPassword) {
+      setError('currentPassword', 'Please enter your current password.');
+      return;
+    }
 
-        console.log(res);
+    if (!formIsValid) return;
 
-        if (res.status === 200) {
-          setIsBoardUpdated
-            ? setIsBoardUpdated(true)
-            : setBoardPageUpdated(true);
-          closeModal();
+    const email = formInputs.email;
+    const newPassword = passwordsMatch ? formInputs.newPassword : null;
+    const currentPassword = formInputs.currentPassword;
+
+    try {
+      const res = await axios.put(
+        `${baseURL}/account/updateAccount`,
+        { email, newPassword, currentPassword },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-      } catch (err) {
-        console.error(err);
+      );
 
-        if (err.response.status === 401) {
-          setErrorMessages(prevState => ({
-            ...prevState,
-            currentPassword: err.response.data.msg,
-          }));
-        }
+      console.log(res);
 
-        if (err.response.status === 403 || err.response.status === 409) {
-          setErrorMessages(prevState => ({
-            ...prevState,
-            email: err.response.data.msg,
-          }));
-        }
+      if (res.status === 200) {
+        setIsBoardUpdated ? setIsBoardUpdated(true) : setBoardPageUpdated(true);
+        closeModal();
+      }
+    } catch (err) {
+      console.error(err);
+
+      if (err.response.status === 401) {
+        setError('currentPassword', err.response.data.msg);
+      }
+
+      if (err.response.status === 403 || err.response.status === 409) {
+        setError('email', err.response.data.msg);
       }
     }
   }
@@ -298,7 +296,9 @@ export default function UserProfile({
                     onChange={handleInputChange}
                     onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      errorMessages['password'] || currentPasswordNotValid
+                      errorMessages['currentPassword'] ||
+                      errorMessages['password'] ||
+                      currentPasswordNotValid
                         ? 'border-deleteRed'
                         : ''
                     }`}
