@@ -29,7 +29,7 @@ export default function UserProfile({
     confirmNewPassword: false,
   });
 
-  const [passwordsMatch, setPasswordsMatch] = useState();
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const enteredCurrentPasswordValidation =
     formInputs.currentPassword.trim() !== '' &&
@@ -49,9 +49,7 @@ export default function UserProfile({
     !enteredConfirmPasswordValidation && formTouched.confirmNewPassword;
 
   useEffect(() => {
-    const arePasswordsEqual =
-      formInputs.newPassword === formInputs.confirmNewPassword;
-    setPasswordsMatch(arePasswordsEqual);
+    setPasswordsMatch(formInputs.newPassword === formInputs.confirmNewPassword);
   }, [formInputs.newPassword, formInputs.confirmNewPassword]);
 
   const [errorMessages, setErrorMessages] = useState({
