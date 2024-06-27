@@ -7,6 +7,7 @@ const { ensureAuth } = require('../middleware/auth');
 router.put('/updateAccount', ensureAuth, accountController.updateAccount);
 router.post(
   '/updateAvatar',
+  ensureAuth,
   upload.single('avatar'),
   accountController.updateAvatar
 );

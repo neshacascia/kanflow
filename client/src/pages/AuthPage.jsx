@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Context } from '../context/Context';
+import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { baseURL } from '../api';
 
@@ -10,75 +10,101 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function AuthPage() {
   const authValue = localStorage.getItem('authValue');
-  const { changeAuthValue } = useContext(Context);
+  const { changeAuthValue } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+  const [formInputs, setFormInputs] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-  const [enteredPassword, setEnteredPassword] = useState('');
-  const [enteredPasswordTouched, setEnteredPasswordTouched] = useState(false);
+  const [formTouched, setFormTouched] = useState({
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
 
-  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
-  const [enteredConfirmPasswordTouched, setEnteredConfirmPasswordTouched] =
-    useState(false);
+  const validationSchema = {
+    email: value => value.trim() !== '' && value.includes('@'),
+    password: value => value.trim() !== '' && value.length >= 8,
+    confirmPassword: (value, formInputs) => value === formInputs.password,
+  };
 
-  const enteredEmailValidation =
-    enteredEmail.trim() !== '' && enteredEmail.includes('@');
-  const enteredEmailNotValid = !enteredEmailValidation && enteredEmailTouched;
+  function validateField(name, value, formInputs) {
+    return validationSchema[name](value, formInputs);
+  }
 
-  const enteredPasswordValidation =
-    enteredPassword.trim() !== '' && enteredPassword.length >= 8;
-  const enteredPasswordNotValid =
-    !enteredPasswordValidation && enteredPasswordTouched;
+  function isFieldNotValid(name, value, formInputs, touched) {
+    return !validateField(name, value, formInputs) && touched[name];
+  }
 
-  const enteredConfirmPasswordValidation =
-    enteredConfirmPassword.trim() !== '' && enteredConfirmPassword.length >= 8;
-  const enteredConfirmPasswordNotValid =
-    !enteredConfirmPasswordValidation && enteredConfirmPasswordTouched;
+  const emailNotValid = isFieldNotValid(
+    'email',
+    formInputs.email,
+    formInputs,
+    formTouched
+  );
+
+  const passwordNotValid = isFieldNotValid(
+    'password',
+    formInputs.password,
+    formInputs,
+    formTouched
+  );
+
+  const confirmPasswordLengthValid =
+    formInputs.confirmPassword.trim() !== '' &&
+    formInputs.confirmPassword.length >= 8;
+
+  const confirmPasswordNotValid =
+    !confirmPasswordLengthValid && formTouched.confirmPassword;
 
   const formIsValid =
     authValue === 'login'
-      ? enteredEmailValidation && enteredPasswordValidation
-      : enteredEmailValidation &&
-        enteredPasswordValidation &&
-        enteredConfirmPasswordValidation;
+      ? validateField('email', formInputs.email, formInputs) &&
+        validateField('password', formInputs.password, formInputs)
+      : validateField('email', formInputs.email, formInputs) &&
+        validateField('password', formInputs.password, formInputs) &&
+        validateField(
+          'confirmPassword',
+          formInputs.confirmPassword,
+          formInputs
+        );
 
   const [passwordsMatch, setPasswordsMatch] = useState();
 
   useEffect(() => {
-    const arePasswordsEqual = enteredPassword === enteredConfirmPassword;
-    setPasswordsMatch(arePasswordsEqual);
-  }, [enteredPassword, enteredConfirmPassword]);
+    setPasswordsMatch(formInputs.password === formInputs.confirmPassword);
+  }, [formInputs.password, formInputs.confirmPassword]);
 
   const [errorMessages, setErrorMessages] = useState('');
 
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
-    useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
-  function emailChangeHandler(e) {
-    setEnteredEmail(e.target.value);
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+
+    setFormInputs(prevState => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
   }
 
-  function passwordChangeHandler(e) {
-    setEnteredPassword(e.target.value);
-  }
+  function handleInputTouched(e) {
+    const { name } = e.target;
 
-  function confirmPasswordChangeHandler(e) {
-    setEnteredConfirmPassword(e.target.value);
-  }
-
-  function emailInputBlurHandler() {
-    setEnteredEmailTouched(true);
-  }
-
-  function passwordInputBlurHandler() {
-    setEnteredPasswordTouched(true);
-  }
-
-  function confirmPasswordInputBlurHandler() {
-    setEnteredConfirmPasswordTouched(true);
+    setFormTouched(prevState => {
+      return {
+        ...prevState,
+        [name]: true,
+      };
+    });
   }
 
   function changeAuthMethod() {
@@ -86,12 +112,13 @@ export default function AuthPage() {
     changeAuthValue(authValue);
   }
 
-  function handleTogglePassword() {
-    setPasswordVisibility(prevState => !prevState);
-  }
-
-  function handleToggleConfirmPassword() {
-    setConfirmPasswordVisibility(prevState => !prevState);
+  function handleTogglePassword(name) {
+    setPasswordVisibility(prevState => {
+      return {
+        ...prevState,
+        [name]: !prevState[name],
+      };
+    });
   }
 
   async function submitHandler(e) {
@@ -101,9 +128,9 @@ export default function AuthPage() {
       const res = await axios.post(
         `${baseURL}/${authValue}`,
         {
-          email: enteredEmail,
-          password: enteredPassword,
-          confirmPassword: enteredConfirmPassword,
+          email: formInputs.email,
+          password: formInputs.password,
+          confirmPassword: formInputs.confirmPassword,
         },
         {
           withCredentials: true,
@@ -140,13 +167,13 @@ export default function AuthPage() {
               type="email"
               name="email"
               placeholder="name@email.com"
-              onChange={emailChangeHandler}
-              onBlur={emailInputBlurHandler}
+              onChange={handleInputChange}
+              onBlur={handleInputTouched}
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 border-[1px] rounded py-[10px] px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                enteredEmailNotValid ? 'border-deleteRed' : 'border-gray-300'
+                emailNotValid ? 'border-deleteRed' : 'border-gray-300'
               }`}
             />
-            {enteredEmailNotValid && (
+            {emailNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Please enter a valid email.
               </span>
@@ -156,25 +183,29 @@ export default function AuthPage() {
             Password
             <div
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                enteredPasswordNotValid ? 'border-deleteRed' : 'border-gray-300'
+                passwordNotValid ||
+                (!passwordsMatch &&
+                  formTouched.password &&
+                  formTouched.confirmPassword)
+                  ? 'border-deleteRed'
+                  : 'border-gray-300'
               }`}
             >
-              {' '}
               <input
-                type={passwordVisibility ? 'text' : 'password'}
+                type={passwordVisibility.password ? 'text' : 'password'}
                 name="password"
                 placeholder="••••••••"
-                onChange={passwordChangeHandler}
-                onBlur={passwordInputBlurHandler}
+                onChange={handleInputChange}
+                onBlur={handleInputTouched}
                 className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
               />
               <FontAwesomeIcon
-                icon={passwordVisibility ? faEyeSlash : faEye}
-                onClick={handleTogglePassword}
+                icon={passwordVisibility.password ? faEyeSlash : faEye}
+                onClick={() => handleTogglePassword('password')}
                 className="text-gray-400 pr-4 cursor-pointer"
               />
             </div>
-            {enteredPasswordNotValid && (
+            {passwordNotValid && (
               <span className="text-deleteRed text-xs flex pb-1">
                 Password must have a minimum of 8 characters.
               </span>
@@ -185,26 +216,31 @@ export default function AuthPage() {
               Confirm Password
               <div
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                  enteredConfirmPasswordNotValid
+                  confirmPasswordNotValid ||
+                  (!passwordsMatch &&
+                    formTouched.password &&
+                    formTouched.confirmPassword)
                     ? 'border-deleteRed'
                     : 'border-gray-300'
                 }`}
               >
                 <input
-                  type={confirmPasswordVisibility ? 'text' : 'password'}
+                  type={
+                    passwordVisibility.confirmPassword ? 'text' : 'password'
+                  }
                   name="confirmPassword"
                   placeholder="••••••••"
-                  onChange={confirmPasswordChangeHandler}
-                  onBlur={confirmPasswordInputBlurHandler}
+                  onChange={handleInputChange}
+                  onBlur={handleInputTouched}
                   className="w-full h-full rounded py-[13px] px-4 focus:outline-none"
                 />
                 <FontAwesomeIcon
-                  icon={confirmPasswordVisibility ? faEyeSlash : faEye}
-                  onClick={handleToggleConfirmPassword}
+                  icon={passwordVisibility.confirmPassword ? faEyeSlash : faEye}
+                  onClick={() => handleTogglePassword('confirmPassword')}
                   className="text-gray-400 pr-4 cursor-pointer"
                 />
               </div>
-              {enteredConfirmPasswordNotValid && (
+              {confirmPasswordNotValid && (
                 <span className="text-deleteRed text-xs flex">
                   Password must have a minimum of 8 characters.
                 </span>
@@ -213,8 +249,8 @@ export default function AuthPage() {
           )}
           {authValue === 'signup' &&
             !passwordsMatch &&
-            enteredPasswordTouched &&
-            enteredConfirmPasswordTouched && (
+            formTouched.password &&
+            formTouched.confirmPassword && (
               <span className="text-deleteRed text-xs font-semibold">
                 Uh oh! The passwords you entered do not match.
               </span>

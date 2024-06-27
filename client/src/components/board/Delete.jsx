@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
-import { Context } from '../context/Context';
+import { BoardContext } from '../../context/BoardContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Modal from './Modal';
-import { baseURL } from '../api';
+import Modal from '@components/ui/Modal';
+import { baseURL } from '../../api';
 
 export default function Delete({
   board,
@@ -15,7 +15,7 @@ export default function Delete({
   user,
   closeModal,
 }) {
-  const { boards } = useContext(Context);
+  const { boards } = useContext(BoardContext);
   const navigate = useNavigate();
   const taskIndex = tasks?.findIndex(task => selectedTask._id === task._id);
 

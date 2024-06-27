@@ -1,17 +1,14 @@
 import { useContext } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Context } from '../context/Context';
-import Modal from './Modal';
-import ToggleThemeButton from './ToggleThemeButton';
+import { NavLink, useLocation } from 'react-router-dom';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
+import Modal from '@components/ui/Modal';
+import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faXmark,
-  faArrowRightFromBracket,
-} from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
-  const { boards, openModal, closeModal } = useContext(Context);
+  const { boards, openModal, closeModal } = useContext(BoardContext);
   const location = useLocation();
 
   return (
@@ -64,7 +61,7 @@ export default function Menu() {
         </div>
 
         <div
-          onClick={() => openModal('new')}
+          onClick={() => openModal(MODAL_TYPES.newBoard)}
           className="flex items-center gap-3 py-3 px-6 mb-5"
         >
           <svg
@@ -87,17 +84,6 @@ export default function Menu() {
         </div>
 
         <ToggleThemeButton />
-
-        <div className="text-mediumGrey flex items items-center justify-end gap-2 px-6 mt-4">
-          <Link
-            to="/logout"
-            onClick={closeModal}
-            className="text-[13px] font-semibold flex items-center gap-2"
-          >
-            <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            Logout
-          </Link>
-        </div>
       </div>
     </Modal>
   );

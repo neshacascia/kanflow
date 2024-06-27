@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Context } from '../context/Context';
-import ToggleThemeButton from './ToggleThemeButton';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
+import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
-import logo from '../../public/assets/logo.svg';
+import logo from '../../../public/assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
@@ -11,7 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar() {
-  const { boards, openModal, setDisplaySidebar } = useContext(Context);
+  const { boards, openModal } = useContext(BoardContext);
+  const { setDisplaySidebar } = useContext(UIContext);
 
   return (
     <div className="bg-white dark:bg-darkGrey min-w-[260px] h-screen relative left-0 pt-6 z-20 hidden md:block border-linesLight dark:border-linesDark border-r-[1px]">
@@ -63,7 +65,7 @@ export default function Sidebar() {
       </div>
 
       <div
-        onClick={() => openModal('new')}
+        onClick={() => openModal(MODAL_TYPES.newBoard)}
         className="flex items-center gap-3 py-3 px-6"
       >
         <svg

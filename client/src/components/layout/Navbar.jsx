@@ -1,9 +1,11 @@
 import { useContext } from 'react';
-import { Context } from '../context/Context';
+import { AuthContext } from '../../context/AuthContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
 import { Link, useLocation } from 'react-router-dom';
-import DefaultAvatar from './DefaultAvatar';
+import DefaultAvatar from '@components/profile/DefaultAvatar';
 
-import logo from '../../public/assets/logo.svg';
+import logo from '../../../public/assets/logo.svg';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -16,20 +18,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
+  const { user, isLoggedIn, storeAuthValue } = useContext(AuthContext);
+  const { board, boards, modal, openModal } = useContext(BoardContext);
   const {
-    board,
-    modal,
-    openModal,
     displaySettings,
     setDisplaySettings,
     displaySidebar,
-    boards,
-    isLoggedIn,
-    storeAuthValue,
     displayUserProfile,
     setDisplayUserProfile,
-    user,
-  } = useContext(Context);
+  } = useContext(UIContext);
 
   const location = useLocation();
   const isUser = localStorage.getItem('user');
@@ -91,7 +88,7 @@ export default function Navbar() {
         {isLoggedIn && (
           <div className="w-full flex items-center gap-2">
             <div
-              onClick={() => openModal('menu')}
+              onClick={() => openModal(MODAL_TYPES.menu)}
               className="flex items-center gap-2 ml-4 mr-auto cursor-pointer md:hidden"
             >
               <h2 className="text-black dark:text-white text-lg font-semibold">
@@ -116,7 +113,7 @@ export default function Navbar() {
             </h2>
 
             <button
-              onClick={() => openModal('add')}
+              onClick={() => openModal(MODAL_TYPES.addTask)}
               disabled={board?.columns.length === 0 || boards.length === 0}
               className="text-white bg-mainPurple w-12 h-8 flex items-center justify-center rounded-3xl mr-4 hover:enabled:bg-mainPurpleHover disabled:opacity-25 md:w-[164px] md:h-12 md:gap-2"
             >
@@ -164,13 +161,13 @@ export default function Navbar() {
       {displaySettings && (
         <div className="bg-white dark:bg-veryDarkGrey text-xs font-light leading-6 w-[170px] flex flex-col items-start gap-4 absolute right-4 rounded-lg shadow-glow p-4 -mt-2">
           <button
-            onClick={() => openModal('editBoard')}
+            onClick={() => openModal(MODAL_TYPES.editBoard)}
             className="text-mediumGrey"
           >
             Edit Board
           </button>
           <button
-            onClick={() => openModal('deleteBoard')}
+            onClick={() => openModal(MODAL_TYPES.deleteBoard)}
             className="text-deleteRed"
           >
             Delete Board
@@ -179,7 +176,7 @@ export default function Navbar() {
       )}
 
       {displayUserProfile && (
-        <div className="text-mediumGrey bg-white text-xs leading-6 w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
+        <div className="text-mediumGrey bg-white text-xs leading-6 w-[310px] md:w-[370px] flex flex-col items-start absolute right-4 rounded-lg shadow-glow py-8 -mt-2">
           <div className="h-full flex items-center gap-5 pl-8 mb-5">
             {user.avatar ? (
               <img src={user.avatar} className="w-11 h-11 rounded-full mr-2" />
@@ -191,7 +188,7 @@ export default function Navbar() {
 
           <ul className="text-[13px] w-full flex flex-col  font-semibold ">
             <li
-              onClick={() => openModal('userProfile')}
+              onClick={() => openModal(MODAL_TYPES.userProfile)}
               className="text-sm hover:bg-[#ededed] py-3 hover:cursor-pointer"
             >
               <FontAwesomeIcon icon={faGear} className="text-base pl-11 pr-8" />

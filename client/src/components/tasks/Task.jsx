@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MODAL_TYPES } from '../../context/BoardContext';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -31,7 +32,7 @@ export default function Task({
   function handleTaskClick(status) {
     setSelectedStatus(status);
     setViewTask(task);
-    openModal('viewTask');
+    openModal(MODAL_TYPES.viewTask);
   }
 
   return (

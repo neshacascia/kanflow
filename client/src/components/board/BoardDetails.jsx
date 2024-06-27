@@ -1,16 +1,16 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Context } from '../context/Context';
+import { BoardContext } from '../../context/BoardContext';
 import axios from 'axios';
-import Modal from './Modal';
-import { baseURL } from '../api';
+import Modal from '@components/ui/Modal';
+import { baseURL } from '../../api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function BoardDetails({ board, setIsBoardUpdated }) {
   const navigate = useNavigate();
-  const { boardIndex, modal, closeModal } = useContext(Context);
+  const { boardIndex, modal, closeModal } = useContext(BoardContext);
 
   const boardDetails = modal;
 
@@ -94,7 +94,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
     };
 
     try {
-      if (boardDetails === 'new') {
+      if (boardDetails === 'newBoard') {
         const res = await axios.post(
           `${baseURL}/board/createBoard`,
           { boardData },
@@ -142,7 +142,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
           className="text-mediumGrey w-5 h-5 absolute right-0 mr-4 cursor-pointer"
         />
         <h2 className="text-lightBlack dark:text-white text-lg font-semibold mb-6">
-          {boardDetails === 'new' ? 'Add New' : 'Edit'} Board
+          {boardDetails === 'newBoard' ? 'Add New' : 'Edit'} Board
         </h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -205,7 +205,7 @@ export default function BoardDetails({ board, setIsBoardUpdated }) {
             type="submit"
             className="text-white bg-mainPurple text-[13px] font-semibold leading-6 rounded-[20px] py-3 hover:bg-mainPurpleHover"
           >
-            {boardDetails === 'new' ? 'Create New Board' : 'Save Changes'}
+            {boardDetails === 'newBoard' ? 'Create New Board' : 'Save Changes'}
           </button>
         </form>
       </div>

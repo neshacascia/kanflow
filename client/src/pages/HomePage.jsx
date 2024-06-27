@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Context } from '../context/Context';
+import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import Feature from '../components/Feature';
+import Feature from '@components/Feature';
 import { baseURL } from '../api';
 
 import data from '../../data.json';
@@ -11,7 +11,7 @@ import logo from '../../public/assets/logo.svg';
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, storeAuthValue } = useContext(Context);
+  const { setIsLoggedIn, storeAuthValue } = useContext(AuthContext);
   const user = localStorage.getItem('user');
 
   if (user) {

@@ -1,18 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Context } from '../context/Context';
-import Column from './Column';
-import Menu from './Menu';
-import BoardDetails from './BoardDetails';
-import AddTask from './AddTask';
-import ViewTask from './ViewTask';
-import EditTask from './EditTask';
-import Delete from './Delete';
-import UserProfile from './UserProfile';
-import Sidebar from './Sidebar';
-import LoadingSpinner from './LoadingSpinner';
-import { baseURL } from '../api';
+import { AuthContext } from '../../context/AuthContext';
+import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
+import { UIContext } from '../../context/UIContext';
+import Column from '@components/board/Column';
+import Menu from '@components/layout/Menu';
+import BoardDetails from '@components/board/BoardDetails';
+import AddTask from '@components/tasks/AddTask';
+import ViewTask from '@components/tasks/ViewTask';
+import EditTask from '@components/tasks/EditTask';
+import Delete from '@components/board/Delete';
+import UserProfile from '@components/profile/UserProfile';
+import Sidebar from '@components/layout/Sidebar';
+import LoadingSpinner from '@components/ui/LoadingSpinner';
+import { baseURL } from '../../api';
 import {
   DndContext,
   useSensors,
@@ -27,23 +29,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function Board() {
+  const { user, setUser, setIsLoggedIn } = useContext(AuthContext);
   const {
-    user,
-    setUser,
     board,
     setBoard,
+    setBoards,
     boardIndex,
     setBoardIndex,
     modal,
     openModal,
     closeModal,
+  } = useContext(BoardContext);
+  const {
     setDisplaySettings,
     displaySidebar,
     setDisplaySidebar,
-    setBoards,
-    setIsLoggedIn,
     setDisplayUserProfile,
-  } = useContext(Context);
+  } = useContext(UIContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -205,13 +207,15 @@ export default function Board() {
                   </p>
                   <button className="bg-mainPurple text-white text-sm font-semibold w-[174px] flex justify-center items-center gap-1 rounded-3xl py-4 hover:bg-mainPurpleHover">
                     <FontAwesomeIcon icon={faPlus} className="text-[10px]" />
-                    <p onClick={() => openModal('editBoard')}>Add New Column</p>
+                    <p onClick={() => openModal(MODAL_TYPES.editBoard)}>
+                      Add New Column
+                    </p>
                   </button>
                 </div>
               )}
               {board.columns.length > 0 && (
                 <div
-                  onClick={() => openModal('editBoard')}
+                  onClick={() => openModal(MODAL_TYPES.editBoard)}
                   className="hidden text-mediumGrey bg-lightColumn dark:bg-column text-lg font-semibold min-w-[280px] h-[814px] lg:flex justify-center items-center gap-1 rounded-md mt-10 cursor-pointer hover:text-mainPurple"
                 >
                   <FontAwesomeIcon icon={faPlus} className="text-xs" />
@@ -225,8 +229,8 @@ export default function Board() {
         {modal === 'editBoard' && (
           <BoardDetails board={board} setIsBoardUpdated={setIsBoardUpdated} />
         )}
-        {modal === 'new' && <BoardDetails board={board} />}
-        {modal === 'add' && (
+        {modal === 'newBoard' && <BoardDetails board={board} />}
+        {modal === 'addTask' && (
           <AddTask
             boardIndex={boardIndex}
             columns={board.columns}
@@ -246,7 +250,7 @@ export default function Board() {
             closeModal={closeModal}
           />
         )}
-        {modal === 'edit' && (
+        {modal === 'editTask' && (
           <EditTask
             boardIndex={boardIndex}
             tasks={tasks}
