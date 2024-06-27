@@ -324,7 +324,10 @@ export default function UserProfile({
                     onChange={handleInputChange}
                     onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      newPasswordNotValid || !passwordsMatch
+                      newPasswordNotValid ||
+                      (!passwordsMatch &&
+                        formTouched.newPassword &&
+                        formTouched.confirmNewPassword)
                         ? 'border-deleteRed'
                         : ''
                     }`}
@@ -346,7 +349,10 @@ export default function UserProfile({
                     onChange={handleInputChange}
                     onBlur={handleInputTouched}
                     className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
-                      confirmNewPasswordNotValid || !passwordsMatch
+                      confirmNewPasswordNotValid ||
+                      (!passwordsMatch &&
+                        formTouched.newPassword &&
+                        formTouched.confirmNewPassword)
                         ? 'border-deleteRed'
                         : ''
                     }`}
@@ -356,11 +362,13 @@ export default function UserProfile({
                       Password must have a minimum of 8 characters.
                     </span>
                   )}
-                  {!passwordsMatch && (
-                    <span className="text-deleteRed text-xs flex pb-1">
-                      Passwords do not match. Please try again.
-                    </span>
-                  )}
+                  {!passwordsMatch &&
+                    formTouched.newPassword &&
+                    formTouched.confirmNewPassword && (
+                      <span className="text-deleteRed text-xs flex pb-1">
+                        Passwords do not match. Please try again.
+                      </span>
+                    )}
                 </label>
               </div>
             </div>

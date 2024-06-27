@@ -183,7 +183,12 @@ export default function AuthPage() {
             Password
             <div
               className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                passwordNotValid ? 'border-deleteRed' : 'border-gray-300'
+                passwordNotValid ||
+                (!passwordsMatch &&
+                  formTouched.password &&
+                  formTouched.confirmPassword)
+                  ? 'border-deleteRed'
+                  : 'border-gray-300'
               }`}
             >
               <input
@@ -211,7 +216,10 @@ export default function AuthPage() {
               Confirm Password
               <div
                 className={`bg-white text-veryDarkGrey placeholder:text-gray text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded focus-within:ring-1 focus-within:ring-mainPurple ${
-                  confirmPasswordNotValid
+                  confirmPasswordNotValid ||
+                  (!passwordsMatch &&
+                    formTouched.password &&
+                    formTouched.confirmPassword)
                     ? 'border-deleteRed'
                     : 'border-gray-300'
                 }`}
