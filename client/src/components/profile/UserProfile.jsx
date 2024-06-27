@@ -6,7 +6,11 @@ import { baseURL } from '../../api';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowUpFromBracket,
+  faEye,
+  faEyeSlash,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function UserProfile({
   user,
@@ -102,6 +106,12 @@ export default function UserProfile({
     password: '',
   });
 
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    currentPassword: false,
+    newPassword: false,
+    confirmNewPassword: false,
+  });
+
   function handleInputChange(e) {
     const { name, value } = e.target;
 
@@ -120,6 +130,15 @@ export default function UserProfile({
       return {
         ...prevState,
         [name]: true,
+      };
+    });
+  }
+
+  function handleTogglePassword(name) {
+    setPasswordVisibility(prevState => {
+      return {
+        ...prevState,
+        [name]: !prevState[name],
       };
     });
   }
@@ -294,20 +313,33 @@ export default function UserProfile({
                 </h2>
                 <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
                   Current password
-                  <input
-                    type="password"
-                    name="currentPassword"
-                    placeholder="********"
-                    onChange={handleInputChange}
-                    onBlur={handleInputTouched}
-                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  <div
+                    className={`text-lightBlack dark:text-white text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded border-borderGrey py-3 px-4 focus:ring-1 focus:ring-mainPurple ${
                       errorMessages['currentPassword'] ||
                       errorMessages['password'] ||
                       currentPasswordNotValid
                         ? 'border-deleteRed'
                         : ''
                     }`}
-                  />
+                  >
+                    <input
+                      type={
+                        passwordVisibility.currentPassword ? 'text' : 'password'
+                      }
+                      name="currentPassword"
+                      placeholder="********"
+                      onChange={handleInputChange}
+                      onBlur={handleInputTouched}
+                      className="bg-transparent w-full h-full focus:outline-none"
+                    />
+                    <FontAwesomeIcon
+                      icon={
+                        passwordVisibility.currentPassword ? faEyeSlash : faEye
+                      }
+                      onClick={() => handleTogglePassword('currentPassword')}
+                      className="text-gray-400 pr-4 cursor-pointer"
+                    />
+                  </div>
                   {errorMessages['currentPassword'] && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       {errorMessages['currentPassword']}
@@ -322,13 +354,8 @@ export default function UserProfile({
 
                 <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
                   New password
-                  <input
-                    type="password"
-                    name="newPassword"
-                    placeholder="********"
-                    onChange={handleInputChange}
-                    onBlur={handleInputTouched}
-                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  <div
+                    className={`text-lightBlack dark:text-white text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded border-borderGrey py-3 px-4 focus:ring-1 focus:ring-mainPurple ${
                       newPasswordNotValid ||
                       (!passwordsMatch &&
                         formTouched.newPassword &&
@@ -336,7 +363,23 @@ export default function UserProfile({
                         ? 'border-deleteRed'
                         : ''
                     }`}
-                  />
+                  >
+                    <input
+                      type={
+                        passwordVisibility.newPassword ? 'text' : 'password'
+                      }
+                      name="newPassword"
+                      placeholder="********"
+                      onChange={handleInputChange}
+                      onBlur={handleInputTouched}
+                      className="bg-transparent w-full h-full focus:outline-none"
+                    />
+                    <FontAwesomeIcon
+                      icon={passwordVisibility.newPassword ? faEyeSlash : faEye}
+                      onClick={() => handleTogglePassword('newPassword')}
+                      className="text-gray-400 pr-4 cursor-pointer"
+                    />
+                  </div>
                   {newPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       Password must have a minimum of 8 characters.
@@ -346,14 +389,8 @@ export default function UserProfile({
 
                 <label className="text-mediumGrey dark:text-white text-xs font-semibold flex flex-col gap-2">
                   Confirm password
-                  <input
-                    type="password"
-                    name="confirmNewPassword"
-                    placeholder="********"
-                    required={formInputs.newPassword}
-                    onChange={handleInputChange}
-                    onBlur={handleInputTouched}
-                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 border-[1px] rounded border-borderGrey py-2 px-4 focus:outline-none focus:ring-1 focus:ring-mainPurple ${
+                  <div
+                    className={`bg-transparent text-lightBlack dark:text-white text-[13px] font-light leading-6 flex items-center justify-between border-[1px] rounded border-borderGrey py-3 px-4 focus:ring-1 focus:ring-mainPurple ${
                       confirmNewPasswordNotValid ||
                       (!passwordsMatch &&
                         formTouched.newPassword &&
@@ -361,7 +398,30 @@ export default function UserProfile({
                         ? 'border-deleteRed'
                         : ''
                     }`}
-                  />
+                  >
+                    <input
+                      type={
+                        passwordVisibility.confirmNewPassword
+                          ? 'text'
+                          : 'password'
+                      }
+                      name="confirmNewPassword"
+                      placeholder="********"
+                      required={formInputs.newPassword}
+                      onChange={handleInputChange}
+                      onBlur={handleInputTouched}
+                      className="bg-transparent w-full h-full focus:outline-none"
+                    />
+                    <FontAwesomeIcon
+                      icon={
+                        passwordVisibility.confirmNewPassword
+                          ? faEyeSlash
+                          : faEye
+                      }
+                      onClick={() => handleTogglePassword('confirmNewPassword')}
+                      className="text-gray-400 pr-4 cursor-pointer"
+                    />
+                  </div>
                   {confirmNewPasswordNotValid && (
                     <span className="text-deleteRed text-xs flex pb-1">
                       Password must have a minimum of 8 characters.
