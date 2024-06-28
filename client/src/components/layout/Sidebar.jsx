@@ -1,15 +1,12 @@
 import { useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BoardContext, MODAL_TYPES } from '../../context/BoardContext';
 import { UIContext } from '../../context/UIContext';
 import ToggleThemeButton from '@components/ui/ToggleThemeButton';
 
 import logo from '../../../public/assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowRightFromBracket,
-  faEyeSlash,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar() {
   const { boards, openModal } = useContext(BoardContext);
@@ -85,16 +82,6 @@ export default function Sidebar() {
         <button className="text-mainPurple text-[15px] font-semibold">
           + Create New Board
         </button>
-      </div>
-
-      <div className="text-mediumGrey flex items items-center justify-end gap-2 px-6 mt-4">
-        <Link
-          to="/logout"
-          className="text-[13px] font-semibold flex items-center gap-2"
-        >
-          <FontAwesomeIcon icon={faArrowRightFromBracket} />
-          Logout
-        </Link>
       </div>
 
       <div className="w-full absolute bottom-0">

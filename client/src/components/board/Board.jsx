@@ -68,6 +68,63 @@ export default function Board() {
     })
   );
 
+  const modalComponents = {
+    menu: Menu,
+    editBoard: BoardDetails,
+    newBoard: BoardDetails,
+    addTask: AddTask,
+    viewTask: ViewTask,
+    editTask: EditTask,
+    deleteTask: Delete,
+    deleteBoard: Delete,
+    userProfile: UserProfile,
+    deleteAccount: Delete,
+  };
+
+  const modalProps = {
+    editBoard: { board, setIsBoardUpdated },
+    newBoard: { board },
+    addTask: {
+      boardIndex,
+      columns: board?.columns,
+      closeModal,
+      setIsBoardUpdated,
+    },
+    viewTask: {
+      boardIndex,
+      task: viewTask,
+      tasks,
+      columns: board?.columns,
+      selectedStatus,
+      setIsBoardUpdated,
+      openModal,
+      closeModal,
+    },
+    editTask: {
+      boardIndex,
+      tasks,
+      selectedTask: viewTask,
+      columns: board?.columns,
+      selectedStatus,
+      setIsBoardUpdated,
+      closeModal,
+    },
+    deleteTask: {
+      boardIndex,
+      tasks,
+      selectedTask: viewTask,
+      setIsBoardUpdated,
+      modal,
+      closeModal,
+    },
+    deleteBoard: { boardIndex, board, modal, closeModal },
+    userProfile: { user, setIsBoardUpdated },
+    deleteAccount: { user, modal, closeModal },
+  };
+
+  const ModalComponent = modalComponents[modal];
+  const props = modalProps[modal] || {};
+
   useEffect(() => {
     if (id) {
       async function fetchData() {
@@ -225,66 +282,7 @@ export default function Board() {
             </section>
           </DndContext>
         )}
-        {modal === 'menu' && <Menu />}
-        {modal === 'editBoard' && (
-          <BoardDetails board={board} setIsBoardUpdated={setIsBoardUpdated} />
-        )}
-        {modal === 'newBoard' && <BoardDetails board={board} />}
-        {modal === 'addTask' && (
-          <AddTask
-            boardIndex={boardIndex}
-            columns={board.columns}
-            closeModal={closeModal}
-            setIsBoardUpdated={setIsBoardUpdated}
-          />
-        )}
-        {modal === 'viewTask' && (
-          <ViewTask
-            boardIndex={boardIndex}
-            task={viewTask}
-            tasks={tasks}
-            columns={board.columns}
-            selectedStatus={selectedStatus}
-            setIsBoardUpdated={setIsBoardUpdated}
-            openModal={openModal}
-            closeModal={closeModal}
-          />
-        )}
-        {modal === 'editTask' && (
-          <EditTask
-            boardIndex={boardIndex}
-            tasks={tasks}
-            selectedTask={viewTask}
-            columns={board.columns}
-            selectedStatus={selectedStatus}
-            setIsBoardUpdated={setIsBoardUpdated}
-            closeModal={closeModal}
-          />
-        )}
-        {modal === 'deleteTask' && (
-          <Delete
-            boardIndex={boardIndex}
-            tasks={tasks}
-            selectedTask={viewTask}
-            setIsBoardUpdated={setIsBoardUpdated}
-            modal={modal}
-            closeModal={closeModal}
-          />
-        )}
-        {modal === 'deleteBoard' && (
-          <Delete
-            boardIndex={boardIndex}
-            board={board}
-            modal={modal}
-            closeModal={closeModal}
-          />
-        )}
-        {modal === 'userProfile' && (
-          <UserProfile user={user} setIsBoardUpdated={setIsBoardUpdated} />
-        )}
-        {modal === 'deleteAccount' && (
-          <Delete user={user} modal={modal} closeModal={closeModal} />
-        )}
+        {ModalComponent && <ModalComponent {...props} />}
         <button
           onClick={() => setDisplaySidebar(true)}
           className="hidden md:flex justify-center items-center bg-mainPurple w-14 h-12 fixed bottom-0 left-0 rounded-menuLink mb-8 hover:bg-mainPurpleHover"
