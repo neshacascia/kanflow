@@ -44,6 +44,8 @@ export default function BoardPage() {
             setWelcomeMessage(true);
           }
         } else {
+          localStorage.setItem('user', false);
+          setUser(null);
           navigate('/');
           console.log('User is not logged in');
         }
