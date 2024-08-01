@@ -33,6 +33,11 @@
 - Toggle the theme between light/dark modes
 - Allow users to drag and drop tasks to change their status and re-order them in a column
 
+#### User Management:
+- Users can update their email address and change their password if applicable
+- Users can upload a profile picture
+- Users can delete their account and all associated data, getting redirected back to the homepage
+
 ## Optimizations
 #### Cookies and Monorepo
 #### UPDATE: As of May 2024, Cyclic has shut down its services. I have now migrated my app to Railway for hosting.
